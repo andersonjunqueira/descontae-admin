@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router'
 
-import Intl from '../Intl';
 import Submenu from './Submenu';
 import MenuHeading from './MenuHeading';
 import MenuItem from './MenuItem';

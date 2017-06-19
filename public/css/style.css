@@ -6249,7 +6249,7 @@ app-root {
   flex: 0 0 55px; }
 
 .app-footer {
-  flex: 0 0 50px; }
+  flex: 0 0 30px; }
 
 .app-body {
   display: flex;
@@ -6337,7 +6337,7 @@ app-root {
   width: 100%; }
 
 .footer-fixed .app-body {
-  margin-bottom: 50px; }
+  margin-bottom: 30px; }
 
 .app-header,
 .app-footer,
@@ -7025,9 +7025,9 @@ ul.icons-list {
         font-size: 18px; }
 
 .app-footer {
-  min-height: 50px;
+  min-height: 30px;
   padding: 0 1rem;
-  line-height: 50px;
+  line-height: 30px;
   color: #263238;
   background: #eceff1;
   border-top: 1px solid #cfd8dc; }

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 
-import SimpleTop from '../containers/SimpleTop';
+import Full from '../containers/Full';
 import Intl from '../components/Intl';
 import PrivateRoute from './PrivateRoute';
 
@@ -14,7 +14,7 @@ const App = ({store}) => (
 
         <Router history={browserHistory}>
 
-            <Route component={SimpleTop} path="/" name={<Intl str='inicio'></Intl>}>
+            <Route component={Full} path="/" name={<Intl str='inicio'></Intl>}>
                 <IndexRoute component={Inicio} />
                 <PrivateRoute path="/profile" name={<Intl str='meu-perfil'></Intl>} component={Profile} />
             </Route>

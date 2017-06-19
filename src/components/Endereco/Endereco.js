@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'reactstrap';
 
 import Intl from '../../components/Intl';
 import Text from '../Text';
