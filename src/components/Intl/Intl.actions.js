@@ -3,6 +3,7 @@ import { toaster } from "../../app/App.actions";
 import intlStrings from '../../intl.json';
 
 export const [ LANGUAGE_CHANGED ] = [ "LANGUAGE_CHANGED" ];
+export const [ DEFAULT_LANGUAGE ] = [ "pt-BR" ];
 
 let config;
 
