@@ -71,7 +71,7 @@ header.navbar {
 }
 
 header.navbar a.navbar-brand {
-    background-color: rgba(39, 24, 15, 1);
+    background-color: #271A0E;
     background-size: 120px auto;
     border-bottom: none;
 }
@@ -95,7 +95,9 @@ header.navbar a.navbar-brand {
     top: 0.66875rem;
 }
 
-
+.breadcrumb {
+    background-color: #FFF;
+}
 
 
 
