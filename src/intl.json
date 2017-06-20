@@ -1,6 +1,23 @@
 {
     "pt-BR": {
+        "== CONFIGURAÇÃO ==": "",
+
         "langId" : "Português (Brasil)",
+        
+        "== DEFAULT STRINGS ==": "",
+        
+        "erro-desconhecido" : "Ocorreu um problema inesperado, Favor entre em contato com o suporte do sistema.",
+        "idioma-alterado" : "Idioma modificado para: '{0}'.",
+        "cep-nao-encontrado" : "O CEP informado não foi encontrado.",
+        "inicio": "Inicio"
+    },
+
+    "outra": {
+        "langId" : "Português (Brasil)",
+        "erro-desconhecido" : "Ocorreu um problema inesperado, Favor entre em contato com o suporte do sistema.",
+        "idioma-alterado" : "Idioma modificado para: '{0}'.",
+        "cep-nao-encontrado" : "O CEP informado não foi encontrado.",
+        "inicio": "Inicio",
 
         "adicionar-email": "Adicionar e-mail",
         "adicionar-telefone": "Adicionar Telefone",
@@ -8,7 +25,6 @@
         "bem-vindo" : "Bem vindo, {0}.",
         "celular": "Celular",
         "cep": "CEP",
-        "cep-nao-encontrado" : "O CEP informado não foi encontrado.",
         "cidade": "Cidade",
         "comercial": "Comercial",
         "complemento": "Complemento",
@@ -17,10 +33,7 @@
         "email": "e-mail",
         "email-obrigatorio": "É necessário informar ao menos 1 e-mail.",
         "emails": "e-mails",
-        "erro-desconhecido" : "Ocorreu um problema inesperado, Favor entre em contato com o suporte do sistema.",
-        "idioma-alterado" : "Idioma modificado para: '{0}'.",
         "informacoes-pessoais": "Informações Pessoais",
-        "inicio": "Inicio",
         "logradouro": "Logradouro",
         "meu-perfil": "Meu Perfil",
         "nao": "Não",
