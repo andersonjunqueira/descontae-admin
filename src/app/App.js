@@ -4,10 +4,10 @@ import { Provider } from 'react-redux';
 
 import Full from '../containers/Full';
 import Intl from '../components/Intl';
-import PrivateRoute from './PrivateRoute';
 
 import Inicio from '../modules/Inicio';
 import Profile from '../modules/Profile';
+import Marca from '../modules/Marca';
 
 const App = ({store}) => (
     <Provider store={store}>
@@ -16,7 +16,8 @@ const App = ({store}) => (
 
             <Route component={Full} path="/" name={<Intl str='inicio'></Intl>}>
                 <IndexRoute component={Inicio} />
-                <PrivateRoute path="/profile" name={<Intl str='meu-perfil'></Intl>} component={Profile} />
+                <Route path="/profile" name={<Intl str='meu-perfil'></Intl>} component={Profile} />
+                <Route path="/marca" name={<Intl str='marca/franquia'></Intl>} component={Marca} />
             </Route>
 
         </Router>

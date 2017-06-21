@@ -1,11 +1,26 @@
 [
     {
-        "text": "Navegacao",
+        "text": "navegacao",
         "heading": true
     },
     {
+        "text": "inicio",
+        "icon": "fa fa-home",
+        "url": "/"
+    },
+    {
+        "text": "configuracoes",
+        "icon": "fa fa-cogs",
+        "submenu": [
+            {
+                "text": "marcas-franquias",
+                "url": "/marca"
+            }
+        ]
+
+    },
+    {
         "text": "modelo",
-        "url": "/a",
         "icon": "fa fa-home",
         "badge": "40",
         "badgeColor": "badge badge-success float-right",

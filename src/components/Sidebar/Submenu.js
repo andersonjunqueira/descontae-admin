@@ -9,7 +9,7 @@ class Submenu extends Component {
         const { activeRoute, handleClick, item } = this.props;
         return (
             <li className={this.props.activeRoute(item.url)}>
-                <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.props.handleClick}><i className="icon-puzzle"></i> <Intl str={item.text}></Intl></a>
+                <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.props.handleClick}><i className={item.icon}></i> <Intl str={item.text}></Intl></a>
                 <ul className="nav-dropdown-items">
                     {item.submenu.map( (item, index) => {
                         if(item.heading) {

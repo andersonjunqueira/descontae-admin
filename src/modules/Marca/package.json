@@ -1,0 +1,6 @@
+{
+  "name": "Marca",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Marca.js"
+}

@@ -11,8 +11,8 @@
     padding: 0 30px 10px 30px;
 }
 
-h2 {
-    margin: 0 0 0.5em 0;
+h2, h3, h4 {
+    margin: 0.5em 0;
 }
 
 .fields-error {
@@ -80,6 +80,16 @@ header.navbar a.navbar-brand {
     color: #FFF;
 }
 
+@media (max-width: 991px) {
+    .app-header .navbar-toggler {
+        color: #FFF;
+    }
+
+    .app-header .navbar-nav {
+        right: 0;
+    }
+}
+
 .sidebar {
     background-color: #333;
 }
@@ -99,7 +109,19 @@ header.navbar a.navbar-brand {
     background-color: #FFF;
 }
 
+.sidebar .nav .nav-item .nav-link.active, .sidebar .nav .nav-item .navbar .active.dropdown-toggle, .navbar .sidebar .nav .nav-item .active.dropdown-toggle {
+    color: #EAA421;
+    background: #271A0E;
+}
 
+.sidebar .nav .nav-item .nav-link.active i, .sidebar .nav .nav-item .navbar .active.dropdown-toggle i, .navbar .sidebar .nav .nav-item .active.dropdown-toggle i {
+    color: #EAA421;
+}
+
+.sidebar .nav .nav-item .nav-link:hover, .sidebar .nav .nav-item .navbar .dropdown-toggle:hover, .navbar .sidebar .nav .nav-item .dropdown-toggle:hover {
+    color: #EAA421 !important;
+    background: #271A0E !important;
+}
 
 
 

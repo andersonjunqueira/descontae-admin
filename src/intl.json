@@ -3,67 +3,30 @@
         "== CONFIGURAÇÃO ==": "",
 
         "langId" : "Português (Brasil)",
-        
+
         "== DEFAULT STRINGS ==": "",
-        
-        "erro-desconhecido" : "Ocorreu um problema inesperado, Favor entre em contato com o suporte do sistema.",
-        "idioma-alterado" : "Idioma modificado para: '{0}'.",
-        "cep-nao-encontrado" : "O CEP informado não foi encontrado.",
-        "inicio": "Inicio"
-    },
 
-    "outra": {
-        "langId" : "Português (Brasil)",
-        "erro-desconhecido" : "Ocorreu um problema inesperado, Favor entre em contato com o suporte do sistema.",
-        "idioma-alterado" : "Idioma modificado para: '{0}'.",
-        "cep-nao-encontrado" : "O CEP informado não foi encontrado.",
-        "inicio": "Inicio",
-
-        "adicionar-email": "Adicionar e-mail",
-        "adicionar-telefone": "Adicionar Telefone",
-        "bairro": "Bairro",
-        "bem-vindo" : "Bem vindo, {0}.",
-        "celular": "Celular",
         "cep": "CEP",
-        "cidade": "Cidade",
-        "comercial": "Comercial",
-        "complemento": "Complemento",
-        "cpf": "CPF",
+        "cep-nao-encontrado" : "O CEP informado não foi encontrado.",
+        "erro-desconhecido" : "Ocorreu um problema inesperado, Favor entre em contato com o suporte do sistema.",
+        "idioma-alterado" : "Idioma modificado para: '{0}'.",
+        "inicio": "Inicio",
         "limpar": "Limpar",
-        "email": "e-mail",
-        "email-obrigatorio": "É necessário informar ao menos 1 e-mail.",
-        "emails": "e-mails",
-        "informacoes-pessoais": "Informações Pessoais",
-        "logradouro": "Logradouro",
         "meu-perfil": "Meu Perfil",
         "nao": "Não",
         "navegacao": "Navegação",
-        "nome-completo": "Nome Completo",
-        "novo-usuario" : "Novo Usuário",
-        "novo-usuario-registrado" : "{0} registrado.",
-        "numero": "Número",
-        "orgao-expedidor": "Órgão Expedidor",
-        "pais": "País",
-        "perfil-salvo-sucesso": "Perfil salvo com sucesso.",
-        "pesquisar-cep": "Pesquisar CEP",
-        "principal": "Principal",
-        "problema-registro" : "Houve um problema no registro do perfil.<br/>Tente novamente mais tarde.",
-        "residencial": "Residencial",
-        "rg": "RG",
         "sair": "Sair",
+        "usuario": "Usuário",
         "salvar": "Salvar",
         "selecione": "Selecione ...",
         "sim": "Sim",
-        "telefone": "Telefone",
-        "telefone-obrigatorio": "É necessário informar ao menos 1 telefone de contato.",
-        "telefones": "Telefones",
-        "tipo": "Tipo",
-        "uf": "UF",
-        "usuario": "Usuário",
 
-        "modelo": "Modelo",
-        "normal-tables": "Normal Tables",
-        "data-tables": "Data Tables"
+        "== SPECIFIC STRINGS ==": "",
+
+        "configuracoes": "Configurações",
+        "marcas-franquias": "Marcas/Franquias",
+        "marca-franquia": "Marca/Franquia",
+        "nome": "Nome"
+
     }
-
 }
