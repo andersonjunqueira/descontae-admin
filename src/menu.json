@@ -13,8 +13,9 @@
         "icon": "fa fa-cogs",
         "submenu": [
             {
-                "text": "marcas-franquias",
-                "url": "/marca"
+                "text": "categorias",
+                "icon": "fa fa-tag",
+                "url": "/categoria"
             }
         ]
 

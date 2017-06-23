@@ -10,7 +10,7 @@ import Intl from '../../components/Intl';
 import { toaster } from "../../app/Notification.actions";
 import { translate } from "../../components/Intl/Intl.actions";
 
-class MarcaForm extends Component {
+class CategoriaForm extends Component {
 
     constructor(props) {
         super(props);
@@ -31,7 +31,7 @@ class MarcaForm extends Component {
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
 
-                <h4><Intl str='marca-franquia'></Intl></h4>
+                <h4><Intl str='categorias'></Intl></h4>
 
                 <Row>
                     <Col xs={12} md={12}>
@@ -53,9 +53,9 @@ const validate = values => {
     return errors;
 }
 
-MarcaForm = reduxForm({ 
-    form: "MarcaForm", 
+CategoriaForm = reduxForm({ 
+    form: "CategoriaForm", 
     validate 
-})(MarcaForm);
+})(CategoriaForm);
 
-export default MarcaForm;
+export default CategoriaForm;
