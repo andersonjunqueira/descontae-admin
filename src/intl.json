@@ -25,6 +25,7 @@
 
         "categorias": "Categorias",
         "configuracoes": "Configurações",
+        "erro-carga-categorias": "Não foi possível carregar as categorias.",
         "marcas-franquias": "Marcas/Franquias",
         "marca-franquia": "Marca/Franquia",
         "nome": "Nome"

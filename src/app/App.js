@@ -6,7 +6,6 @@ import Full from '../containers/Full';
 import Intl from '../components/Intl';
 
 import Inicio from '../modules/Inicio';
-import Profile from '../modules/Profile';
 import Categoria from '../modules/Categoria';
 
 const App = ({store}) => (

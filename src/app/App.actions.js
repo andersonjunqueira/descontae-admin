@@ -8,6 +8,7 @@ import { headerMenuLoad, userMenuLoad } from '../components/Header/Header.action
 import { sidebarMenuLoad } from '../components/Sidebar/Sidebar.actions';
 import { toaster } from './Notification.actions';
 
+export const [ MODE_INSERT, MODE_UPDATE, MODE_LIST ] = [ "MODE_INSERT", "MODE_UPDATE", "MODE_LIST" ];
 export const [ PROCESS_LOGIN, PROFILE_LOADED ] = [ "PROCESS_LOGIN", "PROFILE_LOADED" ];
 
 export const logout = (auth) => {

@@ -6,6 +6,7 @@ import ufReducer from '../components/UF/UF.reducers';
 import intlReducer from '../components/Intl/Intl.reducers';
 import sidebarReducer from '../components/Sidebar/Sidebar.reducers';
 import headerReducer from '../components/Header/Header.reducers';
+import categoriaReducer from '../modules/Categoria/Categoria.reducers';
 import profileReducer from '../modules/Profile/Profile.reducers';
 
 import AppData from '../app.json';
@@ -39,6 +40,7 @@ const appReducer = (state = initialState, action) => {
 
 const reducers = combineReducers({
     profileReducer,
+    categoriaReducer,
 
     ufReducer,
     intlReducer,
