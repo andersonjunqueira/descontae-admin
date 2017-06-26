@@ -15,6 +15,10 @@ h2, h3, h4 {
     margin: 0.5em 0;
 }
 
+h6 {
+    margin: 1.5em 0;
+}
+
 .fields-error {
     color: #f86c6b;
 }
@@ -58,6 +62,10 @@ h2, h3, h4 {
 
 .flag-us {
     background-image: url('../img/flags/USA.png');
+}
+
+i.fa {
+    margin-right: 0.5em;
 }
 
 /* DESCONTAE COLORS */
@@ -122,3 +130,8 @@ header.navbar a.navbar-brand {
     color: #FFF !important;
     background: #271A0E !important;
 }
+
+.tabela {
+    background-color: #FFF;
+}
+

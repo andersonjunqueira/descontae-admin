@@ -5,9 +5,7 @@ const categoriaReducer = (state = {}, action) => {
     switch (action.type) {
 
         case CATEGORIAS_LOADED:
-            return Object.assign({}, state, {
-                ...action.payload
-            });
+            return action.payload;
 
         default:
             return state;

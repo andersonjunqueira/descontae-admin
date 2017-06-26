@@ -4,10 +4,10 @@ import { toaster } from "../../app/Notification.actions";
 
 export const [ CATEGORIAS_LOADED ] = [ "CATEGORIAS_LOADED" ];
 
-export const loadCategorias = () => {
+export const loadCategorias = (filtro) => {
     return dispatch => {
 
-        axios.post('/categorias')
+        axios.get('/categorias', { params: filtro })
             .then(function(response) {
                 dispatch({type: CATEGORIAS_LOADED, payload: response.data});
 

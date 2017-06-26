@@ -6,6 +6,7 @@
 
         "== DEFAULT STRINGS ==": "",
 
+        "bem-vindo": "Bem vindo, {0}",
         "cep": "CEP",
         "cep-nao-encontrado" : "O CEP informado não foi encontrado.",
         "erro-desconhecido" : "Ocorreu um problema inesperado, Favor entre em contato com o suporte do sistema.",
@@ -15,11 +16,17 @@
         "meu-perfil": "Meu Perfil",
         "nao": "Não",
         "navegacao": "Navegação",
+        "nenhum-registro-encontrado": "Nenhum registro encontrado",
+        "novo-usuario" : "Novo Usuário",
+        "novo-usuario-registrado" : "{0} registrado.",
+        "pesquisar": "Pesquisar",
+        "problemas-classe-findall":  "Não foi possível realizar a consulta.",
+        "resultado-pesquisa": "Resultado da pesquisa:",
         "sair": "Sair",
-        "usuario": "Usuário",
         "salvar": "Salvar",
         "selecione": "Selecione ...",
         "sim": "Sim",
+        "usuario": "Usuário",
 
         "== SPECIFIC STRINGS ==": "",
 

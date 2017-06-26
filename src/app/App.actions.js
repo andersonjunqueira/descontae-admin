@@ -6,7 +6,9 @@ import { cpfFunctions } from '../components/CPF';
 import { changeLanguage } from '../components/Intl/Intl.actions';
 import { headerMenuLoad, userMenuLoad } from '../components/Header/Header.actions';
 import { sidebarMenuLoad } from '../components/Sidebar/Sidebar.actions';
+import { DEFAULT_LANGUAGE} from '../components/Intl/Intl.actions';
 import { toaster } from './Notification.actions';
+
 
 export const [ MODE_INSERT, MODE_UPDATE, MODE_LIST ] = [ "MODE_INSERT", "MODE_UPDATE", "MODE_LIST" ];
 export const [ PROCESS_LOGIN, PROFILE_LOADED ] = [ "PROCESS_LOGIN", "PROFILE_LOADED" ];
@@ -21,7 +23,7 @@ export const login = (auth, defaultLanguage) => {
         const { name, email } = auth.tokenParsed;
 
         // PESQUISA O USUÁRIO
-        axios.get('/usuarios/login', {params:{"login": email}})
+        axios.get('/pessoas/login', {params:{"email": email}})
             .then( (response) => {
 
                 const data = Object.assign(response.data, {});
@@ -37,7 +39,7 @@ export const login = (auth, defaultLanguage) => {
                 dispatch({type: PROFILE_LOADED, payload: data});
 
                 // ATUALIZA O IDIOMA DE ACORDO COM A PREFERÊNCIA DO USUÁRIO
-                dispatch(changeLanguage(response.data.language, true));
+                dispatch(changeLanguage(response.data.idioma, true));
 
                 // DISPARA A CARGA DOS MENUS
                 dispatch(headerMenuLoad);
@@ -52,18 +54,14 @@ export const login = (auth, defaultLanguage) => {
                 // 404 É USUÁRIO NÃO ENCONTRADO, REGISTRANDO
                 if(error.response.status === 404) {
 
-                    let usuario = {
+                    let pessoa = {
                         nome: name,
-                        login: email,
-                        language: defaultLanguage,
-                        emails: [{
-                            email: email,
-                            principal: true
-                        }]
+                        email: email,
+                        idioma: DEFAULT_LANGUAGE
                     };
 
                     // GRAVANDO O PERFIL
-                    axios.post('/usuarios', usuario)
+                    axios.post('/pessoas', pessoa)
                       .then( (response) => {
 
                           dispatch(toaster("novo-usuario-registrado", [], {title: "novo-usuario", status: "success"}));

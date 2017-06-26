@@ -1,46 +1,59 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'; 
 
-import CategoriaForm from './CategoriaForm';
 import Intl from '../../components/Intl';
 
+import CategoriaForm from './CategoriaForm';
+import CategoriaList from './CategoriaList';
+
 import { MODE_INSERT, MODE_UPDATE, MODE_LIST } from '../../app/App.actions';
-import { loadCategorias } from './Categoria.actions';
+import * as categoriaActions from './Categoria.actions';
 
 class Categoria extends Component {
 
     constructor(props) {
         super(props);
 
-        if(this.props.params) {
-
+        let mode = MODE_LIST;
+        if(this.props.params.idCategoria) {
             if(this.props.params.idCategoria === 'novo') {
-                this.props.state = {
-                    initialized: false
-                };
+                mode = MODE_INSERT;
             } else {
-
+                mode = MODE_UPDATE;
             }
-
-        } else {
-            this.props.dispatch(this.props.list);
         }
 
+        this.state = {
+            mode: mode
+        };
+
+        this.pesquisar = this.pesquisar.bind(this);
+        this.limparPesquisa = this.limparPesquisa.bind(this);
     }
 
-    doSubmit(values) {
+    componentDidMount() {
+        if(this.state.mode === MODE_LIST ) {
+            this.pesquisar();
+        }
+    }
+
+    pesquisar(values) {
+        this.props.actions.loadCategorias(values);
+    }
+
+    limparPesquisa() {
+        this.props.actions.loadCategorias();
     }
 
     render() {
 
-        const { params } = this.props;
+        const { mode } = this.state;
+        const { params, data } = this.props;
 
         return (
             <div>
-                <h4><Intl str='categorias'></Intl></h4>
-
-                {params && params.idCategoria && <span>{params.idCategoria}</span>}
-                {!params || !params.idCategoria && <span>form</span>}
+                {mode === MODE_LIST && <CategoriaList data={this.props.data} doSubmit={this.pesquisar} doLimpar={this.limparPesquisa}/>}
             </div>
         );
     }
@@ -50,12 +63,18 @@ class Categoria extends Component {
 const mapStateToProps = (state) => {
     return {
         data: state.categoriaReducer
-    }
+    };
 };
 
-Categoria = connect( 
-    mapStateToProps,
-    { list: loadCategorias }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators(categoriaActions, dispatch)
+    };
+};
+
+Categoria = connect(
+    mapStateToProps, 
+    mapDispatchToProps
 )(Categoria);
 
 export default Categoria;
