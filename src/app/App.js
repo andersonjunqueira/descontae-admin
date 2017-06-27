@@ -16,8 +16,8 @@ const App = ({store}) => (
             <Route component={Full} path="/" name={<Intl str='inicio'></Intl>}>
                 <IndexRoute component={Inicio} />
 
-                <Route path="/categoria" name={<Intl str='categoria'></Intl>} component={Categoria} />
-                <Route path="/categoria/:idCategoria" name={<Intl str='categoria'></Intl>} component={Categoria} />
+                <Route path="/categorias" name={<Intl str='categoria'></Intl>} component={Categoria} />
+                <Route path="/categorias/:idCategoria" name={<Intl str='categoria'></Intl>} component={Categoria} />
             </Route>
 
         </Router>

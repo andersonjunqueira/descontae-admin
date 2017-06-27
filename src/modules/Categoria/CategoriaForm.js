@@ -20,10 +20,10 @@ class CategoriaForm extends Component {
     }
 
     componentDidUpdate() {
-//        if(!this.state.initialized && Object.keys(this.props.data).length > 0) {
-//            this.props.dispatch(this.props.initialize(this.props.data));
-//            this.setState(Object.assign(this.state, { initialized: true }));
-//        }
+        if(!this.state.initialized && Object.keys(this.props.data).length > 0) {
+            this.props.dispatch(this.props.initialize(this.props.data));
+            this.setState(Object.assign(this.state, { initialized: true }));
+        }
     }
 
     render() {

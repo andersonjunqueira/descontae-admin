@@ -68,6 +68,10 @@ i.fa {
     margin-right: 0.5em;
 }
 
+a.espacamento, button.espacamento {
+    margin-right: 0.5em;
+}
+
 /* DESCONTAE COLORS */
 
 header.app-header {

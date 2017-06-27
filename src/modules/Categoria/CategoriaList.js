@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
+import { Link } from 'react-router'
 
 import { Form, Row, Col, Button, Table } from 'reactstrap';
 import Text from '../../components/Text';
@@ -38,14 +39,14 @@ class CategoriaList extends Component {
                     <Intl str='pesquisar'></Intl>
                 </Button>
 
-                <Button type="button" disabled={pristine || submitting} onClick={() => this.limparFormulario()}>
+                <Button type="button" disabled={pristine || submitting} onClick={() => this.limparFormulario()} className="espacamento">
                     <Intl str='limpar'></Intl>
                 </Button>
 
-                <Button type="button" disabled={pristine || submitting} onClick={() => this.limparFormulario()}>
-                    <i className="fa fa-plus"></i>    
-                    <Intl str='limpar'></Intl>
-                </Button>
+                <Link to="/categorias/novo" className="btn btn-secondary espacamento">
+                    <i className="fa fa-plus"></i>
+                    <Intl str='nova-categoria'></Intl>
+                </Link>
 
                 <div>
                     <h6>{translate("resultado-pesquisa")}</h6>

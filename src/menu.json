@@ -10,7 +10,7 @@
             {
                 "text": "categorias",
                 "icon": "fa fa-tag",
-                "url": "/categoria"
+                "url": "/categorias"
             }
         ]
 
