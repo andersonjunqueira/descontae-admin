@@ -41,6 +41,54 @@ h6 {
     text-align: left;
 }
 
+button i ~ span {
+    margin-left: 0.5em;
+}
+
+.categ-col-1, .categ-col-3 {
+    text-align: center
+}
+
+
+/* Extra small viewport or screen */
+@media only screen and (max-width : 480px) {
+    button.espacamento { margin-left: 0.0em; }
+    .categ-col-1 { width: 20%; }
+    .categ-col-3 { width: 35%; }
+}
+
+/* Extra small viewport or screen */
+@media only screen and (min-width : 480px) {
+    button.espacamento { margin-left: 0.0em; }
+    .categ-col-1 { width: 10%; }
+    .categ-col-3 { width: 20%; }
+}
+
+/* Small viewport or screen */
+@media only screen and (min-width : 768px) {
+    button.espacamento { margin-left: 0.5em; }
+    .categ-col-1 { width: 10%; }
+    .categ-col-3 { width: 20%; }
+}
+
+/* Medium viewport or screen */
+@media only screen and (min-width : 992px) {
+    button.espacamento { margin-left: 0.5em; }
+}
+
+/* Large viewport or screen */
+@media only screen and (min-width : 1200px) {
+    button.espacamento {
+        margin-left: 0.5em;
+    }
+}
+
+
+.table td {
+    padding: 0.35rem;
+    vertical-align: inherit;
+}
+
 .nav-flag {
     min-width: 30px !important;
 }
@@ -62,19 +110,6 @@ h6 {
 
 .flag-us {
     background-image: url('../img/flags/USA.png');
-}
-
-button.espacamento {
-    margin-left: 0.5em;
-}
-
-button i ~ span {
-    margin-left: 0.5em;
-}
-
-.table td {
-    padding: 0.35rem;
-    vertical-align: inherit;
 }
 
 /* DESCONTAE COLORS */

@@ -21,8 +21,13 @@ class CategoriaList extends Component {
         this.props.doLimpar();
     }
 
-    novo() {
-        this.props.doNovo();
+
+    carregar(id) {
+        this.props.doCarregar(id);
+    }
+
+    excluir(id) {
+        this.props.doExcluir(id);
     }
 
     render() {
@@ -34,9 +39,9 @@ class CategoriaList extends Component {
                 <Table hover className="tabela">
                     <thead>
                         <tr>
-                            <th className="text-center" width="5%">#</th>
-                            <th width="*"><Intl str="nome"></Intl></th>
-                            <th className="text-center" width="5%"></th>
+                            <th className="categ-col-1">#</th>
+                            <th className="categ-col-2"><Intl str="nome"></Intl></th>
+                            <th className="categ-col-3"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,6 +52,10 @@ class CategoriaList extends Component {
                                 <td className="text-center">
                                     <Button type="button" onClick={() => this.carregar(data[key].id)} color="secondary" size="sm">
                                         <i className="fa fa-pencil"></i>
+                                    </Button>
+
+                                    <Button type="button" onClick={() => this.excluir(data[key].id)} color="danger" size="sm" className="espacamento">
+                                        <i className="fa fa-trash"></i>
                                     </Button>
                                 </td>
                             </tr>);
@@ -69,11 +78,11 @@ class CategoriaList extends Component {
                     <Intl str='pesquisar'></Intl>
                 </Button>
 
-                <Button type="button" disabled={pristine || submitting} onClick={() => this.limpar()} className="espacamento">
+                <Button type="button" disabled={pristine || submitting} onClick={() => this.props.doLimpar()} className="espacamento">
                     <Intl str='limpar'></Intl>
                 </Button>
 
-                <Button type="button" onClick={() => this.novo()} color="secondary">
+                <Button type="button" onClick={() => this.props.doNovo()} color="secondary">
                     <i className="fa fa-plus"></i>
                     <Intl str='nova-categoria'></Intl>
                 </Button>

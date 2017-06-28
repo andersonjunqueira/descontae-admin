@@ -32,6 +32,7 @@
         "== SPECIFIC STRINGS ==": "",
 
         "categoria": "Categoria",
+        "categorias": "Categorias",
         "categoria-salva": "Categoria salva com sucesso.",
         "configuracoes": "Configurações",
         "erro-carga-categorias": "Não foi possível carregar as categorias.",

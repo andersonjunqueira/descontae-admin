@@ -32,17 +32,17 @@ class Categoria extends Component {
     checkMode() {
         if(this.props.params.id) {
             if(this.props.params.id == 0) {
-                return MODE_INSERT;
+                this.props.actions.setMode(MODE_INSERT);
             } else {
-                return MODE_UPDATE;
+                this.props.actions.setMode(MODE_UPDATE);
             }
         } else {
-            return MODE_LIST;
+            this.props.actions.setMode(MODE_LIST);
         }
     }
 
     componentDidMount() {
-        switch(this.state.mode) {
+        switch(this.props.data.mode) {
             case MODE_INSERT:
                 break;
 
@@ -57,17 +57,17 @@ class Categoria extends Component {
     }
 
     consultar(values) {
-        this.setState(Object.assign(this.state, { mode: MODE_LIST }));
+        this.props.actions.setMode(MODE_LIST);
         this.props.actions.consultar(values);
     }
 
     limpar() {
-        this.setState(Object.assign(this.state, { mode: MODE_LIST }));
+        this.props.actions.setMode(MODE_LIST);
         this.props.actions.consultar();
     }
 
     novo() {
-        this.setState(Object.assign(this.state, { mode: MODE_INSERT }));
+        this.props.actions.setMode(MODE_INSERT);
     }
 
     salvar(values) {
@@ -75,7 +75,7 @@ class Categoria extends Component {
     }
 
     carregar(id) {
-        this.setState(Object.assign(this.state, { mode: MODE_UPDATE }));
+        this.props.actions.setMode(MODE_UPDATE);
         this.props.actions.carregar(id);
     }
 
@@ -85,19 +85,18 @@ class Categoria extends Component {
 
     render() {
 
-        const { mode } = this.state;
         const { params, data } = this.props;
         const obj = {};
 
         return (
             <div>
-                {mode === MODE_LIST && <CategoriaList data={data.registros} 
-                    doSubmit={this.consultar} doLimpar={this.limpar} doNovo={this.novo} doCarregar={this.carregar}></CategoriaList>}
+                {data.mode === MODE_LIST && <CategoriaList data={data.registros} 
+                    doSubmit={this.consultar} doLimpar={this.limpar} doNovo={this.novo} doCarregar={this.carregar} doExcluir={this.excluir}></CategoriaList>}
 
-                {mode === MODE_INSERT && <CategoriaForm 
+                {data.mode === MODE_INSERT && <CategoriaForm 
                     data={obj} doSubmit={this.salvar} doConsultar={this.consultar}></CategoriaForm>}
 
-                {mode === MODE_UPDATE && <CategoriaForm 
+                {data.mode === MODE_UPDATE && <CategoriaForm 
                     data={data} doSubmit={this.salvar} doConsultar={this.consultar}></CategoriaForm>}
             </div>
         );
