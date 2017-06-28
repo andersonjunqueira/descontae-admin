@@ -64,12 +64,17 @@ h6 {
     background-image: url('../img/flags/USA.png');
 }
 
-i.fa {
-    margin-right: 0.5em;
+button.espacamento {
+    margin-left: 0.5em;
 }
 
-a.espacamento, button.espacamento {
-    margin-right: 0.5em;
+button i ~ span {
+    margin-left: 0.5em;
+}
+
+.table td {
+    padding: 0.35rem;
+    vertical-align: inherit;
 }
 
 /* DESCONTAE COLORS */

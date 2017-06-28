@@ -26,12 +26,16 @@ class CategoriaForm extends Component {
         }
     }
 
+    consultar() {
+        this.props.doConsultar();
+    }
+
     render() {
         const { handleSubmit, doSubmit, pristine, reset, submitting, invalid } = this.props;
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
 
-                <h4><Intl str='categorias'></Intl></h4>
+                <h4><Intl str='categoria'></Intl></h4>
 
                 <Row>
                     <Col xs={12} md={12}>
@@ -39,8 +43,17 @@ class CategoriaForm extends Component {
                     </Col>
                 </Row>
 
-                <Button type="submit" color="primary" disabled={invalid || submitting}><Intl str='salvar'></Intl></Button>
-                <Button type="button" disabled={pristine || submitting} onClick={() => this.props.dispatch(reset)}><Intl str='limpar'></Intl></Button>
+                <Button type="submit" color="primary" disabled={invalid || submitting}>
+                    <Intl str='salvar'></Intl>
+                </Button>
+
+                <Button type="button" disabled={pristine || submitting} onClick={() => this.props.dispatch(reset)} className="espacamento">
+                    <Intl str='limpar'></Intl>
+                </Button>
+
+                <Button type="button" onClick={() => this.consultar()} className="btn btn-secondary">
+                    <Intl str='cancelar'></Intl>
+                </Button>
 
             </Form>
         );

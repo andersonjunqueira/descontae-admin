@@ -2,7 +2,13 @@ import axios from "axios";
 
 import { toaster } from "../../app/Notification.actions";
 
-export const [ CATEGORIAS_PESQUISA, CATEGORIA_EDICAO ] = [ "CATEGORIAS_PESQUISA", "CATEGORIA_EDICAO" ];
+export const [ CATEGORIAS_PESQUISA, CATEGORIA_EDICAO, CATEGORIAS_SETMODE ] = [ "CATEGORIAS_PESQUISA", "CATEGORIA_EDICAO", "CATEGORIAS_SETMODE" ];
+
+export const setMode = (mode) => {
+    return dispatch => {
+        dispatch({type: CATEGORIAS_SETMODE, payload: mode});
+    }
+}
 
 export const consultar = (filtro) => {
     return dispatch => {
@@ -13,6 +19,20 @@ export const consultar = (filtro) => {
 
             }).catch(function(response){
                 dispatch(toaster("erro-carga-categorias", [], {status: "error"}));
+            });
+
+    }
+}
+
+export const salvar = (categoria) => {
+    return dispatch => {
+
+        axios.post('/categorias', categoria)
+            .then(function(response) {
+                dispatch(toaster("categoria-salva", [], {status: "success"}));
+
+            }).catch(function(response){
+                dispatch(toaster("erro-carga-categoria", [], {status: "error"}));
             });
 
     }

@@ -12,15 +12,17 @@ class CategoriaList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            initialized: false
-        }
-        this.limparFormulario = this.limparFormulario.bind(this);
+        this.limpar = this.limpar.bind(this);
+        this.novo = this.novo.bind(this);
     }
 
-    limparFormulario() {
+    limpar() {
         this.props.dispatch(this.props.reset);
         this.props.doLimpar();
+    }
+
+    novo() {
+        this.props.doNovo();
     }
 
     render() {
@@ -42,7 +44,11 @@ class CategoriaList extends Component {
                             return (<tr key={key}>
                                 <td className="text-center" scope="row">{data[key].id}</td>
                                 <td>{data[key].nome}</td>
-                                <td className="text-center"></td>
+                                <td className="text-center">
+                                    <Button type="button" onClick={() => this.carregar(data[key].id)} color="secondary" size="sm">
+                                        <i className="fa fa-pencil"></i>
+                                    </Button>
+                                </td>
                             </tr>);
                         })}
                     </tbody>
@@ -51,7 +57,7 @@ class CategoriaList extends Component {
 
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
-                <h4><Intl str='categorias'></Intl></h4>
+                <h4><Intl str='pesquisa-categorias'></Intl></h4>
                 <Row>
                     <Col xs={12} md={12}>
                         <Text name="nome" label={<Intl str='nome'></Intl>} maxLength={100}/>
@@ -63,14 +69,14 @@ class CategoriaList extends Component {
                     <Intl str='pesquisar'></Intl>
                 </Button>
 
-                <Button type="button" disabled={pristine || submitting} onClick={() => this.limparFormulario()} className="espacamento">
+                <Button type="button" disabled={pristine || submitting} onClick={() => this.limpar()} className="espacamento">
                     <Intl str='limpar'></Intl>
                 </Button>
 
-                <Link to="/categorias/novo" className="btn btn-secondary espacamento">
+                <Button type="button" onClick={() => this.novo()} color="secondary">
                     <i className="fa fa-plus"></i>
                     <Intl str='nova-categoria'></Intl>
-                </Link>
+                </Button>
 
                 <div>
                     <h6><Intl str="resultado-pesquisa"></Intl></h6>

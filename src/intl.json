@@ -7,6 +7,7 @@
         "== DEFAULT STRINGS ==": "",
 
         "bem-vindo": "Bem vindo, {0}",
+        "cancelar": "Cancelar",
         "cep": "CEP",
         "cep-nao-encontrado" : "O CEP informado não foi encontrado.",
         "erro-desconhecido" : "Ocorreu um problema inesperado, Favor entre em contato com o suporte do sistema.",
@@ -30,13 +31,15 @@
 
         "== SPECIFIC STRINGS ==": "",
 
-        "categorias": "Categorias",
+        "categoria": "Categoria",
+        "categoria-salva": "Categoria salva com sucesso.",
         "configuracoes": "Configurações",
         "erro-carga-categorias": "Não foi possível carregar as categorias.",
         "marcas-franquias": "Marcas/Franquias",
         "marca-franquia": "Marca/Franquia",
         "nome": "Nome",
-        "nova-categoria": "Nova Categoria"
+        "nova-categoria": "Nova Categoria",
+        "pesquisa-categorias": "Pesquisa de Categorias"
 
     }
 }
