@@ -19,14 +19,16 @@ class Categoria extends Component {
             mode: MODE_LIST
         };
 
-        this.pesquisar = this.pesquisar.bind(this);
-        this.limparPesquisa = this.limparPesquisa.bind(this);
+        this.carregar = this.carregar.bind(this);
+        this.consultar = this.consultar.bind(this);
+        this.limpar = this.limpar.bind(this);
         this.salvar = this.salvar.bind(this);
         this.excluir = this.excluir.bind(this);
     }
 
     componentDidMount() {
 
+        let mode = this.state.mode;
         if(this.props.params.id) {
             if(this.props.params.id === 'novo') {
                 mode = MODE_INSERT;
@@ -44,15 +46,15 @@ class Categoria extends Component {
     }
 
     carregar(id) {
-        this.props.actions.carregar(values);
+        this.props.actions.carregar(id);
     }
 
     consultar(values) {
-        this.props.actions.load(values);
+        this.props.actions.consultar(values);
     }
 
     limpar() {
-        this.props.actions.load();
+        this.props.actions.consultar();
     }
 
     salvar(values) {
@@ -69,14 +71,11 @@ class Categoria extends Component {
         let  { mode } = this.state;
         const obj = {};
 
-
-        
-
         return (
             <div>
-                {mode === MODE_LIST && <CategoriaList data={this.props.data.list} doSubmit={this.consultar} doLimpar={this.limpar}/>}
+                {mode === MODE_LIST && <CategoriaList data={data.registros} doSubmit={this.consultar} doLimpar={this.limpar}/>}
                 {mode === MODE_INSERT && <CategoriaForm data={obj} doSubmit={this.salvar} />}
-                {mode === MODE_UPDATE && <CategoriaForm data={this.props.data.registro} doSubmit={this.salvar} />}
+                {mode === MODE_UPDATE && <CategoriaForm data={data} doSubmit={this.salvar} />}
             </div>
         );
     }

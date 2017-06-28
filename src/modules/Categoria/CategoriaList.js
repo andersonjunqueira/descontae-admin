@@ -25,12 +25,36 @@ class CategoriaList extends Component {
 
     render() {
         const { handleSubmit, doSubmit, pristine, submitting, invalid, data } = this.props;
+
+        let content = (<Intl str="nenhum-registro-encontrado"></Intl>);
+        if(data && data.length > 0) {
+            content = (
+                <Table hover className="tabela">
+                    <thead>
+                        <tr>
+                            <th className="text-center" width="5%">#</th>
+                            <th width="*"><Intl str="nome"></Intl></th>
+                            <th className="text-center" width="5%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Object.keys(data).map(function(key) {
+                            return (<tr key={key}>
+                                <td className="text-center" scope="row">{data[key].id}</td>
+                                <td>{data[key].nome}</td>
+                                <td className="text-center"></td>
+                            </tr>);
+                        })}
+                    </tbody>
+                </Table>);
+        }
+
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
                 <h4><Intl str='categorias'></Intl></h4>
                 <Row>
                     <Col xs={12} md={12}>
-                        <Text name="nome" label={<Intl str='nome'></Intl>} maxLength={100} required={true}/>
+                        <Text name="nome" label={<Intl str='nome'></Intl>} maxLength={100}/>
                     </Col>
                 </Row>
 
@@ -49,27 +73,8 @@ class CategoriaList extends Component {
                 </Link>
 
                 <div>
-                    <h6>{translate("resultado-pesquisa")}</h6>
-                    {Object.keys(data).length > 0 ? (
-                        <Table hover className="tabela">
-                            <thead>
-                                <tr>
-                                    <th className="text-center" width="5%">#</th>
-                                    <th width="*">{translate("nome")}</th>
-                                    <th className="text-center" width="5%"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {Object.keys(data).map(function(key) {
-                                    return (<tr key={key}>
-                                        <td className="text-center" scope="row">{data[key].id}</td>
-                                        <td>{data[key].nome}</td>
-                                        <td className="text-center"></td>
-                                    </tr>);
-                                })}
-                            </tbody>
-                        </Table>
-                    ) : ( translate("nenhum-registro-encontrado") )}
+                    <h6><Intl str="resultado-pesquisa"></Intl></h6>
+                    {content}
                 </div>
 
             </Form>
