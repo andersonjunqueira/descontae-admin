@@ -1,33 +1,37 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { reduxForm, change, FieldArray } from 'redux-form';
+import { reduxForm } from 'redux-form';
 
 import { Form, Row, Col, Button } from 'reactstrap';
-import Card, { CardHeader, CardBody } from '../../components/Card';
 import Text from '../../components/Text';
 import Intl from '../../components/Intl';
-
-import { toaster } from "../../app/Notification.actions";
-import { translate } from "../../components/Intl/Intl.actions";
 
 class CategoriaForm extends Component {
 
     constructor(props) {
         super(props);
+        this.cancelar = this.cancelar.bind(this);
+
         this.state = {
-            initialized: false
+            id: undefined
         }
     }
 
     componentDidUpdate() {
-        if(!this.state.initialized && Object.keys(this.props.data).length > 0) {
-            this.props.dispatch(this.props.initialize(this.props.data));
-            this.setState(Object.assign(this.state, { initialized: true }));
+        console.log(this.state.id, this.props.data);
+
+        if(this.props.data) {
+
+            if(this.state.id !== this.props.data.id) {
+                this.props.dispatch(this.props.initialize(this.props.data));
+                this.setState(Object.assign(this.state, { id: this.props.data.id }));
+            }
+
         }
     }
 
-    consultar() {
+    cancelar() {
         this.props.doConsultar();
+        this.setState(Object.assign(this.state, { id: undefined }));
     }
 
     render() {
@@ -51,7 +55,7 @@ class CategoriaForm extends Component {
                     <Intl str='limpar'></Intl>
                 </Button>
 
-                <Button type="button" onClick={() => this.consultar()} className="btn btn-secondary">
+                <Button type="button" onClick={() => this.cancelar()} className="btn btn-secondary">
                     <Intl str='cancelar'></Intl>
                 </Button>
 

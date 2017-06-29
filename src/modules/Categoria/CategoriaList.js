@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import { Link } from 'react-router'
 
-import { Form, Row, Col, Button, Table } from 'reactstrap';
+import { Form, Row, Col, Button, Table, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Text from '../../components/Text';
 import Intl from '../../components/Intl';
-
-import { translate } from "../../components/Intl/Intl.actions";
 
 class CategoriaList extends Component {
 
     constructor(props) {
         super(props);
         this.limpar = this.limpar.bind(this);
-        this.novo = this.novo.bind(this);
+        this.toggle = this.toggle.bind(this);
+        this.excluir = this.excluir.bind(this);
+
+        this.state = {
+            modal: false,
+            modalParam: ""
+        };
+
+    }
+
+    toggle(value) {
+        this.setState({
+            modal: !this.state.modal,
+            modalParam: value
+        });
     }
 
     limpar() {
@@ -21,17 +32,14 @@ class CategoriaList extends Component {
         this.props.doLimpar();
     }
 
-
-    carregar(id) {
-        this.props.doCarregar(id);
-    }
-
-    excluir(id) {
-        this.props.doExcluir(id);
+    excluir(value) {
+        this.props.doExcluir(this.state.modalParam.id);
+        this.toggle({});
     }
 
     render() {
-        const { handleSubmit, doSubmit, pristine, submitting, invalid, data } = this.props;
+        const { handleSubmit, doSubmit, pristine, submitting, invalid, data, doCarregar } = this.props;
+        const toggle = (value) => this.toggle(value);
 
         let content = (<Intl str="nenhum-registro-encontrado"></Intl>);
         if(data && data.length > 0) {
@@ -50,11 +58,11 @@ class CategoriaList extends Component {
                                 <td className="text-center" scope="row">{data[key].id}</td>
                                 <td>{data[key].nome}</td>
                                 <td className="text-center">
-                                    <Button type="button" onClick={() => this.carregar(data[key].id)} color="secondary" size="sm">
+                                    <Button type="button" onClick={() => doCarregar(data[key].id)} color="secondary" size="sm">
                                         <i className="fa fa-pencil"></i>
                                     </Button>
 
-                                    <Button type="button" onClick={() => this.excluir(data[key].id)} color="danger" size="sm" className="espacamento">
+                                    <Button type="button" onClick={() => toggle(data[key]) } color="danger" size="sm" className="espacamento">
                                         <i className="fa fa-trash"></i>
                                     </Button>
                                 </td>
@@ -78,7 +86,7 @@ class CategoriaList extends Component {
                     <Intl str='pesquisar'></Intl>
                 </Button>
 
-                <Button type="button" disabled={pristine || submitting} onClick={() => this.props.doLimpar()} className="espacamento">
+                <Button type="button" disabled={pristine || submitting} onClick={() => this.limpar()} className="espacamento">
                     <Intl str='limpar'></Intl>
                 </Button>
 
@@ -91,6 +99,17 @@ class CategoriaList extends Component {
                     <h6><Intl str="resultado-pesquisa"></Intl></h6>
                     {content}
                 </div>
+
+                <Modal isOpen={this.state.modal} toggle={toggle}>
+                    <ModalHeader toggle={toggle}><Intl str="confirmacao-exclusao"></Intl></ModalHeader>
+                    <ModalBody>
+                        <Intl str="categoria-excluir-mensagem" params={[this.state.modalParam.nome]}></Intl>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="primary" onClick={() => this.excluir()}><Intl str="excluir"></Intl></Button>
+                        <Button color="secondary" onClick={toggle} className="espacamento"><Intl str="cancelar"></Intl></Button>
+                    </ModalFooter>
+                </Modal>
 
             </Form>
         );

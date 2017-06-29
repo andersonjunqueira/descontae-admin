@@ -8,7 +8,7 @@ const categoriaReducer = (state = {}, action) => {
             return Object.assign({}, state, { mode: action.payload });
 
         case CATEGORIAS_PESQUISA:
-            return Object.assign({}, state, { registros: action.payload });
+            return Object.assign({}, state, { registros: action.payload, obj: undefined });
 
         case CATEGORIA_EDICAO:
             return Object.assign({}, state, { obj: action.payload });
