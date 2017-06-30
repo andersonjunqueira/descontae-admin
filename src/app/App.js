@@ -7,6 +7,7 @@ import Intl from '../components/Intl';
 
 import Inicio from '../modules/Inicio';
 import Categoria from '../modules/Categoria';
+import Marca from '../modules/Marca';
 
 const App = ({store}) => (
     <Provider store={store}>
@@ -16,7 +17,8 @@ const App = ({store}) => (
             <Route component={Full} path="/" name={<Intl str='inicio'></Intl>}>
                 <IndexRoute component={Inicio} />
 
-                <Route path="/categorias" name={<Intl str='categoria'></Intl>} component={Categoria} />
+                <Route path="/categorias" name={<Intl str='categorias'></Intl>} component={Categoria} />
+                <Route path="/marcas" name={<Intl str='marcas'></Intl>} component={Marca} />
             </Route>
 
         </Router>

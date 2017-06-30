@@ -11,6 +11,11 @@
                 "text": "categorias",
                 "icon": "fa fa-tag",
                 "url": "/categorias"
+            },
+            {
+                "text": "marcas",
+                "icon": "fa fa-tag",
+                "url": "/marcas"
             }
         ]
 
