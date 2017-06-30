@@ -19,6 +19,10 @@ h6 {
     margin: 1.5em 0;
 }
 
+h6.text-center.dropdown-header {
+    margin: 0;
+}
+
 .fields-error {
     color: #f86c6b;
 }
@@ -112,8 +116,16 @@ button i ~ span {
     background-image: url('../img/flags/USA.png');
 }
 
-/* DESCONTAE COLORS */
+.tabela {
+    background-color: #FFF;
+}
 
+.sidebar-nav a.nav-link {
+    font-size: 80%;
+    line-height: 1.0;
+}
+
+/* DESCONTAE COLORS */
 header.app-header {
     background-color: rgba(39, 24, 15, 1);
 }
@@ -146,11 +158,6 @@ header.navbar a.navbar-brand {
     background-color: #333;
 }
 
-.sidebar-nav a.nav-link {
-    font-size: 80%;
-    line-height: 1.0;
-}
-
 .sidebar .nav .nav-item .nav-link.nav-dropdown-toggle::before, 
 .sidebar .nav .nav-item .navbar .nav-dropdown-toggle.dropdown-toggle::before, 
 .navbar .sidebar .nav .nav-item .nav-dropdown-toggle.dropdown-toggle::before {
@@ -174,8 +181,3 @@ header.navbar a.navbar-brand {
     color: #FFF !important;
     background: #271A0E !important;
 }
-
-.tabela {
-    background-color: #FFF;
-}
-
