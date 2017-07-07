@@ -10,7 +10,11 @@ export const setMode = (mode) => {
     }
 }
 
-export const consultar = (filtro) => {
+export const consultar = (filtro, start, pagesize) => {
+    filtro = filtro ? filtro : {};
+    filtro.start = start;
+    filtro.page = pagesize;
+
     return dispatch => {
 
         axios.get('/franquias', { params: filtro })

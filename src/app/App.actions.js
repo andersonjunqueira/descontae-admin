@@ -9,8 +9,8 @@ import { sidebarMenuLoad } from '../components/Sidebar/Sidebar.actions';
 import { DEFAULT_LANGUAGE} from '../components/Intl/Intl.actions';
 import { toaster } from './Notification.actions';
 
-
 export const [ MODE_INSERT, MODE_UPDATE, MODE_LIST ] = [ "MODE_INSERT", "MODE_UPDATE", "MODE_LIST" ];
+export const [ PAGESIZE_DEFAULT ] = [ 10 ];
 export const [ PROCESS_LOGIN, PROFILE_LOADED ] = [ "PROCESS_LOGIN", "PROFILE_LOADED" ];
 
 export const logout = (auth) => {

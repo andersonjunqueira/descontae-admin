@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import MarcaForm from './MarcaForm';
 import MarcaList from './MarcaList';
 
-import { MODE_INSERT, MODE_UPDATE, MODE_LIST } from '../../app/App.actions';
+import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGESIZE_DEFAULT } from '../../app/App.actions';
 import * as marcaActions from './Marca.actions';
 
 class Marca extends Component {
@@ -18,19 +18,25 @@ class Marca extends Component {
         this.carregar = this.carregar.bind(this);
         this.salvar = this.salvar.bind(this);
         this.excluir = this.excluir.bind(this);
+        this.setPage = this.setPage.bind(this);
+
+        this.state = {
+            lastFilter: ""
+        };
     }
 
     componentDidMount() {
         this.consultar();
     }
 
-    consultar(values) {
+    consultar(values, start = 0, pagesize = PAGESIZE_DEFAULT) {
+        this.setState(Object.assign({}, this.state, { lastState: values }));
         this.props.actions.setMode(MODE_LIST);
-        this.props.actions.consultar(values);
+        this.props.actions.consultar(this.state.lastFilter, start, pagesize);
     }
 
     limpar() {
-        this.props.actions.consultar();
+        this.props.actions.consultar("");
     }
 
     novo() {
@@ -50,6 +56,10 @@ class Marca extends Component {
         this.props.actions.excluir(id, this.consultar);
     }
 
+    setPage(page) {
+        this.consultar(this.state.lastFilter, page);
+    }
+
     render() {
 
         const { data } = this.props;
@@ -58,7 +68,8 @@ class Marca extends Component {
         return (
             <div>
                 {data.mode === MODE_LIST && <MarcaList data={data.registros} 
-                    doSubmit={this.consultar} doLimpar={this.limpar} doNovo={this.novo} doCarregar={this.carregar} doExcluir={this.excluir}></MarcaList>}
+                    doSubmit={this.consultar} doLimpar={this.limpar} doNovo={this.novo} doCarregar={this.carregar} 
+                    doExcluir={this.excluir} doSetPage={this.setPage}></MarcaList>}
 
                 {data.mode === MODE_INSERT && <MarcaForm 
                     data={obj} doSubmit={this.salvar} doConsultar={this.consultar}></MarcaForm>}

@@ -49,6 +49,13 @@ button i ~ span {
     margin-left: 0.5em;
 }
 
+li.page-item {
+    cursor: pointer;
+}
+
+
+
+
 .categ-col-1, .categ-col-3 {
     text-align: center
 }
@@ -86,7 +93,6 @@ button i ~ span {
         margin-left: 0.5em;
     }
 }
-
 
 .table td {
     padding: 0.35rem;

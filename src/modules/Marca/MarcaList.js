@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 
 import { Form, Row, Col, Button, Table, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import Text from '../../components/Text';
 import Intl from '../../components/Intl';
 
@@ -42,34 +43,66 @@ class MarcaList extends Component {
         const toggle = (value) => this.toggle(value);
 
         let content = (<Intl str="nenhum-registro-encontrado"></Intl>);
-        if(data && data.length > 0) {
-            content = (
-                <Table hover className="tabela">
-                    <thead>
-                        <tr>
-                            <th className="categ-col-1">#</th>
-                            <th className="categ-col-2"><Intl str="nome"></Intl></th>
-                            <th className="categ-col-3"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {Object.keys(data).map(function(key) {
-                            return (<tr key={key}>
-                                <td className="text-center" scope="row">{data[key].id}</td>
-                                <td>{data[key].nome}</td>
-                                <td className="text-center">
-                                    <Button type="button" onClick={() => doCarregar(data[key].id)} color="secondary" size="sm">
-                                        <i className="fa fa-pencil"></i>
-                                    </Button>
+        if(data && data.size > 0) {
+            let paginationLinks = [];
+            if(!data.first) {
+                paginationLinks.push({ icon: "fa fa-step-backward", page: 0});
+            }
 
-                                    <Button type="button" onClick={() => toggle(data[key]) } color="danger" size="sm" className="espacamento">
-                                        <i className="fa fa-trash"></i>
-                                    </Button>
-                                </td>
-                            </tr>);
-                        })}
-                    </tbody>
-                </Table>);
+            for (let i=0; i < data.totalPages; i++) {
+                paginationLinks.push({ text: i+1, page: i, active: i == data.number});
+            }
+
+            if(!data.last) {
+                paginationLinks.push({ icon: "fa fa-step-forward", page: data.totalPages-1});
+            }
+
+            content = (
+                <div>
+                    <Table hover className="tabela">
+                        <thead>
+                            <tr>
+                                <th className="categ-col-1">#</th>
+                                <th className="categ-col-2"><Intl str="nome"></Intl></th>
+                                <th className="categ-col-3"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {Object.keys(data.content).map(function(key) {
+                                return (<tr key={key}>
+                                    <td className="text-center" scope="row">{data.content[key].id}</td>
+                                    <td>{data.content[key].nome}</td>
+                                    <td className="text-center">
+                                        <Button type="button" onClick={() => doCarregar(data.content[key].id)} color="secondary" size="sm">
+                                            <i className="fa fa-pencil"></i>
+                                        </Button>
+
+                                        <Button type="button" onClick={() => toggle(data.content[key]) } color="danger" size="sm" className="espacamento">
+                                            <i className="fa fa-trash"></i>
+                                        </Button>
+                                    </td>
+                                </tr>);
+                            })}
+                        </tbody>
+                    </Table>
+                    {paginationLinks.length > 0 && (
+                        <Row>
+                            <Col xs={12} md={12}>
+                                <Pagination className="pull-right">
+                                    {paginationLinks.map( (item, index) => {
+                                        return (<PaginationItem key={index} active={item.active}>
+                                            <PaginationLink onClick={() => { this.props.doSetPage(item.page); }}>
+                                                <i className={"fa " + item.icon}></i>
+                                                {item.text}
+                                            </PaginationLink>
+                                        </PaginationItem>)
+                                    })}
+                                </Pagination>
+                            </Col>
+                        </Row>
+                    )}
+                </div>
+            );
         }
 
         return (
