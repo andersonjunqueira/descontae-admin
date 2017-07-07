@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import CategoriaForm from './CategoriaForm';
 import CategoriaList from './CategoriaList';
 
-import { MODE_INSERT, MODE_UPDATE, MODE_LIST } from '../../app/App.actions';
+import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGESIZE_DEFAULT } from '../../app/App.actions';
 import * as categoriaActions from './Categoria.actions';
 
 class Categoria extends Component {
@@ -18,15 +18,21 @@ class Categoria extends Component {
         this.carregar = this.carregar.bind(this);
         this.salvar = this.salvar.bind(this);
         this.excluir = this.excluir.bind(this);
+        this.setPage = this.setPage.bind(this);
+
+        this.state = {
+            lastFilter: ""
+        };
     }
 
     componentDidMount() {
         this.consultar();
     }
 
-    consultar(values) {
+    consultar(values, start = 0, pagesize = PAGESIZE_DEFAULT) {
+        this.setState(Object.assign({}, this.state, { lastState: values }));
         this.props.actions.setMode(MODE_LIST);
-        this.props.actions.consultar(values);
+        this.props.actions.consultar(this.state.lastFilter, start, pagesize);
     }
 
     limpar() {
@@ -50,6 +56,10 @@ class Categoria extends Component {
         this.props.actions.excluir(id, this.consultar);
     }
 
+    setPage(page) {
+        this.consultar(this.state.lastFilter, page);
+    }
+
     render() {
 
         const { data } = this.props;
@@ -58,7 +68,8 @@ class Categoria extends Component {
         return (
             <div>
                 {data.mode === MODE_LIST && <CategoriaList data={data.registros} 
-                    doSubmit={this.consultar} doLimpar={this.limpar} doNovo={this.novo} doCarregar={this.carregar} doExcluir={this.excluir}></CategoriaList>}
+                    doSubmit={this.consultar} doLimpar={this.limpar} doNovo={this.novo} doCarregar={this.carregar} 
+                    doExcluir={this.excluir} doSetPage={this.setPage}></CategoriaList>}
 
                 {data.mode === MODE_INSERT && <CategoriaForm 
                     data={obj} doSubmit={this.salvar} doConsultar={this.consultar}></CategoriaForm>}

@@ -45,21 +45,23 @@ class MarcaList extends Component {
         let content = (<Intl str="nenhum-registro-encontrado"></Intl>);
         if(data && data.size > 0) {
             let paginationLinks = [];
-            if(!data.first) {
-                paginationLinks.push({ icon: "fa fa-step-backward", page: 0});
-            }
+            if(data.totalPages > 1) {
+                if(!data.first) {
+                    paginationLinks.push({ icon: "fa fa-step-backward", page: 0});
+                }
 
-            for (let i=0; i < data.totalPages; i++) {
-                paginationLinks.push({ text: i+1, page: i, active: i == data.number});
-            }
+                for (let i=0; i < data.totalPages; i++) {
+                    paginationLinks.push({ text: i+1, page: i, active: i == data.number});
+                }
 
-            if(!data.last) {
-                paginationLinks.push({ icon: "fa fa-step-forward", page: data.totalPages-1});
+                if(!data.last) {
+                    paginationLinks.push({ icon: "fa fa-step-forward", page: data.totalPages-1});
+                }
             }
 
             content = (
                 <div>
-                    <Table hover className="tabela">
+                    <Table hover size="sm" className="tabela">
                         <thead>
                             <tr>
                                 <th className="categ-col-1">#</th>
