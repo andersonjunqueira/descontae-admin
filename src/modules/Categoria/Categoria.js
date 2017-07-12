@@ -38,7 +38,7 @@ class Categoria extends Component {
         let filter = Object.assign({}, values);
         filter.sort = "nome,ASC";
         if(filter && filter.nome) {
-            filter.nome = filter.nome + "*";
+            filter.nome += "*";
         }
 
         this.setState(Object.assign({}, this.state, { lastFilter: filter }));

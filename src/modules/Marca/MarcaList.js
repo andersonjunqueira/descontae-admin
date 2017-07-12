@@ -51,7 +51,7 @@ class MarcaList extends Component {
                 }
 
                 for (let i=0; i < data.totalPages; i++) {
-                    paginationLinks.push({ text: i+1, page: i, active: i == data.number});
+                    paginationLinks.push({ text: i+1, page: i, active: i === data.number});
                 }
 
                 if(!data.last) {
