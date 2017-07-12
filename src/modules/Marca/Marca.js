@@ -13,6 +13,7 @@ class Marca extends Component {
     constructor(props) {
         super(props);
         this.consultar = this.consultar.bind(this);
+        this.pesquisar = this.pesquisar.bind(this);
         this.limpar = this.limpar.bind(this);
         this.novo = this.novo.bind(this);
         this.carregar = this.carregar.bind(this);
@@ -29,10 +30,20 @@ class Marca extends Component {
         this.consultar();
     }
 
-    consultar(values, start = 0, pagesize = PAGESIZE_DEFAULT) {
-        this.setState(Object.assign({}, this.state, { lastState: values }));
+    pesquisar(values) {
+        this.consultar(values);
+    }
+
+    consultar(values, page = 0, pagesize = PAGESIZE_DEFAULT) {
+        let filter = Object.assign({}, values);
+        filter.sort = "nome,ASC";
+        if(filter && filter.nome) {
+            filter.nome = filter.nome + "*";
+        }
+
+        this.setState(Object.assign({}, this.state, { lastFilter: filter }));
         this.props.actions.setMode(MODE_LIST);
-        this.props.actions.consultar(this.state.lastFilter, start, pagesize);
+        this.props.actions.consultar(filter, page, pagesize);
     }
 
     limpar() {
@@ -68,7 +79,7 @@ class Marca extends Component {
         return (
             <div>
                 {data.mode === MODE_LIST && <MarcaList data={data.registros} 
-                    doSubmit={this.consultar} doLimpar={this.limpar} doNovo={this.novo} doCarregar={this.carregar} 
+                    doSubmit={this.pesquisar} doLimpar={this.limpar} doNovo={this.novo} doCarregar={this.carregar} 
                     doExcluir={this.excluir} doSetPage={this.setPage}></MarcaList>}
 
                 {data.mode === MODE_INSERT && <MarcaForm 

@@ -43,7 +43,7 @@ class MarcaList extends Component {
         const toggle = (value) => this.toggle(value);
 
         let content = (<Intl str="nenhum-registro-encontrado"></Intl>);
-        if(data && data.size > 0) {
+        if(data && data.totalElements > 0) {
             let paginationLinks = [];
             if(data.totalPages > 1) {
                 if(!data.first) {
