@@ -17,15 +17,11 @@ class CategoriaForm extends Component {
     }
 
     componentDidUpdate() {
-        console.log(this.state.id, this.props.data);
-
         if(this.props.data) {
-
             if(this.state.id !== this.props.data.id) {
                 this.props.dispatch(this.props.initialize(this.props.data));
                 this.setState(Object.assign(this.state, { id: this.props.data.id }));
             }
-
         }
     }
 
