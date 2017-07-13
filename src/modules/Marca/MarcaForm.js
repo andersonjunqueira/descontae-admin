@@ -51,6 +51,8 @@ class FranquiaForm extends Component {
                             width={200} height={200}
                             placeholder={<Intl str="miniatura-placeholder"></Intl>}
                             help={<Intl str="logomarca-help"></Intl>}
+                            accept="image/jpeg, image/png"
+                            maxSize={500*1024}
                         />
                     </Col>
                     <Col xs={12} md={4}>
@@ -60,6 +62,8 @@ class FranquiaForm extends Component {
                             width={200} height={200}
                             placeholder={<Intl str="miniatura-placeholder"></Intl>}
                             help={<Intl str="miniatura-help"></Intl>}
+                            accept="image/jpeg, image/png"
+                            maxSize={500*1024}
                         />
                     </Col>
                     <Col xs={12} md={4}>
@@ -69,6 +73,8 @@ class FranquiaForm extends Component {
                             width={200} height={200}
                             placeholder={<Intl str="miniatura-placeholder"></Intl>}
                             help={<Intl str="imagem-fundo-app-help"></Intl>}
+                            accept="image/jpeg, image/png"
+                            maxSize={500*1024}
                         />
                     </Col>
                 </Row>

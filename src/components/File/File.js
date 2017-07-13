@@ -39,6 +39,8 @@ class File extends Component {
             <Field name={this.props.name}
                 component={BootstrapFile}
                 onChange={this.props.onChange}
+                accept={this.props.accept}
+                maxSize={this.props.maxSize}
 
                 label={this.props.label}
                 required={this.props.required}  
@@ -60,6 +62,8 @@ File.propTypes = {
     help: PropTypes.node,
     required: PropTypes.bool,
     validators: PropTypes.array,
+    accept: PropTypes.string,
+    maxSize: PropTypes.number,
     width: PropTypes.number,
     height: PropTypes.number,
     onChange: PropTypes.func

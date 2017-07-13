@@ -4,13 +4,10 @@ import Dropzone from 'react-dropzone';
 
 class BootstrapFile extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-
     onChange(files) {
-        this.props.input.onChange({ name: this.props.input.name, files: files });
+        if(this.props.input.onChange) {
+            this.props.input.onChange({ name: this.props.input.name, files: files });
+        }
     }
 
     render() {
@@ -41,7 +38,9 @@ class BootstrapFile extends Component {
 
                 <Dropzone 
                     className={field.className}
-                    onDrop={this.onChange.bind(this)} 
+                    onDrop={this.onChange.bind(this)}
+                    accept={field.accept}
+                    maxSize={field.maxSize}
                     multiple={true}
                     style={{
                         "width" : "100%", 
@@ -64,6 +63,8 @@ BootstrapFile.propTypes = {
     help: PropTypes.node,
     width: PropTypes.number,
     height: PropTypes.number,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    accept: PropTypes.string,
+    maxSize: PropTypes.number
 }
 export default BootstrapFile;

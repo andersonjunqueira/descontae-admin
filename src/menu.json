@@ -4,6 +4,11 @@
         "heading": true
     },
     {
+        "text": "marcas",
+        "icon": "fa fa-tag",
+        "url": "/marcas"
+    },
+    {
         "text": "configuracoes",
         "icon": "fa fa-cogs",
         "submenu": [
@@ -11,11 +16,6 @@
                 "text": "categorias",
                 "icon": "fa fa-tag",
                 "url": "/categorias"
-            },
-            {
-                "text": "marcas",
-                "icon": "fa fa-tag",
-                "url": "/marcas"
             }
         ]
 
