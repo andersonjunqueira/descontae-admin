@@ -58,7 +58,7 @@ Text.propTypes = {
     label: PropTypes.node,
     className: PropTypes.string,
     placeholder: PropTypes.node,
-    help: PropTypes.string,
+    help: PropTypes.node,
     maxLength: PropTypes.number,
     required: PropTypes.bool,
     validators: PropTypes.array,

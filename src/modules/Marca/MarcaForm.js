@@ -6,8 +6,6 @@ import Text from '../../components/Text';
 import File from '../../components/File';
 import Intl from '../../components/Intl';
 
-import { fileFunctions } from '../../components/File';
-
 class FranquiaForm extends Component {
 
     constructor(props) {
@@ -34,7 +32,7 @@ class FranquiaForm extends Component {
     }
 
     render() {
-        const { handleSubmit, doSubmit, pristine, reset, submitting, invalid, data} = this.props;
+        const { handleSubmit, doSubmit, pristine, reset, submitting, invalid} = this.props;
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
 
@@ -47,12 +45,31 @@ class FranquiaForm extends Component {
                 </Row>
                 <Row>
                     <Col xs={12} md={4}>
-                        <File name="imagemThumbnail" 
-                            label={<Intl str='thumbnail'></Intl>} 
+                        <File name="logomarca" 
+                            label={<Intl str='logomarca'></Intl>} 
                             required={true} 
                             width={200} height={200}
-                            placeholder="Clique e selecione arquivos com extensão .png e tamanho máximo 100Kb"
-                            help="anderson"/>
+                            placeholder={<Intl str="miniatura-placeholder"></Intl>}
+                            help={<Intl str="logomarca-help"></Intl>}
+                        />
+                    </Col>
+                    <Col xs={12} md={4}>
+                        <File name="imagemThumbnail" 
+                            label={<Intl str='miniatura'></Intl>} 
+                            required={true} 
+                            width={200} height={200}
+                            placeholder={<Intl str="miniatura-placeholder"></Intl>}
+                            help={<Intl str="miniatura-help"></Intl>}
+                        />
+                    </Col>
+                    <Col xs={12} md={4}>
+                        <File name="imagemFundoApp" 
+                            label={<Intl str='imagem-fundo-app'></Intl>} 
+                            required={true} 
+                            width={200} height={200}
+                            placeholder={<Intl str="miniatura-placeholder"></Intl>}
+                            help={<Intl str="imagem-fundo-app-help"></Intl>}
+                        />
                     </Col>
                 </Row>
 

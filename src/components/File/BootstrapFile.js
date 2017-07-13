@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { FormGroup, Label, Input, FormText, FormFeedback, InputGroup, InputGroupButton, Button } from 'reactstrap';
+import { FormGroup, Label, FormText, FormFeedback } from 'reactstrap';
 import Dropzone from 'react-dropzone';
 
 class BootstrapFile extends Component {
@@ -15,10 +15,6 @@ class BootstrapFile extends Component {
 
     render() {
         const field = this.props; 
-        const attrs = { 
-            type: field.type,
-            state: field.meta.error && field.meta.touched ? "danger" : ""
-        };
 
         let feedback = (<FormText color="muted">{field.help}</FormText>);
         if(field.meta.error && field.meta.touched) {
@@ -28,9 +24,9 @@ class BootstrapFile extends Component {
         let preview;
         if(field.input.value) {
             if(field.input.value.files) {
-                preview = (<div><img src={field.input.value.files[0].preview} height={field.height}/></div>);
+                preview = (<div><img src={field.input.value.files[0].preview} height={field.height} role="presentation"/></div>);
             } else {
-                preview = (<div><img src={field.input.value} height={field.height}/></div>);
+                preview = (<div><img src={field.input.value} height={field.height} role="presentation"/></div>);
             }
         } else {
             preview = (<div>{field.placeholder}</div>);
@@ -49,7 +45,7 @@ class BootstrapFile extends Component {
                     multiple={true}
                     style={{
                         "width" : "100%", 
-                        "height" : "20%", 
+                        "height" : field.height + 2, 
                         "border": "1px solid #b0bec5", 
                         "textAlign": "center"
                     }}>
@@ -64,10 +60,10 @@ class BootstrapFile extends Component {
 
 BootstrapFile.propTypes = {
     label: PropTypes.node,
-    help: PropTypes.string,
+    placeholder: PropTypes.node,
+    help: PropTypes.node,
     width: PropTypes.number,
     height: PropTypes.number,
-    placeholder: PropTypes.string,
     onChange: PropTypes.func
 }
 export default BootstrapFile;

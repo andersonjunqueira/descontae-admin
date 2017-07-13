@@ -47,17 +47,23 @@
         "erro-salvar-marca": "Não foi possível salvar a marca/franquia.",
         "erro-carga-marca": "Não foi possível carregar a marca/franquia.",
         "erro-excluir-marca": "Não foi possível carregar a marca/franquia.",
+        "imagem-fundo-app": "Imagem de Fundo Perfil App",
+        "imagem-fundo-app-help": "Extensões permitidas: JPG ou PNG e tamanho máximo 100Kb",
+        "logomarca": "Logo",
+        "logomarca-help": "Extensões permitidas: JPG ou PNG e tamanho máximo 100Kb",
         "marca": "Marca/Franquia",
         "marcas": "Marcas/Franquias",
         "marcas-excluir-mensagem": "Confirma a exclusão do registro '{0}'?",
         "marca-salva": "Marca/Franquia salva com sucesso.",
         "marca-excluida": "Marca/Franquia excluída com sucesso.",
+        "miniatura": "Miniatura App",
+        "miniatura-placeholder": "Arraste ou clique para selecionar um arquivo",
+        "miniatura-help": "Extensões permitidas: JPG ou PNG e tamanho máximo 100Kb",
         "nome": "Nome",
         "nova-categoria": "Nova Categoria",
         "nova-marca": "Nova Marca/Franquia",
         "pesquisa-marcas": "Pesquisa de Marcas/Franquias",
-        "pesquisa-categorias": "Pesquisa de Categorias",
-        "thumbnail": "Thumbnail"
+        "pesquisa-categorias": "Pesquisa de Categorias"
 
     }
 }

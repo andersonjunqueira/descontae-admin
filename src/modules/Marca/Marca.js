@@ -20,7 +20,6 @@ class Marca extends Component {
         this.salvar = this.salvar.bind(this);
         this.excluir = this.excluir.bind(this);
         this.setPage = this.setPage.bind(this);
-        this.updateImage = this.updateImage.bind(this);
 
         this.state = {
             lastFilter: ""
@@ -73,10 +72,6 @@ class Marca extends Component {
         this.consultar(this.state.lastFilter, page);
     }
 
-    updateImage(name, data) {
-        this.props.actions.updateImage(name, data);
-    }
-
     render() {
 
         const { data } = this.props;
@@ -89,10 +84,10 @@ class Marca extends Component {
                     doExcluir={this.excluir} doSetPage={this.setPage}></MarcaList>}
 
                 {data.mode === MODE_INSERT && <MarcaForm 
-                    data={obj} doSubmit={this.salvar} doConsultar={this.consultar} doUpdateImage={this.updateImage}></MarcaForm>}
+                    data={obj} doSubmit={this.salvar} doConsultar={this.consultar}></MarcaForm>}
 
                 {data.mode === MODE_UPDATE && <MarcaForm 
-                    data={data.obj} doSubmit={this.salvar} doConsultar={this.consultar} doUpdateImage={this.updateImage}></MarcaForm>}
+                    data={data.obj} doSubmit={this.salvar} doConsultar={this.consultar}></MarcaForm>}
             </div>
         );
     }

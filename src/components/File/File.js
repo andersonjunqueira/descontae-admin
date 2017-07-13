@@ -56,8 +56,8 @@ class File extends Component {
 File.propTypes = {
     label: PropTypes.node,
     className: PropTypes.string,
-    help: PropTypes.string,
-    placeholder: PropTypes.string,
+    placeholder: PropTypes.node,
+    help: PropTypes.node,
     required: PropTypes.bool,
     validators: PropTypes.array,
     width: PropTypes.number,
