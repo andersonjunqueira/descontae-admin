@@ -53,10 +53,11 @@
         "marca-salva": "Marca/Franquia salva com sucesso.",
         "marca-excluida": "Marca/Franquia excluída com sucesso.",
         "nome": "Nome",
+        "nova-categoria": "Nova Categoria",
         "nova-marca": "Nova Marca/Franquia",
         "pesquisa-marcas": "Pesquisa de Marcas/Franquias",
-        "nova-categoria": "Nova Categoria",
-        "pesquisa-categorias": "Pesquisa de Categorias"
+        "pesquisa-categorias": "Pesquisa de Categorias",
+        "thumbnail": "Thumbnail"
 
     }
 }

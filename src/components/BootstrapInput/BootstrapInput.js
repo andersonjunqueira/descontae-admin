@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { FormGroup, Label, Input, FormText, FormFeedback, InputGroup, InputGroupButton, Button } from 'reactstrap';
 
 class BootstrapInput extends Component {
+
     render() {
         const field = this.props; 
         const attrs = { 
@@ -24,7 +25,7 @@ class BootstrapInput extends Component {
                     {field.required && <span className="required"> *</span>}
                 </Label>}
 
-                {attrs.type !== "select" && 
+                {(attrs.type !== "select" && attrs.type !== "file") && 
                     <InputGroup>
                         <Input {...field.input} {...attrs}/>
                         {field.rightButtonLabel &&  

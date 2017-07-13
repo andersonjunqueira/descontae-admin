@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form';
 
 import { Form, Row, Col, Button } from 'reactstrap';
 import Text from '../../components/Text';
+import File from '../../components/File';
 import Intl from '../../components/Intl';
 
 class FranquiaForm extends Component {
@@ -10,6 +11,7 @@ class FranquiaForm extends Component {
     constructor(props) {
         super(props);
         this.cancelar = this.cancelar.bind(this);
+        this.onFileChange = this.onFileChange.bind(this);
 
         this.state = {
             id: undefined
@@ -30,8 +32,12 @@ class FranquiaForm extends Component {
         this.setState(Object.assign(this.state, { id: undefined }));
     }
 
+    onFileChange(item) {
+        this.props.doUpdateImage(item.name, 'data:' + item.type + ';base64,' + item.base64);
+    }
+
     render() {
-        const { handleSubmit, doSubmit, pristine, reset, submitting, invalid } = this.props;
+        const { handleSubmit, doSubmit, pristine, reset, submitting, invalid, data} = this.props;
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
 
@@ -40,6 +46,12 @@ class FranquiaForm extends Component {
                 <Row>
                     <Col xs={12} md={12}>
                         <Text name="nome" label={<Intl str='nome'></Intl>} maxLength={100} required={true}/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} md={12}>
+                        <File name="imagemThumbnail" label={<Intl str='thumbnail'></Intl>} required={true} onChange={this.onFileChange}/>
+                        {data && data.imagemThumbnail && <img src={data.imagemThumbnail} role="presentation"/>}
                     </Col>
                 </Row>
 
@@ -67,7 +79,7 @@ const validate = values => {
 }
 
 FranquiaForm = reduxForm({ 
-    form: "FranquiaForm", 
+    form: "MarcaForm", 
     validate 
 })(FranquiaForm);
 

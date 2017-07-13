@@ -2,7 +2,13 @@ import axios from "axios";
 
 import { toaster } from "../../app/Notification.actions";
 
-export const [ MARCAS_PESQUISA, MARCA_EDICAO, MARCA_SETMODE ] = [ "MARCAS_PESQUISA", "MARCA_EDICAO", "MARCA_SETMODE" ];
+export const [ MARCAS_PESQUISA, MARCA_EDICAO, MARCA_SETMODE, MARCA_UPDATEIMAGE ] = [ "MARCAS_PESQUISA", "MARCA_EDICAO", "MARCA_SETMODE", "MARCA_UPDATEIMAGE" ];
+
+export const updateImage = (name, data) => {
+    return dispatch => {
+        dispatch({type: MARCA_UPDATEIMAGE, payload: {name: name, data: data}});
+    }
+}
 
 export const setMode = (mode) => {
     return dispatch => {
