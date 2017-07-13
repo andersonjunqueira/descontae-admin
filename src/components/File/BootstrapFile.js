@@ -6,19 +6,20 @@ class BootstrapFile extends Component {
 
     constructor(props) {
         super(props);
-        this.onChange = this.onChange.bind(this);
+        this.state = {};
     }
 
     onChange(files) {
         this.encodeBase64(this.props.input.name, files[0], this.props.input.onChange);
+        this.setState({
+            files: [ files[0] ]
+        });
     }
 
     render() {
         const field = this.props; 
         const attrs = { 
             type: field.type,
-            placeholder: field.placeholder, 
-            className: field.className,
             state: field.meta.error && field.meta.touched ? "danger" : ""
         };
 
@@ -28,7 +29,30 @@ class BootstrapFile extends Component {
         }
 
         return (
-            <Dropzone onDrop={this.onChange}/>
+            <FormGroup color={field.meta.error && field.meta.touched ? "danger" : null}>
+                {field.label && <Label for={field.name}>
+                    {field.label}
+                    {field.required && <span className="required"> *</span>}
+                </Label>}
+
+                <Dropzone 
+                    className={field.className}
+                    onDrop={this.onChange.bind(this)} 
+                    multiple={false}
+                    style={{
+                            "width" : (field.width + 2) + "px", 
+                            "height" : (field.height + 2) + "px", 
+                            "border": "1px solid #b0bec5", 
+                            "textAlign": "center"
+                    }}>
+                    <div>
+                        {this.state.files && this.state.files.map((file, index) => <img key={index} src={file.preview} width={field.width} height={field.height} /> )}
+                        {!this.state.files && <span>{field.placeholder}</span>}
+                    </div>
+                </Dropzone>
+
+                {feedback}
+            </FormGroup>
         );
     }
 
@@ -51,6 +75,9 @@ class BootstrapFile extends Component {
 BootstrapFile.propTypes = {
     label: PropTypes.node,
     help: PropTypes.string,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    placeholder: PropTypes.string,
     onChange: PropTypes.func
 }
-export default BootstrapFile
+export default BootstrapFile;

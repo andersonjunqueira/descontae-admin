@@ -25,9 +25,18 @@ class File extends Component {
 
     render() {
         return (
-            <Field name={this.props.name} 
-                component={BootstrapFile} 
+            <Field name={this.props.name}
+                component={BootstrapFile}
                 onChange={this.props.onChange}
+
+                label={this.props.label}
+                required={this.props.required}  
+                placeholder={this.props.placeholder}
+                help={this.props.help}
+                validate={this.getValidators()}
+                className={this.props.className}
+                width={this.props.width} 
+                height={this.props.height}
             />
         );
     }
@@ -37,8 +46,11 @@ File.propTypes = {
     label: PropTypes.node,
     className: PropTypes.string,
     help: PropTypes.string,
+    placeholder: PropTypes.string,
     required: PropTypes.bool,
     validators: PropTypes.array,
+    width: PropTypes.number,
+    height: PropTypes.number,
     onChange: PropTypes.func
 }
 

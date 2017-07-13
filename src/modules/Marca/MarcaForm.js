@@ -33,6 +33,7 @@ class FranquiaForm extends Component {
     }
 
     onFileChange(item) {
+        this.setState(Object.assign(this.state, { id: undefined }));
         this.props.doUpdateImage(item.name, 'data:' + item.type + ';base64,' + item.base64);
     }
 
@@ -50,8 +51,13 @@ class FranquiaForm extends Component {
                 </Row>
                 <Row>
                     <Col xs={12} md={12}>
-                        <File name="imagemThumbnail" label={<Intl str='thumbnail'></Intl>} required={true} onChange={this.onFileChange}/>
-                        {data && data.imagemThumbnail && <img src={data.imagemThumbnail} role="presentation"/>}
+                        <File name="imagemThumbnail" 
+                            label={<Intl str='thumbnail'></Intl>} 
+                            required={true} 
+                            onChange={this.onFileChange}
+                            width={200} height={200}
+                            placeholder="Clique e selecione arquivos com extensão .png e tamanho máximo 100Kb"
+                            help="anderson"/>
                     </Col>
                 </Row>
 
