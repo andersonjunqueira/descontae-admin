@@ -10,10 +10,7 @@ class BootstrapFile extends Component {
     }
 
     onChange(files) {
-        this.encodeBase64(this.props.input.name, files[0], this.props.input.onChange);
-        this.setState({
-            files: [ files[0] ]
-        });
+        this.props.input.onChange({ name: this.props.input.name, files: files });
     }
 
     render() {
@@ -28,6 +25,17 @@ class BootstrapFile extends Component {
             feedback = (<FormFeedback>{field.meta.error}</FormFeedback>);
         }
 
+        let preview;
+        if(field.input.value) {
+            if(field.input.value.files) {
+                preview = (<div><img src={field.input.value.files[0].preview} height={field.height}/></div>);
+            } else {
+                preview = (<div><img src={field.input.value} height={field.height}/></div>);
+            }
+        } else {
+            preview = (<div>{field.placeholder}</div>);
+        }
+
         return (
             <FormGroup color={field.meta.error && field.meta.touched ? "danger" : null}>
                 {field.label && <Label for={field.name}>
@@ -38,37 +46,19 @@ class BootstrapFile extends Component {
                 <Dropzone 
                     className={field.className}
                     onDrop={this.onChange.bind(this)} 
-                    multiple={false}
+                    multiple={true}
                     style={{
-                            "width" : (field.width + 2) + "px", 
-                            "height" : (field.height + 2) + "px", 
-                            "border": "1px solid #b0bec5", 
-                            "textAlign": "center"
+                        "width" : "100%", 
+                        "height" : "20%", 
+                        "border": "1px solid #b0bec5", 
+                        "textAlign": "center"
                     }}>
-                    <div>
-                        {this.state.files && this.state.files.map((file, index) => <img key={index} src={file.preview} width={field.width} height={field.height} /> )}
-                        {!this.state.files && <span>{field.placeholder}</span>}
-                    </div>
+                    {preview}
                 </Dropzone>
 
                 {feedback}
             </FormGroup>
         );
-    }
-
-    encodeBase64(name, file, callback) {
-        let reader = new FileReader();
-        reader.onload = function(readerEvt) {
-            var binaryString = readerEvt.target.result;
-            callback({
-                base64: btoa(binaryString),
-                name: name,
-                filename: file.name,
-                size: file.size,
-                type: file.type
-            });
-        };
-        reader.readAsBinaryString(file);
     }
 }
 

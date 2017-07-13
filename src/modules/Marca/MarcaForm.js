@@ -6,12 +6,13 @@ import Text from '../../components/Text';
 import File from '../../components/File';
 import Intl from '../../components/Intl';
 
+import { fileFunctions } from '../../components/File';
+
 class FranquiaForm extends Component {
 
     constructor(props) {
         super(props);
         this.cancelar = this.cancelar.bind(this);
-        this.onFileChange = this.onFileChange.bind(this);
 
         this.state = {
             id: undefined
@@ -32,11 +33,6 @@ class FranquiaForm extends Component {
         this.setState(Object.assign(this.state, { id: undefined }));
     }
 
-    onFileChange(item) {
-        this.setState(Object.assign(this.state, { id: undefined }));
-        this.props.doUpdateImage(item.name, 'data:' + item.type + ';base64,' + item.base64);
-    }
-
     render() {
         const { handleSubmit, doSubmit, pristine, reset, submitting, invalid, data} = this.props;
         return (
@@ -50,11 +46,10 @@ class FranquiaForm extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={12} md={12}>
+                    <Col xs={12} md={4}>
                         <File name="imagemThumbnail" 
                             label={<Intl str='thumbnail'></Intl>} 
                             required={true} 
-                            onChange={this.onFileChange}
                             width={200} height={200}
                             placeholder="Clique e selecione arquivos com extensão .png e tamanho máximo 100Kb"
                             help="anderson"/>

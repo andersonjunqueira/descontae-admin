@@ -2,6 +2,17 @@ import React, { Component, PropTypes } from 'react';
 import { Field } from 'redux-form';
 import BootstrapFile from './BootstrapFile'
 
+export const fileFunctions = { 
+    toBase64: (file, callback) => {
+        let reader = new FileReader();
+        reader.onload = function(readerEvt) {
+            var binaryString = readerEvt.target.result;
+            callback(btoa(binaryString));
+        };
+        reader.readAsBinaryString(file);
+    }
+}
+
 class File extends Component {
 
     constructor(props) {

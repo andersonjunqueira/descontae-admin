@@ -25,14 +25,14 @@ class Text extends Component {
         this.props.validators.forEach(function(v){
             validators.push(v);
         });
-        
+
         return validators;
     }
 
     normalize(value) {
         return (this.props.normalize) ? this.props.normalize(value) : value;
     }
-    
+
     render() {
         return (
             <Field name={this.props.name}
