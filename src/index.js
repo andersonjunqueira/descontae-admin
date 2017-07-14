@@ -21,6 +21,11 @@ const store = createStore(
 // INTERNACIONALIZAÇÃO
 store.dispatch(changeLanguage(DEFAULT_LANGUAGE, true));
 
+if(location.hostname === "localhost") {
+    appData.config.keycloakConfigFile = "/keycloak-dev.json";
+    appData.config.axiosBaseURL = "http://localhost:8000/descontae-backend/api"
+}
+
 //KEYCLOAK CONFIG
 let kc = Keycloak(appData.config.keycloakConfigFile);
 kc.init({onLoad: 'check-sso'}).success(authenticated => {
