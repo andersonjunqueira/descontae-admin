@@ -24,7 +24,9 @@ class File extends Component {
         const validators = [];
 
         if(this.props.required) {
-            validators.push( (value) => !value ? "Campo Obrigatório" : undefined );
+            validators.push( (value) => { 
+                return !value || (value.files && value.files.length === 0) ? "Campo Obrigatório" : undefined;
+            });
         }
 
         this.props.validators.forEach(function(v){
