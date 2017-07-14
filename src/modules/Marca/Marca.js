@@ -7,6 +7,7 @@ import MarcaList from './MarcaList';
 
 import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGESIZE_DEFAULT } from '../../app/App.actions';
 import * as marcaActions from './Marca.actions';
+import { fileFunctions } from "../../components/File";
 
 class Marca extends Component {
 
@@ -55,8 +56,52 @@ class Marca extends Component {
     }
 
     salvar(values) {
-        console.log(values);
-        this.props.actions.salvar(values, this.consultar);
+        const data = Object.assign({}, values, {});
+        let plogo = new Promise( (resolve, reject) => {
+            if(data.logomarca) {
+                if(data.logomarca.files) {
+                    fileFunctions.toBase64(data.logomarca.files[0], (base64) => {
+                        data.logomarca = "data:" + data.logomarca.files[0].type + ";base64," + base64;
+                        resolve();
+                    });
+                } else {
+                    resolve();
+                }
+            }
+        });
+
+        let pthumb = new Promise( (resolve, reject) => {       
+            if(data.imagemThumbnail) {
+                if(data.imagemThumbnail.files) {
+                    fileFunctions.toBase64(data.imagemThumbnail.files[0], (base64) => {
+                        data.imagemThumbnail = "data:" + data.imagemThumbnail.files[0].type + ";base64," + base64;
+                        resolve();
+                    });
+                } else {
+                    resolve();
+                }
+            }
+        });
+
+        let pfundo = new Promise( (resolve, reject) => {
+            if(data.imagemFundoApp) {
+                if(data.imagemFundoApp.files) {
+                    fileFunctions.toBase64(data.imagemFundoApp.files[0], (base64) => {
+                        data.imagemFundoApp = "data:" + data.imagemFundoApp.files[0].type + ";base64," + base64;
+                        resolve();
+                    });
+                } else {
+                    resolve();
+                }
+            }
+        });
+
+        Promise.all([plogo, pthumb, pfundo]).then(values => { 
+            this.props.actions.salvar(data, this.consultar);
+        }, reason => {
+            console.log(reason);
+        });
+
     }
 
     carregar(id) {

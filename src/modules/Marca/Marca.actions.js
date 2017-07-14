@@ -34,10 +34,11 @@ export const consultar = (filtro, start, pagesize) => {
     }
 }
 
-export const salvar = (categoria, callback) => {
+export const salvar = (marca, callback) => {
+
     return dispatch => {
 
-        axios.post('/franquias', categoria)
+        axios.post('/franquias', marca)
             .then(function(response) {
                 callback();
                 dispatch(toaster("marca-salva", [], {status: "success"}));
