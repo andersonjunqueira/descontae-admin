@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
+import { reduxForm, change } from 'redux-form';
 
 import { Form, Row, Col, Button } from 'reactstrap';
 import Text from '../../components/Text';
-import File from '../../components/File';
+import CNPJ from '../../components/CNPJ';
+import Email from '../../components/Email';
+import Endereco from '../../components/Endereco';
 import Intl from '../../components/Intl';
 
-class MarcaForm extends Component {
+import { toaster } from "../../app/Notification.actions";
+
+class ClienteForm extends Component {
 
     constructor(props) {
         super(props);
         this.cancelar = this.cancelar.bind(this);
+        this.atualizaEndereco = this.atualizaEndereco.bind(this);
 
         this.state = {
             id: undefined
@@ -31,12 +36,23 @@ class MarcaForm extends Component {
         this.setState(Object.assign(this.state, { id: undefined }));
     }
 
+    atualizaEndereco(address) { 
+        if(address) {
+            this.props.dispatch(change(this.props.form, 'logradouro', address.logradouro));
+            this.props.dispatch(change(this.props.form, 'bairro', address.bairro));
+            this.props.dispatch(change(this.props.form, 'cidade', address.cidade));
+            this.props.dispatch(change(this.props.form, 'uf', address.uf));
+        } else {
+            this.props.dispatch(toaster("cep-nao-encontrado", [], {status: "warning"}));
+        }
+    }
+
     render() {
         const { handleSubmit, doSubmit, pristine, reset, submitting, invalid} = this.props;
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
 
-                <h4><Intl str='marca'></Intl></h4>
+                <h4><Intl str='cliente'></Intl></h4>
 
                 <Row>
                     <Col xs={12} md={12}>
@@ -44,38 +60,21 @@ class MarcaForm extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={12} md={4}>
-                        <File name="logomarca" 
-                            label={<Intl str='logomarca'></Intl>} 
-                            required={true} 
-                            width={200} height={200}
-                            placeholder={<Intl str="miniatura-placeholder"></Intl>}
-                            help={<Intl str="logomarca-help"></Intl>}
-                            accept="image/jpeg, image/png"
-                            maxSize={500*1024}
-                        />
+                    <Col xs={12} md={12}>
+                        <Text name="nomeFantasia" label={<Intl str='nome-fantasia'></Intl>} maxLength={100} required={true}/>
                     </Col>
-                    <Col xs={12} md={4}>
-                        <File name="imagemThumbnail" 
-                            label={<Intl str='miniatura'></Intl>} 
-                            required={true} 
-                            width={200} height={200}
-                            placeholder={<Intl str="miniatura-placeholder"></Intl>}
-                            help={<Intl str="miniatura-help"></Intl>}
-                            accept="image/jpeg, image/png"
-                            maxSize={500*1024}
-                        />
+                </Row>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <CNPJ name="cnpj" label={<Intl str='cnpj'></Intl>} required={true}/>
                     </Col>
-                    <Col xs={12} md={4}>
-                        <File name="imagemFundoApp" 
-                            label={<Intl str='imagem-fundo-app'></Intl>} 
-                            required={true} 
-                            width={200} height={200}
-                            placeholder={<Intl str="miniatura-placeholder"></Intl>}
-                            help={<Intl str="imagem-fundo-app-help"></Intl>}
-                            accept="image/jpeg, image/png"
-                            maxSize={500*1024}
-                        />
+                    <Col xs={12} md={6}>
+                        <Email name="email" label={<Intl str='email'></Intl>} required={true}/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} md={12}>
+                        <Endereco zipcodeParams={{ form: "ClienteForm", callback: this.atualizaEndereco }}/>
                     </Col>
                 </Row>
 
@@ -102,9 +101,9 @@ const validate = values => {
     return errors;
 }
 
-MarcaForm = reduxForm({ 
-    form: "MarcaForm", 
+ClienteForm = reduxForm({ 
+    form: "ClienteForm", 
     validate 
-})(MarcaForm);
+})(ClienteForm);
 
-export default MarcaForm;
+export default ClienteForm;

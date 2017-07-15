@@ -1,0 +1,6 @@
+{
+  "name": "Cliente",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Cliente.js"
+}

@@ -4,6 +4,11 @@
         "heading": true
     },
     {
+        "text": "clientes",
+        "icon": "fa fa-tag",
+        "url": "/clientes"
+    },
+    {
         "text": "marcas",
         "icon": "fa fa-tag",
         "url": "/marcas"

@@ -1,16 +1,16 @@
-import { MARCAS_PESQUISA, MARCA_EDICAO, MARCA_SETMODE } from './Marca.actions';
+import { CLIENTES_PESQUISA, CLIENTES_EDICAO, CLIENTE_SETMODE } from './Cliente.actions';
 
-const marcaReducer = (state = {}, action) => {
+const clienteReducer = (state = {}, action) => {
 
     switch (action.type) {
 
-        case MARCA_SETMODE:
+        case CLIENTE_SETMODE:
             return Object.assign({}, state, { mode: action.payload });
 
-        case MARCAS_PESQUISA:
+        case CLIENTES_PESQUISA:
             return Object.assign({}, state, { registros: action.payload, obj: undefined });
 
-        case MARCA_EDICAO:
+        case CLIENTES_EDICAO:
             return Object.assign({}, state, { obj: action.payload });
 
         default:
@@ -20,4 +20,4 @@ const marcaReducer = (state = {}, action) => {
 
 }
 
-export default marcaReducer;
+export default clienteReducer;
