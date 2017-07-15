@@ -1,7 +1,6 @@
 {
   "name": "descontae-admin",
   "version": "0.0.1-SNAPSHOT",
-  "homepage": "http://213.136.69.6/descontae-admin",
   "private": true,
 
   "devDependencies": {
