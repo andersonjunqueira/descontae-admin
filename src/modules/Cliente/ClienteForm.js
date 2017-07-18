@@ -48,7 +48,7 @@ class ClienteForm extends Component {
     }
 
     render() {
-        const { handleSubmit, doSubmit, pristine, reset, submitting, invalid} = this.props;
+        const { handleSubmit, doSubmit, pristine, reset, submitting, invalid } = this.props;
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
 

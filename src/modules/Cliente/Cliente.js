@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import ClienteForm from './ClienteForm';
 import ClienteList from './ClienteList';
 
+import  { numberFunctions } from '../../components/Number';
+
 import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGESIZE_DEFAULT } from '../../app/App.actions';
 import * as clienteActions from './Cliente.actions';
 
@@ -55,7 +57,29 @@ class Cliente extends Component {
     }
 
     salvar(values) {
-        this.props.actions.salvar(values, this.consultar);
+        const data = {
+            id: values.id,
+            nome: values.nome,
+            nomeFantasia: values.nomeFantasia,
+            email: values.email,
+            cnpj: numberFunctions.applyMask(values.cnpj),
+            endereco: {
+                cep: numberFunctions.applyMask(values.cep),
+                logradouro: values.logradouro,
+                complemento: values.complemento,
+                numero: values.numero,
+                bairro: values.bairro,
+                cidade: { 
+                    nome: values.cidade,
+                    estado: {
+                        sigla: values.uf
+                    }
+                }
+            },
+            telefones: []
+        }
+
+        this.props.actions.salvar(data, this.consultar);
     }
 
     carregar(id) {

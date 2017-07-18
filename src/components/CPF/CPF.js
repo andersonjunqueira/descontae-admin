@@ -5,15 +5,14 @@ import  Number, { numberFunctions } from '../Number';
 
 export const cpfFunctions = { 
     applyMask: (value) => {
-        let nums = textFunctions.clearMask(value);
-        nums = numberFunctions.applyMask(nums);
+        let nums = numberFunctions.applyMask(value);
         return nums.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"$1.$2.$3-$4");
     },
 
     validate: (value) => {
         let isValid = true;
         if(value) {
-            let cpf = numberFunctions.applyMask(value); 
+            let cpf = textFunctions.clearMask(value); 
             if (cpf.length !== 11 ||
                 cpf === "00000000000" ||
                 cpf === "11111111111" ||
