@@ -15,7 +15,7 @@ import appData from './app.json';
 
 // CONFIGURAÇÃO DO AMBIENTE LOCAL
 if(location.hostname === "localhost") {
-    appData.config.keycloakConfigFile = "/keycloak-dev.json";
+    appData.config.keycloakConfigFile = "/keycloak-local.json";
     appData.config.axiosBaseURL = "http://localhost:8000/descontae-backend/api"
 }
 
@@ -32,6 +32,7 @@ store.dispatch(changeLanguage(DEFAULT_LANGUAGE, true));
 let kc = Keycloak(appData.config.keycloakConfigFile);
 kc.init({onLoad: 'check-sso'}).success(authenticated => {
     if (authenticated) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + kc.token;
         store.dispatch(login(kc, DEFAULT_LANGUAGE));
         ReactDOM.render(<App store={store}/>, document.getElementById('root'));
     } else {
@@ -41,14 +42,11 @@ kc.init({onLoad: 'check-sso'}).success(authenticated => {
 
 // AXIOS CONFIG
 axios.defaults.baseURL = appData.config.axiosBaseURL;
+
 axios.interceptors.request.use(config => {
     if(kc.isTokenExpired()) {
         kc.updateToken(1000*60*25).error(() => kc.logout());
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + kc.token;
     }
-
-    config.headers = {...config.headers, ...{
-        Accept: 'application/json',
-        Authorization: 'Bearer ' + kc.token
-    }};
     return config;
 });
