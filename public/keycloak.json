@@ -3,7 +3,6 @@
   "auth-server-url": "http://213.136.69.6:9000/auth",
   "ssl-required": "none",
   "resource": "descontae-admin",
-  "credentials": {
-    "secret": "ae9789b9-0d00-40c9-b3ba-bc948c408819"
-  }
+  "public-client": true,
+  "use-resource-role-mappings": true
 }
