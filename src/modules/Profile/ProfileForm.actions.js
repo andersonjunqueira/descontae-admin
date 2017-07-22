@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { toaster } from "../../app/Notification.actions";
+import { toaster } from '../../components/Notification/Notification.actions';
 
 export const [ PROFILE_LOADED, PROFILE_SAVED, PROFILE_SAVE_ERROR ] = [ "PROFILE_LOADED", "PROFILE_SAVED", "PROFILE_SAVE_ERROR" ];
 

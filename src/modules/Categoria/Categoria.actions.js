@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { toaster } from "../../app/Notification.actions";
+import { toaster } from '../../components/Notification/Notification.actions';
 
 export const [ CATEGORIAS_PESQUISA, CATEGORIA_EDICAO, CATEGORIAS_SETMODE ] = [ "CATEGORIAS_PESQUISA", "CATEGORIA_EDICAO", "CATEGORIAS_SETMODE" ];
 

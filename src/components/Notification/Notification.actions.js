@@ -1,6 +1,6 @@
 import { addNotification as notify } from 'reapop';
 
-import { translate } from "../components/Intl/Intl.actions";
+import { translate } from "../Intl/Intl.actions";
 
 export const toaster = (msg, params = [], configuration) => {
 

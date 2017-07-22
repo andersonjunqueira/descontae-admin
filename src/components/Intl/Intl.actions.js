@@ -1,4 +1,4 @@
-import { toaster } from "../../app/App.actions";
+import { toaster } from '../Notification/Notification.actions';
 
 export const [ LANGUAGE_CHANGED, LANGUAGE_INIT ] = [ "LANGUAGE_CHANGED", "LANGUAGE_INIT" ];
 export const [ DEFAULT_LANGUAGE ] = [ "pt-BR" ];
@@ -25,11 +25,13 @@ export const translate = (str, params = []) => {
     return out ? format(out, params) : "???" + str + "???";
 }
 
-export const changeLanguage = (lang) => {
+export const changeLanguage = (lang, silent = false) => {
     return dispatch => {
         if(lang) {
             dispatch({type: LANGUAGE_CHANGED, payload: lang});
-            dispatch(toaster("idioma-alterado", [config.currentStrings.langId]));
+            if(!silent) {
+                dispatch(toaster("idioma-alterado", [config.currentStrings.langId]));
+            }
         }
     }
 }

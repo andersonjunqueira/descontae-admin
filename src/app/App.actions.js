@@ -7,7 +7,7 @@ import { changeLanguage } from '../components/Intl/Intl.actions';
 import { headerMenuLoad, userMenuLoad } from '../components/Header/Header.actions';
 import { sidebarMenuLoad } from '../components/Sidebar/Sidebar.actions';
 import { DEFAULT_LANGUAGE} from '../components/Intl/Intl.actions';
-import { toaster } from './Notification.actions';
+import { toaster } from '../components/Notification/Notification.actions';
 
 export const [ MODE_INSERT, MODE_UPDATE, MODE_LIST ] = [ "MODE_INSERT", "MODE_UPDATE", "MODE_LIST" ];
 export const [ PAGESIZE_DEFAULT ] = [ 10 ];
@@ -49,41 +49,48 @@ export const login = (auth) => {
                 // DISPARA NOTIFICAÇÃO
                 dispatch(toaster("bem-vindo", [name]));
 
+                // ATUALIZAR O STORE COM O OBJETO DO KEYCLOAK
+                dispatch({type: PROCESS_LOGIN, payload: auth});
+
             }).catch( (error) => {
 
-                // 404 É USUÁRIO NÃO ENCONTRADO, REGISTRANDO
-                if(error.response.status === 404) {
+                if(error.response) {
 
-                    let pessoa = {
-                        nome: name,
-                        email: email,
-                        idioma: DEFAULT_LANGUAGE
-                    };
+                    // 404 É USUÁRIO NÃO ENCONTRADO, REGISTRANDO
+                    if(error.response.status === 404) {
 
-                    // GRAVANDO O PERFIL
-                    axios.post('/pessoas', pessoa)
-                      .then( (response) => {
+                        let pessoa = {
+                            nome: name,
+                            email: email,
+                            idioma: DEFAULT_LANGUAGE
+                        };
 
-                          dispatch(toaster("novo-usuario-registrado", [], {title: "novo-usuario", status: "success"}));
+                        // GRAVANDO O PERFIL
+                        axios.post('/pessoas', pessoa)
+                          .then( (response) => {
 
-                      }).catch( (response) => {
+                              dispatch(toaster("novo-usuario-registrado", [], {title: "novo-usuario", status: "success"}));
 
-                          dispatch(toaster("problema-registro", [], {title: "novo-usuario", status: "danger"}));
-                          setTimeout(() => logout(auth), 3000);
+                          }).catch( (response) => {
 
-                      });
+                              dispatch(toaster("problema-registro", [], {title: "novo-usuario", status: "danger"}));
+                              setTimeout(() => logout(auth), 3000);
+
+                          });
+
+                    } else {
+
+                        dispatch(toaster("erro-desconhecido", [], {status: "danger"}));
+                        setTimeout(() => logout(auth), 3000);
+
+                    }
 
                 } else {
-
-                    dispatch(toaster("erro-desconhecido", [], {status: "danger"}));
-                    setTimeout(() => logout(auth), 3000);
-
+                    console.log("erro", error);
                 }
 
             });
 
-        // ATUALIZAR O STORE COM O OBJETO DO KEYCLOAK
-        dispatch({type: PROCESS_LOGIN, payload: auth});
     }
 }
 

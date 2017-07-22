@@ -8,7 +8,7 @@ import Email from '../../components/Email';
 import Endereco from '../../components/Endereco';
 import Intl from '../../components/Intl';
 
-import { toaster } from "../../app/Notification.actions";
+import { toaster } from '../../components/Notification/Notification.actions';
 
 class ClienteForm extends Component {
 

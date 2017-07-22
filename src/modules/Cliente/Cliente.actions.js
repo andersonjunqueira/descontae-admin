@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { toaster } from "../../app/Notification.actions";
+import { toaster } from '../../components/Notification/Notification.actions';
 
 export const [ CLIENTES_PESQUISA, CLIENTE_EDICAO, CLIENTE_SETMODE ] = [ "CLIENTES_PESQUISA", "CLIENTE_EDICAO", "CLIENTE_SETMODE" ];
 

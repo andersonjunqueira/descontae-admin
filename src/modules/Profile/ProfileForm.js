@@ -13,7 +13,7 @@ import Select from '../../components/Select';
 import Email from '../../components/Email';
 import Intl from '../../components/Intl';
 
-import { toaster } from "../../app/Notification.actions";
+import { toaster } from '../../components/Notification/Notification.actions';
 import { translate } from "../../components/Intl/Intl.actions";
 import { saveProfile } from "./ProfileForm.actions";
 
