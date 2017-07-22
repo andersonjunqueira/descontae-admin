@@ -6,12 +6,13 @@ import axios from "axios";
 import Keycloak from "keycloak-js";
 
 import App from './app/App';
-import { login } from './app/App.actions';
 import reducers from './app/App.reducers';
 
-import { changeLanguage, DEFAULT_LANGUAGE } from './components/Intl/Intl.actions';
+import { login } from './app/App.actions';
+import { initLanguage } from './components/Intl/Intl.actions';
 
 import appData from './app.json';
+import intlData from './intl.json';
 
 // CONFIGURAÇÃO DO AMBIENTE LOCAL
 if(location.hostname === "localhost") {
@@ -26,14 +27,14 @@ const store = createStore(
 );
 
 // INTERNACIONALIZAÇÃO
-store.dispatch(changeLanguage(DEFAULT_LANGUAGE, true));
+store.dispatch(initLanguage(intlData));
 
 //KEYCLOAK CONFIG
 let kc = Keycloak(appData.config.keycloakConfigFile);
 kc.init({onLoad: 'check-sso'}).success(authenticated => {
     if (authenticated) {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + kc.token;
-        store.dispatch(login(kc, DEFAULT_LANGUAGE));
+        store.dispatch(login(kc));
         ReactDOM.render(<App store={store}/>, document.getElementById('root'));
     } else {
         kc.login();

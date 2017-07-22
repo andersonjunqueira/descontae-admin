@@ -1,15 +1,13 @@
 import { toaster } from "../../app/App.actions";
 
-import intlStrings from '../../intl.json';
-
-export const [ LANGUAGE_CHANGED ] = [ "LANGUAGE_CHANGED" ];
+export const [ LANGUAGE_CHANGED, LANGUAGE_INIT ] = [ "LANGUAGE_CHANGED", "LANGUAGE_INIT" ];
 export const [ DEFAULT_LANGUAGE ] = [ "pt-BR" ];
 
-let config;
+const config = {};
 
-export const getAvailableLanguages = () => {
+export const getAvailableLanguages = (strings) => {
     let langs = [];
-    Object.keys(intlStrings).map((keyName, keyIndex) => langs.push(keyName));
+    Object.keys(strings).map((keyName, keyIndex) => langs.push(keyName));
     return langs;
 }
 
@@ -27,21 +25,25 @@ export const translate = (str, params = []) => {
     return out ? format(out, params) : "???" + str + "???";
 }
 
-export const changeLanguage = (lang, silent = false) => {
-  return dispatch => {
+export const changeLanguage = (lang) => {
+    return dispatch => {
+        if(lang) {
+            dispatch({type: LANGUAGE_CHANGED, payload: lang});
+            dispatch(toaster("idioma-alterado", [config.currentStrings.langId]));
+        }
+    }
+}
 
-      config = {
-          currentLanguage: lang,
-          availableLanguages: getAvailableLanguages(),
-          currentStrings: intlStrings[lang]
-      };
-
-      dispatch({type: LANGUAGE_CHANGED, payload: config});
-
-      if(!silent) {
-          dispatch(toaster("idioma-alterado", [config.currentStrings.langId]));
-      }
-  }
+export const initLanguage = (strings) => {
+    return dispatch => {
+        config.currentStrings = strings[DEFAULT_LANGUAGE];
+        dispatch({type: LANGUAGE_INIT, payload: {
+            availableLanguages: getAvailableLanguages(strings),
+            availableStrings: strings,
+            currentLanguage: DEFAULT_LANGUAGE,
+            currentStrings: strings[DEFAULT_LANGUAGE]
+        }});
+    }
 }
 
 

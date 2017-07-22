@@ -17,7 +17,7 @@ export const logout = (auth) => {
     auth.logout();
 }
 
-export const login = (auth, defaultLanguage) => {
+export const login = (auth) => {
     return dispatch => {
 
         const { name, email } = auth.tokenParsed;
