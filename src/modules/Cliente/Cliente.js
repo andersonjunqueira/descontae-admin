@@ -49,7 +49,7 @@ class Cliente extends Component {
     }
 
     limpar() {
-        this.props.actions.consultar("");
+        this.consultar();
     }
 
     novo() {
