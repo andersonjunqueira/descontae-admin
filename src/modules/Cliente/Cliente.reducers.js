@@ -1,4 +1,4 @@
-import { CLIENTES_PESQUISA, CLIENTES_EDICAO, CLIENTE_SETMODE } from './Cliente.actions';
+import { CLIENTES_PESQUISA, CLIENTE_EDICAO, CLIENTE_SETMODE } from './Cliente.actions';
 
 const clienteReducer = (state = {}, action) => {
 
@@ -10,7 +10,7 @@ const clienteReducer = (state = {}, action) => {
         case CLIENTES_PESQUISA:
             return Object.assign({}, state, { registros: action.payload, obj: undefined });
 
-        case CLIENTES_EDICAO:
+        case CLIENTE_EDICAO:
             return Object.assign({}, state, { obj: action.payload });
 
         default:

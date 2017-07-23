@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-
 import { Form, Row, Col, Button, Table, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+
+import { cnpjFunctions } from '../../components/CNPJ';
 import Text from '../../components/Text';
 import Intl from '../../components/Intl';
 
@@ -66,6 +67,7 @@ class ClienteList extends Component {
                             <tr>
                                 <th className="categ-col-1">#</th>
                                 <th className="categ-col-2"><Intl str="nome"></Intl></th>
+                                <th className="categ-col-3"><Intl str="cnpj"></Intl></th>
                                 <th className="categ-col-3"></th>
                             </tr>
                         </thead>
@@ -74,6 +76,7 @@ class ClienteList extends Component {
                                 return (<tr key={key}>
                                     <td className="text-center" scope="row">{data.content[key].id}</td>
                                     <td>{data.content[key].nome}</td>
+                                    <td>{cnpjFunctions.applyMask(data.content[key].cnpj)}</td>
                                     <td className="text-center">
                                         <Button type="button" onClick={() => doCarregar(data.content[key].id)} color="secondary" size="sm">
                                             <i className="fa fa-pencil"></i>
@@ -138,7 +141,7 @@ class ClienteList extends Component {
                 <Modal isOpen={this.state.modal} toggle={toggle}>
                     <ModalHeader toggle={toggle}><Intl str="confirmacao-exclusao"></Intl></ModalHeader>
                     <ModalBody>
-                        <Intl str="franquia-excluir-mensagem" params={[this.state.modalParam.nome]}></Intl>
+                        <Intl str="cliente-excluir-mensagem" params={[this.state.modalParam.nome]}></Intl>
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={() => this.excluir()}><Intl str="excluir"></Intl></Button>

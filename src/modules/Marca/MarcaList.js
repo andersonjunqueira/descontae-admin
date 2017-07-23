@@ -138,7 +138,7 @@ class MarcaList extends Component {
                 <Modal isOpen={this.state.modal} toggle={toggle}>
                     <ModalHeader toggle={toggle}><Intl str="confirmacao-exclusao"></Intl></ModalHeader>
                     <ModalBody>
-                        <Intl str="franquia-excluir-mensagem" params={[this.state.modalParam.nome]}></Intl>
+                        <Intl str="marca-excluir-mensagem" params={[this.state.modalParam.nome]}></Intl>
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={() => this.excluir()}><Intl str="excluir"></Intl></Button>
