@@ -4,37 +4,44 @@ import { toaster } from '../../components/Notification/Notification.actions';
 import  { numberFunctions } from '../../components/Number';
 import { cnpjFunctions } from '../../components/CNPJ';
 import { zipcodeFunctions } from '../../components/ZipCode';
+import { phoneFunctions } from '../../components/Phone';
 
 export const [ CLIENTES_PESQUISA, CLIENTE_EDICAO, CLIENTE_SETMODE ] = [ "CLIENTES_PESQUISA", "CLIENTE_EDICAO", "CLIENTE_SETMODE" ];
 
-export const setMode = (mode) => {
-    return dispatch => {
-        dispatch({type: CLIENTE_SETMODE, payload: mode});
-    }
-}
+const converter = {
+    toFrontend: (values) => {
 
-export const consultar = (filtro, start, pagesize) => {
-    filtro = filtro ? filtro : {};
-    filtro.start = start;
-    filtro.page = pagesize;
+        const data = {
+            id: values.id,
+            idPessoa: values.pessoa.id,
+            nome: values.nome,
+            nomeFantasia: values.nomeFantasia,
+            email: values.email,
+            cnpj: cnpjFunctions.applyMask(values.cnpj),
+            idEndereco: values.endereco ? values.endereco.id : undefined,
+            cep: values.endereco ? zipcodeFunctions.applyMask(values.endereco.cep) : undefined,
+            logradouro: values.endereco ? values.endereco.logradouro : undefined,
+            complemento: values.endereco ? values.endereco.complemento : undefined,
+            numero: values.endereco ? values.endereco.numero : undefined,
+            bairro: values.endereco ? values.endereco.bairro : undefined,
+            idCidade: values.endereco && values.endereco.cidade ? values.endereco.cidade.id : undefined,
+            cidade: values.endereco && values.endereco.cidade ? values.endereco.cidade.nome : undefined,
+            uf: values.endereco && values.endereco.cidade && values.endereco.cidade.estado ? values.endereco.cidade.estado.sigla : undefined,
+            dataCadastro: values.dataCadastro,
+            telefones: values.telefones
+        };
 
-    return dispatch => {
+        if(data.telefones && data.telefones.length > 0) {
+            for(let i = 0; i < data.telefones.length; i++) {
+                data.telefones[i].numero = phoneFunctions.applyMask(values.telefones[i].numero);
+            };
+        }
 
-        axios.get('/clientes', { params: filtro })
-            .then(function(response) {
-                console.log(response.data);
-                dispatch({type: CLIENTES_PESQUISA, payload: response.data});
+        return data;
 
-            }).catch(function(response){
-                dispatch(toaster("erro-consulta-clientes", [], {status: "error"}));
-            });
+    },
 
-    }
-}
-
-export const salvar = (values, callback) => {
-
-    return dispatch => {
+    toBackend: (values) => {
 
         const data = {
             id: values.id,
@@ -64,7 +71,46 @@ export const salvar = (values, callback) => {
             dataCadastro: values.dataCadastro
         };
 
-        axios.post('/clientes', data)
+        data.telefones = Object.assign(values.telefones);
+        if(data.telefones && data.telefones.length > 0) {
+            for(let i = 0; i < data.telefones.length; i++) {
+                data.telefones[i].numero = numberFunctions.applyMask(values.telefones[i].numero);
+            };
+        }
+
+        return data;
+    }
+}
+
+export const setMode = (mode) => {
+    return dispatch => {
+        dispatch({type: CLIENTE_SETMODE, payload: mode});
+    }
+}
+
+export const consultar = (filtro, start, pagesize) => {
+    filtro = filtro ? filtro : {};
+    filtro.start = start;
+    filtro.page = pagesize;
+
+    return dispatch => {
+
+        axios.get('/clientes', { params: filtro })
+            .then(function(response) {
+                dispatch({type: CLIENTES_PESQUISA, payload: response.data});
+
+            }).catch(function(response){
+                dispatch(toaster("erro-consulta-clientes", [], {status: "error"}));
+            });
+
+    }
+}
+
+export const salvar = (values, callback) => {
+
+    return dispatch => {
+
+        axios.post('/clientes', converter.toBackend(values) )
             .then(function(response) {
                 callback();
                 dispatch(toaster("cliente-salvo", [], {status: "success"}));
@@ -97,28 +143,7 @@ export const carregar = (id) => {
         axios.get('/clientes/' + id)
             .then(function(response) {
 
-                const values = response.data;
-                const data = {
-                    id: values.id,
-                    idPessoa: values.pessoa.id,
-                    nome: values.nome,
-                    nomeFantasia: values.nomeFantasia,
-                    email: values.email,
-                    cnpj: cnpjFunctions.applyMask(values.cnpj),
-                    idEndereco: values.endereco ? values.endereco.id : undefined,
-                    cep: values.endereco ? zipcodeFunctions.applyMask(values.endereco.cep) : undefined,
-                    logradouro: values.endereco ? values.endereco.logradouro : undefined,
-                    complemento: values.endereco ? values.endereco.complemento : undefined,
-                    numero: values.endereco ? values.endereco.numero : undefined,
-                    bairro: values.endereco ? values.endereco.bairro : undefined,
-                    idCidade: values.endereco && values.endereco.cidade ? values.endereco.cidade.id : undefined,
-                    cidade: values.endereco && values.endereco.cidade ? values.endereco.cidade.nome : undefined,
-                    uf: values.endereco && values.endereco.cidade && values.endereco.cidade.estado ? values.endereco.cidade.estado.sigla : undefined,
-                    dataCadastro: values.dataCadastro,
-                    telefones: values.telefones
-                };
-
-                dispatch({type: CLIENTE_EDICAO, payload: data});
+                dispatch({type: CLIENTE_EDICAO, payload: converter.toFrontend(response.data)});
 
             }).catch(function(response){
                 dispatch(toaster("erro-carga-cliente", [], {status: "error"}));

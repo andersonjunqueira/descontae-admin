@@ -1,14 +1,49 @@
 import React, { Component } from 'react';
-import { reduxForm, change } from 'redux-form';
-
+import { FieldArray, reduxForm, change } from 'redux-form';
 import { Form, Row, Col, Button } from 'reactstrap';
+
 import Text from '../../components/Text';
 import CNPJ from '../../components/CNPJ';
 import Email from '../../components/Email';
+import Phone from '../../components/Phone';
 import Endereco from '../../components/Endereco';
 import Intl from '../../components/Intl';
+import Card, { CardHeader, CardBody } from '../../components/Card';
 
 import { toaster } from '../../components/Notification/Notification.actions';
+
+class renderPhones extends Component {
+    render() {
+        const { fields, meta } = this.props; 
+        return (
+            <Card>
+                <CardHeader>
+                    <Intl str='telefones'></Intl> 
+                    <Button type="button" color="secondary" className="pull-right" size="sm" onClick={() => fields.push()}>
+                        <Intl str='adicionar-telefone'></Intl>
+                    </Button>
+                </CardHeader>
+                <CardBody>
+                    {fields.map((field, index) => {
+                        return (
+                            <Row key={index}>
+                                <Col xs={6} md={4}>
+                                    <Phone name={`${field}.numero`} label={<Intl str='telefone'></Intl>} maxLength={15}/>
+                                </Col>
+                                <Col xs={2} md={1}>
+                                    <a className="btn btn-danger fields-remove-button" onClick={() => { fields.remove(index); } }>
+                                      <i className="fa fa-trash"></i>
+                                    </a>
+                                </Col>
+                            </Row>
+                        );
+                    })}
+                    {meta.error && <span className="fields-error">{meta.error}</span>}
+                </CardBody>
+            </Card>
+        );
+    }
+}
 
 class ClienteForm extends Component {
 
@@ -72,11 +107,15 @@ class ClienteForm extends Component {
                         <Email name="email" label={<Intl str='email'></Intl>} required={true}/>
                     </Col>
                 </Row>
-                <Row>
-                    <Col xs={12} md={12}>
+
+                <FieldArray name="telefones" component={renderPhones} />
+
+                <Card>
+                    <CardHeader><Intl str='endereco'></Intl></CardHeader>
+                    <CardBody>
                         <Endereco zipcodeParams={{ form: "ClienteForm", callback: this.atualizaEndereco }}/>
-                    </Col>
-                </Row>
+                    </CardBody>
+                </Card>
 
                 <Button type="submit" color="primary" disabled={invalid || submitting}>
                     <Intl str='salvar'></Intl>

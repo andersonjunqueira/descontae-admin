@@ -19,6 +19,7 @@
         "meu-perfil": "Meu Perfil",
         "nao": "Não",
         "navegacao": "Navegação",
+        "endereco": "Endereço",
         "nenhum-registro-encontrado": "Nenhum registro encontrado",
         "novo-usuario" : "Novo Usuário",
         "novo-usuario-registrado" : "{0} registrado.",
@@ -85,7 +86,10 @@
         "nova-marca": "Nova Marca/Franquia",
         "pesquisa-categorias": "Pesquisa de Categorias",
         "pesquisa-clientes": "Pesquisa de Clientes",
-        "pesquisa-marcas": "Pesquisa de Marcas/Franquias"
+        "pesquisa-marcas": "Pesquisa de Marcas/Franquias",
+        "telefones": "Telefones",
+        "adicionar-telefone": "Adicionar Telefone",
+        "telefone": "Telefone"
 
     }
 }
