@@ -5,13 +5,18 @@
     },
     {
         "text": "clientes",
-        "icon": "fa fa-tag",
+        "icon": "fa fa-group",
         "url": "/clientes"
     },
     {
         "text": "marcas",
-        "icon": "fa fa-tag",
+        "icon": "fa fa-industry",
         "url": "/marcas"
+    },
+    {
+        "text": "planos",
+        "icon": "fa fa-money",
+        "url": "/planos"
     },
     {
         "text": "configuracoes",

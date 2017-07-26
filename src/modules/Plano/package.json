@@ -1,0 +1,6 @@
+{
+  "name": "Plano",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Plano.js"
+}

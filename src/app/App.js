@@ -9,6 +9,7 @@ import Inicio from '../modules/Inicio';
 import Categoria from '../modules/Categoria';
 import Marca from '../modules/Marca';
 import Cliente from '../modules/Cliente';
+import Plano from '../modules/Plano';
 
 const App = ({store}) => (
     <Provider store={store}>
@@ -21,6 +22,7 @@ const App = ({store}) => (
                 <Route path="/categorias" name={<Intl str='categorias'></Intl>} component={Categoria} />
                 <Route path="/marcas" name={<Intl str='marcas'></Intl>} component={Marca} />
                 <Route path="/clientes" name={<Intl str='clientes'></Intl>} component={Cliente} />
+                <Route path="/planos" name={<Intl str='planos'></Intl>} component={Plano} />
             </Route>
 
         </Router>
