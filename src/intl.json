@@ -109,7 +109,7 @@
         "plano-excluir-mensagem": "Confirma a exclusão do registro '{0}'?",
         "plano-salvo": "Plano salvo com sucesso.",
         "plano-excluido": "Plano excluído com sucesso.",
-        "erro-consulta-plano": "Não foi possível carregar os planos.",
+        "erro-consulta-planos": "Não foi possível carregar os planos.",
         "erro-salvar-plano": "Não foi possível salvar o plano.",
         "erro-carga-plano": "Não foi possível carregar o plano.",
         "erro-excluir-plano": "Não foi possível excluir o plano.",

@@ -29,7 +29,6 @@ export const consultar = (filtro, start, pagesize) => {
 }
 
 export const salvar = (marca, callback) => {
-
     return dispatch => {
 
         axios.post('/franquias', marca)

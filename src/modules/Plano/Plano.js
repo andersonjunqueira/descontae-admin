@@ -57,11 +57,11 @@ class Plano extends Component {
 
     salvar(values) {
         const data = Object.assign({}, values, {});
-        let plogo = new Promise( (resolve, reject) => {
-            if(data.logoplano) {
-                if(data.logoplano.files) {
-                    fileFunctions.toBase64(data.logoplano.files[0], (base64) => {
-                        data.logoplano = "data:" + data.logoplano.files[0].type + ";base64," + base64;
+        let imagem = new Promise( (resolve, reject) => {
+            if(data.imagem) {
+                if(data.imagem.files) {
+                    fileFunctions.toBase64(data.imagem.files[0], (base64) => {
+                        data.imagem = "data:" + data.imagem.files[0].type + ";base64," + base64;
                         resolve();
                     });
                 } else {
@@ -70,33 +70,7 @@ class Plano extends Component {
             }
         });
 
-        let pthumb = new Promise( (resolve, reject) => {       
-            if(data.imagemThumbnail) {
-                if(data.imagemThumbnail.files) {
-                    fileFunctions.toBase64(data.imagemThumbnail.files[0], (base64) => {
-                        data.imagemThumbnail = "data:" + data.imagemThumbnail.files[0].type + ";base64," + base64;
-                        resolve();
-                    });
-                } else {
-                    resolve();
-                }
-            }
-        });
-
-        let pfundo = new Promise( (resolve, reject) => {
-            if(data.imagemFundoApp) {
-                if(data.imagemFundoApp.files) {
-                    fileFunctions.toBase64(data.imagemFundoApp.files[0], (base64) => {
-                        data.imagemFundoApp = "data:" + data.imagemFundoApp.files[0].type + ";base64," + base64;
-                        resolve();
-                    });
-                } else {
-                    resolve();
-                }
-            }
-        });
-
-        Promise.all([plogo, pthumb, pfundo]).then(values => { 
+        Promise.all([imagem]).then(values => { 
             this.props.actions.salvar(data, this.consultar);
         }, reason => {
             console.log(reason);

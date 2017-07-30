@@ -38,8 +38,8 @@ class PlanoForm extends Component {
 
     render() {
         const situacaoTypes = [
-            {value: "ativo", text: translate("ativo")},
-            {value: "inativo", text: translate("inativo")}
+            {value: "A", text: translate("ativo")},
+            {value: "I", text: translate("inativo")}
         ];
         const { handleSubmit, doSubmit, pristine, reset, submitting, invalid} = this.props;
         return (
