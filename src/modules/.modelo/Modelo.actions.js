@@ -6,7 +6,7 @@ import { cnpjFunctions } from '../../components/CNPJ';
 import { zipcodeFunctions } from '../../components/ZipCode';
 import { phoneFunctions } from '../../components/Phone';
 
-export const [ MDOELOS_PESQUISA, MDOELO_EDICAO, MDOELO_SETMODE ] = [ "MDOELOS_PESQUISA", "MDOELO_EDICAO", "MDOELO_SETMODE" ];
+export const [ MODELOS_PESQUISA, MODELO_EDICAO, MODELO_SETMODE ] = [ "MODELOS_PESQUISA", "MODELO_EDICAO", "MODELO_SETMODE" ];
 
 const converter = {
     toFrontend: (values) => {
@@ -84,7 +84,7 @@ const converter = {
 
 export const setMode = (mode) => {
     return dispatch => {
-        dispatch({type: MDOELO_SETMODE, payload: mode});
+        dispatch({type: MODELO_SETMODE, payload: mode});
     }
 }
 
@@ -97,7 +97,7 @@ export const consultar = (filtro, start, pagesize) => {
 
         axios.get('/modelos', { params: filtro })
             .then(function(response) {
-                dispatch({type: MDOELOS_PESQUISA, payload: response.data});
+                dispatch({type: MODELOS_PESQUISA, payload: response.data});
 
             }).catch(function(response){
                 dispatch(toaster("erro-consulta-modelos", [], {status: "error"}));
@@ -142,7 +142,7 @@ export const carregar = (id) => {
         axios.get('/modelos/' + id)
             .then(function(response) {
 
-                dispatch({type: MDOELO_EDICAO, payload: converter.toFrontend(response.data)});
+                dispatch({type: MODELO_EDICAO, payload: converter.toFrontend(response.data)});
 
             }).catch(function(response){
                 dispatch(toaster("erro-carga-modelo", [], {status: "error"}));
