@@ -78,6 +78,18 @@
         "erro-carga-modelo": "Não foi possível carregar o modelo.",
         "erro-excluir-modelo": "Não foi possível excluir o modelo.",
 
+        "novo-parceiro": "Novo Parceiro",
+        "pesquisa-parceiros": "Pesquisa de Parceiros",
+        "parceiro": "Parceiro",
+        "parceiros": "Parceiros",
+        "parceiro-excluir-mensagem": "Confirma a exclusão do registro '{0}'?",
+        "parceiro-salvo": "Parceiro salvo com sucesso.",
+        "parceiro-excluido": "Parceiro excluído com sucesso.",
+        "erro-consulta-parceiros": "Não foi possível carregar os parceiros.",
+        "erro-salvar-parceiro": "Não foi possível salvar o parceiro.",
+        "erro-carga-parceiro": "Não foi possível carregar o parceiro.",
+        "erro-excluir-parceiro": "Não foi possível excluir o parceiro.",
+
         "nova-categoria": "Nova Categoria",
         "pesquisa-categorias": "Pesquisa de Categorias",
         "categoria": "Categoria",
