@@ -66,6 +66,18 @@
         "ativo": "Ativo",
         "inativo": "Inativo",
 
+        "novo-modelo": "Novo Modelo",
+        "pesquisa-modelos": "Pesquisa de Modelos",
+        "modelo": "Modelo",
+        "modelos": "Modelos",
+        "modelo-excluir-mensagem": "Confirma a exclusão do registro '{0}'?",
+        "modelo-salvo": "Modelo salvo com sucesso.",
+        "modelo-excluido": "Modelo excluído com sucesso.",
+        "erro-consulta-modelos": "Não foi possível carregar os modelos.",
+        "erro-salvar-modelo": "Não foi possível salvar o modelo.",
+        "erro-carga-modelo": "Não foi possível carregar o modelo.",
+        "erro-excluir-modelo": "Não foi possível excluir o modelo.",
+
         "nova-categoria": "Nova Categoria",
         "pesquisa-categorias": "Pesquisa de Categorias",
         "categoria": "Categoria",
