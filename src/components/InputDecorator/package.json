@@ -1,0 +1,6 @@
+{
+  "name": "InputDecorator",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./InputDecorator.js"
+}

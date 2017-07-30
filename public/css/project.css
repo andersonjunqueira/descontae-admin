@@ -23,6 +23,15 @@ h6.text-center.dropdown-header {
     margin: 0;
 }
 
+.fa {
+    margin-right: 5px;
+}
+
+.has-danger .input-group-btn .btn {
+    color: #f86c6b;
+    border-color: #f86c6b;
+}
+
 .fields-error {
     color: #f86c6b;
 }

@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { Field } from 'redux-form';
 
-import InputBootstrap from './InputBootstrap';
+import InputBootstrap from '../Text/InputBootstrap';
 
 export const textFunctions = { 
     clearMask: (value) => value !== undefined ? value.replace(/[\.\/\-]/g, '') : value,
 }
 
-class Text extends Component {
+class Mask extends Component {
 
     constructor(props) {
         super(props);
@@ -37,7 +37,7 @@ class Text extends Component {
     }
 }
 
-Text.propTypes = {
+Mask.propTypes = {
 
     // INPUT DECORATOR
     label: PropTypes.node,
@@ -63,10 +63,10 @@ Text.propTypes = {
     maxLength: PropTypes.number
 }
 
-Text.defaultProps = {
+Mask.defaultProps = {
     required: false,
     validators: []
 };
 
-export default Text;
+export default Mask;
 

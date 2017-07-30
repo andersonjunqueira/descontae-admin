@@ -29,7 +29,7 @@ export const cnpjFunctions = {
             let add = 0;
             let peso = 5;
             for (let i = 0; i < 12; i++) {
-                add += parseInt(cnpj.charAt(i)) * peso;
+                add += parseInt(cnpj.charAt(i), 10) * peso;
                 peso = peso === 2 ? 9 : peso-1;
             }
 
@@ -38,14 +38,14 @@ export const cnpjFunctions = {
                 rev = 0;
             }
 
-            if (rev !== parseInt(cnpj.charAt(12))) {
+            if (rev !== parseInt(cnpj.charAt(12), 10)) {
                 isValid = false;
             }
 
             add = 0;
             peso = 6;
             for (let i = 0; i < 13; i++) {
-                add += parseInt(cnpj.charAt(i)) * peso;
+                add += parseInt(cnpj.charAt(i), 10) * peso;
                 peso = peso === 2 ? 9 : peso-1;
             }
 
@@ -54,7 +54,7 @@ export const cnpjFunctions = {
                 rev = 0;
             }
 
-            if (rev !== parseInt(cnpj.charAt(13))) {
+            if (rev !== parseInt(cnpj.charAt(13), 10)) {
                 isValid = false;
             }
 
