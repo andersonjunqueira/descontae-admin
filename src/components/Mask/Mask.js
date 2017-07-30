@@ -1,11 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Field } from 'redux-form';
 
-import InputBootstrap from '../Text/InputBootstrap';
-
-export const textFunctions = { 
-    clearMask: (value) => value !== undefined ? value.replace(/[\.\/\-]/g, '') : value,
-}
+import MaskBootstrap from './MaskBootstrap';
 
 class Mask extends Component {
 
@@ -29,7 +25,7 @@ class Mask extends Component {
 
     render() {
         return (
-            <Field component={InputBootstrap} 
+            <Field component={MaskBootstrap} 
                 type="input"
                 validate={this.getValidators()}
                 {...this.props}
@@ -38,7 +34,6 @@ class Mask extends Component {
 }
 
 Mask.propTypes = {
-
     // INPUT DECORATOR
     label: PropTypes.node,
     placeholder: PropTypes.node,
@@ -46,7 +41,6 @@ Mask.propTypes = {
     required: PropTypes.bool,
     inputSize: PropTypes.number,
     labelSize: PropTypes.number,
-
     action: PropTypes.func,
     actionIcon: PropTypes.string,
     actionLabel: PropTypes.node,
@@ -59,8 +53,8 @@ Mask.propTypes = {
     // COMMON
     validators: PropTypes.array,
 
-    // TEXT 
-    maxLength: PropTypes.number
+    // MASK
+    mask: PropTypes.string
 }
 
 Mask.defaultProps = {

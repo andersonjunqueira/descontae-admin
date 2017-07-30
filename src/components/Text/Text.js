@@ -38,7 +38,6 @@ class Text extends Component {
 }
 
 Text.propTypes = {
-
     // INPUT DECORATOR
     label: PropTypes.node,
     placeholder: PropTypes.node,
@@ -46,7 +45,6 @@ Text.propTypes = {
     required: PropTypes.bool,
     inputSize: PropTypes.number,
     labelSize: PropTypes.number,
-
     action: PropTypes.func,
     actionIcon: PropTypes.string,
     actionLabel: PropTypes.node,
