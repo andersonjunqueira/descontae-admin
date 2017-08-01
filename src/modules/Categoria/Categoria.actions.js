@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { toaster } from '../../components/Notification/Notification.actions';
 
-export const [ CATEGORIAS_PESQUISA, CATEGORIA_EDICAO, CATEGORIAS_SETMODE ] = [ "CATEGORIAS_PESQUISA", "CATEGORIA_EDICAO", "CATEGORIAS_SETMODE" ];
+export const [ CATEGORIAS_PESQUISA, CATEGORIA_EDICAO, CATEGORIAS_SETMODE, CATEGORIAS_SELECT ] = [ "CATEGORIAS_PESQUISA", "CATEGORIA_EDICAO", "CATEGORIAS_SETMODE", "CATEGORIAS_SELECT" ];
 
 export const setMode = (mode) => {
     return dispatch => {
@@ -72,3 +72,15 @@ export const carregar = (id) => {
     }
 }
 
+export const loadCategoriasForSelect = () => {
+    return dispatch => {
+        axios({ url: '/categorias?sort=nome,ASC&page=1000', method: 'get', responseType: 'json' })
+        .then(function(response) {
+            var ret = [];
+            response.data.content.forEach((p) => ret.push({ value: p.id, text: p.nome }) );
+            dispatch({type: CATEGORIAS_SELECT, payload: ret});
+        }).catch(function(response){
+        });
+
+    }
+}

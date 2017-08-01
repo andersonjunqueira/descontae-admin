@@ -10,6 +10,8 @@ import categoriaReducer from '../modules/Categoria/Categoria.reducers';
 import marcaReducer from '../modules/Marca/Marca.reducers';
 import clienteReducer from '../modules/Cliente/Cliente.reducers';
 import planoReducer from '../modules/Plano/Plano.reducers';
+import parceiroReducer from '../modules/Parceiro/Parceiro.reducers';
+
 import profileReducer from '../modules/Profile/Profile.reducers';
 
 import AppData from '../app.json';
@@ -47,6 +49,7 @@ const reducers = combineReducers({
     marcaReducer,
     clienteReducer,
     planoReducer,
+    parceiroReducer,
 
     ufReducer,
     intlReducer,

@@ -12,6 +12,7 @@ class Text extends Component {
     constructor(props) {
         super(props);
         this.getValidators = this.getValidators.bind(this);
+        this.normalize = this.normalize.bind(this);
     }
 
     getValidators() {
@@ -27,11 +28,16 @@ class Text extends Component {
         return validators;
     }
 
+    normalize(value) {
+        return (this.props.normalize) ? this.props.normalize(value) : value;
+    }
+
     render() {
         return (
             <Field component={InputBootstrap} 
                 type="input"
                 validate={this.getValidators()}
+                normalize={this.normalize}
                 {...this.props}
             ></Field>);
     }

@@ -1,4 +1,4 @@
-import { CATEGORIAS_PESQUISA, CATEGORIA_EDICAO, CATEGORIAS_SETMODE } from './Categoria.actions';
+import { CATEGORIAS_PESQUISA, CATEGORIA_EDICAO, CATEGORIAS_SETMODE, CATEGORIAS_SELECT } from './Categoria.actions';
 
 const categoriaReducer = (state = {}, action) => {
 
@@ -12,6 +12,9 @@ const categoriaReducer = (state = {}, action) => {
 
         case CATEGORIA_EDICAO:
             return Object.assign({}, state, { obj: action.payload });
+
+        case CATEGORIAS_SELECT:
+            return Object.assign({}, state, { selectList: action.payload });
 
         default:
             return state;

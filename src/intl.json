@@ -44,6 +44,7 @@
         "configuracoes": "Configurações",
         "cpf": "CPF",
         "email": "E-mail",
+        "email-responsavel": "E-mail do Responsável",
         "imagem-fundo-app": "Imagem de Fundo Perfil App",
         "logomarca": "Logo",
         "logomarca-help": "Extensões permitidas: JPG ou PNG e tamanho máximo 500KB",
@@ -65,6 +66,8 @@
         "situacao": "Situação",
         "ativo": "Ativo",
         "inativo": "Inativo",
+        "unidades": "Unidades",
+        "adicionar-unidade": "Adicionar Unidade",
 
         "novo-modelo": "Novo Modelo",
         "pesquisa-modelos": "Pesquisa de Modelos",

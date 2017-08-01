@@ -9,6 +9,11 @@
         "url": "/clientes"
     },
     {
+        "text": "parceiros",
+        "icon": "fa fa-group",
+        "url": "/parceiros"
+    },
+    {
         "text": "marcas",
         "icon": "fa fa-industry",
         "url": "/marcas"

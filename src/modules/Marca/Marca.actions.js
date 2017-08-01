@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { toaster } from '../../components/Notification/Notification.actions';
 
-export const [ MARCAS_PESQUISA, MARCA_EDICAO, MARCA_SETMODE ] = [ "MARCAS_PESQUISA", "MARCA_EDICAO", "MARCA_SETMODE" ];
+export const [ MARCAS_PESQUISA, MARCA_EDICAO, MARCA_SETMODE, MARCA_SELECT ] = [ "MARCAS_PESQUISA", "MARCA_EDICAO", "MARCA_SETMODE", "MARCA_SELECT" ];
 
 export const setMode = (mode) => {
     return dispatch => {
@@ -72,3 +72,15 @@ export const carregar = (id) => {
     }
 }
 
+export const loadFranquiasForSelect = () => {
+    return dispatch => {
+        axios({ url: '/franquias?sort=nome,ASC&page=1000', method: 'get', responseType: 'json' })
+        .then(function(response) {
+            var ret = [];
+            response.data.content.forEach((p) => ret.push({ value: p.id, text: p.nome }) );
+            dispatch({type: MARCA_SELECT, payload: ret});
+        }).catch(function(response){
+        });
+
+    }
+}
