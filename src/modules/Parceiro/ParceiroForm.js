@@ -26,18 +26,28 @@ class renderUnidades extends Component {
                     </Button>
                 </CardHeader>
                 <CardBody>
+                    {(!fields || fields.length === 0) && <Intl str='nenhum-registro-encontrado'></Intl>}
                     {fields.map((field, index) => {
                         return (
-                            <Row key={index}>
-                                <Col xs={6} md={4}>
-                                    <Phone name={`${field}.numero`} label={<Intl str='telefone'></Intl>} maxLength={15}/>
-                                </Col>
-                                <Col xs={2} md={1}>
-                                    <a className="btn btn-danger fields-remove-button" onClick={() => { fields.remove(index); } }>
-                                      <i className="fa fa-trash"></i>
-                                    </a>
-                                </Col>
-                            </Row>
+                            <div key={index}>
+                                <Row>
+                                    <Col xs={6} md={12}>
+                                        <Text name={`${field}.nome`} label={<Intl str='nome'></Intl>} maxLength={50}/>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={6} md={12}>
+                                        <Endereco/>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={12} md={12} className="text-right">
+                                        <a className="btn btn-danger fields-remove-button" onClick={() => { fields.remove(index); } }>
+                                          <i className="fa fa-trash"></i>
+                                        </a>
+                                    </Col>
+                                </Row>
+                            </div>
                         );
                     })}
                     {meta.error && <span className="fields-error">{meta.error}</span>}
