@@ -24,6 +24,7 @@ class renderPhones extends Component {
                     </Button>
                 </CardHeader>
                 <CardBody>
+                    {(!fields || fields.length === 0) && <Intl str='nenhum-registro-encontrado'></Intl>}
                     {fields.map((field, index) => {
                         return (
                             <Row key={index}>
