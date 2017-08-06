@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { FieldArray, reduxForm, change } from 'redux-form';
-import { Form, Row, Col, Button } from 'reactstrap';
+import { Form, Row, Col, Button, Table, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import Card, { CardHeader, CardBody } from '../../components/Card';
 import Text from '../../components/Text';
 import CNPJ from '../../components/CNPJ';
+import File from '../../components/File';
 import Email from '../../components/Email';
 import Phone from '../../components/Phone';
+import TextArea from '../../components/TextArea';
+import Endereco from '../../components/Endereco';
 import SelectCategoria from '../Categoria/SelectCategoria';
 import SelectMarca from '../Marca/SelectMarca';
-import Unidade from './Unidade';
-import Phones from '../../components/Phones';
 import Intl from '../../components/Intl';
+import Phones from '../../components/Phones';
 
 import { toaster } from '../../components/Notification/Notification.actions';
 
@@ -41,7 +43,19 @@ class renderUnidades extends Component {
                         {(!fields || fields.length === 0) && <Intl str='nenhuma-unidade-encontrada'></Intl>}
                         {fields.map((field, index) => {
                             return (<div>
-                                <Unidade name={`${field}`} />
+                                <Row>
+                                    <Col xs={10} md={11}>
+                                        <Text name={`${field}.nome`} label={<Intl str='nome'></Intl>} maxLength={100}/>
+                                    </Col>
+                                    <Col xs={2} md={1}>
+                                        <a className="btn btn-danger fields-remove-button" onClick={() => { fields.remove(index); } }>
+                                          <i className="fa fa-trash"></i>
+                                        </a>
+                                    </Col>
+                                </Row>
+                                <Endereco name={`${field}.endereco`}/>
+                                <FieldArray name={`${field}.telefones`} component={Phones} />
+                                <FieldArray name={`${field}.imagens`} component={renderImages} />
                                 <hr/>
                             </div>);
                         })}
@@ -50,6 +64,53 @@ class renderUnidades extends Component {
                 </Card>
 
             </div>
+        );
+    }
+}
+
+class renderImages extends Component {
+    render() {
+        const { fields, meta } = this.props; 
+        return (
+            <Card>
+                <CardHeader>
+                    <Intl str='imagens'></Intl> 
+                    <Button type="button" color="success" className="pull-right" size="sm" onClick={() => fields.push()}>
+                        <i className="fa fa-plus"></i>
+                    </Button>
+                </CardHeader>
+                <CardBody>
+                    {(!fields || fields.length === 0) && <Intl str='nenhuma-imagem-encontrado'></Intl>}    
+                    <Row>
+                    {fields.map((field, index) => {
+                        return (
+                            <Col key={index} xs={12} md={4}>
+                                <Row>
+                                    <Col xs={8} md={10}>
+                                        <File name="imagem" 
+                                        label={<Intl str='imagem'></Intl>} 
+                                        required={true} 
+                                        width={200} height={200}
+                                        placeholder={<Intl str="miniatura-placeholder"></Intl>}
+                                        help={<Intl str="imagem-plano-help"></Intl>}
+                                        accept="image/jpeg, image/png"
+                                            maxSize={500*1024}
+                                        />
+                                    </Col>
+                                    <Col xs={4} md={2}>
+                                        <a className="btn btn-danger fields-remove-button" onClick={() => { fields.remove(index); } }>
+                                          <i className="fa fa-trash"></i>
+                                        </a>
+                                    </Col>
+                                </Row>
+                            </Col>
+
+                        );
+                    })}
+                    </Row>
+                    {meta.error && <span className="fields-error">{meta.error}</span>}
+                </CardBody>
+            </Card>
         );
     }
 }
@@ -123,7 +184,7 @@ class ParceiroForm extends Component {
                     </Col>
                 </Row>
 
-                <FieldArray name="telefones" component={Phones} />
+                <FieldArray name="telefones" component={renderPhones} />
 
                 <FieldArray name="unidades" component={renderUnidades} />
 

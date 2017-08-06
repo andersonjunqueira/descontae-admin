@@ -54,16 +54,16 @@ const converter = {
             cnpj: numberFunctions.applyMask(values.cnpj),
             endereco: {
                 id: values.idEndereco,
-                cep: numberFunctions.applyMask(values.cep),
-                logradouro: values.logradouro,
-                complemento: values.complemento,
-                numero: values.numero,
-                bairro: values.bairro,
+                cep: numberFunctions.applyMask(values.endereco.cep),
+                logradouro: values.endereco.logradouro,
+                complemento: values.endereco.complemento,
+                numero: values.endereco.numero,
+                bairro: values.endereco.bairro,
                 cidade: { 
                     id: values.idCidade,
-                    nome: values.cidade,
+                    nome: values.endereco.cidade,
                     estado: {
-                        sigla: values.uf
+                        sigla: values.endereco.uf
                     }
                 }
             },

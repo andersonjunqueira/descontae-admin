@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import { Form } from 'reactstrap';
-
-import Mask from '../../components/Mask';
 
 class Inicio extends Component {
 

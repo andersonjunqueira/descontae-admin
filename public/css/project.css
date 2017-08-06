@@ -38,6 +38,7 @@ h6.text-center.dropdown-header {
 
 .fields-remove-button {
     margin-top: 29px;
+    margin-left: -28px;
     color: #FFF !important;
     cursor: pointer;
 }
@@ -196,3 +197,4 @@ header.navbar a.navbar-brand {
     color: #FFF !important;
     background: #271A0E !important;
 }
+

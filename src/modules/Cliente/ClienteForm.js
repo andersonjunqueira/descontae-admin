@@ -8,43 +8,10 @@ import Email from '../../components/Email';
 import Phone from '../../components/Phone';
 import Endereco from '../../components/Endereco';
 import Intl from '../../components/Intl';
+import Phones from '../../components/Phones';
 import Card, { CardHeader, CardBody } from '../../components/Card';
 
 import { toaster } from '../../components/Notification/Notification.actions';
-
-class renderPhones extends Component {
-    render() {
-        const { fields, meta } = this.props; 
-        return (
-            <Card>
-                <CardHeader>
-                    <Intl str='telefones'></Intl> 
-                    <Button type="button" color="secondary" className="pull-right" size="sm" onClick={() => fields.push()}>
-                        <Intl str='adicionar-telefone'></Intl>
-                    </Button>
-                </CardHeader>
-                <CardBody>
-                    {(!fields || fields.length === 0) && <Intl str='nenhum-registro-encontrado'></Intl>}
-                    {fields.map((field, index) => {
-                        return (
-                            <Row key={index}>
-                                <Col xs={6} md={4}>
-                                    <Phone name={`${field}.numero`} label={<Intl str='telefone'></Intl>} maxLength={15}/>
-                                </Col>
-                                <Col xs={2} md={1}>
-                                    <a className="btn btn-danger fields-remove-button" onClick={() => { fields.remove(index); } }>
-                                      <i className="fa fa-trash"></i>
-                                    </a>
-                                </Col>
-                            </Row>
-                        );
-                    })}
-                    {meta.error && <span className="fields-error">{meta.error}</span>}
-                </CardBody>
-            </Card>
-        );
-    }
-}
 
 class ClienteForm extends Component {
 
@@ -109,12 +76,12 @@ class ClienteForm extends Component {
                     </Col>
                 </Row>
 
-                <FieldArray name="telefones" component={renderPhones} />
+                <FieldArray name="telefones" component={Phones} />
 
                 <Card>
                     <CardHeader><Intl str='endereco'></Intl></CardHeader>
                     <CardBody>
-                        <Endereco zipcodeParams={{ form: "ClienteForm", callback: this.atualizaEndereco }}/>
+                        <Endereco name="endereco" zipcodeParams={{ form: "ClienteForm", callback: this.atualizaEndereco }}/>
                     </CardBody>
                 </Card>
 
