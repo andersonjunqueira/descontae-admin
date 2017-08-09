@@ -2,7 +2,22 @@ import React, { Component, PropTypes } from 'react';
 import { Field } from 'redux-form';
 import BootstrapFile from './BootstrapFile'
 
-export const fileFunctions = { 
+export const fileFunctions = {
+    getPromise: (data) => {
+        return new Promise( (resolve, reject) => {
+            if(data) {
+                if(data.files) {
+                    fileFunctions.toBase64(data.files[0], (base64) => {
+                        let b64 = "data:" + data.files[0].type + ";base64," + base64;
+                        resolve(b64);
+                    });
+                } else {
+                    resolve(undefined);
+                }
+            }
+        });
+    },
+    
     toBase64: (file, callback) => {
         let reader = new FileReader();
         reader.onload = function(readerEvt) {

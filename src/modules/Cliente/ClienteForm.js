@@ -5,10 +5,9 @@ import { Form, Row, Col, Button } from 'reactstrap';
 import Text from '../../components/Text';
 import CNPJ from '../../components/CNPJ';
 import Email from '../../components/Email';
-import Phone from '../../components/Phone';
 import Endereco from '../../components/Endereco';
 import Intl from '../../components/Intl';
-import Phones from '../../components/Phones';
+import Phones from '../Snippets/Phones';
 import Card, { CardHeader, CardBody } from '../../components/Card';
 
 import { toaster } from '../../components/Notification/Notification.actions';

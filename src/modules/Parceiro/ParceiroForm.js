@@ -2,57 +2,16 @@ import React, { Component } from 'react';
 import { FieldArray, reduxForm, change } from 'redux-form';
 import { Form, Row, Col, Button } from 'reactstrap';
 
-import Card, { CardHeader, CardBody } from '../../components/Card';
 import Text from '../../components/Text';
 import CNPJ from '../../components/CNPJ';
 import Email from '../../components/Email';
-import Phone from '../../components/Phone';
 import SelectCategoria from '../Categoria/SelectCategoria';
 import SelectMarca from '../Marca/SelectMarca';
-import Unidade from './Unidade';
-import Phones from '../../components/Phones';
+import Phones from '../Snippets/Phones';
+import Unidades from '../Snippets/Unidades';
 import Intl from '../../components/Intl';
 
 import { toaster } from '../../components/Notification/Notification.actions';
-
-class renderUnidades extends Component {
-
-    constructor(props) {
-        super(props);
-        this.salvar = this.salvar.bind(this);
-    }
-
-    salvar(values) {
-        console.log(values);
-    }
-
-    render() {
-        const { fields, meta } = this.props; 
-        return (
-            <div>
-                <Card>
-                    <CardHeader>
-                        <Intl str='unidades'></Intl> 
-                        <Button type="button" color="success" className="pull-right" size="sm" onClick={() => fields.push()}>
-                            <i className="fa fa-plus"></i>
-                        </Button>
-                    </CardHeader>
-                    <CardBody>
-                        {(!fields || fields.length === 0) && <Intl str='nenhuma-unidade-encontrada'></Intl>}
-                        {fields.map((field, index) => {
-                            return (<div>
-                                <Unidade name={`${field}`} />
-                                <hr/>
-                            </div>);
-                        })}
-                        {meta.error && <span className="fields-error">{meta.error}</span>}
-                    </CardBody>
-                </Card>
-
-            </div>
-        );
-    }
-}
 
 class ParceiroForm extends Component {
 
@@ -125,7 +84,7 @@ class ParceiroForm extends Component {
 
                 <FieldArray name="telefones" component={Phones} />
 
-                <FieldArray name="unidades" component={renderUnidades} />
+                <FieldArray name="unidades" component={Unidades} />
 
                 <Button type="submit" color="primary" disabled={invalid || submitting}>
                     <Intl str='salvar'></Intl>

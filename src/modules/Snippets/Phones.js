@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Row, Col, Button } from 'reactstrap';
 
-import Intl from '../Intl';
-import Phone from '../Phone';
-import Card, { CardHeader, CardBody } from '../Card';
+import Intl from '../../components/Intl';
+import Phone from '../../components/Phone';
+import Card, { CardHeader, CardBody } from '../../components/Card';
 
 class Phones extends Component {
 

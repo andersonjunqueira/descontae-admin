@@ -5,10 +5,9 @@ import { Row, Col, Button } from 'reactstrap';
 import Card, { CardHeader, CardBody } from '../../components/Card';
 import Intl from '../../components/Intl';
 import Text from '../../components/Text';
-import Phone from '../../components/Phone';
 import File from '../../components/File';
 import Endereco from '../../components/Endereco';
-import Phones from '../../components/Phones';
+import Phones from './Phones';
 
 class renderImages extends Component {
     render() {
@@ -22,14 +21,14 @@ class renderImages extends Component {
                     </Button>
                 </CardHeader>
                 <CardBody>
-                    {(!fields || fields.length === 0) && <Intl str='nenhuma-imagem-encontrado'></Intl>}    
+                    {(!fields || fields.length === 0) && <Intl str='nenhuma-imagem-encontrada'></Intl>}    
                     <Row>
                     {fields.map((field, index) => {
                         return (
-                            <Col key={index} xs={12} md={4} key={index}> 
+                            <Col xs={12} md={4} key={index}> 
                                 <Row>
                                     <Col xs={8} md={10}>
-                                        <File name="imagem" 
+                                        <File name={`${field}`} 
                                             label={<Intl str='imagem'></Intl>} 
                                             required={true} 
                                             width={200} height={200}

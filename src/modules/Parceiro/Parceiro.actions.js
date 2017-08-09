@@ -43,38 +43,24 @@ const converter = {
 
     toBackend: (values) => {
 
-        const data = {
-            id: values.id,
-            pessoa: { 
-                id: values.idPessoa
-            },
-            nome: values.nome,
-            nomeFantasia: values.nomeFantasia,
-            email: values.email,
-            cnpj: numberFunctions.applyMask(values.cnpj),
-            endereco: {
-                id: values.idEndereco,
-                cep: numberFunctions.applyMask(values.cep),
-                logradouro: values.logradouro,
-                complemento: values.complemento,
-                numero: values.numero,
-                bairro: values.bairro,
-                cidade: { 
-                    id: values.idCidade,
-                    nome: values.cidade,
-                    estado: {
-                        sigla: values.uf
-                    }
-                }
-            },
-            telefones: [],
-            dataCadastro: values.dataCadastro
-        };
-
-        data.telefones = Object.assign(values.telefones);
+        const data = Object.assign({}, values, {});
+        data.cnpj = numberFunctions.applyMask(data.cnpj);
         if(data.telefones && data.telefones.length > 0) {
             for(let i = 0; i < data.telefones.length; i++) {
-                data.telefones[i].numero = numberFunctions.applyMask(values.telefones[i].numero);
+                data.telefones[i].numero = numberFunctions.applyMask(data.telefones[i].numero);
+            };
+        }
+
+        if(data.unidades && data.unidades.length > 0) {
+            for(let i = 0; i < data.unidades.length; i++) {
+
+                data.unidades[i].endereco.cep = numberFunctions.applyMask(data.unidades[i].endereco.cep);
+                if(data.unidades[i].telefones && data.unidades[i].telefones.length > 0) {
+                    for(let j = 0; j < data.unidades[i].telefones.length; j++) {
+                        data.unidades[i].telefones[j].numero = numberFunctions.applyMask(data.unidades[i].telefones[j].numero);
+                    };
+                }
+
             };
         }
 

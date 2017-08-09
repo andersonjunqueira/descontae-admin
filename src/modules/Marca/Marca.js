@@ -57,42 +57,22 @@ class Marca extends Component {
 
     salvar(values) {
         const data = Object.assign({}, values, {});
-        let plogo = new Promise( (resolve, reject) => {
-            if(data.logomarca) {
-                if(data.logomarca.files) {
-                    fileFunctions.toBase64(data.logomarca.files[0], (base64) => {
-                        data.logomarca = "data:" + data.logomarca.files[0].type + ";base64," + base64;
-                        resolve();
-                    });
-                } else {
-                    resolve();
-                }
+
+        let plogo = fileFunctions.getPromise(data.logomarca).then(response => {
+            if(response) {
+                data.logomarca = response;
             }
         });
 
-        let pthumb = new Promise( (resolve, reject) => {       
-            if(data.imagemThumbnail) {
-                if(data.imagemThumbnail.files) {
-                    fileFunctions.toBase64(data.imagemThumbnail.files[0], (base64) => {
-                        data.imagemThumbnail = "data:" + data.imagemThumbnail.files[0].type + ";base64," + base64;
-                        resolve();
-                    });
-                } else {
-                    resolve();
-                }
+        let pthumb = fileFunctions.getPromise(data.imagemThumbnail).then(response => {
+            if(response) {
+                data.imagemThumbnail = response;
             }
         });
 
-        let pfundo = new Promise( (resolve, reject) => {
-            if(data.imagemFundoApp) {
-                if(data.imagemFundoApp.files) {
-                    fileFunctions.toBase64(data.imagemFundoApp.files[0], (base64) => {
-                        data.imagemFundoApp = "data:" + data.imagemFundoApp.files[0].type + ";base64," + base64;
-                        resolve();
-                    });
-                } else {
-                    resolve();
-                }
+        let pfundo = fileFunctions.getPromise(data.imagemFundoApp).then(response => {
+            if(response) {
+                data.imagemFundoApp = response;
             }
         });
 

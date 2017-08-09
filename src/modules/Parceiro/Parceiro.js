@@ -7,6 +7,7 @@ import ParceiroList from './ParceiroList';
 
 import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGESIZE_DEFAULT } from '../../app/App.actions';
 import * as parceiroActions from './Parceiro.actions';
+import { fileFunctions } from "../../components/File";
 
 class Parceiro extends Component {
 
@@ -55,7 +56,37 @@ class Parceiro extends Component {
     }
 
     salvar(values) {
-        this.props.actions.salvar(values, this.consultar);
+        const data = Object.assign({}, values, {});
+
+        const imagens = {};
+        if(data.unidades && data.unidades.length > 0) {
+            for(let i = 0; i < data.unidades.length; i++) {
+                let unidade = data.unidades[i];
+                if(unidade.imagens && unidade.imagens.length > 0) {
+                    for(let j = 0; j < unidade.imagens.length; j++) {
+                        imagens["u" + i + "i" + j] = unidade.imagens[j];
+                    }
+                }
+            };
+        }
+
+        let allPromisses = [];
+        Object.keys(imagens).forEach(function(key) {
+
+            allPromisses.push(fileFunctions.getPromise(imagens[key]).then(response => {
+                if(response) {
+                    data.unidades[key.charAt(1)].imagens[key.charAt(3)] = response;
+                }
+            }));
+
+        });
+
+        Promise.all(allPromisses).then(values => { 
+            this.props.actions.salvar(data, this.consultar);
+        }, reason => {
+            console.log(reason);
+        });
+
     }
 
     carregar(id) {
