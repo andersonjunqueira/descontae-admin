@@ -64,7 +64,7 @@ class Parceiro extends Component {
                 let unidade = data.unidades[i];
                 if(unidade.imagens && unidade.imagens.length > 0) {
                     for(let j = 0; j < unidade.imagens.length; j++) {
-                        imagens["u" + i + "i" + j] = unidade.imagens[j];
+                        imagens["u" + i + "i" + j] = unidade.imagens[j].imagem;
                     }
                 }
             };
@@ -75,7 +75,7 @@ class Parceiro extends Component {
 
             allPromisses.push(fileFunctions.getPromise(imagens[key]).then(response => {
                 if(response) {
-                    data.unidades[key.charAt(1)].imagens[key.charAt(3)] = response;
+                    data.unidades[key.charAt(1)].imagens[key.charAt(3)].imagem = response;
                 }
             }));
 

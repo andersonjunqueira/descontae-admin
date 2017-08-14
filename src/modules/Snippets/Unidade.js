@@ -28,7 +28,7 @@ class renderImages extends Component {
                             <Col xs={12} md={4} key={index}> 
                                 <Row>
                                     <Col xs={8} md={10}>
-                                        <File name={`${field}`} 
+                                        <File name={`${field}.imagem`} 
                                             label={<Intl str='imagem'></Intl>} 
                                             required={true} 
                                             width={200} height={200}
@@ -61,8 +61,8 @@ class Unidade extends Component {
     render() {
         return (
             <div>
-                <Text name={`${this.props.name}.nome`} label={<Intl str='nome'></Intl>} maxLength={100}/>
-                <Endereco name={`${this.props.name}.endereco`}/>
+                <Text name={`${this.props.name}.nome`} label={<Intl str='nome'></Intl>} maxLength={100} required={true}/>
+                <Endereco name={`${this.props.name}.endereco`} required={true}/>
                 <FieldArray name={`${this.props.name}.telefones`} component={Phones} />
                 <FieldArray name={`${this.props.name}.imagens`} component={renderImages} />
             </div>

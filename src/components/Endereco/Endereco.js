@@ -13,10 +13,10 @@ class Endereco extends Component {
             <div>
                 <Row>
                     <Col xs={12} md={3}>
-                        <ZipCode name={`${this.props.name}.cep`} label={<Intl str='cep'></Intl>} placeholder="__.___-___" zipcodeParams={this.props.zipcodeParams}/>
+                        <ZipCode name={`${this.props.name}.cep`} label={<Intl str='cep'></Intl>} placeholder="__.___-___" zipcodeParams={this.props.zipcodeParams} required={this.props.required}/>
                     </Col>
                     <Col xs={12} md={9}>
-                        <Text name={`${this.props.name}.logradouro`} label={<Intl str='logradouro'></Intl>} maxLength={100}/>
+                        <Text name={`${this.props.name}.logradouro`} label={<Intl str='logradouro'></Intl>} maxLength={100} required={this.props.required}/>
                     </Col>
                 </Row>
                 <Row>
@@ -29,13 +29,13 @@ class Endereco extends Component {
                 </Row>
                 <Row>
                     <Col xs={12} md={5}>
-                        <Text name={`${this.props.name}.bairro`} label={<Intl str='bairro'></Intl>} maxLength={50}/>
+                        <Text name={`${this.props.name}.bairro`} label={<Intl str='bairro'></Intl>} maxLength={50} required={this.props.required}/>
                     </Col>
                     <Col xs={12} md={5}>
-                        <Text name={`${this.props.name}.cidade`} label={<Intl str='cidade'></Intl>} maxLength={50}/>
+                        <Text name={`${this.props.name}.cidade`} label={<Intl str='cidade'></Intl>} maxLength={50} required={this.props.required}/>
                     </Col>
                     <Col xs={12} md={2}>
-                        <UF name={`${this.props.name}.uf`} label={<Intl str='uf'></Intl>}/>
+                        <UF name={`${this.props.name}.uf`} label={<Intl str='uf'></Intl>} required={this.props.required}/>
                     </Col>
                 </Row>
             </div>
@@ -44,7 +44,13 @@ class Endereco extends Component {
 }
 
 Endereco.propTypes = {
-    zipcodeParams: PropTypes.object
+    zipcodeParams: PropTypes.object,
+    required: PropTypes.bool
 }
+
+Endereco.defaultProps = {
+    required: false
+};
+
 
 export default Endereco;

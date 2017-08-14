@@ -11,30 +11,30 @@ export const [ PARCEIROS_PESQUISA, PARCEIRO_EDICAO, PARCEIRO_SETMODE ] = [ "PARC
 const converter = {
     toFrontend: (values) => {
 
-        const data = {
-            id: values.id,
-            idPessoa: values.pessoa.id,
-            nome: values.nome,
-            nomeFantasia: values.nomeFantasia,
-            email: values.email,
-            cnpj: cnpjFunctions.applyMask(values.cnpj),
-            idEndereco: values.endereco ? values.endereco.id : undefined,
-            cep: values.endereco ? zipcodeFunctions.applyMask(values.endereco.cep) : undefined,
-            logradouro: values.endereco ? values.endereco.logradouro : undefined,
-            complemento: values.endereco ? values.endereco.complemento : undefined,
-            numero: values.endereco ? values.endereco.numero : undefined,
-            bairro: values.endereco ? values.endereco.bairro : undefined,
-            idCidade: values.endereco && values.endereco.cidade ? values.endereco.cidade.id : undefined,
-            cidade: values.endereco && values.endereco.cidade ? values.endereco.cidade.nome : undefined,
-            uf: values.endereco && values.endereco.cidade && values.endereco.cidade.estado ? values.endereco.cidade.estado.sigla : undefined,
-            dataCadastro: values.dataCadastro,
-            telefones: values.telefones
-        };
+        const data = Object.assign({}, values, {});
+        data.cnpj = cnpjFunctions.applyMask(data.cnpj);
 
-        if(data.telefones && data.telefones.length > 0) {
-            for(let i = 0; i < data.telefones.length; i++) {
-                data.telefones[i].numero = phoneFunctions.applyMask(values.telefones[i].numero);
-            };
+        if(data.telefones) {
+            data.telefones.forEach(telefone => {
+                telefone.numero = phoneFunctions.applyMask(telefone.numero);
+            });
+        }
+
+        if(data.unidades) {
+            data.unidades.forEach(unidade => {
+                unidade.endereco.cep = zipcodeFunctions.applyMask(unidade.endereco.cep);
+                unidade.endereco.idUf = unidade.endereco.cidade.estado.id;
+                unidade.endereco.uf = unidade.endereco.cidade.estado.sigla;
+                unidade.endereco.idCidade = unidade.endereco.cidade.id;
+                unidade.endereco.cidade = unidade.endereco.cidade.nome;
+
+                if(unidade.telefones) {
+                    unidade.telefones.forEach(telefone => {
+                        telefone.numero = phoneFunctions.applyMask(telefone.numero);
+                    });
+                }
+
+            });
         }
 
         return data;
@@ -45,23 +45,29 @@ const converter = {
 
         const data = Object.assign({}, values, {});
         data.cnpj = numberFunctions.applyMask(data.cnpj);
-        if(data.telefones && data.telefones.length > 0) {
-            for(let i = 0; i < data.telefones.length; i++) {
-                data.telefones[i].numero = numberFunctions.applyMask(data.telefones[i].numero);
-            };
+
+        if(data.telefones) {
+            data.telefones.forEach(telefone => {
+                telefone.numero = numberFunctions.applyMask(telefone.numero);
+            });
         }
 
-        if(data.unidades && data.unidades.length > 0) {
-            for(let i = 0; i < data.unidades.length; i++) {
+        if(data.unidades) {
+            data.unidades.forEach(unidade => {
+                unidade.endereco.cep = numberFunctions.applyMask(unidade.endereco.cep);
+                unidade.endereco.cidade = { id: unidade.endereco.idCidade, nome: unidade.endereco.cidade };
+                unidade.endereco.cidade.estado = { id: unidade.endereco.idUf, sigla: unidade.endereco.uf };
+                unidade.endereco.idCidade = undefined;
+                unidade.endereco.idUf = undefined;
+                unidade.endereco.uf = undefined;
 
-                data.unidades[i].endereco.cep = numberFunctions.applyMask(data.unidades[i].endereco.cep);
-                if(data.unidades[i].telefones && data.unidades[i].telefones.length > 0) {
-                    for(let j = 0; j < data.unidades[i].telefones.length; j++) {
-                        data.unidades[i].telefones[j].numero = numberFunctions.applyMask(data.unidades[i].telefones[j].numero);
-                    };
+                if(unidade.telefones) {
+                    unidade.telefones.forEach(telefone => {
+                        telefone.numero = numberFunctions.applyMask(telefone.numero);
+                    });
                 }
 
-            };
+            });
         }
 
         return data;

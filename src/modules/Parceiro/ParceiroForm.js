@@ -75,10 +75,10 @@ class ParceiroForm extends Component {
                 </Row>
                 <Row>
                     <Col xs={12} md={6}>
-                        <SelectCategoria name="categoria" label={<Intl str='categoria'></Intl>} required={true}/>
+                        <SelectCategoria name="categoria.id" label={<Intl str='categoria'></Intl>} required={true}/>
                     </Col>
                     <Col xs={12} md={6}>
-                        <SelectMarca name="marca" label={<Intl str='marca'></Intl>} required={true}/>
+                        <SelectMarca name="marca.id" label={<Intl str='marca'></Intl>} required={true}/>
                     </Col>
                 </Row>
 
