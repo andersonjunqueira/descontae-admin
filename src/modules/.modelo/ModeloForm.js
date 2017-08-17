@@ -39,17 +39,6 @@ class ModeloForm extends Component {
         this.setState(Object.assign(this.state, { id: undefined }));
     }
 
-    atualizaEndereco(address) { 
-        if(address) {
-            this.props.dispatch(change(this.props.form, 'logradouro', address.logradouro));
-            this.props.dispatch(change(this.props.form, 'bairro', address.bairro));
-            this.props.dispatch(change(this.props.form, 'cidade', address.cidade));
-            this.props.dispatch(change(this.props.form, 'uf', address.uf));
-        } else {
-            this.props.dispatch(toaster("cep-nao-encontrado", [], {status: "warning"}));
-        }
-    }
-
     render() {
         const { handleSubmit, doSubmit, pristine, reset, submitting, invalid } = this.props;
         return (
@@ -81,7 +70,7 @@ class ModeloForm extends Component {
                 <Card>
                     <CardHeader><Intl str='endereco'></Intl></CardHeader>
                     <CardBody>
-                        <Endereco zipcodeParams={{ form: "ModeloForm", callback: this.atualizaEndereco }}/>
+                        <Endereco name="endereco" formName="ModeloForm"/>
                     </CardBody>
                 </Card>
 

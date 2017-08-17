@@ -28,9 +28,21 @@ class ZipCode extends Component {
     }
 
     doSearch() {
-        const { form, callback } = this.props.zipcodeParams;
-        let zip = this.props.forms[form].values[this.props.name]
-        searchZipcode(zip, callback);
+        let fields = this.props.name.split('.');
+        let zip = this.props.forms[this.props.formName].values;
+        fields.forEach(token => {
+
+            let fieldArray = token.split("[");
+            if(fieldArray.length === 1) {
+                zip = zip[token];
+            } else {
+                zip = zip[fieldArray[0]];
+                zip = zip [fieldArray[1].split(']')[0]];
+            } 
+        });
+
+        zip = numberFunctions.applyMask(zip);
+        searchZipcode(zip, this.props.callback);
     }
 
     render() {
@@ -43,20 +55,22 @@ class ZipCode extends Component {
                 maxLength={10}
                 required={this.props.required}
                 normalize={this.normalize}
-                rightButtonLabel={translate("pesquisar-cep")}
-                rightButtonAction={this.doSearch}
                 className=""
+
+                actionLabel={translate("pesquisar-cep")}
+                action={this.doSearch}
             />
         )
     }
 }
 
 ZipCode.propTypes = {
+    formName: PropTypes.string,
+    callback: PropTypes.func,
     label: PropTypes.node,
     placeholder: PropTypes.node,
     help: PropTypes.string,
-    required: PropTypes.bool,
-    zipcodeParams: PropTypes.object
+    required: PropTypes.bool
 }
 
 const mapStateToProps = (state) => {

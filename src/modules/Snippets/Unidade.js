@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { FieldArray } from 'redux-form';
 import { Row, Col, Button } from 'reactstrap';
 
@@ -62,13 +62,17 @@ class Unidade extends Component {
         return (
             <div>
                 <Text name={`${this.props.name}.nome`} label={<Intl str='nome'></Intl>} maxLength={100} required={true}/>
-                <Endereco name={`${this.props.name}.endereco`} required={true}/>
+                <Endereco name={`${this.props.name}.endereco`} required={true} formName={this.props.formName}/>
                 <FieldArray name={`${this.props.name}.telefones`} component={Phones} />
                 <FieldArray name={`${this.props.name}.imagens`} component={renderImages} />
             </div>
         );
     }
 
+}
+
+Unidade.propTypes = {
+    formName: PropTypes.string
 }
 
 export default Unidade;

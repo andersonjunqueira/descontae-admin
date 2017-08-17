@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Button } from 'reactstrap';
 
 import Intl from '../../components/Intl';
@@ -23,7 +23,7 @@ class Unidades extends Component {
                         {fields.map((field, index) => {
                             return (
                                 <div key={index}>
-                                    <Unidade name={`${field}`} />
+                                    <Unidade name={`${field}`} formName={this.props.formName}/>
                                     <hr/>
                                 </div>
                             );
@@ -35,6 +35,10 @@ class Unidades extends Component {
             </div>
         );
     }
+}
+
+Unidades.propTypes = {
+    formName: PropTypes.string
 }
 
 export default Unidades;

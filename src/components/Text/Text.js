@@ -44,6 +44,8 @@ class Text extends Component {
 }
 
 Text.propTypes = {
+    name: PropTypes.string,
+
     // INPUT DECORATOR
     label: PropTypes.node,
     placeholder: PropTypes.node,
@@ -62,6 +64,7 @@ Text.propTypes = {
 
     // COMMON
     validators: PropTypes.array,
+    normalize: PropTypes.func,
 
     // TEXT 
     maxLength: PropTypes.number

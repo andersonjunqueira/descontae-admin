@@ -18,7 +18,6 @@ class ParceiroForm extends Component {
     constructor(props) {
         super(props);
         this.cancelar = this.cancelar.bind(this);
-        this.atualizaEndereco = this.atualizaEndereco.bind(this);
 
         this.state = {
             id: undefined
@@ -37,17 +36,6 @@ class ParceiroForm extends Component {
     cancelar() {
         this.props.doConsultar();
         this.setState(Object.assign(this.state, { id: undefined }));
-    }
-
-    atualizaEndereco(address) { 
-        if(address) {
-            this.props.dispatch(change(this.props.form, 'logradouro', address.logradouro));
-            this.props.dispatch(change(this.props.form, 'bairro', address.bairro));
-            this.props.dispatch(change(this.props.form, 'cidade', address.cidade));
-            this.props.dispatch(change(this.props.form, 'uf', address.uf));
-        } else {
-            this.props.dispatch(toaster("cep-nao-encontrado", [], {status: "warning"}));
-        }
     }
 
     render() {
@@ -84,7 +72,7 @@ class ParceiroForm extends Component {
 
                 <FieldArray name="telefones" component={Phones} />
 
-                <FieldArray name="unidades" component={Unidades} />
+                <FieldArray name="unidades" component={Unidades} formName="ParceiroForm"/>
 
                 <Button type="submit" color="primary" disabled={invalid || submitting}>
                     <Intl str='salvar'></Intl>

@@ -44,19 +44,7 @@ class Number extends Component {
 
     render() {
         return (
-            <Text
-                name={this.props.name}
-                label={this.props.label}
-                placeholder={this.props.placeholder} 
-                help={this.props.help}
-                maxLength={this.props.maxLength}
-                required={this.props.required}
-                validators={this.getValidators()}
-                normalize={this.normalize}
-                className={this.props.className}
-                rightButtonLabel={this.props.rightButtonLabel}
-                rightButtonAction={this.props.rightButtonAction}
-            />
+            <Text {...this.props}/>
         );
     }
 }
@@ -64,20 +52,30 @@ class Number extends Component {
 //TODO [AJ] INCLUIR COMPORTAMENTO PARA CASAS DECIMAIS
 
 Number.propTypes = {
+    name: PropTypes.string,
+
+    // INPUT DECORATOR
     label: PropTypes.node,
-    className: PropTypes.string,
     placeholder: PropTypes.node,
-    help: PropTypes.string,
-    maxLength: PropTypes.number,
+    help: PropTypes.node,
     required: PropTypes.bool,
-    rightButtonLabel: PropTypes.string,
-    rightButtonAction: PropTypes.func,
+    inputSize: PropTypes.number,
+    labelSize: PropTypes.number,
+    action: PropTypes.func,
+    actionIcon: PropTypes.string,
+    actionLabel: PropTypes.node,
+    leftAddon: PropTypes.node,
+    rightAddon: PropTypes.node,
+    leftIconAddon: PropTypes.node,
+    rightIconAddon: PropTypes.node,
 
-    maxValue: PropTypes.number,
-    minValue: PropTypes.number,
-
+    // COMMON
     validators: PropTypes.array,
-    normalize: PropTypes.func
+    normalize: PropTypes.func,
+
+    // NUMBER 
+    maxValue: PropTypes.number,
+    minValue: PropTypes.number
 }
 
 Number.defaultProps = {

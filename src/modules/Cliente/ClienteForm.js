@@ -40,10 +40,10 @@ class ClienteForm extends Component {
 
     atualizaEndereco(address) { 
         if(address) {
-            this.props.dispatch(change(this.props.form, 'logradouro', address.logradouro));
-            this.props.dispatch(change(this.props.form, 'bairro', address.bairro));
-            this.props.dispatch(change(this.props.form, 'cidade', address.cidade));
-            this.props.dispatch(change(this.props.form, 'uf', address.uf));
+            this.props.dispatch(change(this.props.form, 'endereco.logradouro', address.logradouro));
+            this.props.dispatch(change(this.props.form, 'endereco.bairro', address.bairro));
+            this.props.dispatch(change(this.props.form, 'endereco.cidade', address.cidade));
+            this.props.dispatch(change(this.props.form, 'endereco.uf', address.uf));
         } else {
             this.props.dispatch(toaster("cep-nao-encontrado", [], {status: "warning"}));
         }
@@ -80,7 +80,7 @@ class ClienteForm extends Component {
                 <Card>
                     <CardHeader><Intl str='endereco'></Intl></CardHeader>
                     <CardBody>
-                        <Endereco name="endereco" zipcodeParams={{ form: "ClienteForm", callback: this.atualizaEndereco }}/>
+                        <Endereco name="endereco" formName="ClienteForm"/>
                     </CardBody>
                 </Card>
 
