@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { FieldArray, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { Form, Row, Col, Button } from 'reactstrap';
 
 import Text from '../../components/Text';
-import CNPJ from '../../components/CNPJ';
-import Email from '../../components/Email';
-import Endereco from '../../components/Endereco';
+import TextArea from '../../components/TextArea';
+import File from '../../components/File';
 import Intl from '../../components/Intl';
-import Phones from '../Snippets/Phones';
-import Card, { CardHeader, CardBody } from '../../components/Card';
 
 class RevistaForm extends Component {
 
@@ -43,33 +40,40 @@ class RevistaForm extends Component {
                 <h4><Intl str='revista'></Intl></h4>
 
                 <Row>
-                    <Col xs={12} md={12}>
-                        <Text name="nome" label={<Intl str='nome'></Intl>} maxLength={100} required={true}/>
+                    <Col xs={12} md={4}>
+                        <Text name="edicao" label={<Intl str='edicao'></Intl>} maxLength={100} required={true}/>
                     </Col>
                 </Row>
                 <Row>
                     <Col xs={12} md={12}>
-                        <Text name="nomeFantasia" label={<Intl str='nome-fantasia'></Intl>} maxLength={100} required={true}/>
+                        <TextArea name="descricao" label={<Intl str='nome-fantasia'></Intl>} maxLength={100} required={true}/>
                     </Col>
                 </Row>
+
                 <Row>
-                    <Col xs={12} md={6}>
-                        <CNPJ name="cnpj" label={<Intl str='cnpj'></Intl>} required={true}/>
+                    <Col xs={12} md={4}>
+                        <File name="thumbnail" 
+                            label={<Intl str='imagem'></Intl>} 
+                            required={true} 
+                            width={200} height={200}
+                            placeholder={<Intl str="miniatura-placeholder"></Intl>}
+                            help={<Intl str="imagem-plano-help"></Intl>}
+                            accept="image/jpeg, image/png"
+                            maxSize={500*1024}/>
                     </Col>
-                    <Col xs={12} md={6}>
-                        <Email name="email" label={<Intl str='email'></Intl>} required={true}/>
+                    <Col xs={12} md={4}>
+                        <File name="pdf" 
+                            label={<Intl str='imagem'></Intl>} 
+                            required={true} 
+                            width={200} height={200}
+                            placeholder={<Intl str="miniatura-placeholder"></Intl>}
+                            help={<Intl str="imagem-plano-help"></Intl>}
+                            accept="application/pdf"
+                            maxSize={500*1024}/>
                     </Col>
                 </Row>
 
-                <FieldArray name="telefones" component={Phones} />
-
-                <Card>
-                    <CardHeader><Intl str='endereco'></Intl></CardHeader>
-                    <CardBody>
-                        <Endereco name="endereco" formName="RevistaForm"/>
-                    </CardBody>
-                </Card>
-
+                
                 <Button type="submit" color="primary" disabled={invalid || submitting}>
                     <Intl str='salvar'></Intl>
                 </Button>

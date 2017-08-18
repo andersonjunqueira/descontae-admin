@@ -4,7 +4,6 @@ import { Form, Row, Col, Button, Table, Modal, ModalHeader, ModalBody, ModalFoot
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 import { cnpjFunctions } from '../../components/CNPJ';
-import Text from '../../components/Text';
 import Intl from '../../components/Intl';
 
 class RevistaList extends Component {
