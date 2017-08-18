@@ -37,7 +37,7 @@ class ZipCode extends Component {
                 zip = zip[token];
             } else {
                 zip = zip[fieldArray[0]];
-                zip = zip [fieldArray[1].split(']')[0]];
+                zip = zip[fieldArray[1].split(']')[0]];
             } 
         });
 

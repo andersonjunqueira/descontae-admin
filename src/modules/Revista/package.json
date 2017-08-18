@@ -1,0 +1,6 @@
+{
+  "name": "Revista",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Revista.js"
+}

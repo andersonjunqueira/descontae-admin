@@ -85,6 +85,18 @@
         "erro-carga-modelo": "Não foi possível carregar o modelo.",
         "erro-excluir-modelo": "Não foi possível excluir o modelo.",
 
+        "nova-revista": "Nova Revista",
+        "pesquisa-revistas": "Pesquisa de Revistas",
+        "revista": "Revista",
+        "revistas": "Revistas",
+        "revista-excluir-mensagem": "Confirma a exclusão do registro '{0}'?",
+        "revista-salva": "Revista salva com sucesso.",
+        "revista-excluida": "Revista excluída com sucesso.",
+        "erro-consulta-revistas": "Não foi possível carregar as revistas.",
+        "erro-salvar-revista": "Não foi possível salvar a revista.",
+        "erro-carga-revista": "Não foi possível carregar a revista.",
+        "erro-excluir-revista": "Não foi possível excluir a revista.",
+
         "novo-parceiro": "Novo Parceiro",
         "pesquisa-parceiros": "Pesquisa de Parceiros",
         "parceiro": "Parceiro",

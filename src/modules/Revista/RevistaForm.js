@@ -5,13 +5,12 @@ import { Form, Row, Col, Button } from 'reactstrap';
 import Text from '../../components/Text';
 import CNPJ from '../../components/CNPJ';
 import Email from '../../components/Email';
-import SelectCategoria from '../Categoria/SelectCategoria';
-import SelectMarca from '../Marca/SelectMarca';
-import Phones from '../Snippets/Phones';
-import Unidades from '../Snippets/Unidades';
+import Endereco from '../../components/Endereco';
 import Intl from '../../components/Intl';
+import Phones from '../Snippets/Phones';
+import Card, { CardHeader, CardBody } from '../../components/Card';
 
-class ParceiroForm extends Component {
+class RevistaForm extends Component {
 
     constructor(props) {
         super(props);
@@ -41,36 +40,35 @@ class ParceiroForm extends Component {
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
 
-                <h4><Intl str='parceiro'></Intl></h4>
+                <h4><Intl str='revista'></Intl></h4>
 
                 <Row>
-                    <Col xs={12} md={8}>
+                    <Col xs={12} md={12}>
                         <Text name="nome" label={<Intl str='nome'></Intl>} maxLength={100} required={true}/>
                     </Col>
-                    <Col xs={12} md={4}>
-                        <CNPJ name="cnpj" label={<Intl str='cnpj'></Intl>} required={true}/>
-                    </Col>
                 </Row>
                 <Row>
-                    <Col xs={12} md={6}>
+                    <Col xs={12} md={12}>
                         <Text name="nomeFantasia" label={<Intl str='nome-fantasia'></Intl>} maxLength={100} required={true}/>
                     </Col>
-                    <Col xs={12} md={6}>
-                        <Email name="email" label={<Intl str='email-responsavel'></Intl>} required={true} maxLength={100}/>
-                    </Col>
                 </Row>
                 <Row>
                     <Col xs={12} md={6}>
-                        <SelectCategoria name="categoria.id" label={<Intl str='categoria'></Intl>} required={true}/>
+                        <CNPJ name="cnpj" label={<Intl str='cnpj'></Intl>} required={true}/>
                     </Col>
                     <Col xs={12} md={6}>
-                        <SelectMarca name="marca.id" label={<Intl str='marca'></Intl>} required={true}/>
+                        <Email name="email" label={<Intl str='email'></Intl>} required={true}/>
                     </Col>
                 </Row>
 
                 <FieldArray name="telefones" component={Phones} />
 
-                <FieldArray name="unidades" component={Unidades} formName="ParceiroForm"/>
+                <Card>
+                    <CardHeader><Intl str='endereco'></Intl></CardHeader>
+                    <CardBody>
+                        <Endereco name="endereco" formName="RevistaForm"/>
+                    </CardBody>
+                </Card>
 
                 <Button type="submit" color="primary" disabled={invalid || submitting}>
                     <Intl str='salvar'></Intl>
@@ -95,9 +93,9 @@ const validate = values => {
     return errors;
 }
 
-ParceiroForm = reduxForm({ 
-    form: "ParceiroForm", 
+RevistaForm = reduxForm({ 
+    form: "RevistaForm", 
     validate 
-})(ParceiroForm);
+})(RevistaForm);
 
-export default ParceiroForm;
+export default RevistaForm;
