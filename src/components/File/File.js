@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Field } from 'redux-form';
 import BootstrapFile from './BootstrapFile'
 
+//TODO MINIATURA OU INDICATIVO DE PDF NÃO É EXIBIDO
+
 export const fileFunctions = {
     getPromise: (data) => {
         return new Promise( (resolve, reject) => {
@@ -17,7 +19,7 @@ export const fileFunctions = {
             }
         });
     },
-    
+
     toBase64: (file, callback) => {
         let reader = new FileReader();
         reader.onload = function(readerEvt) {

@@ -5,6 +5,7 @@ import { Form, Row, Col, Button } from 'reactstrap';
 import Text from '../../components/Text';
 import TextArea from '../../components/TextArea';
 import File from '../../components/File';
+import Date from '../../components/Date';
 import Intl from '../../components/Intl';
 
 class RevistaForm extends Component {
@@ -43,6 +44,12 @@ class RevistaForm extends Component {
                     <Col xs={12} md={4}>
                         <Text name="edicao" label={<Intl str='edicao'></Intl>} maxLength={100} required={true}/>
                     </Col>
+                    <Col xs={12} md={4}>
+                        <Date name="inicioVigencia" label={<Intl str='inicio-vigencia'></Intl>} required={true}/>
+                    </Col>
+                    <Col xs={12} md={4}>
+                        <Date name="fimVigencia" label={<Intl str='inicio-vigencia'></Intl>} required={true}/>
+                    </Col>
                 </Row>
                 <Row>
                     <Col xs={12} md={12}>
@@ -52,8 +59,8 @@ class RevistaForm extends Component {
 
                 <Row>
                     <Col xs={12} md={4}>
-                        <File name="thumbnail" 
-                            label={<Intl str='imagem'></Intl>} 
+                        <File name="imagem" 
+                            label={<Intl str='miniatura'></Intl>} 
                             required={true} 
                             width={200} height={200}
                             placeholder={<Intl str="miniatura-placeholder"></Intl>}
@@ -63,17 +70,16 @@ class RevistaForm extends Component {
                     </Col>
                     <Col xs={12} md={4}>
                         <File name="pdf" 
-                            label={<Intl str='imagem'></Intl>} 
+                            label={<Intl str='pdf'></Intl>} 
                             required={true} 
                             width={200} height={200}
-                            placeholder={<Intl str="miniatura-placeholder"></Intl>}
-                            help={<Intl str="imagem-plano-help"></Intl>}
+                            placeholder={<Intl str="pdf-revista-placeholder"></Intl>}
+                            help={<Intl str="pdf-revista-help"></Intl>}
                             accept="application/pdf"
-                            maxSize={500*1024}/>
+                            maxSize={1024*1024*3}/>
                     </Col>
                 </Row>
 
-                
                 <Button type="submit" color="primary" disabled={invalid || submitting}>
                     <Intl str='salvar'></Intl>
                 </Button>

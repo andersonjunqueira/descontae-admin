@@ -1,20 +1,23 @@
 import axios from "axios";
 
 import { toaster } from '../../components/Notification/Notification.actions';
+import  { dateFunctions } from '../../components/Date';
 
 export const [ REVISTAS_PESQUISA, REVISTA_EDICAO, REVISTA_SETMODE ] = [ "REVISTAS_PESQUISA", "REVISTA_EDICAO", "REVISTA_SETMODE" ];
 
+//TODO REMOVER ESSAS FUNÇÕES DE CONVERSÃO DE DATA
 const converter = {
     toFrontend: (values) => {
-
         const data = Object.assign({}, values, {});
+        data.inicioVigencia = dateFunctions.toFrontend(data.inicioVigencia);
+        data.fimVigencia = dateFunctions.toFrontend(data.fimVigencia);
         return data;
-
     },
 
     toBackend: (values) => {
-
         const data = Object.assign({}, values, {});
+        data.inicioVigencia = dateFunctions.toBackend(data.inicioVigencia);
+        data.fimVigencia = dateFunctions.toBackend(data.fimVigencia);
         return data;
     }
 }

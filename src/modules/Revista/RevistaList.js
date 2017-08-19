@@ -3,7 +3,6 @@ import { reduxForm } from 'redux-form';
 import { Form, Row, Col, Button, Table, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
-import { cnpjFunctions } from '../../components/CNPJ';
 import Intl from '../../components/Intl';
 
 class RevistaList extends Component {
@@ -65,8 +64,7 @@ class RevistaList extends Component {
                         <thead>
                             <tr>
                                 <th className="categ-col-1">#</th>
-                                <th className="categ-col-2"><Intl str="nome"></Intl></th>
-                                <th className="categ-col-3"><Intl str="cnpj"></Intl></th>
+                                <th className="categ-col-2"><Intl str="edicao"></Intl></th>
                                 <th className="categ-col-3"></th>
                             </tr>
                         </thead>
@@ -74,8 +72,7 @@ class RevistaList extends Component {
                             {Object.keys(data.content).map(function(key) {
                                 return (<tr key={key}>
                                     <td className="text-center" scope="row">{data.content[key].id}</td>
-                                    <td>{data.content[key].nome}</td>
-                                    <td>{cnpjFunctions.applyMask(data.content[key].cnpj)}</td>
+                                    <td>{data.content[key].edicao}</td>
                                     <td className="text-center">
                                         <Button type="button" onClick={() => doCarregar(data.content[key].id)} color="secondary" size="sm">
                                             <i className="fa fa-pencil"></i>

@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 
 import Text from '../Text';
 
+//TODO FORMATAÇÃO DE NÚMERO DECIMAL
+
 export const numberFunctions = { 
     applyMask: (value) => value !== undefined ? value.replace(/[^\d]/g, '') : value,
     minValueValidator: min => value => (value && value < min) ? "Valor mínimo permitido: " + min : undefined,
@@ -44,7 +46,7 @@ class Number extends Component {
 
     render() {
         return (
-            <Text {...this.props}/>
+            <Text {...this.props} validators={this.getValidators()}/>
         );
     }
 }

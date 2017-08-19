@@ -72,6 +72,12 @@
         "nenhuma-unidade-encontrada": "Nenhuma unidade encontrada",
         "nenhuma-imagem-encontrada": "Nenhuma imagem encontrada",
         "imagens": "Imagens",
+        "edicao": "Edição",
+        "inicio-vigencia": "Início da Vigência",
+        "fim-vigencia": "Fim da Vigência",
+        "pdf-revista-placeholder": "Arraste ou clique para selecionar um arquivo",
+        "pdf-revista-help": "Extensão permitida: PDF e tamanho máximo 3MB",
+        "pdf": "PDF",
 
         "novo-modelo": "Novo Modelo",
         "pesquisa-modelos": "Pesquisa de Modelos",

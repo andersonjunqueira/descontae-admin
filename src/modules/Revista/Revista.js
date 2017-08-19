@@ -7,6 +7,7 @@ import RevistaList from './RevistaList';
 
 import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGESIZE_DEFAULT } from '../../app/App.actions';
 import * as revistaActions from './Revista.actions';
+import { fileFunctions } from "../../components/File";
 
 class Revista extends Component {
 
@@ -55,7 +56,25 @@ class Revista extends Component {
     }
 
     salvar(values) {
-        this.props.actions.salvar(values, this.consultar);
+        const data = Object.assign({}, values, {});
+
+        let ppdf = fileFunctions.getPromise(data.pdf).then(response => {
+            if(response) {
+                data.pdf = response;
+            }
+        });
+
+        let pimagem = fileFunctions.getPromise(data.imagem).then(response => {
+            if(response) {
+                data.imagem = response;
+            }
+        });
+
+        Promise.all([ppdf, pimagem]).then(values => { 
+            this.props.actions.salvar(data, this.consultar);
+        }, reason => {
+            console.log(reason);
+        });
     }
 
     carregar(id) {
