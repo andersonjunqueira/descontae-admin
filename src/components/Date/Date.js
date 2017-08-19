@@ -5,6 +5,8 @@ import  { textFunctions } from '../Text';
 import  Number, { numberFunctions } from '../Number';
 
 //TODO CRIAR UM COMPONENTE COM SELEÇÃO DE DATA EM CALENDÁRIO
+//TODO REMOVER ESSAS FUNÇÕES DE CONVERSÃO DE DATA
+//TODO CRIAR UMA VALIDAÇÃO DE DATA DECENTE
 
 export const dateFunctions = {  
     applyMask: (value) => {
@@ -13,7 +15,6 @@ export const dateFunctions = {
         return nums.replace(/(\d{2})(\d{2})(\d{4})/g,"$1/$2/$3");
     },
     checkDateFormat: value => value.split("/").length === 3,
-//TODO REMOVER ESSAS FUNÇÕES DE CONVERSÃO DE DATA
     toBackend: value => {
         const tokens = value.split("/");
         return tokens[2] + "-" + tokens[1] + "-" + tokens[0];
