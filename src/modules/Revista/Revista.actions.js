@@ -3,7 +3,7 @@ import axios from "axios";
 import { toaster } from '../../components/Notification/Notification.actions';
 import  { dateFunctions } from '../../components/Date';
 
-export const [ REVISTAS_PESQUISA, REVISTA_EDICAO, REVISTA_SETMODE ] = [ "REVISTAS_PESQUISA", "REVISTA_EDICAO", "REVISTA_SETMODE" ];
+export const [ REVISTAS_PESQUISA, REVISTA_EDICAO, REVISTA_EDICAO_OFERTAS, REVISTA_SETMODE ] = [ "REVISTAS_PESQUISA", "REVISTA_EDICAO", "REVISTA_EDICAO_OFERTAS", "REVISTA_SETMODE" ];
 
 //TODO REMOVER ESSAS FUNÇÕES DE CONVERSÃO DE DATA
 const converter = {
@@ -13,6 +13,12 @@ const converter = {
         data.fimVigencia = dateFunctions.toFrontend(data.fimVigencia);
         return data;
     },
+
+    ofertasToFrontend: (values) => {
+        const data = Object.assign({}, values, {});
+        let arr = Object.keys(data).map(function (key) { return data[key]; });
+        return arr;
+    }, 
 
     toBackend: (values) => {
         const data = Object.assign({}, values, {});
@@ -82,9 +88,18 @@ export const carregar = (id) => {
     return dispatch => {
 
         axios.get('/revistas/' + id)
-            .then(function(response) {
+            .then(function(responseR) {
 
-                dispatch({type: REVISTA_EDICAO, payload: converter.toFrontend(response.data)});
+                axios.get('/revistas/' + id + "/ofertas")
+                    .then(function(responseO) {
+
+                        dispatch({type: REVISTA_EDICAO_OFERTAS, payload: converter.ofertasToFrontend(responseO.data)});
+                        dispatch({type: REVISTA_EDICAO, payload: converter.toFrontend(responseR.data)});
+
+                    }).catch(function(error){
+                        console.log(error);
+                        dispatch(toaster("erro-carga-revista", [], {status: "error"}));
+                    });
 
             }).catch(function(error){
                 console.log(error);

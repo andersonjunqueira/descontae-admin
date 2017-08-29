@@ -93,7 +93,8 @@ class Revista extends Component {
     render() {
 
         const { data } = this.props;
-        const obj = {};
+        const newObj = {};
+        const obj = {...data.obj, ofertas: data.objOfertas};
 
         return (
             <div>
@@ -102,10 +103,10 @@ class Revista extends Component {
                     doExcluir={this.excluir} doSetPage={this.setPage}></RevistaList>}
 
                 {data.mode === MODE_INSERT && <RevistaForm 
-                    data={obj} doSubmit={this.salvar} doConsultar={this.consultar}></RevistaForm>}
+                    data={newObj} doSubmit={this.salvar} doConsultar={this.consultar}></RevistaForm>}
 
                 {data.mode === MODE_UPDATE && <RevistaForm 
-                    data={data.obj} doSubmit={this.salvar} doConsultar={this.consultar}></RevistaForm>}
+                    data={obj} doSubmit={this.salvar} doConsultar={this.consultar}></RevistaForm>}
             </div>
         );
     }

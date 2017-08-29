@@ -63,7 +63,26 @@ li.page-item {
     cursor: pointer;
 }
 
-
+.table-w-5 { width: 5%; }
+.table-w-10 { width: 10%; }
+.table-w-15 { width: 15%; }
+.table-w-20 { width: 20%; }
+.table-w-25 { width: 25%; }
+.table-w-30 { width: 30%; }
+.table-w-35 { width: 35%; }
+.table-w-40 { width: 40%; }
+.table-w-45 { width: 45%; }
+.table-w-50 { width: 50%; }
+.table-w-55 { width: 55%; }
+.table-w-60 { width: 60%; }
+.table-w-65 { width: 65%; }
+.table-w-70 { width: 70%; }
+.table-w-75 { width: 75%; }
+.table-w-80 { width: 80%; }
+.table-w-85 { width: 85%; }
+.table-w-90 { width: 90%; }
+.table-w-95 { width: 95%; }
+.table-w-100 { width: 100%; }
 
 
 .categ-col-1, .categ-col-3 {

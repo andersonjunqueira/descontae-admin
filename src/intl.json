@@ -163,6 +163,10 @@
         "erro-carga-plano": "Não foi possível carregar o plano.",
         "erro-excluir-plano": "Não foi possível excluir o plano.",
 
+        "oferta": "Oferta",
+        "ofertas": "Ofertas",
+        "nenhuma-oferta-encontrada": "Nenhuma oferta encontrada.",
+
         "z": "z"
     }
 }

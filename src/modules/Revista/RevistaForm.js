@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
+import { FieldArray, reduxForm } from 'redux-form';
 import { Form, Row, Col, Button } from 'reactstrap';
 
 import Text from '../../components/Text';
@@ -7,6 +7,8 @@ import TextArea from '../../components/TextArea';
 import File from '../../components/File';
 import Date from '../../components/Date';
 import Intl from '../../components/Intl';
+
+import RevistaOfertas from './RevistaOfertas';
 
 class RevistaForm extends Component {
 
@@ -79,6 +81,8 @@ class RevistaForm extends Component {
                             maxSize={1024*1024*3}/>
                     </Col>
                 </Row>
+
+                <FieldArray name="ofertas" component={RevistaOfertas} />
 
                 <Button type="submit" color="primary" disabled={invalid || submitting}>
                     <Intl str='salvar'></Intl>
