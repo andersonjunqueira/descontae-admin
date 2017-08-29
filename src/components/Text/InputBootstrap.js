@@ -17,7 +17,8 @@ class InputBootstrap extends Component {
             name: this.props.input.name,
             id: this.props.input.name,
             placeholder: this.props.placeholder,
-            maxLength: this.props.maxLength
+            maxLength: this.props.maxLength,
+            disabled: this.props.disabled,
         };
 
         return (
@@ -33,6 +34,7 @@ InputBootstrap.propTypes = {
     placeholder: PropTypes.node,
     help: PropTypes.node,
     required: PropTypes.bool,
+    disabled: PropTypes.bool,
     inputSize: PropTypes.number,
     labelSize: PropTypes.number,
 

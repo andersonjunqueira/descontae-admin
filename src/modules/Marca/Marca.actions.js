@@ -21,7 +21,8 @@ export const consultar = (filtro, start, pagesize) => {
             .then(function(response) {
                 dispatch({type: MARCAS_PESQUISA, payload: response.data});
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-consulta-marcas", [], {status: "error"}));
             });
 
@@ -36,7 +37,8 @@ export const salvar = (marca, callback) => {
                 callback();
                 dispatch(toaster("marca-salva", [], {status: "success"}));
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-salvar-marca", [], {status: "error"}));
             });
 
@@ -51,7 +53,8 @@ export const excluir = (id, callback) => {
                 callback();
                 dispatch(toaster("marca-excluida", [], {status: "success"}));
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-excluir-marca", [], {status: "error"}));
             });
 
@@ -65,7 +68,8 @@ export const carregar = (id) => {
             .then(function(response) {
                 dispatch({type: MARCA_EDICAO, payload: response.data});
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-carga-marca", [], {status: "error"}));
             });
 
@@ -79,7 +83,8 @@ export const loadFranquiasForSelect = () => {
             var ret = [];
             response.data.content.forEach((p) => ret.push({ value: p.id, text: p.nome }) );
             dispatch({type: MARCA_SELECT, payload: ret});
-        }).catch(function(response){
+        }).catch(function(error){
+            console.log(error);
         });
 
     }

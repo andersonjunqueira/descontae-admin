@@ -9,7 +9,8 @@ export const loadUfs = () => {
             var ret = [];
             response.data.content.forEach((p) => ret.push({ value: p.sigla, text: p.nome }) );
             dispatch({type: UF_LIST_LOADED, payload: ret});
-        }).catch(function(response){
+        }).catch(function(error){
+            console.log(error);
         });
 
     }

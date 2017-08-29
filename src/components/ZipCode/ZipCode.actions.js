@@ -6,7 +6,8 @@ export const searchZipcode = (zipcode, callback) => {
     axios({ url: '/ceps/' + textFunctions.clearMask(zipcode), method: 'get', responseType: 'json' })
         .then(function(response) {
             callback(response.data);
-        }).catch(function(response){
+        }).catch(function(error){
+            console.log(error);
             callback(undefined);
         });
 }

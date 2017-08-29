@@ -39,7 +39,8 @@ export const consultar = (filtro, start, pagesize) => {
             .then(function(response) {
                 dispatch({type: REVISTAS_PESQUISA, payload: response.data});
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-consulta-revistas", [], {status: "error"}));
             });
 
@@ -54,7 +55,8 @@ export const salvar = (values, callback) => {
                 callback();
                 dispatch(toaster("revista-salva", [], {status: "success"}));
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-salvar-revista", [], {status: "error"}));
             });
 
@@ -69,7 +71,7 @@ export const excluir = (id, callback) => {
                 callback();
                 dispatch(toaster("revista-excluida", [], {status: "success"}));
 
-            }).catch(function(response){
+            }).catch(function(error){
                 dispatch(toaster("erro-excluir-revista", [], {status: "error"}));
             });
 
@@ -84,7 +86,8 @@ export const carregar = (id) => {
 
                 dispatch({type: REVISTA_EDICAO, payload: converter.toFrontend(response.data)});
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-carga-revista", [], {status: "error"}));
             });
 

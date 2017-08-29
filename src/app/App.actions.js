@@ -53,7 +53,8 @@ export const login = (auth) => {
                 dispatch({type: PROCESS_LOGIN, payload: auth});
 
             }).catch( (error) => {
-
+                
+                console.log(error);
                 if(error.response) {
 
                     // 404 É USUÁRIO NÃO ENCONTRADO, REGISTRANDO
@@ -71,8 +72,9 @@ export const login = (auth) => {
 
                               dispatch(toaster("novo-usuario-registrado", [], {title: "novo-usuario", status: "success"}));
 
-                          }).catch( (response) => {
+                          }).catch( (error) => {
 
+                              console.log(error);
                               dispatch(toaster("problema-registro", [], {title: "novo-usuario", status: "danger"}));
                               setTimeout(() => logout(auth), 3000);
 

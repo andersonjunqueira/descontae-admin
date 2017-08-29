@@ -91,7 +91,8 @@ export const consultar = (filtro, start, pagesize) => {
             .then(function(response) {
                 dispatch({type: PARCEIROS_PESQUISA, payload: response.data});
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-consulta-parceiros", [], {status: "error"}));
             });
 
@@ -106,7 +107,8 @@ export const salvar = (values, callback) => {
                 callback();
                 dispatch(toaster("parceiro-salvo", [], {status: "success"}));
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-salvar-parceiro", [], {status: "error"}));
             });
 
@@ -121,7 +123,8 @@ export const excluir = (id, callback) => {
                 callback();
                 dispatch(toaster("parceiro-excluido", [], {status: "success"}));
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-excluir-parceiro", [], {status: "error"}));
             });
 
@@ -136,7 +139,8 @@ export const carregar = (id) => {
 
                 dispatch({type: PARCEIRO_EDICAO, payload: converter.toFrontend(response.data)});
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-carga-parceiro", [], {status: "error"}));
             });
 

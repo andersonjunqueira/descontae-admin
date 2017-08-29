@@ -21,7 +21,8 @@ export const consultar = (filtro, start, pagesize) => {
             .then(function(response) {
                 dispatch({type: CATEGORIAS_PESQUISA, payload: response.data});
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-consulta-categorias", [], {status: "error"}));
             });
 
@@ -36,7 +37,8 @@ export const salvar = (categoria, callback) => {
                 callback();
                 dispatch(toaster("categoria-salva", [], {status: "success"}));
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-salvar-categoria", [], {status: "error"}));
             });
 
@@ -51,7 +53,8 @@ export const excluir = (id, callback) => {
                 callback();
                 dispatch(toaster("categoria-excluida", [], {status: "success"}));
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-excluir-categoria", [], {status: "error"}));
             });
 
@@ -65,7 +68,8 @@ export const carregar = (id) => {
             .then(function(response) {
                 dispatch({type: CATEGORIA_EDICAO, payload: response.data});
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-carga-categoria", [], {status: "error"}));
             });
 
@@ -79,7 +83,8 @@ export const loadCategoriasForSelect = () => {
             var ret = [];
             response.data.content.forEach((p) => ret.push({ value: p.id, text: p.nome }) );
             dispatch({type: CATEGORIAS_SELECT, payload: ret});
-        }).catch(function(response){
+        }).catch(function(error){
+            console.log(error);
         });
 
     }

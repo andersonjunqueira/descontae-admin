@@ -51,6 +51,7 @@ Text.propTypes = {
     placeholder: PropTypes.node,
     help: PropTypes.node,
     required: PropTypes.bool,
+    disabled: PropTypes.bool,
     inputSize: PropTypes.number,
     labelSize: PropTypes.number,
     action: PropTypes.func,
@@ -72,6 +73,7 @@ Text.propTypes = {
 
 Text.defaultProps = {
     required: false,
+    disabled: false,
     validators: []
 };
 

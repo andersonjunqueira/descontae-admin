@@ -4,6 +4,7 @@ import { Field } from 'redux-form';
 import { translate } from '../Intl/Intl.actions';
 import BootstrapInput from '../BootstrapInput';
 
+//TODO REVER O COMPONENTE PARA NÃO UTILIZAR O BOOTSTRAPINPUT E SIM O INPUTBOOTSTRAP OU SIMILAR
 class Select extends Component {
 
     render() {
@@ -21,6 +22,7 @@ class Select extends Component {
             help: this.props.help,
             options: ops,
             required: this.props.required,
+            disabled: this.props.disabled,
             formGroupClass: "form-group--select"
         };
 
@@ -35,12 +37,14 @@ Select.propTypes = {
     placeholder: PropTypes.node,
     help: PropTypes.string,
     required: PropTypes.bool,
+    disabled: PropTypes.bool,
     undefinedOption: PropTypes.bool,
     options: PropTypes.arrayOf(PropTypes.object)
 }
 
 Select.defaultProps = {
     undefinedOption: true,
+    disabled: false,
     options: []
 };
 

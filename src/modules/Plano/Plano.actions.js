@@ -33,7 +33,8 @@ export const consultar = (filtro, start, pagesize) => {
             .then(function(response) {
                 dispatch({type: PLANOS_PESQUISA, payload: response.data});
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-consulta-planos", [], {status: "error"}));
             });
 
@@ -48,7 +49,8 @@ export const salvar = (values, callback) => {
                 callback();
                 dispatch(toaster("plano-salvo", [], {status: "success"}));
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-salvar-plano", [], {status: "error"}));
             });
 
@@ -63,7 +65,8 @@ export const excluir = (id, callback) => {
                 callback();
                 dispatch(toaster("plano-excluido", [], {status: "success"}));
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-excluir-plano", [], {status: "error"}));
             });
 
@@ -77,7 +80,8 @@ export const carregar = (id) => {
             .then(function(response) {
                 dispatch({type: PLANO_EDICAO, payload: converter.toFrontend(response.data)});
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-carga-plano", [], {status: "error"}));
             });
 

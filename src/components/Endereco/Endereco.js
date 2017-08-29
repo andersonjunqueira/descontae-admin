@@ -36,7 +36,7 @@ class Endereco extends Component {
                         <ZipCode name={`${this.props.name}.cep`} label={<Intl str='cep'></Intl>} placeholder="__.___-___" formName={this.props.formName} callback={this.atualizaEndereco} required={this.props.required}/>
                     </Col>
                     <Col xs={12} md={9}>
-                        <Text name={`${this.props.name}.logradouro`} label={<Intl str='logradouro'></Intl>} maxLength={100} required={this.props.required}/>
+                        <Text name={`${this.props.name}.logradouro`} label={<Intl str='logradouro'></Intl>} maxLength={100} required={this.props.required} disabled={true}/>
                     </Col>
                 </Row>
                 <Row>
@@ -49,13 +49,13 @@ class Endereco extends Component {
                 </Row>
                 <Row>
                     <Col xs={12} md={5}>
-                        <Text name={`${this.props.name}.bairro`} label={<Intl str='bairro'></Intl>} maxLength={50} required={this.props.required}/>
+                        <Text name={`${this.props.name}.bairro`} label={<Intl str='bairro'></Intl>} maxLength={50} required={this.props.required} disabled={true}/>
                     </Col>
                     <Col xs={12} md={5}>
-                        <Text name={`${this.props.name}.cidade`} label={<Intl str='cidade'></Intl>} maxLength={50} required={this.props.required}/>
+                        <Text name={`${this.props.name}.cidade`} label={<Intl str='cidade'></Intl>} maxLength={50} required={this.props.required} disabled={true}/>
                     </Col>
                     <Col xs={12} md={2}>
-                        <UF name={`${this.props.name}.uf`} label={<Intl str='uf'></Intl>} required={this.props.required}/>
+                        <UF name={`${this.props.name}.uf`} label={<Intl str='uf'></Intl>} required={this.props.required} disabled={true}/>
                     </Col>
                 </Row>
             </div>

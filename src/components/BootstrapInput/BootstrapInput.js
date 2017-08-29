@@ -10,6 +10,7 @@ class BootstrapInput extends Component {
             placeholder: field.placeholder, 
             maxLength: field.maxLength, 
             className: field.className,
+            disabled: field.disabled,
             state: field.meta.error && field.meta.touched ? "danger" : ""
         };
 

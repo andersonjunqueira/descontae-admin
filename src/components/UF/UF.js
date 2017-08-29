@@ -20,6 +20,7 @@ class UF extends Component {
             placeholder: this.props.placeholder, 
             help: this.props.help,
             required: this.props.required,
+            disabled: this.props.disabled,
             undefinedOption: this.props.undefinedOption,
             options: this.props.ufs
         };
@@ -34,6 +35,7 @@ UF.propTypes = {
     placeholder: PropTypes.node,
     help: PropTypes.string,
     required: PropTypes.bool,
+    disabled: PropTypes.bool,
     undefinedOption: PropTypes.bool,
     options: PropTypes.arrayOf(PropTypes.object)
 }

@@ -71,11 +71,13 @@ const converter = {
             dataCadastro: values.dataCadastro
         };
 
-        data.telefones = Object.assign(values.telefones);
-        if(data.telefones && data.telefones.length > 0) {
-            for(let i = 0; i < data.telefones.length; i++) {
-                data.telefones[i].numero = numberFunctions.applyMask(values.telefones[i].numero);
-            };
+        if(values.telefones) {
+            data.telefones = Object.assign(values.telefones);
+            if(data.telefones && data.telefones.length > 0) {
+                for(let i = 0; i < data.telefones.length; i++) {
+                    data.telefones[i].numero = numberFunctions.applyMask(values.telefones[i].numero);
+                };
+            }
         }
 
         return data;
@@ -99,7 +101,8 @@ export const consultar = (filtro, start, pagesize) => {
             .then(function(response) {
                 dispatch({type: CLIENTES_PESQUISA, payload: response.data});
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-consulta-clientes", [], {status: "error"}));
             });
 
@@ -114,7 +117,8 @@ export const salvar = (values, callback) => {
                 callback();
                 dispatch(toaster("cliente-salvo", [], {status: "success"}));
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-salvar-cliente", [], {status: "error"}));
             });
 
@@ -129,7 +133,8 @@ export const excluir = (id, callback) => {
                 callback();
                 dispatch(toaster("cliente-excluido", [], {status: "success"}));
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-excluir-cliente", [], {status: "error"}));
             });
 
@@ -144,7 +149,8 @@ export const carregar = (id) => {
 
                 dispatch({type: CLIENTE_EDICAO, payload: converter.toFrontend(response.data)});
 
-            }).catch(function(response){
+            }).catch(function(error){
+                console.log(error);
                 dispatch(toaster("erro-carga-cliente", [], {status: "error"}));
             });
 
