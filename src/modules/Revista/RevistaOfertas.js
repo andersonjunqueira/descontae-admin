@@ -33,9 +33,9 @@ class RevistaOfertas extends Component {
                             {fields && fields.map((field, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{`${field}.oferta.id`}</td>
-                                        <td>{`${field}.oferta.descricao`}</td>
-                                        <td>{`${field}.marca.nome`}</td>
+                                        <td>{field.oferta.id}</td>
+                                        <td>{field.oferta.descricao}</td>
+                                        <td>{field.marca.nome}</td>
                                         <td></td>
                                     </tr>
                                 );
