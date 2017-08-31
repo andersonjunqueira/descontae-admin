@@ -96,7 +96,7 @@ class RevistaOfertas extends Component {
                                         <td className="text-center">{item ? item.oferta.id : ""}</td>
                                         <td>{item ? item.oferta.descricao : "(nova)"}</td>
                                         <td className="text-center">{item ? item.marca.nome : ""}</td>
-                                        <td>
+                                        <td className="text-center">
                                             <Button type="button" onClick={() => this.toggleEditModal(`${name}`) } color="secondary" size="sm">
                                                 <i className="fa fa-pencil"></i>
                                             </Button>
