@@ -131,7 +131,7 @@ class RevistaList extends Component {
                 <Modal isOpen={this.state.modal} toggle={toggle}>
                     <ModalHeader toggle={toggle}><Intl str="confirmacao-exclusao"></Intl></ModalHeader>
                     <ModalBody>
-                        <Intl str="revista-excluir-mensagem" params={[this.state.modalParam.nome]}></Intl>
+                        <Intl str="revista-excluir-mensagem" params={[this.state.modalParam.descricao]}></Intl>
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={() => this.excluir()}><Intl str="excluir"></Intl></Button>

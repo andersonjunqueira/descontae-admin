@@ -3,7 +3,7 @@ import axios from "axios";
 import { toaster } from '../../components/Notification/Notification.actions';
 import  { dateFunctions } from '../../components/Date';
 
-export const [ REVISTAS_PESQUISA, REVISTA_EDICAO, REVISTA_EDICAO_OFERTAS, REVISTA_SETMODE ] = [ "REVISTAS_PESQUISA", "REVISTA_EDICAO", "REVISTA_EDICAO_OFERTAS", "REVISTA_SETMODE" ];
+export const [ REVISTAS_PESQUISA, REVISTA_EDICAO, REVISTA_SETMODE ] = [ "REVISTAS_PESQUISA", "REVISTA_EDICAO", "REVISTA_SETMODE" ];
 
 //TODO REMOVER ESSAS FUNÇÕES DE CONVERSÃO DE DATA
 const converter = {
@@ -89,12 +89,13 @@ export const carregar = (id) => {
 
         axios.get('/revistas/' + id)
             .then(function(responseR) {
+                const payload = converter.toFrontend(responseR.data);
 
                 axios.get('/revistas/' + id + "/ofertas")
                     .then(function(responseO) {
 
-                        dispatch({type: REVISTA_EDICAO_OFERTAS, payload: converter.ofertasToFrontend(responseO.data)});
-                        dispatch({type: REVISTA_EDICAO, payload: converter.toFrontend(responseR.data)});
+                        payload.ofertas = converter.ofertasToFrontend(responseO.data);
+                        dispatch({type: REVISTA_EDICAO, payload: payload});
 
                     }).catch(function(error){
                         console.log(error);

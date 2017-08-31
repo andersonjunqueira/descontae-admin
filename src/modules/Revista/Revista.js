@@ -94,7 +94,6 @@ class Revista extends Component {
 
         const { data } = this.props;
         const newObj = {};
-        const obj = {...data.obj, ofertas: data.objOfertas};
 
         return (
             <div>
@@ -106,7 +105,7 @@ class Revista extends Component {
                     data={newObj} doSubmit={this.salvar} doConsultar={this.consultar}></RevistaForm>}
 
                 {data.mode === MODE_UPDATE && <RevistaForm 
-                    data={obj} doSubmit={this.salvar} doConsultar={this.consultar}></RevistaForm>}
+                    data={data.obj} doSubmit={this.salvar} doConsultar={this.consultar}></RevistaForm>}
             </div>
         );
     }

@@ -1,4 +1,4 @@
-import { REVISTAS_PESQUISA, REVISTA_EDICAO, REVISTA_EDICAO_OFERTAS, REVISTA_SETMODE } from './Revista.actions';
+import { REVISTAS_PESQUISA, REVISTA_EDICAO, REVISTA_SETMODE } from './Revista.actions';
 
 const revistaReducer = (state = {}, action) => {
 
@@ -12,9 +12,6 @@ const revistaReducer = (state = {}, action) => {
 
         case REVISTA_EDICAO:
             return Object.assign({}, state, { obj: action.payload });
-
-        case REVISTA_EDICAO_OFERTAS:
-            return Object.assign({}, state, { objOfertas: action.payload });
 
         default:
             return state;
