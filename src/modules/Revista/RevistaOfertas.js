@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Button, Table, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+    
 import Intl from '../../components/Intl';
 import Card, { CardHeader, CardBody } from '../../components/Card';
 import TextArea from '../../components/TextArea';
@@ -20,14 +21,24 @@ class RevistaOfertas extends Component {
         this.closeDeleteModal = this.closeDeleteModal.bind(this);
         this.closeEditModal = this.closeEditModal.bind(this);
         this.excluir = this.excluir.bind(this);
+        this.toggleTab = this.toggleTab.bind(this);
 
         this.state = {
             editModal: false,
             editModalData: "",
             deleteModal: false,
-            deleteModalData: { oferta: {} }
+            deleteModalData: { oferta: {} },
+            activeTab: '1'
         };
 
+    }
+
+    toggleTab(tab) {
+        if (this.state.activeTab !== tab) {
+            this.setState({
+                activeTab: tab
+            });
+        }
     }
 
     toggleEditModal(value) {
@@ -126,41 +137,63 @@ class RevistaOfertas extends Component {
                     <Modal isOpen={this.state.editModal} toggle={this.toggleEditModal} size="lg">
                         <ModalHeader toggle={this.toggleDeleteModal}><Intl str="editar-oferta"></Intl></ModalHeader>
                         <ModalBody>
-                            <Row>
-                                <Col xs={12} md={8}>
-                                    <TextArea name={`${this.state.editModalData}.oferta.descricao`} label={<Intl str='descricao'></Intl>} maxLength={500} required={true} />
-                                    <TextArea name={`${this.state.editModalData}.oferta.regras`} label={<Intl str='regras'></Intl>} maxLength={1000} required={true} />
+
+                            <Nav tabs>
+                                <NavItem>
+                                    <NavLink className={this.state.activeTab === '1' ? "active" : ""} onClick={() => { this.toggleTab('1'); }} >
+                                        <Intl str="oferta"></Intl>
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink className={this.state.activeTab === '2' ? "active" : ""} onClick={() => { this.toggleTab('2'); }} >
+                                        <Intl str="unidades"></Intl>
+                                    </NavLink>
+                                </NavItem>
+                            </Nav>
+                            <TabContent activeTab={this.state.activeTab}>
+
+                                <TabPane tabId="1">
                                     <Row>
-                                        <Col xs={12} md={6}>
-                                            <Number name={`${this.state.editModalData}.oferta.valor`} label={<Intl str='valor'></Intl>} required={true} />
+                                        <Col xs={12} md={8}>
+                                            <TextArea name={`${this.state.editModalData}.oferta.descricao`} label={<Intl str='descricao'></Intl>} maxLength={500} required={true} />
+                                            <TextArea name={`${this.state.editModalData}.oferta.regras`} label={<Intl str='regras'></Intl>} maxLength={1000} required={true} />
+                                            <Row>
+                                                <Col xs={12} md={6}>
+                                                    <Number name={`${this.state.editModalData}.oferta.valor`} label={<Intl str='valor'></Intl>} required={true} />
+                                                </Col>
+                                                <Col xs={12} md={6}>
+                                                    <Number name={`${this.state.editModalData}.oferta.desconto`} label={<Intl str='desconto'></Intl>} required={true} />
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col xs={12} md={6}>
+                                                    <Select name="situacao" options={situacaoTypes} label={<Intl str='situacao'></Intl>}/>
+                                                </Col>
+                                                <Col xs={12} md={6}>
+                                                    <SelectMarca name="marca" label={<Intl str='marca'></Intl>}/>
+                                                </Col>
+                                            </Row>
                                         </Col>
-                                        <Col xs={12} md={6}>
-                                            <Number name={`${this.state.editModalData}.oferta.desconto`} label={<Intl str='desconto'></Intl>} required={true} />
+                                        <Col xs={12} md={4}>
+                                            <File name={`${this.state.editModalData}.oferta.imagem`} 
+                                                label={<Intl str='imagem-oferta'></Intl>} 
+                                                required={true} 
+                                                width={200} height={200}
+                                                placeholder={<Intl str="oferta-placeholder"></Intl>}
+                                                help={<Intl str="imagem-oferta-help"></Intl>}
+                                                accept="image/jpeg, image/png"
+                                                maxSize={500*1024}/>
                                         </Col>
                                     </Row>
-                                    <Row>
-                                        <Col xs={12} md={6}>
-                                            <Select name="situacao" options={situacaoTypes} label={<Intl str='situacao'></Intl>}/>
-                                        </Col>
-                                        <Col xs={12} md={6}>
-                                            <SelectMarca name="marca" label={<Intl str='situacao'></Intl>}/>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                                <Col xs={12} md={4}>
-                                    <File name={`${this.state.editModalData}.oferta.imagem`} 
-                                        label={<Intl str='miniatura'></Intl>} 
-                                        required={true} 
-                                        width={200} height={200}
-                                        placeholder={<Intl str="miniatura-placeholder"></Intl>}
-                                        help={<Intl str="imagem-plano-help"></Intl>}
-                                        accept="image/jpeg, image/png"
-                                        maxSize={500*1024}/>
-                                </Col>
-                            </Row>
+                                </TabPane>
+                                <TabPane tabId="2">
+
+                                </TabPane>
+                            </TabContent>
+
                         </ModalBody>
                         <ModalFooter>
-                            <Button color="primary" onClick={() => this.excluir()}><Intl str="excluir"></Intl></Button>
+                            <Button color="primary" onClick={() => this.excluir()}><Intl str="salvar"></Intl></Button>
                             <Button color="secondary" onClick={this.closeEditModal} className="espacamento"><Intl str="cancelar"></Intl></Button>
                         </ModalFooter>
                     </Modal>

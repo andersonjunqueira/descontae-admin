@@ -31,6 +31,8 @@
         "selecione": "Selecione ...",
         "sim": "Sim",
         "usuario": "Usuário",
+        "erro-id-obrigatorio": "O id na URL é obrigatório.",
+        "erro-id-desnecessario": "O id não deve ser enviado.",
 
         "== SPECIFIC STRINGS ==": "",
 
@@ -54,6 +56,8 @@
         "imagem-fundo-app-help": "Extensões permitidas: JPG ou PNG e tamanho máximo 500KB",
         "miniatura-help": "Extensões permitidas: JPG ou PNG e tamanho máximo 500KB",
         "imagem-plano-help": "Extensões permitidas: JPG ou PNG e tamanho máximo 500KB",
+        "oferta-placeholder": "Arraste ou clique para selecionar um arquivo",
+        "imagem-oferta-help": "Extensões permitidas: JPG ou PNG e tamanho máximo 500KB",
         "nome": "Nome",
         "nome-fantasia": "Nome Fantasia",
         "telefones": "Telefones",
@@ -78,6 +82,9 @@
         "pdf-revista-placeholder": "Arraste ou clique para selecionar um arquivo",
         "pdf-revista-help": "Extensão permitida: PDF e tamanho máximo 3MB",
         "pdf": "PDF",
+        "regras": "Regras",
+        "desconto": "Desconto",
+        "imagem-oferta": "Imagem",
 
         "novo-modelo": "Novo Modelo",
         "pesquisa-modelos": "Pesquisa de Modelos",
@@ -165,6 +172,7 @@
 
         "oferta": "Oferta",
         "ofertas": "Ofertas",
+        "editar-oferta": "Editar Oferta",
         "nenhuma-oferta-encontrada": "Nenhuma oferta encontrada.",
 
         "z": "z"
