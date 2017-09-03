@@ -11,7 +11,7 @@ import Marca from '../modules/Marca';
 import Cliente from '../modules/Cliente';
 import Plano from '../modules/Plano';
 import Parceiro from '../modules/Parceiro';
-import Revista from '../modules/Revista';
+import Oferta from '../modules/Oferta';
 
 const App = ({store}) => (
     <Provider store={store}>
@@ -26,7 +26,7 @@ const App = ({store}) => (
                 <Route path="/clientes" name={<Intl str='clientes'></Intl>} component={Cliente} />
                 <Route path="/planos" name={<Intl str='planos'></Intl>} component={Plano} />
                 <Route path="/parceiros" name={<Intl str='parceiros'></Intl>} component={Parceiro} />
-                <Route path="/revistas" name={<Intl str='revistas'></Intl>} component={Revista} />
+                <Route path="/ofertas" name={<Intl str='ofertas'></Intl>} component={Oferta} />
 
             </Route>
 

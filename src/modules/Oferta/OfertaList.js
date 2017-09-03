@@ -3,9 +3,14 @@ import { reduxForm } from 'redux-form';
 import { Form, Row, Col, Button, Table, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
+import Text from '../../components/Text';
 import Intl from '../../components/Intl';
+import Select from '../../components/Select';
 
-class RevistaList extends Component {
+import { cnpjFunctions } from '../../components/CNPJ';
+import { translate } from "../../components/Intl/Intl.actions";
+
+class OfertaList extends Component {
 
     constructor(props) {
         super(props);
@@ -41,6 +46,11 @@ class RevistaList extends Component {
         const { handleSubmit, doSubmit, pristine, submitting, invalid, data, doCarregar } = this.props;
         const toggle = (value) => this.toggle(value);
 
+        const situacaoTypes = [
+            {value: "A", text: translate("ativo")},
+            {value: "I", text: translate("inativo")}
+        ];
+
         let content = (<Intl str="nenhum-registro-encontrado"></Intl>);
         if(data && data.totalElements > 0) {
             let paginationLinks = [];
@@ -63,18 +73,20 @@ class RevistaList extends Component {
                     <Table hover size="sm" className="tabela">
                         <thead>
                             <tr>
-                                <th className="categ-col-1">#</th>
-                                <th className="categ-col-2"><Intl str="edicao"></Intl></th>
-                                <th className="categ-col-3"></th>
+                            <th className="table-w-10 text-center">#</th>
+                            <th className="table-w-50"><Intl str="oferta"></Intl></th>
+                            <th className="table-w-20 text-center"><Intl str="marca"></Intl></th>
+                            <th className="table-w-20 text-center"></th>
                             </tr>
                         </thead>
                         <tbody>
                             {Object.keys(data.content).map(function(key) {
                                 return (<tr key={key}>
-                                    <td className="text-center" scope="row">{data.content[key].id}</td>
-                                    <td>{data.content[key].edicao}</td>
+                                    <td className="text-center" scope="row">{data.content[key][0]}</td>
+                                    <td>{data.content[key][1]}</td>
+                                    <td className="text-center">{data.content[key][2]}</td>
                                     <td className="text-center">
-                                        <Button type="button" onClick={() => doCarregar(data.content[key].id)} color="secondary" size="sm">
+                                        <Button type="button" onClick={() => doCarregar(data.content[key][0])} color="secondary" size="sm">
                                             <i className="fa fa-pencil"></i>
                                         </Button>
 
@@ -108,7 +120,16 @@ class RevistaList extends Component {
 
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
-                <h4><Intl str='pesquisa-revistas'></Intl></h4>
+                <h4><Intl str='pesquisa-ofertas'></Intl></h4>
+                <Row>
+                    <Col xs={12} md={8}>
+                        <Text name="texto" label={<Intl str='texto'></Intl>} maxLength={100}/>
+                    </Col>
+                    <Col xs={12} md={4}>
+                    <Select name="situacao" options={situacaoTypes} label={<Intl str='situacao'></Intl>}/>
+                    </Col>
+                </Row>
+
                 <Button type="submit" color="primary" disabled={invalid || submitting}>
                     <i className="fa fa-search"></i>
                     <Intl str='pesquisar'></Intl>
@@ -120,7 +141,7 @@ class RevistaList extends Component {
 
                 <Button type="button" onClick={() => this.props.doNovo()} color="secondary">
                     <i className="fa fa-plus"></i>
-                    <Intl str='nova-revista'></Intl>
+                    <Intl str='nova-oferta'></Intl>
                 </Button>
 
                 <div>
@@ -131,7 +152,7 @@ class RevistaList extends Component {
                 <Modal isOpen={this.state.modal} toggle={toggle}>
                     <ModalHeader toggle={toggle}><Intl str="confirmacao-exclusao"></Intl></ModalHeader>
                     <ModalBody>
-                        <Intl str="revista-excluir-mensagem" params={[this.state.modalParam.descricao]}></Intl>
+                        <Intl str="oferta-excluir-mensagem" params={[this.state.modalParam[1]]}></Intl>
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={() => this.excluir()}><Intl str="excluir"></Intl></Button>
@@ -150,9 +171,9 @@ const validate = values => {
     return errors;
 }
 
-RevistaList = reduxForm({ 
-    form: "RevistaList", 
+OfertaList = reduxForm({ 
+    form: "OfertaList", 
     validate 
-})(RevistaList);
+})(OfertaList);
 
-export default RevistaList;
+export default OfertaList;

@@ -51,7 +51,7 @@
         "logomarca": "Logo",
         "logomarca-help": "Extensões permitidas: JPG ou PNG e tamanho máximo 500KB",
         "logradouro": "Logradouro",
-        "miniatura": "Miniatura App",
+        "miniatura": "Miniatura",
         "miniatura-placeholder": "Arraste ou clique para selecionar um arquivo",
         "imagem-fundo-app-help": "Extensões permitidas: JPG ou PNG e tamanho máximo 500KB",
         "miniatura-help": "Extensões permitidas: JPG ou PNG e tamanho máximo 500KB",
@@ -85,6 +85,8 @@
         "regras": "Regras",
         "desconto": "Desconto",
         "imagem-oferta": "Imagem",
+        "texto": "Texto",
+        "miniatura-app": "Miniatura App",
 
         "novo-modelo": "Novo Modelo",
         "pesquisa-modelos": "Pesquisa de Modelos",
@@ -98,17 +100,17 @@
         "erro-carga-modelo": "Não foi possível carregar o modelo.",
         "erro-excluir-modelo": "Não foi possível excluir o modelo.",
 
-        "nova-revista": "Nova Revista",
-        "pesquisa-revistas": "Pesquisa de Revistas",
-        "revista": "Revista",
-        "revistas": "Revistas",
-        "revista-excluir-mensagem": "Confirma a exclusão do registro '{0}'?",
-        "revista-salva": "Revista salva com sucesso.",
-        "revista-excluida": "Revista excluída com sucesso.",
-        "erro-consulta-revistas": "Não foi possível carregar as revistas.",
-        "erro-salvar-revista": "Não foi possível salvar a revista.",
-        "erro-carga-revista": "Não foi possível carregar a revista.",
-        "erro-excluir-revista": "Não foi possível excluir a revista.",
+        "nova-oferta": "Nova Oferta",
+        "pesquisa-ofertas": "Pesquisa de Ofertas",
+        "oferta": "Oferta",
+        "ofertas": "Ofertas",
+        "oferta-excluir-mensagem": "Confirma a exclusão do registro '{0}'?",
+        "oferta-salva": "Oferta salva com sucesso.",
+        "oferta-excluida": "Oferta excluída com sucesso.",
+        "erro-consulta-ofertas": "Não foi possível carregar as ofertas.",
+        "erro-salvar-oferta": "Não foi possível salvar a oferta.",
+        "erro-carga-oferta": "Não foi possível carregar a oferta.",
+        "erro-excluir-oferta": "Não foi possível excluir a oferta.",
 
         "novo-parceiro": "Novo Parceiro",
         "pesquisa-parceiros": "Pesquisa de Parceiros",
@@ -169,11 +171,6 @@
         "erro-salvar-plano": "Não foi possível salvar o plano.",
         "erro-carga-plano": "Não foi possível carregar o plano.",
         "erro-excluir-plano": "Não foi possível excluir o plano.",
-
-        "oferta": "Oferta",
-        "ofertas": "Ofertas",
-        "editar-oferta": "Editar Oferta",
-        "nenhuma-oferta-encontrada": "Nenhuma oferta encontrada.",
 
         "z": "z"
     }

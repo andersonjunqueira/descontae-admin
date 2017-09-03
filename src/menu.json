@@ -24,9 +24,9 @@
         "url": "/planos"
     },
     {
-        "text": "revistas",
+        "text": "ofertas",
         "icon": "fa fa-book",
-        "url": "/revistas"
+        "url": "/ofertas"
     },
     {
         "text": "configuracoes",
