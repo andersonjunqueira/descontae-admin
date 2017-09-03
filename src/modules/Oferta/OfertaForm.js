@@ -90,7 +90,7 @@ class OfertaForm extends Component {
                     <CardBody>
                         <Row> 
                             <Col xs={12} md={4}>
-                                <SelectMarca name="marcaSelecionada" label={<Intl str='marca'/>}/>
+                                <SelectMarca name="marcaSelecionada" label={<Intl str='marca'/>} onChange={(param) => {console.log(param.target.selectedOptions.index)}}/>
                             </Col>
                         </Row>
 

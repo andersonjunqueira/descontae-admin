@@ -21,7 +21,8 @@ class SelectMarca extends Component {
             help: this.props.help,
             required: this.props.required,
             undefinedOption: this.props.undefinedOption,
-            options: this.props.list
+            options: this.props.list,
+            onChange: this.props.onChange
         };
         return (
             <Select {...attrs}/>
@@ -35,7 +36,8 @@ SelectMarca.propTypes = {
     help: PropTypes.string,
     required: PropTypes.bool,
     undefinedOption: PropTypes.bool,
-    options: PropTypes.arrayOf(PropTypes.object)
+    options: PropTypes.arrayOf(PropTypes.object),
+    onChange: PropTypes.func
 }
 
 const mapStateToProps = (state) => {
