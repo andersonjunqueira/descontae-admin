@@ -7,6 +7,7 @@ import OfertaList from './OfertaList';
 
 import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGESIZE_DEFAULT } from '../../app/App.actions';
 import * as ofertaActions from './Oferta.actions';
+import { fileFunctions } from "../../components/File";
 
 class Oferta extends Component {
 
@@ -47,8 +48,8 @@ class Oferta extends Component {
         this.props.actions.consultar(filter, page, pagesize);
     }
 
-    consultarUnidades(marcaId, ofertaId) {
-        this.props.actions.carregarUnidades(marcaId, ofertaId);
+    consultarUnidades(marcaId, callback) {
+        this.props.actions.carregarUnidades(marcaId, callback);
     }
 
     limpar() {
@@ -60,7 +61,26 @@ class Oferta extends Component {
     }
 
     salvar(values) {
-        this.props.actions.salvar(values, this.consultar);
+        const data = Object.assign({}, values, {});
+        let imagem = new Promise( (resolve, reject) => {
+            if(data.imagem) {
+                if(data.imagem.files) {
+                    fileFunctions.toBase64(data.imagem.files[0], (base64) => {
+                        data.imagem = "data:" + data.imagem.files[0].type + ";base64," + base64;
+                        resolve();
+                    });
+                } else {
+                    resolve();
+                }
+            }
+        });
+
+        Promise.all([imagem]).then(values => { 
+            this.props.actions.salvar(data, this.consultar);
+        }, reason => {
+            console.log(reason);
+        });
+
     }
 
     carregar(id) {

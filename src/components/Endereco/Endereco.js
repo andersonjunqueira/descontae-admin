@@ -64,6 +64,7 @@ class Endereco extends Component {
 }
 
 Endereco.propTypes = {
+    name: PropTypes.string.required,
     formName: PropTypes.string,
     required: PropTypes.bool
 }

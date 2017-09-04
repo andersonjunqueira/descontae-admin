@@ -52,10 +52,10 @@ export const consultar = (filtro, start, pagesize) => {
 export const salvar = (values, callback) => {
     return dispatch => {
 
-        axios.post('/ofertas', converter.toBackend(values) )
+        axios.put('/ofertas/dto', converter.toBackend(values) )
             .then(function(response) {
                 callback();
-                dispatch(toaster("oferta-salvo", [], {status: "success"}));
+                dispatch(toaster("oferta-salva", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
@@ -71,7 +71,7 @@ export const excluir = (id, callback) => {
         axios.delete('/ofertas/' + id)
             .then(function(response) {
                 callback();
-                dispatch(toaster("oferta-excluido", [], {status: "success"}));
+                dispatch(toaster("oferta-excluida", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
@@ -84,7 +84,7 @@ export const excluir = (id, callback) => {
 export const carregar = (id) => {
     return dispatch => {
 
-        axios.get('/ofertas/' + id)
+        axios.get('/ofertas/' + id + '/dto')
             .then(function(response) {
 
                 dispatch({type: OFERTA_EDICAO, payload: converter.toFrontend(response.data)});
@@ -97,13 +97,13 @@ export const carregar = (id) => {
     }
 }
 
-export const carregarUnidades = (marcaId, ofertaId) => {
+export const carregarUnidades = (marcaId, callback) => {
     return dispatch => {
 
-        axios.get('/franquia/' + marcaId + '/oferta/' + ofertaId)
+        axios.get('/unidades/marca/' + marcaId + '/dto')
             .then(function(response) {
 
-                dispatch({type: OFERTA_EDICAO_UNIDADES, payload: response.data});
+                callback(response.data);
 
             }).catch(function(error){
                 console.log(error);

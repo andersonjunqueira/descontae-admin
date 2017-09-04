@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { FieldArray, reduxForm } from 'redux-form';
-import { Form, Row, Col, Button } from 'reactstrap';
+import { FieldArray, reduxForm, Field, change } from 'redux-form';
+import { Form, Row, Col, Button, Table } from 'reactstrap';
 
 import Text from '../../components/Text';
 import Number from '../../components/Number';
@@ -14,12 +14,15 @@ import Card, { CardHeader, CardBody } from '../../components/Card';
 
 import { toaster } from '../../components/Notification/Notification.actions';
 import { translate } from '../../components/Intl/Intl.actions';
+import { OFERTA_EDICAO_UNIDADES } from './Oferta.actions';
 
 class OfertaForm extends Component {
 
     constructor(props) {
         super(props);
         this.cancelar = this.cancelar.bind(this);
+        this.selecionarMarca = this.selecionarMarca.bind(this);
+        this.carregarUnidades = this.carregarUnidades.bind(this);
  
         this.state = {
             id: undefined
@@ -40,14 +43,29 @@ class OfertaForm extends Component {
         this.setState(Object.assign(this.state, { id: undefined }));
     }
 
+    selecionarMarca(param) {
+        const idMarca = param.target.selectedOptions[0].value;
+        this.props.doConsultarUnidades(idMarca, this.carregarUnidades);
+    }
+
+    carregarUnidades(unidades) {
+        if(unidades) {
+            this.props.dispatch(change("OfertaForm", 'unidades', unidades));
+            this.props.dispatch({type: OFERTA_EDICAO_UNIDADES, payload: unidades});
+        } else {
+            this.props.dispatch(toaster("unidades-nao-encontradas", [], {status: "warning"}));
+        }
+    }
+
     render() {
-        const { handleSubmit, doSubmit, pristine, reset, submitting, invalid } = this.props;
+        const { handleSubmit, doSubmit, pristine, reset, submitting, invalid, data } = this.props;
 
         const situacaoTypes = [
             {value: "A", text: translate("ativo")},
             {value: "I", text: translate("inativo")}
         ];
 
+        //TODO O COMPORTAMENTO DO CHECKBOX AINDA NÃO ESTÁ COERENTE QUANDO MUDA O VALOR DA COMBO, DEVERIA FICAR TUDO COMO FALSE
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
 
@@ -90,11 +108,31 @@ class OfertaForm extends Component {
                     <CardBody>
                         <Row> 
                             <Col xs={12} md={4}>
-                                <SelectMarca name="marcaSelecionada" label={<Intl str='marca'/>} onChange={(param) => {console.log(param.target.selectedOptions.index)}}/>
+                                <SelectMarca name="marcaSelecionada" label={<Intl str='marca'/>} onChange={this.selecionarMarca}/>
                             </Col>
                         </Row>
 
-                        {this.props.data && this.props.data.marcaSelecionada && (<span>OK</span>)}
+                        {data && data.unidades && 
+                        <Table hover size="sm" className="tabela">
+                            <thead>
+                                <tr>
+                                <th className="table-w-10 text-center">#</th>
+                                <th className="table-w-30"><Intl str="unidade"></Intl></th>
+                                <th className="table-w-40"><Intl str="endereco"></Intl></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.props.data.unidades.map(function(item, index) {
+                                    return (<tr key={index}>
+                                        <td className="text-center" scope="row">
+                                            <Field name={`unidades[${index}].selecionada`} component="input" type="checkbox"/>
+                                        </td>
+                                        <td>{data.unidades[index].nome}</td>
+                                        <td>{data.unidades[index].endereco}</td>
+                                    </tr>);
+                                })}
+                            </tbody>
+                        </Table>}
 
                     </CardBody>
                 </Card>

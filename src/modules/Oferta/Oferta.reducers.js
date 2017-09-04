@@ -14,7 +14,9 @@ const ofertaReducer = (state = {}, action) => {
             return Object.assign({}, state, { obj: action.payload });
 
         case OFERTA_EDICAO_UNIDADES:
-            return Object.assign({}, state, { unidades: action.payload });
+            const newObj = Object.assign({}, state.obj, {});
+            newObj.unidades = action.payload;
+            return Object.assign({}, state, { obj : newObj });
 
         default:
             return state;
