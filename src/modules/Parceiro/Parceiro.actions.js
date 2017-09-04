@@ -102,7 +102,7 @@ export const consultar = (filtro, start, pagesize) => {
 export const salvar = (values, callback) => {
     return dispatch => {
 
-        axios.post('/parceiros', converter.toBackend(values) )
+        axios.put('/parceiros', converter.toBackend(values) )
             .then(function(response) {
                 callback();
                 dispatch(toaster("parceiro-salvo", [], {status: "success"}));
