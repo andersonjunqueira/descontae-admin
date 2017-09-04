@@ -32,7 +32,7 @@ export const consultar = (filtro, start, pagesize) => {
 export const salvar = (categoria, callback) => {
     return dispatch => {
 
-        axios.post('/categorias', categoria)
+        axios.put('/categorias', categoria)
             .then(function(response) {
                 callback();
                 dispatch(toaster("categoria-salva", [], {status: "success"}));

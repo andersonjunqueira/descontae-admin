@@ -44,7 +44,7 @@ export const consultar = (filtro, start, pagesize) => {
 export const salvar = (values, callback) => {
     return dispatch => {
 
-        axios.post('/planos', converter.toBackend(values) )
+        axios.put('/planos', converter.toBackend(values) )
             .then(function(response) {
                 callback();
                 dispatch(toaster("plano-salvo", [], {status: "success"}));
