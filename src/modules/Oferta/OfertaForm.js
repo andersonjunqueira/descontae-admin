@@ -8,9 +8,10 @@ import File from '../../components/File';
 import Intl from '../../components/Intl';
 import TextArea from '../../components/TextArea';
 import Select from '../../components/Select';
-import UnidadesOferta from '../Snippets/UnidadesOferta';
 import SelectMarca from '../Marca/SelectMarca';
 import Card, { CardHeader, CardBody } from '../../components/Card';
+
+import UnidadesOferta from './UnidadesOferta';
 
 import { toaster } from '../../components/Notification/Notification.actions';
 import { translate } from '../../components/Intl/Intl.actions';
@@ -111,29 +112,7 @@ class OfertaForm extends Component {
                                 <SelectMarca name="marcaSelecionada" label={<Intl str='marca'/>} onChange={this.selecionarMarca}/>
                             </Col>
                         </Row>
-
-                        {data && data.unidades && 
-                        <Table hover size="sm" className="tabela">
-                            <thead>
-                                <tr>
-                                <th className="table-w-10 text-center">#</th>
-                                <th className="table-w-30"><Intl str="unidade"></Intl></th>
-                                <th className="table-w-40"><Intl str="endereco"></Intl></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.props.data.unidades.map(function(item, index) {
-                                    return (<tr key={index}>
-                                        <td className="text-center" scope="row">
-                                            <Field name={`unidades[${index}].selecionada`} component="input" type="checkbox"/>
-                                        </td>
-                                        <td>{data.unidades[index].nome}</td>
-                                        <td>{data.unidades[index].endereco}</td>
-                                    </tr>);
-                                })}
-                            </tbody>
-                        </Table>}
-
+                        <FieldArray name="unidades" component={UnidadesOferta}/>
                     </CardBody>
                 </Card>
 
