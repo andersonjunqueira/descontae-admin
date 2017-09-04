@@ -38,7 +38,7 @@ class OfertaList extends Component {
     }
 
     excluir(value) {
-        this.props.doExcluir(this.state.modalParam.id);
+        this.props.doExcluir(this.state.modalParam[0]);
         this.toggle({});
     }
 
