@@ -33,6 +33,7 @@ const converter = {
 
         const data = Object.assign({}, values, {});
 
+        data.cnpj = numberFunctions.applyMask(values.cnpj);
         data.endereco = {
             cep: numberFunctions.applyMask(values.endereco.cep),
             logradouro: values.endereco.logradouro,
