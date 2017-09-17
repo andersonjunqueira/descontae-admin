@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-import { Button, Table } from 'reactstrap';
+import React, { Component } from 'react';
+import { Table } from 'reactstrap';
 import { Field } from 'redux-form';
 
 import Intl from '../../components/Intl';

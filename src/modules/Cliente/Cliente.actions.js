@@ -2,7 +2,6 @@ import axios from "axios";
 
 import { toaster } from '../../components/Notification/Notification.actions';
 import  { numberFunctions } from '../../components/Number';
-import { cnpjFunctions } from '../../components/CNPJ';
 import { zipcodeFunctions } from '../../components/ZipCode';
 import { phoneFunctions } from '../../components/Phone';
 

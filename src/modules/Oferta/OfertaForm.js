@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { FieldArray, reduxForm, Field, change } from 'redux-form';
-import { Form, Row, Col, Button, Table } from 'reactstrap';
+import { FieldArray, reduxForm, change } from 'redux-form';
+import { Form, Row, Col, Button } from 'reactstrap';
 
-import Text from '../../components/Text';
 import Number from '../../components/Number';
 import File from '../../components/File';
 import Intl from '../../components/Intl';
@@ -59,7 +58,7 @@ class OfertaForm extends Component {
     }
 
     render() {
-        const { handleSubmit, doSubmit, pristine, reset, submitting, invalid, data } = this.props;
+        const { handleSubmit, doSubmit, pristine, reset, submitting, invalid } = this.props;
 
         const situacaoTypes = [
             {value: "A", text: translate("ativo")},

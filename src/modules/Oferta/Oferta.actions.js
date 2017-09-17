@@ -1,10 +1,6 @@
 import axios from "axios";
 
 import { toaster } from '../../components/Notification/Notification.actions';
-import  { numberFunctions } from '../../components/Number';
-import { cnpjFunctions } from '../../components/CNPJ';
-import { zipcodeFunctions } from '../../components/ZipCode';
-import { phoneFunctions } from '../../components/Phone';
 
 export const [ OFERTAS_PESQUISA, OFERTA_EDICAO, OFERTA_SETMODE, OFERTA_EDICAO_UNIDADES ] = [ "OFERTAS_PESQUISA", "OFERTA_EDICAO", "OFERTA_SETMODE", "OFERTA_EDICAO_UNIDADES" ];
 

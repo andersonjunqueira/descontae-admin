@@ -7,7 +7,6 @@ import Text from '../../components/Text';
 import Intl from '../../components/Intl';
 import Select from '../../components/Select';
 
-import { cnpjFunctions } from '../../components/CNPJ';
 import { translate } from "../../components/Intl/Intl.actions";
 
 class OfertaList extends Component {
