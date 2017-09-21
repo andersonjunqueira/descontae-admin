@@ -1,0 +1,6 @@
+{
+  "name": "Cartao",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Cartao.js"
+}

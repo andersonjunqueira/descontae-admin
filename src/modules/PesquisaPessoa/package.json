@@ -1,0 +1,6 @@
+{
+  "name": "PesquisaPessoa",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./PesquisaPessoa.js"
+}
