@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { toaster } from '../../components/Notification/Notification.actions';
 
-export const [ PLANOS_PESQUISA, PLANO_EDICAO, PLANO_SETMODE ] = [ "PLANOS_PESQUISA", "PLANO_EDICAO", "PLANO_SETMODE" ];
+export const [ PLANOS_PESQUISA, PLANO_EDICAO, PLANO_SETMODE, PLANO_SELECT ] = [ "PLANOS_PESQUISA", "PLANO_EDICAO", "PLANO_SETMODE", "PLANO_SELECT" ];
 
 const converter = {
     toFrontend: (values) => {
@@ -88,3 +88,16 @@ export const carregar = (id) => {
     }
 }
 
+export const loadPlanosForSelect = () => {
+    return dispatch => {
+        axios({ url: '/planos?sort=titulo,ASC&page=1000', method: 'get', responseType: 'json' })
+        .then(function(response) {
+            var ret = [];
+            response.data.content.forEach((p) => ret.push({ value: p.id, text: p.titulo }) );
+            dispatch({type: PLANO_SELECT, payload: ret});
+        }).catch(function(error){
+            console.log(error);
+        });
+
+    }
+}

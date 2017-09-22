@@ -94,6 +94,10 @@
         "selecione-uma-franquia": "Selecione uma Marca/Franquia",
         "pesquisa-pessoas": "Pesquisa de Pessoas",
         "nome-cpf": "Nome ou CPF",
+        "avulso": "Avulso",
+        "faixa": "Faixa",
+        "codigo-inicial": "Código Inicial",
+        "codigo-final": "Código Final",
 
         "novo-modelo": "Novo Modelo",
         "pesquisa-modelos": "Pesquisa de Modelos",

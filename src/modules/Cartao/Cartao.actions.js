@@ -12,6 +12,7 @@ const converter = {
     toFrontend: (values) => {
 
         const data = Object.assign({}, values, {});
+        data.ativo = values.ativo == 'A';
         return data;
 
     },
@@ -19,6 +20,7 @@ const converter = {
     toBackend: (values) => {
 
         const data = Object.assign({}, values, {});
+        data.ativo = values.ativo ? 'A' : 'I';
         return data;
 
     }
@@ -52,7 +54,7 @@ export const consultar = (filtro, start, pagesize) => {
 export const salvar = (values, callback) => {
     return dispatch => {
 
-        axios.post('/cartoes', converter.toBackend(values) )
+        axios.put('/cartoes', converter.toBackend(values) )
             .then(function(response) {
                 callback();
                 dispatch(toaster("cartao-salvo", [], {status: "success"}));

@@ -79,7 +79,7 @@ class CartaoList extends Component {
                                     <td className="text-center" scope="row">{data.content[key].id}</td>
                                     <td className="text-center">{data.content[key].codigo}</td>
                                     <td>{pessoa ? pessoa.nome : ""}</td>
-                                    <td className="text-center">{pessoa ? cpfFunctions.applyMask(pessoa.cpf) : ""}</td>
+                                    <td className="text-center">{pessoa && pessoa.cpf ? cpfFunctions.applyMask(pessoa.cpf) : ""}</td>
                                     <td className="text-center">
                                         <Button type="button" onClick={() => doCarregar(data.content[key].id)} color="secondary" size="sm">
                                             <i className="fa fa-pencil"></i>
