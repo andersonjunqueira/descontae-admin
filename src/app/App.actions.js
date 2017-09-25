@@ -47,7 +47,7 @@ export const login = (auth) => {
                 dispatch(sidebarMenuLoad);
 
                 // DISPARA NOTIFICAÇÃO
-                dispatch(toaster("bem-vindo", [name]));
+                dispatch(toaster(null, "bem-vindo", [name]));
 
                 // ATUALIZAR O STORE COM O OBJETO DO KEYCLOAK
                 dispatch({type: PROCESS_LOGIN, payload: auth});
@@ -70,19 +70,19 @@ export const login = (auth) => {
                         axios.post('/pessoas', pessoa)
                           .then( (response) => {
 
-                              dispatch(toaster("novo-usuario-registrado", [], {title: "novo-usuario", status: "success"}));
+                              dispatch(toaster("novo-usuario", "novo-usuario-registrado", [], {status: "success"}));
 
                           }).catch( (error) => {
 
                               console.log(error);
-                              dispatch(toaster("problema-registro", [], {title: "novo-usuario", status: "danger"}));
+                              dispatch(toaster("novo-usuario", "problema-registro", [], {status: "danger"}));
                               setTimeout(() => logout(auth), 3000);
 
                           });
 
                     } else {
 
-                        dispatch(toaster("erro-desconhecido", [], {status: "danger"}));
+                        dispatch(toaster("erro-desconhecido", null, [], {status: "danger"}));
                         setTimeout(() => logout(auth), 3000);
 
                     }

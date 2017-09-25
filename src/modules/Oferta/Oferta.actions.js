@@ -39,7 +39,7 @@ export const consultar = (filtro, start, pagesize) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-consulta-ofertas", [], {status: "error"}));
+                dispatch(toaster("erro-consulta-ofertas", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -51,11 +51,11 @@ export const salvar = (values, callback) => {
         axios.put('/ofertas/dto', converter.toBackend(values) )
             .then(function(response) {
                 callback();
-                dispatch(toaster("oferta-salva", [], {status: "success"}));
+                dispatch(toaster(null, "oferta-salva", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-salvar-oferta", [], {status: "error"}));
+                dispatch(toaster("erro-salvar-oferta", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -67,11 +67,11 @@ export const excluir = (id, callback) => {
         axios.delete('/ofertas/' + id)
             .then(function(response) {
                 callback();
-                dispatch(toaster("oferta-excluida", [], {status: "success"}));
+                dispatch(toaster(null, "oferta-excluida", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-excluir-oferta", [], {status: "error"}));
+                dispatch(toaster("erro-excluir-oferta", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -87,7 +87,7 @@ export const carregar = (id) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-carga-oferta", [], {status: "error"}));
+                dispatch(toaster("erro-carga-oferta", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -103,7 +103,7 @@ export const carregarUnidades = (marcaId, callback) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-carga-unidades", [], {status: "error"}));
+                dispatch(toaster("erro-carga-unidades", error.response.data, [], {status: "error"}));
             });
 
     }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import { Form, Row, Col, Button, Table, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Form, Row, Col, Button, Table } from 'reactstrap';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 import { cpfFunctions } from '../../components/CPF';
@@ -11,7 +11,7 @@ import { translate } from '../../components/Intl/Intl.actions';
 class PesquisaPessoaList extends Component {
 
     render() {
-        const { handleSubmit, doSubmit, pristine, submitting, invalid, data, doSelecionar } = this.props;
+        const { handleSubmit, doSubmit, data, doSelecionar } = this.props;
 
         let content = (<Intl str="nenhum-registro-encontrado"></Intl>);
         if(data && data.totalElements > 0) {

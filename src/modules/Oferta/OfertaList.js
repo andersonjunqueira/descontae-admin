@@ -125,7 +125,7 @@ class OfertaList extends Component {
                         <Text name="texto" label={<Intl str='texto'></Intl>} maxLength={100}/>
                     </Col>
                     <Col xs={12} md={4}>
-                    <Select name="situacao" options={situacaoTypes} label={<Intl str='situacao'></Intl>}/>
+                        <Select name="situacao" options={situacaoTypes} label={<Intl str='situacao'></Intl>}/>
                     </Col>
                 </Row>
 

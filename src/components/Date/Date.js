@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 
 import  { textFunctions } from '../Text';
 import  Number, { numberFunctions } from '../Number';
@@ -14,7 +13,7 @@ export const dateFunctions = {
         nums = numberFunctions.applyMask(nums);
         return nums.replace(/(\d{2})(\d{2})(\d{4})/g,"$1/$2/$3");
     },
-    checkDateFormat: value => value.split("/").length === 3,
+    checkDateFormat: value => value && value.split("/").length === 3,
     toBackend: value => {
         const tokens = value.split("/");
         return tokens[2] + "-" + tokens[1] + "-" + tokens[0];
@@ -41,7 +40,7 @@ class Date extends Component {
     getValidators() {
         const validators = [];
         validators.push((value) => {
-            return !dateFunctions.checkDateFormat(value) ? "Data inválida" : undefined;
+            return value && !dateFunctions.checkDateFormat(value) ? "Data inválida" : undefined;
         });
         return validators;
     }
@@ -68,5 +67,9 @@ Date.propTypes = {
     help: PropTypes.string,
     required: PropTypes.bool
 }
+
+Date.defaultProps = {
+    required: false
+};
 
 export default Date;

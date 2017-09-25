@@ -65,21 +65,30 @@ class CartaoList extends Component {
                     <Table hover size="sm" className="tabela">
                         <thead>
                             <tr>
-                                <th className="table-w-10 text-center">#</th>
+                                <th className="table-w-5 text-center"><Intl str="ativo"></Intl></th>
                                 <th className="table-w-10 text-center"><Intl str="codigo"></Intl></th>
-                                <th className="table-w-50"><Intl str="nome"></Intl></th>
-                                <th className="table-w-20 text-center"><Intl str="cpf"></Intl></th>
+                                <th className="table-w-15 text-center"><Intl str="cpf"></Intl></th>
+                                <th className="table-w-30"><Intl str="usuario"></Intl></th>
+                                <th className="table-w-30"><Intl str="assinante"></Intl></th>
                                 <th className="table-w-10 text-center"></th>
                             </tr>
                         </thead>
                         <tbody>
                             {Object.keys(data.content).map(function(key) {
-                                let pessoa = data.content[key].pessoa;
+                                let usuario = data.content[key].pessoa;
+                                let cliente = data.content[key].assinatura;
+                                if(cliente && cliente.pessoa) {
+                                    cliente = cliente.pessoa;
+                                } else {
+                                    cliente = cliente.cliente;
+                                }
+                                
                                 return (<tr key={key}>
-                                    <td className="text-center" scope="row">{data.content[key].id}</td>
+                                    <td className="text-center"><i className={"fa fa-credit-card " + (data.content[key].ativo === 'A' ? "text-success" : "text-danger")}></i></td>
                                     <td className="text-center">{data.content[key].codigo}</td>
-                                    <td>{pessoa ? pessoa.nome : ""}</td>
-                                    <td className="text-center">{pessoa && pessoa.cpf ? cpfFunctions.applyMask(pessoa.cpf) : ""}</td>
+                                    <td className="text-center">{usuario && usuario.cpf ? cpfFunctions.applyMask(usuario.cpf) : ""}</td>
+                                    <td>{usuario ? usuario.nome : ""}</td>
+                                    <td>{cliente ? cliente.nome : "" }</td>
                                     <td className="text-center">
                                         <Button type="button" onClick={() => doCarregar(data.content[key].id)} color="secondary" size="sm">
                                             <i className="fa fa-pencil"></i>

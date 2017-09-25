@@ -2,7 +2,7 @@ import { addNotification as notify } from 'reapop';
 
 import { translate } from "../Intl/Intl.actions";
 
-export const toaster = (msg, params = [], configuration) => {
+export const toaster = (title, msg, params = [], configuration) => {
 
     const defaultConfig = {
         message: undefined,
@@ -13,9 +13,11 @@ export const toaster = (msg, params = [], configuration) => {
         dismissAfter: 3000
     };
 
+    const formattedTitle = title ? translate(title) : "";
     const formatted = translate(msg, params);
     const config = Object.assign(defaultConfig, {
         message: formatted,
+        title: formattedTitle,
         ...configuration
     });
 

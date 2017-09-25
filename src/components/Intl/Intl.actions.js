@@ -30,7 +30,7 @@ export const changeLanguage = (lang, silent = false) => {
         if(lang) {
             dispatch({type: LANGUAGE_CHANGED, payload: lang});
             if(!silent) {
-                dispatch(toaster("idioma-alterado", [config.currentStrings.langId]));
+                dispatch(toaster(null, "idioma-alterado", [config.currentStrings.langId]));
             }
         }
     }

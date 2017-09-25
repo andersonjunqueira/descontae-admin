@@ -23,7 +23,7 @@ export const consultar = (filtro, start, pagesize) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-consulta-marcas", [], {status: "error"}));
+                dispatch(toaster("erro-consulta-marcas", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -35,11 +35,11 @@ export const salvar = (marca, callback) => {
         axios.put('/franquias', marca)
             .then(function(response) {
                 callback();
-                dispatch(toaster("marca-salva", [], {status: "success"}));
+                dispatch(toaster(null, "marca-salva", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-salvar-marca", [], {status: "error"}));
+                dispatch(toaster("erro-salvar-marca", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -51,11 +51,11 @@ export const excluir = (id, callback) => {
         axios.delete('/franquias/' + id)
             .then(function(response) {
                 callback();
-                dispatch(toaster("marca-excluida", [], {status: "success"}));
+                dispatch(toaster(null, "marca-excluida", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-excluir-marca", [], {status: "error"}));
+                dispatch(toaster("erro-excluir-marca", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -70,7 +70,7 @@ export const carregar = (id) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-carga-marca", [], {status: "error"}));
+                dispatch(toaster("erro-carga-marca", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -85,6 +85,7 @@ export const loadFranquiasForSelect = () => {
             dispatch({type: MARCA_SELECT, payload: ret});
         }).catch(function(error){
             console.log(error);
+            dispatch(toaster("erro-carga-marca", error.response.data, [], {status: "error"}));
         });
 
     }

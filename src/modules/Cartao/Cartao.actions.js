@@ -1,10 +1,6 @@
 import axios from "axios";
 
 import { toaster } from '../../components/Notification/Notification.actions';
-import  { numberFunctions } from '../../components/Number';
-import { cnpjFunctions } from '../../components/CNPJ';
-import { zipcodeFunctions } from '../../components/ZipCode';
-import { phoneFunctions } from '../../components/Phone';
 
 export const [ CARTOES_PESQUISA, CARTAO_EDICAO, CARTAO_SETMODE ] = [ "CARTOES_PESQUISA", "CARTAO_EDICAO", "CARTAO_SETMODE" ];
 
@@ -12,7 +8,6 @@ const converter = {
     toFrontend: (values) => {
 
         const data = Object.assign({}, values, {});
-        data.ativo = values.ativo == 'A';
         return data;
 
     },
@@ -20,7 +15,6 @@ const converter = {
     toBackend: (values) => {
 
         const data = Object.assign({}, values, {});
-        data.ativo = values.ativo ? 'A' : 'I';
         return data;
 
     }
@@ -45,7 +39,7 @@ export const consultar = (filtro, start, pagesize) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-consulta-cartoes", [], {status: "error"}));
+                dispatch(toaster("erro-consulta-cartoes", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -57,11 +51,11 @@ export const salvar = (values, callback) => {
         axios.put('/cartoes', converter.toBackend(values) )
             .then(function(response) {
                 callback();
-                dispatch(toaster("cartao-salvo", [], {status: "success"}));
+                dispatch(toaster(null, "cartao-salvo", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-salvar-cartao", [], {status: "error"}));
+                dispatch(toaster("erro-salvar-cartao", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -73,11 +67,11 @@ export const excluir = (id, callback) => {
         axios.delete('/cartoes/' + id)
             .then(function(response) {
                 callback();
-                dispatch(toaster("cartao-excluido", [], {status: "success"}));
+                dispatch(toaster(null, "cartao-excluido", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-excluir-cartao", [], {status: "error"}));
+                dispatch(toaster("erro-excluir-cartao", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -93,7 +87,7 @@ export const carregar = (id) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-carga-cartao", [], {status: "error"}));
+                dispatch(toaster("erro-carga-cartao", error.response.data, [], {status: "error"}));
             });
 
     }

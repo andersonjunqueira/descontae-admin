@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { Field, reduxForm, change } from 'redux-form';
+import { reduxForm, change } from 'redux-form';
 import { Form, Row, Col, Button } from 'reactstrap';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 
+import Card, { CardHeader, CardBody } from '../../components/Card';
 import Text from '../../components/Text';
 import Number from '../../components/Number';
+import Date from '../../components/Date';
+import Select from '../../components/Select';
 import Intl from '../../components/Intl';
 import SelectPlano from '../Plano/SelectPlano';
 import PesquisaPessoa from '../PesquisaPessoa';
@@ -18,14 +21,17 @@ class CartaoForm extends Component {
         super(props);
         this.cancelar = this.cancelar.bind(this);
         this.modalPessoaToggle = this.modalPessoaToggle.bind(this);
+        this.modalUsuarioToggle = this.modalUsuarioToggle.bind(this);
         this.modalClienteToggle = this.modalClienteToggle.bind(this);
         this.tabToggle = this.tabToggle.bind(this);
         this.selecionarPessoa = this.selecionarPessoa.bind(this);
+        this.selecionarUsuario = this.selecionarUsuario.bind(this);
         this.selecionarCliente = this.selecionarCliente.bind(this);
  
         this.state = {
             id: undefined,
             modalPessoaOpen: false,
+            modalUsuarioOpen: false,
             modalClienteOpen: false,
             activeTab: '1'
         };
@@ -40,6 +46,12 @@ class CartaoForm extends Component {
     modalPessoaToggle() {
         this.setState({
             modalPessoaOpen: !this.state.modalPessoaOpen
+        });
+    }
+
+    modalUsuarioToggle() {
+        this.setState({
+            modalUsuarioOpen: !this.state.modalUsuarioOpen
         });
     }
 
@@ -63,22 +75,33 @@ class CartaoForm extends Component {
         this.setState(Object.assign(this.state, { id: undefined }));
     }
 
+    selecionarUsuario(value) {
+        if(value) {
+            this.props.dispatch(change('CartaoForm', 'pessoa', value ));
+        }
+        this.modalUsuarioToggle();
+    }
+
     selecionarPessoa(value) {
         if(value) {
-            this.props.dispatch(change('CartaoForm', 'assinatura', { pessoa: value }));
+            this.props.dispatch(change('CartaoForm', 'assinatura', { pessoa: value, cliente: undefined }));
         }
         this.modalPessoaToggle();
     }
 
     selecionarCliente(value) {
         if(value) {
-            this.props.dispatch(change('CartaoForm', 'cliente', value));
+            this.props.dispatch(change('CartaoForm', 'assinatura', { cliente: value, pessoa: undefined }));
         }
         this.modalClienteToggle();
     }
 
     render() {
         const { handleSubmit, doSubmit, pristine, reset, submitting, invalid } = this.props;
+        const ativoTypes = [
+            {value: "A", text: translate("ativo")},
+            {value: "I", text: translate("inativo")}
+        ];
         return (
             <div>
                 <Form onSubmit={handleSubmit(doSubmit)}>
@@ -93,7 +116,7 @@ class CartaoForm extends Component {
                         </NavItem>
                         <NavItem>
                             <NavLink className={this.state.activeTab === '2' ? 'active' : ''} onClick={() => { this.tabToggle('2'); }}
-                                disabled={this.state.id}>
+                                disabled={this.state.id !== undefined}>
                                 <Intl str="faixa"></Intl>
                             </NavLink>
                         </NavItem>
@@ -103,59 +126,93 @@ class CartaoForm extends Component {
                             <Row>
                                 <Col xs={12} md={2}>
                                     <Number name="codigo" label={<Intl str='codigo'></Intl>} maxLength={50} required={true}
-                                        disabled={this.state.id}/>
+                                        disabled={this.state.id !== undefined}/>
                                 </Col>
                                 <Col xs={12} md={10}>
-                                    <Text name="assinatura.pessoa.nome" label={<Intl str='usuario'></Intl>} maxLength={50} disabled={true}
+                                    <Text name="pessoa.nome" label={<Intl str='usuario'></Intl>} maxLength={50} disabled={true}
                                         actionLabel={translate("pesquisar")}
-                                        action={this.modalPessoaToggle}/>
+                                        action={this.modalUsuarioToggle}/>                                
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={12} md={6}>
-                                    <Text name="cliente.nome" label={<Intl str='cliente'></Intl>} maxLength={50} disabled={true}
-                                        actionLabel={translate("pesquisar")}
-                                        action={this.modalClienteToggle}/>
-                                </Col>
-                                <Col xs={12} md={6}>
-                                    <SelectPlano name="plano" label={<Intl str='plano'></Intl>}/>
+                                <Col xs={12} md={2}>
+                                    <Select name="ativo" options={ativoTypes} label={<Intl str='ativo'></Intl>}/>
                                 </Col>
                             </Row>
-                            <Row>
-                                <Col xs={12} md={12}>
-                                    <Field name="ativo" component="input" type="checkbox"/> <Intl str='ativo'></Intl>
-                                </Col>
-                            </Row>
+                            <p></p>
+
+                            <Card>
+                                <CardHeader>
+                                    <Intl str='assinatura'></Intl> 
+                                </CardHeader>
+                                <CardBody>
+                                    <Row>
+                                        <Col xs={12} md={6}>
+                                            <Text name="assinatura.pessoa.nome" label={<Intl str='patrocinador-usuario'></Intl>} maxLength={50} disabled={true}
+                                                actionLabel={translate("pesquisar")}
+                                                action={this.modalPessoaToggle}/>
+                                        </Col>
+                                        <Col xs={12} md={6}>
+                                            <Text name="assinatura.cliente.nome" label={<Intl str='patrocinador-cliente'></Intl>} maxLength={50} disabled={true}
+                                                actionLabel={translate("pesquisar")}
+                                                action={this.modalClienteToggle}/>
+                                        </Col>
+                                    </Row>                                    
+                                    <Row>
+                                        <Col xs={12} md={4}>
+                                            <SelectPlano name="assinatura.plano.id" label={<Intl str='plano'></Intl>}/>
+                                        </Col>
+                                        <Col xs={12} md={4}>
+                                            <Date name="assinatura.inicioVigencia" label={<Intl str='inicio-vigencia'></Intl>}/>
+                                        </Col>
+                                        <Col xs={12} md={4}>
+                                            <Date name="assinatura.fimVigencia" label={<Intl str='fim-vigencia'></Intl>}/>
+                                        </Col>
+                                    </Row>
+                                </CardBody>
+                            </Card>
+
                         </TabPane>
                         <TabPane tabId="2">
                             <Row>
                                 <Col xs={12} md={2}>
                                     <Number name="codigo" label={<Intl str='codigo-inicial'></Intl>} maxLength={50} required={true}
-                                        disabled={this.state.id}/>
+                                        disabled={this.state.id !== undefined}/>
                                 </Col>
                                 <Col xs={12} md={2}>
-                                    <Number name="codigoFinal" label={<Intl str='codigo-final'></Intl>} maxLength={50} required={true}/>
+                                    <Number name="codigoFinal" label={<Intl str='codigo-final'></Intl>} maxLength={50} required={this.state.activeTab === '2'}/>
                                 </Col>
                             </Row>
-                            <Row>
-                                <Col xs={12} md={12}>
-                                    <Text name="cliente.nome" label={<Intl str='cliente'></Intl>} maxLength={50} disabled={true}
-                                        actionLabel={translate("pesquisar")}
-                                        action={this.modalToggle}/>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={12} md={12}>
-                                    <Text name="assinatura.plano.nome" label={<Intl str='plano'></Intl>} maxLength={50} disabled={true}
-                                        actionLabel={translate("pesquisar")}
-                                        action={this.modalToggle}/>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={12} md={12}>
-                                    <Field name="ativo" component="input" type="checkbox"/> <Intl str='ativo'></Intl>
-                                </Col>
-                            </Row>                            
+
+                            <Card>
+                                <CardHeader>
+                                    <Intl str='assinatura'></Intl> 
+                                </CardHeader>
+                                <CardBody>
+                                    <Row>
+                                        <Col xs={12} md={12}>
+                                            <Text name="assinatura.cliente.nome" label={<Intl str='patrocinador-cliente'></Intl>} maxLength={50} disabled={true}
+                                                actionLabel={translate("pesquisar")}
+                                                action={this.modalClienteToggle}/>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col xs={12} md={4}>
+                                            <SelectPlano name="assinatura.plano.id" label={<Intl str='plano'></Intl>} 
+                                                required={this.props.data && this.props.data.assinatura}/>
+                                        </Col>
+                                        <Col xs={12} md={4}>
+                                            <Date name="assinatura.inicioVigencia" label={<Intl str='inicio-vigencia'></Intl>} 
+                                                required={this.props.data && this.props.data.assinatura}/>
+                                        </Col>
+                                        <Col xs={12} md={4}>
+                                            <Date name="assinatura.fimVigencia" label={<Intl str='fim-vigencia'></Intl>} 
+                                                required={this.props.data && this.props.data.assinatura}/>
+                                        </Col>
+                                    </Row>
+                                </CardBody>
+                            </Card>
+
                         </TabPane>
                     </TabContent>
                     <br/>
@@ -178,6 +235,13 @@ class CartaoForm extends Component {
                     <ModalHeader toggle={this.modalPessoaToggle}><Intl str="pesquisa-pessoas"></Intl></ModalHeader>
                     <ModalBody>
                         <PesquisaPessoa doSelecionar={this.selecionarPessoa}/>
+                    </ModalBody>
+                </Modal>
+
+                <Modal isOpen={this.state.modalUsuarioOpen} toggle={this.modalUsuarioToggle} size="lg">
+                    <ModalHeader toggle={this.modalUsuarioToggle}><Intl str="pesquisa-pessoas"></Intl></ModalHeader>
+                    <ModalBody>
+                        <PesquisaPessoa doSelecionar={this.selecionarUsuario}/>
                     </ModalBody>
                 </Modal>
 

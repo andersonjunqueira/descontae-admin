@@ -53,7 +53,7 @@ class OfertaForm extends Component {
             this.props.dispatch(change("OfertaForm", 'unidades', unidades));
             this.props.dispatch({type: OFERTA_EDICAO_UNIDADES, payload: unidades});
         } else {
-            this.props.dispatch(toaster("unidades-nao-encontradas", [], {status: "warning"}));
+            this.props.dispatch(toaster(null, "unidades-nao-encontradas", [], {status: "warning"}));
         }
     }
 

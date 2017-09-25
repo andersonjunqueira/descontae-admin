@@ -24,7 +24,7 @@ class Endereco extends Component {
             this.props.dispatch(change(this.props.formName, this.props.name + '.cidade', address.cidade));
             this.props.dispatch(change(this.props.formName, this.props.name + '.uf', address.uf));
         } else {
-            this.props.dispatch(toaster("cep-nao-encontrado", [], {status: "warning"}));
+            this.props.dispatch(toaster(null, "cep-nao-encontrado", [], {status: "warning"}));
         }
     }
 

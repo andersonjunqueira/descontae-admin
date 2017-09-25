@@ -23,7 +23,7 @@ export const consultar = (filtro, start, pagesize) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-consulta-categorias", [], {status: "error"}));
+                dispatch(toaster("erro-consulta-categorias", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -35,11 +35,11 @@ export const salvar = (categoria, callback) => {
         axios.put('/categorias', categoria)
             .then(function(response) {
                 callback();
-                dispatch(toaster("categoria-salva", [], {status: "success"}));
+                dispatch(toaster(null, "categoria-salva", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-salvar-categoria", [], {status: "error"}));
+                dispatch(toaster("erro-salvar-categoria", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -51,11 +51,11 @@ export const excluir = (id, callback) => {
         axios.delete('/categorias/' + id)
             .then(function(response) {
                 callback();
-                dispatch(toaster("categoria-excluida", [], {status: "success"}));
+                dispatch(toaster(null, "categoria-excluida", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-excluir-categoria", [], {status: "error"}));
+                dispatch(toaster("erro-excluir-categoria", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -70,7 +70,7 @@ export const carregar = (id) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-carga-categoria", [], {status: "error"}));
+                dispatch(toaster("erro-carga-categoria", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -85,6 +85,7 @@ export const loadCategoriasForSelect = () => {
             dispatch({type: CATEGORIAS_SELECT, payload: ret});
         }).catch(function(error){
             console.log(error);
+            dispatch(toaster("erro-carga-categoria", error.response.data, [], {status: "error"}));
         });
 
     }

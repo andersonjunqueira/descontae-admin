@@ -43,7 +43,7 @@ export const consultar = (filtro, start, pagesize) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-consulta-modelos", [], {status: "error"}));
+                dispatch(toaster("erro-consulta-modelos", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -55,11 +55,11 @@ export const salvar = (values, callback) => {
         axios.put('/modelos', converter.toBackend(values) )
             .then(function(response) {
                 callback();
-                dispatch(toaster("modelo-salvo", [], {status: "success"}));
+                dispatch(toaster(null, "modelo-salvo", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-salvar-modelo", [], {status: "error"}));
+                dispatch(toaster("erro-salvar-modelo", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -71,11 +71,11 @@ export const excluir = (id, callback) => {
         axios.delete('/modelos/' + id)
             .then(function(response) {
                 callback();
-                dispatch(toaster("modelo-excluido", [], {status: "success"}));
+                dispatch(toaster(null, "modelo-excluido", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-excluir-modelo", [], {status: "error"}));
+                dispatch(toaster("erro-excluir-modelo", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -91,7 +91,7 @@ export const carregar = (id) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-carga-modelo", [], {status: "error"}));
+                dispatch(toaster("erro-carga-modelo", error.response.data, [], {status: "error"}));
             });
 
     }

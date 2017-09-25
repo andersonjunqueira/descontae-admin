@@ -35,7 +35,7 @@ export const consultar = (filtro, start, pagesize) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-consulta-planos", [], {status: "error"}));
+                dispatch(toaster("erro-consulta-planos", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -47,11 +47,11 @@ export const salvar = (values, callback) => {
         axios.put('/planos', converter.toBackend(values) )
             .then(function(response) {
                 callback();
-                dispatch(toaster("plano-salvo", [], {status: "success"}));
+                dispatch(toaster(null, "plano-salvo", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-salvar-plano", [], {status: "error"}));
+                dispatch(toaster("erro-salvar-plano", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -63,11 +63,11 @@ export const excluir = (id, callback) => {
         axios.delete('/planos/' + id)
             .then(function(response) {
                 callback();
-                dispatch(toaster("plano-excluido", [], {status: "success"}));
+                dispatch(toaster(null, "plano-excluido", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-excluir-plano", [], {status: "error"}));
+                dispatch(toaster("erro-excluir-plano", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -82,7 +82,7 @@ export const carregar = (id) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-carga-plano", [], {status: "error"}));
+                dispatch(toaster("erro-carga-plano", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -97,6 +97,7 @@ export const loadPlanosForSelect = () => {
             dispatch({type: PLANO_SELECT, payload: ret});
         }).catch(function(error){
             console.log(error);
+            dispatch(toaster("erro-carga-plano", error.response.data, [], {status: "error"}));
         });
 
     }

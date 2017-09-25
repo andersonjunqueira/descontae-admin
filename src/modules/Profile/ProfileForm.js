@@ -123,7 +123,7 @@ class ProfileForm extends Component {
             this.props.dispatch(change(this.props.form, 'cidade', address.cidade));
             this.props.dispatch(change(this.props.form, 'uf', address.uf));
         } else {
-            this.props.dispatch(toaster("cep-nao-encontrado", [], {status: "warning"}));
+            this.props.dispatch(toaster(null, "cep-nao-encontrado", [], {status: "warning"}));
         }
     }
 

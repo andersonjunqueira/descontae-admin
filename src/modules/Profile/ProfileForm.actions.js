@@ -10,7 +10,7 @@ export const saveProfile = (profile) => {
         axios.post('/usuarios', profile)
             .then(function(response) {
                 dispatch({type: PROFILE_SAVED, payload: response.data});
-                dispatch(toaster("perfil-salvo-sucesso", [], {status: "success"}));
+                dispatch(toaster(null, "perfil-salvo-sucesso", [], {status: "success"}));
 
             }).catch(function(response){
                 dispatch({type: PROFILE_SAVE_ERROR, payload: response.data});

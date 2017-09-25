@@ -61,6 +61,7 @@ Number.propTypes = {
     placeholder: PropTypes.node,
     help: PropTypes.node,
     required: PropTypes.bool,
+    disabled: PropTypes.bool,
     inputSize: PropTypes.number,
     labelSize: PropTypes.number,
     action: PropTypes.func,
@@ -82,6 +83,7 @@ Number.propTypes = {
 
 Number.defaultProps = {
     className: "text-align-right ",
+    required: false,
     validators: []
 };
 

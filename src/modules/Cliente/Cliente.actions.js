@@ -78,7 +78,7 @@ export const consultar = (filtro, start, pagesize) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-consulta-clientes", [], {status: "error"}));
+                dispatch(toaster("erro-consulta-clientes", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -90,11 +90,11 @@ export const salvar = (values, callback) => {
         axios.put('/clientes', converter.toBackend(values) )
             .then(function(response) {
                 callback();
-                dispatch(toaster("cliente-salvo", [], {status: "success"}));
+                dispatch(toaster(null, "cliente-salvo", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-salvar-cliente", [], {status: "error"}));
+                dispatch(toaster("erro-salvar-cliente", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -106,11 +106,11 @@ export const excluir = (id, callback) => {
         axios.delete('/clientes/' + id)
             .then(function(response) {
                 callback();
-                dispatch(toaster("cliente-excluido", [], {status: "success"}));
+                dispatch(toaster(null, "cliente-excluido", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-excluir-cliente", [], {status: "error"}));
+                dispatch(toaster("erro-excluir-cliente", error.response.data, [], {status: "error"}));
             });
 
     }
@@ -126,7 +126,7 @@ export const carregar = (id) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-carga-cliente", [], {status: "error"}));
+                dispatch(toaster("erro-carga-cliente", error.response.data, [], {status: "error"}));
             });
 
     }
