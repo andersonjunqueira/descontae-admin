@@ -77,10 +77,12 @@ class CartaoList extends Component {
                             {Object.keys(data.content).map(function(key) {
                                 let usuario = data.content[key].pessoa;
                                 let cliente = data.content[key].assinatura;
-                                if(cliente && cliente.pessoa) {
-                                    cliente = cliente.pessoa;
-                                } else {
-                                    cliente = cliente.cliente;
+                                if(cliente) {
+                                    if(cliente.pessoa) {
+                                        cliente = cliente.pessoa;
+                                    } else {
+                                        cliente = cliente.cliente;
+                                    }
                                 }
                                 
                                 return (<tr key={key}>
