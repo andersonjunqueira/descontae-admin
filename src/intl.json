@@ -33,9 +33,12 @@
         "usuario": "Usuário",
         "erro-id-obrigatorio": "O id na URL é obrigatório.",
         "erro-id-desnecessario": "O id não deve ser enviado.",
+        "campo-obrigatorio": "Campo Obnrigatório.",
 
         "== SPECIFIC STRINGS ==": "",
 
+        "formato-invalido": "Formato Inválido.",
+        "valor-invalido": "Valor Inválido.",
         "bairro": "Bairro",
         "numero": "Número",
         "cidade": "Cidade",
@@ -106,6 +109,10 @@
         "patrocinador-usuario": "Assinante (Usuário)",
         "patrocinador-cliente": "Assinante (Cliente)",
         "assinante": "Assinante",
+        "cep-inexistente": "CEP não encontrado",
+        "senha-validacao": "Senha de Validação",
+        "inicio-expediente": "Início do Expediente",
+        "fim-expediente": "Fim do Expediente",
 
         "novo-modelo": "Novo Modelo",
         "pesquisa-modelos": "Pesquisa de Modelos",

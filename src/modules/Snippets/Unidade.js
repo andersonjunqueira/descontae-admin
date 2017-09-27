@@ -6,6 +6,8 @@ import Card, { CardHeader, CardBody } from '../../components/Card';
 import Intl from '../../components/Intl';
 import Text from '../../components/Text';
 import File from '../../components/File';
+import Password from '../../components/Password';
+import Time from '../../components/Time';
 import Endereco from '../../components/Endereco';
 import Phones from './Phones';
 
@@ -61,10 +63,37 @@ class Unidade extends Component {
     render() {
         return (
             <div>
-                <Text name={`${this.props.name}.nome`} label={<Intl str='nome'></Intl>} maxLength={100} required={true}/>
-                <Endereco name={`${this.props.name}.endereco`} required={true} formName={this.props.formName}/>
-                <FieldArray name={`${this.props.name}.telefones`} component={Phones} />
-                <FieldArray name={`${this.props.name}.imagens`} component={renderImages} />
+                <Row>
+                    <Col xs={12} md={12}>
+                        <Text name={`${this.props.name}.nome`} label={<Intl str='nome'></Intl>} maxLength={100} required={true}/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} md={4}>
+                        <Password name={`${this.props.name}.senhaValidacao`} label={<Intl str='senha-validacao'></Intl>} maxLength={100} required={true}/>
+                    </Col>
+                    <Col xs={12} md={4}>
+                        <Time name={`${this.props.name}.inicioExpediente`} label={<Intl str='inicio-expediente'></Intl>} required={true}/>
+                    </Col>
+                    <Col xs={12} md={4}>
+                        <Time name={`${this.props.name}.fimExpediente`} label={<Intl str='fim-expediente'></Intl>} required={true}/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} md={12}>
+                        <Endereco name={`${this.props.name}.endereco`} required={true} formName={this.props.formName}/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} md={12}>
+                        <FieldArray name={`${this.props.name}.telefones`} component={Phones} />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} md={12}>
+                        <FieldArray name={`${this.props.name}.imagens`} component={renderImages} />
+                    </Col>
+                </Row>
             </div>
         );
     }

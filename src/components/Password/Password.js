@@ -1,19 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { Field } from 'redux-form';
 
-import InputBootstrap from './InputBootstrap';
+import InputBootstrap from '../Text/InputBootstrap';
 import { translate } from '../Intl/Intl.actions';
 
-export const textFunctions = { 
-    clearMask: (value) => value !== undefined ? value.replace(/[\.\/\-\:]/g, '') : value,
-}
-
-class Text extends Component {
+class Password extends Component {
 
     constructor(props) {
         super(props);
         this.getValidators = this.getValidators.bind(this);
-        this.normalize = this.normalize.bind(this);
     }
 
     getValidators() {
@@ -29,22 +24,18 @@ class Text extends Component {
         return validators;
     }
 
-    normalize(value) {
-        return (this.props.normalize) ? this.props.normalize(value) : value;
-    }
-
     render() {
         return (
             <Field component={InputBootstrap} 
-                type="input"
+                type="password"
                 validate={this.getValidators()}
-                normalize={this.normalize}
                 {...this.props}
-            ></Field>);
+            ></Field>
+        );
     }
 }
 
-Text.propTypes = {
+Password.propTypes = {
     name: PropTypes.string,
 
     // INPUT DECORATOR
@@ -62,21 +53,16 @@ Text.propTypes = {
     rightAddon: PropTypes.node,
     leftIconAddon: PropTypes.node,
     rightIconAddon: PropTypes.node,
-    size: PropTypes.string,
 
     // COMMON
     validators: PropTypes.array,
-    normalize: PropTypes.func,
 
-    // TEXT 
-    maxLength: PropTypes.number
 }
 
-Text.defaultProps = {
+Password.defaultProps = {
     required: false,
-    disabled: false,
-    validators: []
+    validators: [],
+    leftIconAddon: "fa fa-key"
 };
 
-export default Text;
-
+export default Password;

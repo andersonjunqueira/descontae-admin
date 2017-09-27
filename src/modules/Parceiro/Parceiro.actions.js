@@ -5,6 +5,7 @@ import  { numberFunctions } from '../../components/Number';
 import { cnpjFunctions } from '../../components/CNPJ';
 import { zipcodeFunctions } from '../../components/ZipCode';
 import { phoneFunctions } from '../../components/Phone';
+import { timeFunctions } from '../../components/Time';
 
 export const [ PARCEIROS_PESQUISA, PARCEIRO_EDICAO, PARCEIRO_SETMODE ] = [ "PARCEIROS_PESQUISA", "PARCEIRO_EDICAO", "PARCEIRO_SETMODE" ];
 
@@ -33,6 +34,9 @@ const converter = {
                         telefone.numero = phoneFunctions.applyMask(telefone.numero);
                     });
                 }
+
+                unidade.inicioExpediente = timeFunctions.applyMask(unidade.inicioExpediente);
+                unidade.fimExpediente = timeFunctions.applyMask(unidade.fimExpediente);
 
             });
         }
@@ -93,7 +97,7 @@ export const consultar = (filtro, start, pagesize) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-consulta-parceiros", [], {status: "error"}));
+                dispatch(toaster("erro-consulta-parceiros", error.response ? error.response.data : "", [], {status: "error"}));
             });
 
     }
@@ -105,11 +109,11 @@ export const salvar = (values, callback) => {
         axios.put('/parceiros', converter.toBackend(values) )
             .then(function(response) {
                 callback();
-                dispatch(toaster("parceiro-salvo", [], {status: "success"}));
+                dispatch(toaster(null, "parceiro-salvo", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-salvar-parceiro", [], {status: "error"}));
+                dispatch(toaster("erro-salvar-parceiro", error.response ? error.response.data : "", [], {status: "error"}));
             });
 
     }
@@ -121,11 +125,11 @@ export const excluir = (id, callback) => {
         axios.delete('/parceiros/' + id)
             .then(function(response) {
                 callback();
-                dispatch(toaster("parceiro-excluido", [], {status: "success"}));
+                dispatch(toaster(null, "parceiro-excluido", [], {status: "success"}));
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-excluir-parceiro", [], {status: "error"}));
+                dispatch(toaster("erro-excluir-parceiro", error.response ? error.response.data : "", [], {status: "error"}));
             });
 
     }
@@ -141,7 +145,7 @@ export const carregar = (id) => {
 
             }).catch(function(error){
                 console.log(error);
-                dispatch(toaster("erro-carga-parceiro", [], {status: "error"}));
+                dispatch(toaster("erro-carga-parceiro", error.response ? error.response.data : "", [], {status: "error"}));
             });
 
     }

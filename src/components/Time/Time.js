@@ -2,23 +2,27 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import  { textFunctions } from '../Text';
-import  Number, { numberFunctions } from '../Number';
+import { translate } from '../Intl/Intl.actions';
+import  Text from '../Text';
 
 export const timeFunctions = {  
     applyMask: (value) => {
         let nums = textFunctions.clearMask(value);
-        nums = numberFunctions.applyMask(nums);
-        return nums.replace(/(\d{2})(\d{2})/g,"$1:$2");
+        return nums.substring(0,2) + ":" + nums.substring(2,4);
     },
-    checkTimeFormat: value => value.split(":").length === 2,
+    checkTimeFormat: value => {
+        return value.split(":").length === 2 ? translate("formato-invalido") : undefined;
+    },
+
     checkTimeValues: value => {
+        console.log(value);
         const temp = value.split(":");
         if(parseInt(temp[0]) < 0 || parseInt(temp[0]) > 23) {
-            return false;
+            return undefined;
         } else if(parseInt(temp[1]) < 0 || parseInt(temp[1]) > 59) {
-            return false;
+            return undefined;
         }
-        return true;
+        return translate("valor-invalido");
     }
 
 }
@@ -37,14 +41,14 @@ class Time extends Component {
 
     getValidators() {
         const validators = [];
-        validators.push(timeFunctions.checkTimeFormat);
-        validators.push(timeFunctions.checkTimeValues);
+        // validators.push(timeFunctions.checkTimeFormat);
+        // validators.push(timeFunctions.checkTimeValues);
         return validators;
     }
 
     render() {
         return (
-            <Number 
+            <Text 
                 name={this.props.name}
                 label={this.props.label}
                 placeholder="__:__" 
@@ -63,6 +67,10 @@ Time.propTypes = {
     label: PropTypes.node,
     help: PropTypes.string,
     required: PropTypes.bool
+}
+
+Time.defaultProps = {
+    leftIconAddon: "fa fa-clock-o"
 }
 
 export default Time;

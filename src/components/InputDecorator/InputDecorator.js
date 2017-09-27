@@ -6,9 +6,11 @@ class InputDecorator extends Component {
     render() {
         const p = this.props;
 
-        let feedback = (<FormText color="muted">{p.help}</FormText>);
+        let feedback = (<span></span>);
         if(p.meta.error && p.meta.touched) {
-            feedback = (<FormFeedback>{p.meta.error}</FormFeedback>);
+            feedback = (<FormFeedback><span>{p.meta.error}</span></FormFeedback>);
+        } else if(p.help) {
+            feedback = (<FormText color="muted">{p.help}</FormText>);
         }
 
         let label = p.inputSize ?
