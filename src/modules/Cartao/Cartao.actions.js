@@ -1,20 +1,29 @@
 import axios from "axios";
 
 import { toaster } from '../../components/Notification/Notification.actions';
+import { dateFunctions } from '../../components/Date';
 
 export const [ CARTOES_PESQUISA, CARTAO_EDICAO, CARTAO_SETMODE ] = [ "CARTOES_PESQUISA", "CARTAO_EDICAO", "CARTAO_SETMODE" ];
 
 const converter = {
     toFrontend: (values) => {
 
-        const data = Object.assign({}, values, {});
+        const data = JSON.parse(JSON.stringify(values));
+        if(data.assinatura) {
+            data.assinatura.fimVigencia = dateFunctions.toFrontend(data.assinatura.fimVigencia);
+            data.assinatura.inicioVigencia = dateFunctions.toFrontend(data.assinatura.inicioVigencia);
+        }
         return data;
 
     },
 
     toBackend: (values) => {
 
-        const data = Object.assign({}, values, {});
+        const data = JSON.parse(JSON.stringify(values));
+        if(data.assinatura) {
+            data.assinatura.fimVigencia = dateFunctions.toBackend(data.assinatura.fimVigencia);
+            data.assinatura.inicioVigencia = dateFunctions.toBackend(data.assinatura.inicioVigencia);
+        }
         return data;
 
     }

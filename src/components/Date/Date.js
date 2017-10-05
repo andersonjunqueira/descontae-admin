@@ -15,12 +15,18 @@ export const dateFunctions = {
     },
     checkDateFormat: value => value && value.split("/").length === 3,
     toBackend: value => {
-        const tokens = value.split("/");
-        return tokens[2] + "-" + tokens[1] + "-" + tokens[0];
+        if(value) {
+            const tokens = value.split("/");
+            return tokens[2] + "-" + tokens[1] + "-" + tokens[0];
+        }
+        return undefined;
     },
     toFrontend: value => {
-        const tokens = value.split("-");
-        return tokens[2] + "/" + tokens[1] + "/" + tokens[0];
+        if(value) {
+            const tokens = value.split("-");
+            return tokens[2] + "/" + tokens[1] + "/" + tokens[0];
+        }
+        return undefined;
     }
 
 }

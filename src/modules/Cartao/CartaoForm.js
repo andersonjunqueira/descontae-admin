@@ -102,6 +102,7 @@ class CartaoForm extends Component {
             {value: "A", text: translate("ativo")},
             {value: "I", text: translate("inativo")}
         ];
+        const assinaturaRequired = !!this.props.data && !!this.props.data.assinatura;
         return (
             <div>
                 <Form onSubmit={handleSubmit(doSubmit)}>
@@ -199,15 +200,15 @@ class CartaoForm extends Component {
                                     <Row>
                                         <Col xs={12} md={4}>
                                             <SelectPlano name="assinatura.plano.id" label={<Intl str='plano'></Intl>} 
-                                                required={this.props.data && this.props.data.assinatura}/>
+                                                required={assinaturaRequired}/>
                                         </Col>
                                         <Col xs={12} md={4}>
                                             <Date name="assinatura.inicioVigencia" label={<Intl str='inicio-vigencia'></Intl>} 
-                                                required={this.props.data && this.props.data.assinatura}/>
+                                                required={assinaturaRequired}/>
                                         </Col>
                                         <Col xs={12} md={4}>
                                             <Date name="assinatura.fimVigencia" label={<Intl str='fim-vigencia'></Intl>} 
-                                                required={this.props.data && this.props.data.assinatura}/>
+                                                required={assinaturaRequired}/>
                                         </Col>
                                     </Row>
                                 </CardBody>
