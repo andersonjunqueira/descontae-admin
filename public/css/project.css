@@ -227,3 +227,11 @@ header.navbar a.navbar-brand {
     background: #271A0E !important;
 }
 
+.react-numeric-input {
+    width: 100%;
+}
+
+.react-numeric-input .form-control {
+    width: 100%;
+    direction: rtl;
+}
