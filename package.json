@@ -25,6 +25,7 @@
     "react-dropzone": "3.13.3",
     "react-dropzone-component": "2.0.0",
     "react-maskedinput": "4.0.0",
+    "react-numeric-input": "2.2.0",
 
     "reactstrap": "4.6.2",
     "react-transition-group": "1.1.2",
