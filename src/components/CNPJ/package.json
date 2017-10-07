@@ -1,6 +1,0 @@
-{
-  "name": "CNPJ",
-  "version": "0.0.0",
-  "private": true,
-  "main": "./CNPJ.js"
-}
