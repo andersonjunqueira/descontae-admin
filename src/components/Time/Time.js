@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 
 import  { textFunctions } from '../Text';
 import { translate } from '../Intl/Intl.actions';
@@ -17,9 +16,9 @@ export const timeFunctions = {
     checkTimeValues: value => {
         console.log(value);
         const temp = value.split(":");
-        if(parseInt(temp[0]) < 0 || parseInt(temp[0]) > 23) {
+        if(parseInt(temp[0], 10) < 0 || parseInt(temp[0], 10) > 23) {
             return undefined;
-        } else if(parseInt(temp[1]) < 0 || parseInt(temp[1]) > 59) {
+        } else if(parseInt(temp[1], 10) < 0 || parseInt(temp[1], 10) > 59) {
             return undefined;
         }
         return translate("valor-invalido");

@@ -5,7 +5,7 @@ import InputBootstrap from './InputBootstrap';
 import { translate } from '../Intl/Intl.actions';
 
 export const textFunctions = { 
-    clearMask: (value) => value !== undefined ? value.replace(/[\.\/\-\:]/g, '') : value,
+    clearMask: (value) => value !== undefined ? value.replace(/[\.\/\-:]/g, '') : value,
 }
 
 class Text extends Component {
