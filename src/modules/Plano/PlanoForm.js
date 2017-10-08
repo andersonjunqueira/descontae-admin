@@ -61,7 +61,7 @@ class PlanoForm extends Component {
                         </Row>
                         <Row>
                             <Col xs={12} md={6}>
-                                <Number name="valor" label={<Intl str='valor'></Intl>} required={true}/>
+                                <Number name="valor" label={<Intl str='valor'></Intl>} required={true} step={0.1} precision={2} min={0}/>
                             </Col>
                             <Col xs={12} md={6}>
                                 <Select name="situacao" options={situacaoTypes} label={<Intl str='situacao'></Intl>}/>

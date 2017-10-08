@@ -3,7 +3,12 @@ import { reduxForm } from 'redux-form';
 import { Form, Row, Col, Button } from 'reactstrap';
 
 import Text from '../../components/Text';
+import TextArea from '../../components/TextArea';
 import Number from '../../components/Number';
+import Password from '../../components/Password';
+import Email from '../../components/Email';
+import CPF from '../../components/CPF';
+import CNPJ from '../../components/CNPJ';
 
 class InicioForm extends Component {
 
@@ -16,14 +21,30 @@ class InicioForm extends Component {
                         <Text name="text" label="TEXT"/>
                     </Col>
                     <Col md={6}>
-                        <Number name="number" label="NUMBER"/>
-                        <Number name="number1" label="NUMBER" min={10}/>
-                        <Number name="number2" label="NUMBER" max={99}/>
-                        <Number name="number3" label="NUMBER" min={10} max={99}/>
-                        <Number name="number4" label="NUMBER" precision={2}/>
                         <Number name="number5" label="NUMBER" precision={2} step={0.1}/>
                     </Col>
                 </Row>
+                <Row>
+                    <Col md={6}>
+                        <Password name="password" label="PASSWORD"/>
+                    </Col>
+                    <Col md={6}>
+                        <Email name="email" label="EMAIL"/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={6}>
+                        <CPF name="cpf" label="CPF"/>
+                    </Col>
+                    <Col md={6}>
+                        <CNPJ name="cnpj" label="CNPJ"/>
+                    </Col>
+                </Row>
+                <Row>                    
+                    <Col md={6}>
+                        <TextArea name="textarea" label="TEXTAREA" rows={10}/>
+                    </Col>
+                </Row>                
                 <Button type="submit" color="primary">Enviar</Button>
             </Form>
         );
