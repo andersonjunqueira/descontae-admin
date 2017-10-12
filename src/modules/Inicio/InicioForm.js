@@ -9,6 +9,7 @@ import Password from '../../components/Password';
 import Email from '../../components/Email';
 import CPF from '../../components/CPF';
 import CNPJ from '../../components/CNPJ';
+import Phone from '../../components/Phone';
 
 class InicioForm extends Component {
 
@@ -40,6 +41,14 @@ class InicioForm extends Component {
                         <CNPJ name="cnpj" label="CNPJ"/>
                     </Col>
                 </Row>
+                <Row>
+                    <Col md={6}>
+                        <Phone name="phone" label="TELEFONE"/>
+                    </Col>
+                    <Col md={6}>
+                        
+                    </Col>
+                </Row>                
                 <Row>                    
                     <Col md={6}>
                         <TextArea name="textarea" label="TEXTAREA" rows={10}/>
