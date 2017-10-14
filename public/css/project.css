@@ -235,3 +235,8 @@ header.navbar a.navbar-brand {
     width: 100%;
     direction: rtl;
 }
+
+.hr-destaque {
+    border: 2px solid #cfd8dc;
+    background-color: #cfd8dc;
+}

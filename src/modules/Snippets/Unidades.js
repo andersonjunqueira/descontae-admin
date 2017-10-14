@@ -24,7 +24,7 @@ class Unidades extends Component {
                             return (
                                 <div key={index}>
                                     <Unidade name={`${field}`} formName={this.props.formName}/>
-                                    <hr/>
+                                    <hr className="hr-destaque"/>
                                 </div>
                             );
                         })}
