@@ -70,8 +70,7 @@ class ParceiroForm extends Component {
                 </Row>
 
                 <FieldArray name="telefones" component={Phones} required={true}/>
-
-                <FieldArray name="unidades" component={Unidades} formName="ParceiroForm"/>
+                <FieldArray name="unidades" component={Unidades} formName="ParceiroForm" required={true}/>
 
                 <Button type="submit" color="primary" disabled={invalid || submitting}>
                     <Intl str='salvar'></Intl>

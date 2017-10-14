@@ -240,3 +240,14 @@ header.navbar a.navbar-brand {
     border: 2px solid #cfd8dc;
     background-color: #cfd8dc;
 }
+
+.tab-content .tab-pane {
+    border-left: solid 1px #cfd8dc;
+    border-right: solid 1px #cfd8dc;
+    border-bottom: solid 1px #cfd8dc;
+}
+
+p.form-control-plaintext {
+    margin-bottom: 0;
+    padding-top: 7px;
+}

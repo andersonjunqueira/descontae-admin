@@ -115,6 +115,7 @@
         "fim-expediente": "Fim do Expediente",
         "telefone-obrigatorio": "Pelo menos um telefone deve ser informado.",
         "imagem-obrigatoria": "Pelo menos uma imagem deve ser informada.",
+        "unidade-obrigatoria": "Pelo menos uma unidade deve ser informada.",
 
         "novo-modelo": "Novo Modelo",
         "pesquisa-modelos": "Pesquisa de Modelos",
@@ -127,6 +128,7 @@
         "erro-salvar-modelo": "Não foi possível salvar o modelo.",
         "erro-carga-modelo": "Não foi possível carregar o modelo.",
         "erro-excluir-modelo": "Não foi possível excluir o modelo.",
+        "nova-unidade": "Nova Unidade",
 
         "novo-cartao": "Novo Cartão",
         "pesquisa-cartoes": "Pesquisa de Cartões",

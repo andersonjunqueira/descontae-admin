@@ -12,7 +12,7 @@ class Inicio extends Component {
     render() {
         return (
         <div>
-            {/*
+            {/* 
             <h4>Inicio</h4>
             <InicioForm doSubmit={this.pesquisar}/>
             */}

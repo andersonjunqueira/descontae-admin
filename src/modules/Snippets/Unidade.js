@@ -19,33 +19,33 @@ class Unidade extends Component {
             <div>
                 <Row>
                     <Col xs={12} md={12}>
-                        <Text name={`${this.props.name}.nome`} label={<Intl str='nome'></Intl>} maxLength={100} required={true}/>
+                        <Text name={`${this.props.name}.nome`} label={<Intl str='nome'></Intl>} maxLength={100} required={this.props.required}/>
                     </Col>
                 </Row>
                 <Row>
                     <Col xs={12} md={4}>
-                        <Password name={`${this.props.name}.senhaValidacao`} label={<Intl str='senha-validacao'></Intl>} maxLength={100} required={true}/>
+                        <Password name={`${this.props.name}.senhaValidacao`} label={<Intl str='senha-validacao'></Intl>} maxLength={100} required={this.props.required}/>
                     </Col>
                     <Col xs={12} md={4}>
-                        <Time name={`${this.props.name}.inicioExpediente`} label={<Intl str='inicio-expediente'></Intl>} required={true}/>
+                        <Time name={`${this.props.name}.inicioExpediente`} label={<Intl str='inicio-expediente'></Intl>} required={this.props.required}/>
                     </Col>
                     <Col xs={12} md={4}>
-                        <Time name={`${this.props.name}.fimExpediente`} label={<Intl str='fim-expediente'></Intl>} required={true}/>
+                        <Time name={`${this.props.name}.fimExpediente`} label={<Intl str='fim-expediente'></Intl>} required={this.props.required}/>
                     </Col>
                 </Row>
                 <Row>
                     <Col xs={12} md={12}>
-                        <Endereco name={`${this.props.name}.endereco`} required={true} formName={this.props.formName}/>
+                        <Endereco name={`${this.props.name}.endereco`} required={this.props.required} formName={this.props.formName}/>
                     </Col>
                 </Row>
                 <Row>
                     <Col xs={12} md={12}>
-                        <FieldArray name={`${this.props.name}.telefones`} component={Phones} />
+                        <FieldArray name={`${this.props.name}.telefones`} component={Phones} required={this.props.required} />
                     </Col>
                 </Row>
                 <Row>
                     <Col xs={12} md={12}>
-                        <FieldArray name={`${this.props.name}.imagens`} component={Imagens} />
+                        <FieldArray name={`${this.props.name}.imagens`} component={Imagens} required={this.props.required} />
                     </Col>
                 </Row>
             </div>
@@ -57,5 +57,9 @@ class Unidade extends Component {
 Unidade.propTypes = {
     formName: PropTypes.string
 }
+
+Unidade.defaultProps = {
+    required: false
+};
 
 export default Unidade;

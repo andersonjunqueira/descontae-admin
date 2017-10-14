@@ -17,6 +17,7 @@ import Mask from '../../components/Mask';
 import Select from '../../components/Select';
 import UF from '../../components/UF';
 import File from '../../components/File';
+import PlainText from '../../components/PlainText';
 
 class InicioForm extends Component {
 
@@ -77,6 +78,7 @@ class InicioForm extends Component {
                         <UF name="uf" label="UF"/>
                     </Col>
                     <Col md={4}>
+                        <PlainText name="text" label="PLAIN" />
                     </Col>
                     <Col md={4}>
                     </Col>
