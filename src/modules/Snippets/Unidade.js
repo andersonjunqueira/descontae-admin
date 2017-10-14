@@ -10,53 +10,7 @@ import Password from '../../components/Password';
 import Time from '../../components/Time';
 import Endereco from '../../components/Endereco';
 import Phones from './Phones';
-
-class renderImages extends Component {
-    render() {
-        const { fields, meta } = this.props; 
-        return (
-            <Card>
-                <CardHeader>
-                    <Intl str='imagens'></Intl> 
-                    <Button type="button" color="success" className="pull-right" size="sm" onClick={() => fields.push()}>
-                        <i className="fa fa-plus"></i>
-                    </Button>
-                </CardHeader>
-                <CardBody>
-                    {(!fields || fields.length === 0) && <Intl str='nenhuma-imagem-encontrada'></Intl>}    
-                    <Row>
-                    {fields.map((field, index) => {
-                        return (
-                            <Col xs={12} md={4} key={index}> 
-                                <Row>
-                                    <Col xs={8} md={10}>
-                                        <File name={`${field}.imagem`} 
-                                            label={<Intl str='imagem'></Intl>} 
-                                            required={true} 
-                                            width={200} height={200}
-                                            placeholder={<Intl str="miniatura-placeholder"></Intl>}
-                                            help={<Intl str="imagem-plano-help"></Intl>}
-                                            accept="image/jpeg, image/png"
-                                            maxSize={500*1024}
-                                        />
-                                    </Col>
-                                    <Col xs={4} md={2}>
-                                        <a className="btn btn-danger btn-sm fields-remove-button" onClick={() => { fields.remove(index); } }>
-                                          <i className="fa fa-trash"></i>
-                                        </a>
-                                    </Col>
-                                </Row>
-                            </Col>
-
-                        );
-                    })}
-                    </Row>
-                    {meta.error && <span className="fields-error">{meta.error}</span>}
-                </CardBody>
-            </Card>
-        );
-    }
-}
+import Imagens from './Imagens';
 
 class Unidade extends Component {
 
@@ -91,7 +45,7 @@ class Unidade extends Component {
                 </Row>
                 <Row>
                     <Col xs={12} md={12}>
-                        <FieldArray name={`${this.props.name}.imagens`} component={renderImages} />
+                        <FieldArray name={`${this.props.name}.imagens`} component={Imagens} />
                     </Col>
                 </Row>
             </div>

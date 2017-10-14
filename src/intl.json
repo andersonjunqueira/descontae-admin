@@ -113,6 +113,8 @@
         "senha-validacao": "Senha de Validação",
         "inicio-expediente": "Início do Expediente",
         "fim-expediente": "Fim do Expediente",
+        "telefone-obrigatorio": "Pelo menos um telefone deve ser informado.",
+        "imagem-obrigatoria": "Pelo menos uma imagem deve ser informada.",
 
         "novo-modelo": "Novo Modelo",
         "pesquisa-modelos": "Pesquisa de Modelos",

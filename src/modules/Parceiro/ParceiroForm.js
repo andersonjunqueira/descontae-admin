@@ -10,6 +10,7 @@ import SelectMarca from '../Marca/SelectMarca';
 import Phones from '../Snippets/Phones';
 import Unidades from '../Snippets/Unidades';
 import Intl from '../../components/Intl';
+import { translate } from "../../components/Intl/Intl.actions";
 
 class ParceiroForm extends Component {
 
@@ -68,7 +69,7 @@ class ParceiroForm extends Component {
                     </Col>
                 </Row>
 
-                <FieldArray name="telefones" component={Phones} />
+                <FieldArray name="telefones" component={Phones} required={true}/>
 
                 <FieldArray name="unidades" component={Unidades} formName="ParceiroForm"/>
 
@@ -92,6 +93,28 @@ class ParceiroForm extends Component {
 
 const validate = values => {
     const errors = {};
+    if(values.telefones && values.telefones.length < 1) {
+        errors.telefones = [];
+        errors.telefones._error = translate("telefone-obrigatorio");
+    }
+
+    errors.unidades = [];
+    if(!values.unidades || values.unidades.length < 1) {
+        errors.unidades._error = translate("unidade-obrigatoria");
+    } else {
+        for(let index = 0; index < values.unidades.length; index++) {
+            errors.unidades[index] = {};
+            if(values.unidades[index].telefones && values.unidades[index].telefones.length < 1) {
+                errors.unidades[index].telefones = [];
+                errors.unidades[index].telefones._error = translate("telefone-obrigatorio");
+            }
+            if(values.unidades[index].imagens && values.unidades[index].imagens.length < 1) {
+                errors.unidades[index].imagens = [];
+                errors.unidades[index].imagens._error = translate("imagem-obrigatoria");
+            }
+        }
+    }
+    
     return errors;
 }
 
