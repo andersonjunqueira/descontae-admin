@@ -12,7 +12,7 @@ export const [ PARCEIROS_PESQUISA, PARCEIRO_EDICAO, PARCEIRO_SETMODE ] = [ "PARC
 const converter = {
     toFrontend: (values) => {
 
-        const data = Object.assign({}, values, {});
+        const data = JSON.parse(JSON.stringify(values));
         data.cnpj = cnpjFunctions.applyMask(data.cnpj);
 
         if(data.telefones) {
@@ -47,7 +47,7 @@ const converter = {
 
     toBackend: (values) => {
 
-        const data = Object.assign({}, values, {});
+        const data = JSON.parse(JSON.stringify(values));
         data.cnpj = numberFunctions.applyMask(data.cnpj);
 
         if(data.telefones) {

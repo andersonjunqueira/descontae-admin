@@ -42,7 +42,7 @@ export const consultar = (filtro, start, pagesize) => {
 
     return dispatch => {
 
-        axios.get('/cartoes', { params: filtro })
+        axios.get('/cartoes/simples', { params: filtro })
             .then(function(response) {
                 dispatch({type: CARTOES_PESQUISA, payload: response.data});
 

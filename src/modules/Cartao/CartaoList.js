@@ -35,7 +35,7 @@ class CartaoList extends Component {
     }
 
     excluir(value) {
-        this.props.doExcluir(this.state.modalParam.id);
+        this.props.doExcluir(this.state.modalParam[0]);
         this.toggle({});
     }
 
@@ -75,24 +75,14 @@ class CartaoList extends Component {
                         </thead>
                         <tbody>
                             {Object.keys(data.content).map(function(key) {
-                                let usuario = data.content[key].pessoa;
-                                let cliente = data.content[key].assinatura;
-                                if(cliente) {
-                                    if(cliente.pessoa) {
-                                        cliente = cliente.pessoa;
-                                    } else {
-                                        cliente = cliente.cliente;
-                                    }
-                                }
-                                
                                 return (<tr key={key}>
-                                    <td className="text-center"><i className={"fa fa-credit-card " + (data.content[key].ativo === 'A' ? "text-success" : "text-danger")}></i></td>
-                                    <td className="text-center">{data.content[key].codigo}</td>
-                                    <td className="text-center">{usuario && usuario.cpf ? cpfFunctions.applyMask(usuario.cpf) : ""}</td>
-                                    <td>{usuario ? usuario.nome : ""}</td>
-                                    <td>{cliente ? cliente.nome : "" }</td>
+                                    <td className="text-center"><i className={"fa fa-credit-card " + (data.content[key][5] === 'A' ? "text-success" : "text-danger")}></i></td>
+                                    <td className="text-center">{data.content[key][1]}</td>
+                                    <td className="text-center">{data.content[key][3] ? cpfFunctions.applyMask(data.content[key][3]) : ""}</td>
+                                    <td>{data.content[key][2] ? data.content[key][2] : ""}</td>
+                                    <td>{data.content[key][4] ? data.content[key][4] : "" }</td>
                                     <td className="text-center">
-                                        <Button type="button" onClick={() => doCarregar(data.content[key].id)} color="secondary" size="sm">
+                                        <Button type="button" onClick={() => doCarregar(data.content[key][0])} color="secondary" size="sm">
                                             <i className="fa fa-pencil"></i>
                                         </Button>
 
@@ -155,7 +145,7 @@ class CartaoList extends Component {
                 <Modal isOpen={this.state.modal} toggle={toggle}>
                     <ModalHeader toggle={toggle}><Intl str="confirmacao-exclusao"></Intl></ModalHeader>
                     <ModalBody>
-                        <Intl str="cartao-excluir-mensagem" params={[this.state.modalParam.codigo]}></Intl>
+                        <Intl str="cartao-excluir-mensagem" params={[this.state.modalParam[1]]}></Intl>
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={() => this.excluir()}><Intl str="excluir"></Intl></Button>

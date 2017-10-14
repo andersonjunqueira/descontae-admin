@@ -11,14 +11,14 @@ export const [ MODELOS_PESQUISA, MODELO_EDICAO, MODELO_SETMODE ] = [ "MODELOS_PE
 const converter = {
     toFrontend: (values) => {
 
-        const data = Object.assign({}, values, {});
+        const data = JSON.parse(JSON.stringify(values));
         return data;
 
     },
 
     toBackend: (values) => {
 
-        const data = Object.assign({}, values, {});
+        const data = JSON.parse(JSON.stringify(values));
         return data;
 
     }
@@ -42,7 +42,6 @@ export const consultar = (filtro, start, pagesize) => {
                 dispatch({type: MODELOS_PESQUISA, payload: response.data});
 
             }).catch(function(error){
-                console.log(error);
                 dispatch(toaster("erro-consulta-modelos", error.response.data, [], {status: "error"}));
             });
 
@@ -58,7 +57,6 @@ export const salvar = (values, callback) => {
                 dispatch(toaster(null, "modelo-salvo", [], {status: "success"}));
 
             }).catch(function(error){
-                console.log(error);
                 dispatch(toaster("erro-salvar-modelo", error.response.data, [], {status: "error"}));
             });
 
@@ -74,7 +72,6 @@ export const excluir = (id, callback) => {
                 dispatch(toaster(null, "modelo-excluido", [], {status: "success"}));
 
             }).catch(function(error){
-                console.log(error);
                 dispatch(toaster("erro-excluir-modelo", error.response.data, [], {status: "error"}));
             });
 
@@ -90,7 +87,6 @@ export const carregar = (id) => {
                 dispatch({type: MODELO_EDICAO, payload: converter.toFrontend(response.data)});
 
             }).catch(function(error){
-                console.log(error);
                 dispatch(toaster("erro-carga-modelo", error.response.data, [], {status: "error"}));
             });
 

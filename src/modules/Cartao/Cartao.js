@@ -36,10 +36,7 @@ class Cartao extends Component {
 
     consultar(values, page = 0, pagesize = PAGESIZE_DEFAULT) {
         let filter = Object.assign({}, values);
-        filter.sort = "codigo,ASC";
-        if(filter && filter.nome) {
-            filter.nome += "*";
-        }
+        filter.sort = "1,ASC";
 
         this.setState(Object.assign({}, this.state, { lastFilter: filter }));
         this.props.actions.setMode(MODE_LIST);

@@ -54,7 +54,6 @@ export const login = (auth) => {
 
             }).catch( (error) => {
                 
-                console.log(error);
                 if(error.response) {
 
                     // 404 É USUÁRIO NÃO ENCONTRADO, REGISTRANDO
@@ -74,7 +73,6 @@ export const login = (auth) => {
 
                           }).catch( (error) => {
 
-                              console.log(error);
                               dispatch(toaster("novo-usuario", "problema-registro", [], {status: "danger"}));
                               setTimeout(() => logout(auth), 3000);
 
@@ -88,7 +86,7 @@ export const login = (auth) => {
                     }
 
                 } else {
-                    console.log("erro", error);
+                    dispatch(toaster("erro-desconhecido", error, [], {status: "danger"}));
                 }
 
             });
