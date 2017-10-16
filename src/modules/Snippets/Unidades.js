@@ -32,7 +32,7 @@ class Unidades extends Component {
     }
 
     render() {
-        const { fields, meta, data } = this.props; 
+        const { fields, meta } = this.props; 
         
         let tabs = (
             <div>

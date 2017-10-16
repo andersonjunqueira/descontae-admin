@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Row, Col, Button } from 'reactstrap';
 
 import Intl from '../../components/Intl';
-import Phone from '../../components/Phone';
 import Card, { CardHeader, CardBody } from '../../components/Card';
 import File from '../../components/File';
 
@@ -28,7 +27,6 @@ class Imagens extends Component {
                                     <Col xs={8} md={10}>
                                         <File name={`${field}.imagem`} 
                                             label={<Intl str='imagem'></Intl>} 
-                                            required={true} 
                                             width={200} height={200}
                                             placeholder={<Intl str="miniatura-placeholder"></Intl>}
                                             help={<Intl str="imagem-plano-help"></Intl>}

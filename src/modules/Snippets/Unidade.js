@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { FieldArray } from 'redux-form';
-import { Row, Col, Button } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 
-import Card, { CardHeader, CardBody } from '../../components/Card';
 import Intl from '../../components/Intl';
 import Text from '../../components/Text';
-import File from '../../components/File';
 import Password from '../../components/Password';
 import Time from '../../components/Time';
 import Endereco from '../../components/Endereco';
