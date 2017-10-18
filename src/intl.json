@@ -116,6 +116,8 @@
         "telefone-obrigatorio": "Pelo menos um telefone deve ser informado.",
         "imagem-obrigatoria": "Pelo menos uma imagem deve ser informada.",
         "unidade-obrigatoria": "Pelo menos uma unidade deve ser informada.",
+        "latitude": "Latitude", 
+        "longitude": "Longitude",
 
         "novo-modelo": "Novo Modelo",
         "pesquisa-modelos": "Pesquisa de Modelos",

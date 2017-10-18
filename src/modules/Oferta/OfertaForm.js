@@ -65,7 +65,6 @@ class OfertaForm extends Component {
             {value: "I", text: translate("inativo")}
         ];
 
-        //TODO O COMPORTAMENTO DO CHECKBOX AINDA NÃO ESTÁ COERENTE QUANDO MUDA O VALOR DA COMBO, DEVERIA FICAR TUDO COMO FALSE
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
 
@@ -77,10 +76,10 @@ class OfertaForm extends Component {
                         <TextArea name="regras" label={<Intl str='regras'></Intl>} maxLength={1000} required={true} />
                         <Row>
                             <Col xs={12} md={6}>
-                                <Number name="valor" label={<Intl str='valor'></Intl>} required={true} />
+                                <Number name="valor" label={<Intl str='valor'></Intl>} required={true} step={0.1} precision={2} min={0}/>
                             </Col>
                             <Col xs={12} md={6}>
-                                <Number name="desconto" label={<Intl str='desconto'></Intl>} required={true} />
+                                <Number name="desconto" label={<Intl str='desconto'></Intl>} required={true} step={0.1} precision={2} min={0}/>
                             </Col>
                         </Row>
                         <Row>

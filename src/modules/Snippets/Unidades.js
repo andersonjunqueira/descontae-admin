@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Button } from 'reactstrap';
+import { Button, Row, Col } from 'reactstrap';
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 
 import PlainText from '../../components/PlainText';
@@ -15,6 +15,7 @@ class Unidades extends Component {
         super(props);
         this.tabToggle = this.tabToggle.bind(this);
         this.novaUnidade = this.novaUnidade.bind(this);
+        this.removerUnidade = this.removerUnidade.bind(this);
 
         this.state = {
             activeTab: 0
@@ -29,6 +30,11 @@ class Unidades extends Component {
 
     novaUnidade() {
         this.props.fields.push({nome: translate("nova-unidade")});
+    }
+
+    removerUnidade(index) {
+        this.props.fields.remove(index);
+        this.tabToggle(0);
     }
 
     render() {
@@ -51,6 +57,13 @@ class Unidades extends Component {
                 {fields.map((field, index) => {
                     return (
                         <TabPane key={index} tabId={index}>
+                            <Row>
+                                <Col xs={12} md={12}>
+                                    <Button type="button" color="danger" size="sm" className="pull-right" onClick={() => this.removerUnidade(index)}>
+                                        <i className="fa fa-trash"></i>
+                                    </Button>
+                                </Col>
+                            </Row>
                             <Unidade name={`${field}`} formName={this.props.formName} required={this.props.required}/>
                         </TabPane>
                     );

@@ -4,6 +4,7 @@ import { Row, Col } from 'reactstrap';
 
 import Intl from '../../components/Intl';
 import Text from '../../components/Text';
+import Number from '../../components/Number';
 import Password from '../../components/Password';
 import Time from '../../components/Time';
 import Endereco from '../../components/Endereco';
@@ -29,6 +30,14 @@ class Unidade extends Component {
                     </Col>
                     <Col xs={12} md={4}>
                         <Time name={`${this.props.name}.fimExpediente`} label={<Intl str='fim-expediente'></Intl>} required={this.props.required}/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Text name={`${this.props.name}.endereco.latitude`} label={<Intl str='latitude'></Intl>} precision={6} step={0.1}/>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Text name={`${this.props.name}.endereco.longitude`} label={<Intl str='longitude'></Intl>} precision={6} step={0.1}/>
                     </Col>
                 </Row>
                 <Row>
