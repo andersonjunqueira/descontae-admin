@@ -15,6 +15,8 @@ import ofertaReducer from '../modules/Oferta/Oferta.reducers';
 import cartaoReducer from '../modules/Cartao/Cartao.reducers';
 import pesquisaPessoaReducer from '../modules/PesquisaPessoa/PesquisaPessoa.reducers';
 import pesquisaClienteReducer from '../modules/PesquisaCliente/PesquisaCliente.reducers';
+import pessoaReducer from '../modules/Pessoa/Pessoa.reducers';
+
 
 import profileReducer from '../modules/Profile/Profile.reducers';
 
@@ -58,6 +60,7 @@ const reducers = combineReducers({
     cartaoReducer,
     pesquisaPessoaReducer,
     pesquisaClienteReducer,
+    pessoaReducer,
 
     ufReducer,
     intlReducer,

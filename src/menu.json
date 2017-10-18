@@ -4,24 +4,14 @@
         "heading": true
     },
     {
-        "text": "clientes",
-        "icon": "fa fa-group",
-        "url": "/clientes"
+        "text": "cartoes",
+        "icon": "fa fa-credit-card",
+        "url": "/cartoes"
     },
     {
         "text": "parceiros",
-        "icon": "fa fa-group",
+        "icon": "fa fa-hand-spock-o",
         "url": "/parceiros"
-    },
-    {
-        "text": "marcas",
-        "icon": "fa fa-industry",
-        "url": "/marcas"
-    },
-    {
-        "text": "planos",
-        "icon": "fa fa-money",
-        "url": "/planos"
     },
     {
         "text": "ofertas",
@@ -29,9 +19,14 @@
         "url": "/ofertas"
     },
     {
-        "text": "cartoes",
-        "icon": "fa fa-credit-card",
-        "url": "/cartoes"
+        "text": "clientes",
+        "icon": "fa fa-building-o",
+        "url": "/clientes"
+    },
+    {
+        "text": "pessoas",
+        "icon": "fa fa-group",
+        "url": "/pessoas"
     },
     {
         "text": "configuracoes",
@@ -41,6 +36,16 @@
                 "text": "categorias",
                 "icon": "fa fa-tag",
                 "url": "/categorias"
+            },
+            {
+                "text": "marcas",
+                "icon": "fa fa-industry",
+                "url": "/marcas"
+            },
+            {
+                "text": "planos",
+                "icon": "fa fa-money",
+                "url": "/planos"
             }
         ]
 
