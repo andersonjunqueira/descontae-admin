@@ -24,11 +24,6 @@
         "url": "/clientes"
     },
     {
-        "text": "pessoas",
-        "icon": "fa fa-group",
-        "url": "/pessoas"
-    },
-    {
         "text": "configuracoes",
         "icon": "fa fa-cogs",
         "submenu": [
