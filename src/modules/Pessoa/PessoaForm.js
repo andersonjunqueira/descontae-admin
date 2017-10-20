@@ -71,7 +71,7 @@ class PessoaForm extends Component {
                 </Row>
                 <Row>
                     <Col xs={12} md={4}>
-                        <CPF name="cpf" label={<Intl str='cpf'></Intl>}/>
+                        <CPF name="cpf" label={<Intl str='cpf'></Intl>} required={true}/>
                     </Col>
                     <Col xs={12} md={4}>
                         <Date name="dataNascimento" label={<Intl str='data-nascimento'></Intl>}/>
@@ -106,7 +106,7 @@ class PessoaForm extends Component {
                         <Date name="dataAlteracao" label={<Intl str='data-alteracao'></Intl>} disabled={true}/>
                     </Col>
                     <Col xs={12} md={4}>
-                        <Select name="tipoPessoa" options={tipoPessoaTypes} label={<Intl str='tipo-pessoa'></Intl>} disabled={this.state.id}/>
+                        <Select name="tipoPessoa" options={tipoPessoaTypes} label={<Intl str='tipo-pessoa'></Intl>} disabled={this.state.id} required={true}/>
                     </Col>
                 </Row>
 

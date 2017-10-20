@@ -130,6 +130,11 @@
         "administrador": "Administrador",
         "parceiro": "Parceiro",
         "cliente": "Cliente",
+        "usuario-ja-registrado": "Usuário já registrado.",
+        "cpf-ja-registrado": "CPF já registrado.",
+        "email-ja-registrado": "E-mail já registrado.",
+        "erro-perfil-autenticacao": "Erro ao criar o perfil de autenticação.",
+        "erro-criar-senha": "Erro ao criar a senha para o usuario.",
 
         "novo-modelo": "Novo Modelo",
         "pesquisa-modelos": "Pesquisa de Modelos",

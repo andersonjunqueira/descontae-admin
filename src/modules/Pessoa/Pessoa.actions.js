@@ -44,21 +44,23 @@ const converter = {
         data.dataAlteracao = dateFunctions.toBackend(data.dataAlteracao);
         data.tipoPessoa = { id: data.tipoPessoa };
 
-        data.endereco = {
-            cep: numberFunctions.applyMask(data.endereco.cep),
-            logradouro: data.endereco.logradouro,
-            complemento: data.endereco.complemento,
-            numero: data.endereco.numero,
-            bairro: data.endereco.bairro,
-            cidade: {
-                id: data.endereco.idCidade,
-                nome: data.endereco.cidade,
-                estado: {
-                    id: data.endereco.idUf,
-                    sigla: data.endereco.uf
+        if(data.endereco) {
+            data.endereco = {
+                cep: numberFunctions.applyMask(data.endereco.cep),
+                logradouro: data.endereco.logradouro,
+                complemento: data.endereco.complemento,
+                numero: data.endereco.numero,
+                bairro: data.endereco.bairro,
+                cidade: {
+                    id: data.endereco.idCidade,
+                    nome: data.endereco.cidade,
+                    estado: {
+                        id: data.endereco.idUf,
+                        sigla: data.endereco.uf
+                    }
                 }
-            }
-        };
+            };
+        }
 
         if(data.telefones && data.telefones.length > 0) {
             for(let i = 0; i < data.telefones.length; i++) {
