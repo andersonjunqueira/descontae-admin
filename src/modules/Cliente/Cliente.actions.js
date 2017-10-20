@@ -10,7 +10,7 @@ export const [ CLIENTES_PESQUISA, CLIENTE_EDICAO, CLIENTE_SETMODE ] = [ "CLIENTE
 const converter = {
     toFrontend: (values) => {
 
-        const data = Object.assign({}, values, {});
+        const data = JSON.parse(JSON.stringify(values));
 
         data.endereco.cep = zipcodeFunctions.applyMask(values.endereco.cep);
         data.endereco.idUf = values.endereco.cidade.estado.id;
@@ -30,7 +30,7 @@ const converter = {
 
     toBackend: (values) => {
 
-        const data = Object.assign({}, values, {});
+        const data = JSON.parse(JSON.stringify(values));
 
         data.cnpj = numberFunctions.applyMask(values.cnpj);
         data.endereco = {

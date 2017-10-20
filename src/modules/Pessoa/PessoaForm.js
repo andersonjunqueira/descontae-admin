@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { FieldArray, reduxForm, change } from 'redux-form';
+import { FieldArray, reduxForm } from 'redux-form';
 import { Form, Row, Col, Button } from 'reactstrap';
 
 import Text from '../../components/Text';
-import CNPJ from '../../components/CNPJ';
+import Select from '../../components/Select';
 import Email from '../../components/Email';
-import Phone from '../../components/Phone';
-import Endereco from '../../components/Endereco';
+import CPF from '../../components/CPF';
 import Intl from '../../components/Intl';
+import Date from '../../components/Date';
 import Phones from '../Snippets/Phones';
+import Endereco from '../../components/Endereco';
 import Card, { CardHeader, CardBody } from '../../components/Card';
-
-import { toaster } from '../../components/Notification/Notification.actions';
+import { translate } from '../../components/Intl/Intl.actions';
 
 class PessoaForm extends Component {
 
@@ -30,7 +30,7 @@ class PessoaForm extends Component {
                 this.props.dispatch(this.props.initialize(this.props.data));
                 this.setState(Object.assign(this.state, { id: this.props.data.id }));
             }
-        }
+        } 
     }
 
     cancelar() {
@@ -39,28 +39,53 @@ class PessoaForm extends Component {
     }
 
     render() {
+
         const { handleSubmit, doSubmit, pristine, reset, submitting, invalid } = this.props;
+        const sexoTypes = [
+            {value: "M", text: translate("masculino")},
+            {value: "F", text: translate("feminino")}
+        ];
+
+        const tipoPessoaTypes = [
+            {value: "1", text: translate("administrador")},
+            {value: "4", text: translate("usuario")}
+        ];
+
+        if(this.state.id) {
+            tipoPessoaTypes.push({value: "2", text: translate("parceiro")});
+            tipoPessoaTypes.push({value: "3", text: translate("cliente")});
+        }
+
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
 
-                <h4><Intl str='PESSOA'></Intl></h4>
+                <h4><Intl str='pessoa'></Intl></h4>
 
                 <Row>
-                    <Col xs={12} md={12}>
+                    <Col xs={12} md={6}>
                         <Text name="nome" label={<Intl str='nome'></Intl>} maxLength={100} required={true}/>
                     </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} md={12}>
-                        <Text name="nomeFantasia" label={<Intl str='nome-fantasia'></Intl>} maxLength={100} required={true}/>
+                    <Col xs={12} md={6}>
+                        <Email name="email" label={<Intl str='email'></Intl>} maxLength={100} required={true}/>
                     </Col>
                 </Row>
                 <Row>
+                    <Col xs={12} md={4}>
+                        <CPF name="cpf" label={<Intl str='cpf'></Intl>}/>
+                    </Col>
+                    <Col xs={12} md={4}>
+                        <Date name="dataNascimento" label={<Intl str='data-nascimento'></Intl>}/>
+                    </Col>
+                    <Col xs={12} md={4}>
+                        <Select name="sexo" options={sexoTypes} label={<Intl str='sexo'></Intl>}/>
+                    </Col>
+                </Row>                
+                <Row>
                     <Col xs={12} md={6}>
-                        <CNPJ name="cnpj" label={<Intl str='cnpj'></Intl>} required={true}/>
+                        <Text name="facebook" label={<Intl str='facebook'></Intl>} maxLength={50}/>
                     </Col>
                     <Col xs={12} md={6}>
-                        <Email name="email" label={<Intl str='email'></Intl>} required={true}/>
+                        <Text name="instagram" label={<Intl str='instagram'></Intl>} maxLength={50}/>
                     </Col>
                 </Row>
 
@@ -72,6 +97,18 @@ class PessoaForm extends Component {
                         <Endereco name="endereco" formName="PessoaForm"/>
                     </CardBody>
                 </Card>
+
+                <Row>
+                    <Col xs={12} md={4}>
+                        <Date name="dataCadastro" label={<Intl str='data-cadastro'></Intl>} disabled={true}/>
+                    </Col>
+                    <Col xs={12} md={4}>
+                        <Date name="dataAlteracao" label={<Intl str='data-alteracao'></Intl>} disabled={true}/>
+                    </Col>
+                    <Col xs={12} md={4}>
+                        <Select name="tipoPessoa" options={tipoPessoaTypes} label={<Intl str='tipo-pessoa'></Intl>} disabled={this.state.id}/>
+                    </Col>
+                </Row>
 
                 <Button type="submit" color="primary" disabled={invalid || submitting}>
                     <Intl str='salvar'></Intl>

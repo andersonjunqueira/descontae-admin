@@ -1,8 +1,8 @@
 import axios from "axios";
 
 import { toaster } from '../../components/Notification/Notification.actions';
+import { dateFunctions } from '../../components/Date';
 import  { numberFunctions } from '../../components/Number';
-import { cnpjFunctions } from '../../components/CNPJ';
 import { zipcodeFunctions } from '../../components/ZipCode';
 import { phoneFunctions } from '../../components/Phone';
 
@@ -12,6 +12,25 @@ const converter = {
     toFrontend: (values) => {
 
         const data = JSON.parse(JSON.stringify(values));
+        data.dataNascimento = dateFunctions.toFrontend(data.dataNascimento);
+        data.dataCadastro = dateFunctions.toFrontend(data.dataCadastro);
+        data.dataAlteracao = dateFunctions.toFrontend(data.dataAlteracao);
+        data.tipoPessoa = data.tipoPessoa.id;
+
+        if(data.endereco) {
+            data.endereco.cep = zipcodeFunctions.applyMask(data.endereco.cep);
+            data.endereco.idUf = data.endereco.cidade.estado.id;
+            data.endereco.uf = data.endereco.cidade.estado.sigla;
+            data.endereco.idCidade = data.endereco.cidade.id;
+            data.endereco.cidade = data.endereco.cidade.nome;
+        }
+
+        if(data.telefones && data.telefones.length > 0) {
+            for(let i = 0; i < data.telefones.length; i++) {
+                data.telefones[i].numero = phoneFunctions.applyMask(data.telefones[i].numero);
+            };
+        }
+        
         return data;
 
     },
@@ -19,8 +38,35 @@ const converter = {
     toBackend: (values) => {
 
         const data = JSON.parse(JSON.stringify(values));
-        return data;
+        data.cpf = numberFunctions.applyMask(data.cpf);
+        data.dataNascimento = dateFunctions.toBackend(data.dataNascimento);
+        data.dataCadastro = dateFunctions.toBackend(data.dataCadastro);
+        data.dataAlteracao = dateFunctions.toBackend(data.dataAlteracao);
+        data.tipoPessoa = { id: data.tipoPessoa };
 
+        data.endereco = {
+            cep: numberFunctions.applyMask(data.endereco.cep),
+            logradouro: data.endereco.logradouro,
+            complemento: data.endereco.complemento,
+            numero: data.endereco.numero,
+            bairro: data.endereco.bairro,
+            cidade: {
+                id: data.endereco.idCidade,
+                nome: data.endereco.cidade,
+                estado: {
+                    id: data.endereco.idUf,
+                    sigla: data.endereco.uf
+                }
+            }
+        };
+
+        if(data.telefones && data.telefones.length > 0) {
+            for(let i = 0; i < data.telefones.length; i++) {
+                data.telefones[i].numero = numberFunctions.applyMask(data.telefones[i].numero);
+            };
+        }
+
+        return data;
     }
 }
 

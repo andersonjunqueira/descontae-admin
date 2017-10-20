@@ -4,7 +4,6 @@ import { Row, Col } from 'reactstrap';
 
 import Intl from '../../components/Intl';
 import Text from '../../components/Text';
-import Number from '../../components/Number';
 import Password from '../../components/Password';
 import Time from '../../components/Time';
 import Endereco from '../../components/Endereco';
