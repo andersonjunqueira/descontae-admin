@@ -73,20 +73,24 @@ export const login = (auth) => {
 
                           }).catch( (error) => {
 
-                              dispatch(toaster("novo-usuario", "problema-registro", [], {status: "danger"}));
+                              dispatch(toaster("novo-usuario", "problema-registro", [], {status: "error"}));
                               setTimeout(() => logout(auth), 3000);
 
                           });
 
                     } else {
 
-                        dispatch(toaster("erro-desconhecido", null, [], {status: "danger"}));
+                        dispatch(toaster("erro-desconhecido", null, [], {status: "error"}));
                         setTimeout(() => logout(auth), 3000);
 
                     }
 
                 } else {
-                    dispatch(toaster("erro-desconhecido", error, [], {status: "danger"}));
+                    if(error.message === 'Network Error') {
+                        dispatch(toaster("erro-desconhecido", "erro-backend-inacessivel", [], {status: "error"}));    
+                    } else {
+                        dispatch(toaster(null, "erro-desconhecido", [], {status: "error"}));
+                    }
                 }
 
             });

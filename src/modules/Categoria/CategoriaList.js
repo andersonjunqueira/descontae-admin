@@ -64,15 +64,15 @@ class CategoriaList extends Component {
                     <Table hover size="sm" className="tabela">
                         <thead>
                             <tr>
-                                <th className="categ-col-1">#</th>
-                                <th className="categ-col-2"><Intl str="nome"></Intl></th>
-                                <th className="categ-col-3"></th>
+                                <th className="table-w-5"></th>
+                                <th className="table-w-75"><Intl str="nome"></Intl></th>
+                                <th className="table-w-20 text-center"></th>
                             </tr>
                         </thead>
                         <tbody>
                             {Object.keys(data.content).map(function(key) {
                                 return (<tr key={key}>
-                                    <td className="text-center" scope="row">{data.content[key].id}</td>
+                                    <td></td>
                                     <td>{data.content[key].nome}</td>
                                     <td className="text-center">
                                         <Button type="button" onClick={() => doCarregar(data.content[key].id)} color="secondary" size="sm">

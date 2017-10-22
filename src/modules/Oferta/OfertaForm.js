@@ -79,7 +79,7 @@ class OfertaForm extends Component {
                                 <Number name="valor" label={<Intl str='valor'></Intl>} required={true} step={0.1} precision={2} min={0}/>
                             </Col>
                             <Col xs={12} md={6}>
-                                <Number name="desconto" label={<Intl str='desconto'></Intl>} required={true} step={0.1} precision={2} min={0}/>
+                                <Number name="desconto" label={<Intl str='desconto'></Intl>} required={true} step={1} min={0}/>
                             </Col>
                         </Row>
                         <Row>

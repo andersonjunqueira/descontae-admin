@@ -135,6 +135,8 @@
         "email-ja-registrado": "E-mail já registrado.",
         "erro-perfil-autenticacao": "Erro ao criar o perfil de autenticação.",
         "erro-criar-senha": "Erro ao criar a senha para o usuario.",
+        "registro-em-uso": "Esse registro é referenciado em outros objetos.",
+        "erro-backend-inacessivel": "Backend inacessível.",
 
         "novo-modelo": "Novo Modelo",
         "pesquisa-modelos": "Pesquisa de Modelos",
