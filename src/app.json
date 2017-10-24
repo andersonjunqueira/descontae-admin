@@ -1,27 +1,25 @@
 {
-    "title": "Descontaê Admin", 
-    "subtitle": "Administração",
-    "config": {
-        "keycloakConfigFile": "/descontae-admin/keycloak.json",
-        "axiosBaseURL": "http://213.136.69.6:8000/descontae-backend/api"
+  "title": "Descontaê Admin",
+  "subtitle": "Administração",
+  "config": {
+    "keycloakConfigFile": "keycloak.json",
+    "axiosBaseURL": "http://localhost:8000/descontae-backend/api"
+  },
+  "userMenu": [
+    {
+      "text": "usuario",
+      "heading": true
     },
-
-    "userMenu": [
-        {
-            "text": "usuario",
-            "heading": true
-        },
-        {
-            "text": "meu-perfil",
-            "url": "/profile",
-            "icon": "fa fa-user"
-        }
-    ],
-
-    "headerMenu": [
-        {
-            "text": "inicio",
-            "url": "/"
-        }
-    ]
+    {
+      "text": "meu-perfil",
+      "url": "/profile",
+      "icon": "fa fa-user"
+    }
+  ],
+  "headerMenu": [
+    {
+      "text": "inicio",
+      "url": "/"
+    }
+  ]
 }

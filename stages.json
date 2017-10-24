@@ -1,0 +1,22 @@
+[{
+    "id": "local",
+    "default": true,
+    "config": {
+        "keycloakConfigFile": "keycloak.json",
+        "axiosBaseURL": "http://localhost:8000/descontae-backend/api"
+    }
+},
+{
+    "id": "dev",
+    "config": {
+        "keycloakConfigFile": "keycloak.json",
+        "axiosBaseURL": "http://213.136.69.6:8000/descontae-backend/api"
+    }
+},
+{
+    "id": "prod",
+    "config": {
+        "keycloakConfigFile": "keycloak.json",
+        "axiosBaseURL": "http://213.136.69.6:8000/descontae-backend/api"
+    }
+}]

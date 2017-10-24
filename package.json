@@ -18,7 +18,7 @@
     "react-dom": "15.4.2",
     "react-redux": "5.0.2",
     "react-router": "3.0.2",
-
+    
     "redux": "3.6.0",
     "redux-form": "6.8.0",
     "redux-thunk": "2.2.0",
@@ -26,12 +26,13 @@
     "react-dropzone-component": "2.0.0",
     "react-maskedinput": "4.0.0",
     "react-numeric-input": "2.2.0",
-
+    
     "reactstrap": "4.6.2",
     "react-transition-group": "1.1.2",
     "react-addons-css-transition-group": "15.4.2",
     "react-addons-transition-group": "15.4.2",
-
+    
+    "yargs": "9.0.1",
     "axios": "0.16.1",
     "keycloak-js": "3.1.0",
     "chart.js": "2.5.0",
@@ -45,6 +46,10 @@
   },
 
   "scripts": {
+    "stage-local": "node stage.js --local",
+    "stage-dev": "node stage.js --dev",
+    "stage-prod": "node stage.js --prod",
+
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

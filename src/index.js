@@ -14,12 +14,6 @@ import { initLanguage } from './components/Intl/Intl.actions';
 import appData from './app.json';
 import intlData from './intl.json';
 
-// CONFIGURAÇÃO DO AMBIENTE LOCAL
-if(location.hostname === "localhost") {
-    appData.config.keycloakConfigFile = "/keycloak-local.json";
-    appData.config.axiosBaseURL = "http://localhost:8000/descontae-backend/api"
-}
-
 // CRIAÇÃO DA REDUX STORE
 const store = createStore(
     reducers,
