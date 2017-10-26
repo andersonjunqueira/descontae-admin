@@ -58,10 +58,20 @@ class OfertaList extends Component {
                     paginationLinks.push({ icon: "fa fa-step-backward", page: 0});
                 }
 
-                for (let i=0; i < data.totalPages; i++) {
-                    paginationLinks.push({ text: i+1, page: i, active: i === data.number});
+                let start = data.number - 4;
+                let last = data.number + 5;
+
+                if(start < 0) {
+                    start = 0;
                 }
 
+                if(last > data.totalPages) {
+                    last = data.totalPages;
+                }
+
+                for (let i=start; i < last; i++) {
+                    paginationLinks.push({ text: i+1, page: i, active: i === data.number});
+                }
                 if(!data.last) {
                     paginationLinks.push({ icon: "fa fa-step-forward", page: data.totalPages-1});
                 }

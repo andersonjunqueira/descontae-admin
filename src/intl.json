@@ -137,6 +137,7 @@
         "erro-criar-senha": "Erro ao criar a senha para o usuario.",
         "registro-em-uso": "Esse registro é referenciado em outros objetos.",
         "erro-backend-inacessivel": "Backend inacessível.",
+        "vigencia-obrigatorias": "A vigëncia dos cartões é obrigatória.",
 
         "novo-modelo": "Novo Modelo",
         "pesquisa-modelos": "Pesquisa de Modelos",
