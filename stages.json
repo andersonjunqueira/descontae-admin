@@ -7,7 +7,7 @@
     }
 },
 {
-    "id": "dev",
+    "id": "hom",
     "config": {
         "keycloakConfigFile": "keycloak.json",
         "axiosBaseURL": "http://213.136.69.6:8000/descontae-backend/api"

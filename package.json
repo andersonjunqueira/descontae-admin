@@ -47,7 +47,7 @@
 
   "scripts": {
     "stage-local": "node stage.js --local",
-    "stage-dev": "node stage.js --dev",
+    "stage-hom": "node stage.js --hom",
     "stage-prod": "node stage.js --prod",
 
     "start": "react-scripts start",
