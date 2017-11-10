@@ -1,6 +1,6 @@
 {
   "realm": "descontaeRealm-dev",
-  "auth-server-url": "http://213.136.69.6:9000/auth",
+  "auth-server-url": "http://auth.iwstech.com.br/auth",
   "ssl-required": "none",
   "resource": "descontae-admin",
   "public-client": true,

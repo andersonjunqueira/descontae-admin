@@ -10,13 +10,13 @@
     "id": "hom",
     "config": {
         "keycloakConfigFile": "keycloak.json",
-        "axiosBaseURL": "http://213.136.69.6:8000/descontae-backend/api"
+        "axiosBaseURL": "http://descontae-backend-hom/descontae-backend/api"
     }
 },
 {
     "id": "prod",
     "config": {
         "keycloakConfigFile": "keycloak.json",
-        "axiosBaseURL": "http://213.136.69.6:8000/descontae-backend/api"
+        "axiosBaseURL": "http://descontae-backend/descontae-backend/api"
     }
 }]
