@@ -7,14 +7,14 @@
     }
 },
 {
-    "id": "hom",
+    "id": "beta",
     "config": {
         "keycloakConfigFile": "keycloak.json",
         "axiosBaseURL": "http://descontae-backend-hom/descontae-backend/api"
     }
 },
 {
-    "id": "prod",
+    "id": "production",
     "config": {
         "keycloakConfigFile": "keycloak.json",
         "axiosBaseURL": "http://descontae-backend/descontae-backend/api"

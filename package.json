@@ -46,9 +46,9 @@
   },
 
   "scripts": {
-    "stage-local": "node stage.js --local",
-    "stage-hom": "node stage.js --hom",
-    "stage-prod": "node stage.js --prod",
+    "set-local": "node stage.js --local",
+    "set-beta": "node stage.js --beta",
+    "set-production": "node stage.js --production",
 
     "start": "react-scripts start",
     "build": "react-scripts build",
