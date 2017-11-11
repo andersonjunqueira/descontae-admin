@@ -7,5 +7,5 @@ RUN apt-get update
 RUN apt-get install -y unzip
 
 # PASSAR O PARAMETRO DO ARQUIVO BIN DO JAVA
-COPY ${BUILD_FOLDER}/* /usr/local/apache2/htdocs
+COPY ${BUILD_FOLDER}/* /usr/local/apache2/htdocs/
 
