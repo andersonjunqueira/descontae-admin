@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 
-import InicioForm from './InicioForm';
+//import InicioForm from './InicioForm';
 
 class Inicio extends Component {
 

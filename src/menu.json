@@ -10,16 +10,16 @@
         "url": "/cartoes"
     },
     {
-        "text": "parceiros",
-        "icon": "fa fa-hand-spock-o",
-        "roles": ["admin"],
-        "url": "/parceiros"
-    },
-    {
         "text": "ofertas",
         "icon": "fa fa-book",
         "roles": ["admin"],
         "url": "/ofertas"
+    },
+    {
+        "text": "parceiros",
+        "icon": "fa fa-hand-spock-o",
+        "roles": ["admin"],
+        "url": "/parceiros"
     },
     {
         "text": "clientes",
@@ -27,6 +27,12 @@
         "roles": ["admin"],
         "url": "/clientes"
     },
+    {
+        "text": "pessoas",
+        "icon": "fa fa-users",
+        "roles": ["admin"],
+        "url": "/pessoas"
+    },    
     {
         "text": "configuracoes",
         "icon": "fa fa-cogs",
