@@ -20,7 +20,7 @@ export const logout = (auth) => {
 export const login = (auth) => {
     return dispatch => {
 
-        const { name, email } = auth.tokenParsed;
+        const { name, email, resource_access } = auth.tokenParsed;
 
         // PESQUISA O USUÁRIO
         axios.get('/pessoas/login', {params:{"email": email}})
@@ -33,6 +33,10 @@ export const login = (auth) => {
                     Object.keys(data.telefones).map((keyName, keyIndex) => {
                         return data.telefones[keyIndex].numero = phoneFunctions.applyMask(data.telefones[keyIndex].numero);
                     });
+                }
+
+                if(resource_access) {
+                    data.roles = resource_access['descontae-admin'].roles;
                 }
 
                 // ENCONTROU, CARREGA E CONTINUA

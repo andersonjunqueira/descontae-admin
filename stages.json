@@ -2,14 +2,14 @@
     "id": "local",
     "default": true,
     "config": {
-        "keycloakConfigFile": "keycloak.json",
+        "keycloakConfigFile": "keycloak-beta.json",
         "axiosBaseURL": "http://localhost:8000/descontae-backend/api"
     }
 },
 {
     "id": "beta",
     "config": {
-        "keycloakConfigFile": "keycloak.json",
+        "keycloakConfigFile": "keycloak-beta.json",
         "axiosBaseURL": "http://descontae-backend-hom.iwstech.com.br/descontae-backend/api"
     }
 },

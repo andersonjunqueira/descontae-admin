@@ -6,40 +6,48 @@
     {
         "text": "cartoes",
         "icon": "fa fa-credit-card",
+        "roles": ["admin"],
         "url": "/cartoes"
     },
     {
         "text": "parceiros",
         "icon": "fa fa-hand-spock-o",
+        "roles": ["admin"],
         "url": "/parceiros"
     },
     {
         "text": "ofertas",
         "icon": "fa fa-book",
+        "roles": ["admin"],
         "url": "/ofertas"
     },
     {
         "text": "clientes",
         "icon": "fa fa-building-o",
+        "roles": ["admin"],
         "url": "/clientes"
     },
     {
         "text": "configuracoes",
         "icon": "fa fa-cogs",
+        "roles": ["admin"],
         "submenu": [
             {
                 "text": "categorias",
                 "icon": "fa fa-tag",
+                "roles": ["admin"],
                 "url": "/categorias"
             },
             {
                 "text": "marcas",
                 "icon": "fa fa-industry",
+                "roles": ["admin"],
                 "url": "/marcas"
             },
             {
                 "text": "planos",
                 "icon": "fa fa-money",
+                "roles": ["admin"],
                 "url": "/planos"
             }
         ]

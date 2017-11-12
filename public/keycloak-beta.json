@@ -1,0 +1,8 @@
+{
+  "realm": "descontaeRealm-dev",
+  "auth-server-url": "http://auth-hom.iwstech.com.br/auth",
+  "ssl-required": "none",
+  "resource": "descontae-admin",
+  "public-client": true,
+  "use-resource-role-mappings": true
+}

@@ -12,6 +12,7 @@ class Sidebar extends Component {
     constructor(props) {
         super(props);
         this.activeRoute = this.activeRoute.bind(this);
+        this.activeRoute = this.activeRoute.bind(this);
     }
 
     componentWillMount() {
@@ -27,14 +28,55 @@ class Sidebar extends Component {
         return this.props.location.pathname.indexOf(routeName) > -1 ? 'nav-item nav-dropdown open' : 'nav-item nav-dropdown';
     }
 
+    filterMenu(menu, roles) {
+        let out = [];
+
+        const verificar = (itemRoles, userRoles) => {
+            for(let ur=0; ur < userRoles.length; ur++) {
+                if(itemRoles.indexOf(userRoles[ur]) > -1) {
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        const adicionar = (menuItem) => {
+            out.push(menuItem);
+            if(menuItem.submenu) {
+               menuItem.submenu = this.filterMenu(menuItem.submenu, roles);
+            }
+        };
+        
+        for(let i = 0; i < menu.length; i++) {
+            let item = menu[i];
+
+            // SE NÃO TEM ROLES DEFINIDAS, ADICIONA.
+            if(!item.roles) {
+                adicionar(item);
+
+            // SE TEM ROLES DEFINIDAS, VERIFICAR
+            } else if(roles) {
+            
+                // SE A ROLE DO MENU ESTIVER PRESENTE NA ROLE DO ITEM, ADICIONAR
+                if(verificar(item.roles, roles)) {
+                    adicionar(item)
+                }
+            }
+
+        }
+
+        return out;
+    }
+
     render() {
+        const menuItems = this.filterMenu(this.props.menu, this.props.roles);
         const activeRoute = this.activeRoute;
         const handleClick = this.handleClick;
         return (
             <div className="sidebar">
                 <nav className="sidebar-nav">
                     <ul className="nav">
-                        {this.props.menu.map( (item, index) => {
+                        {menuItems.map( (item, index) => {
                             if(item.heading) {
                                 return <MenuHeading key={index} item={item} />
                             } else if(item.submenu) {
@@ -56,6 +98,7 @@ Sidebar.defaultProps = {
 
 const mapStateToProps = (state) => {
     return {
+        roles: state.profileReducer.roles,
         menu: state.sidebarReducer.sidebarMenu
     }
 };
