@@ -10,13 +10,13 @@
     "id": "beta",
     "config": {
         "keycloakConfigFile": "keycloak.json",
-        "axiosBaseURL": "http://descontae-backend-hom/descontae-backend/api"
+        "axiosBaseURL": "http://descontae-backend-hom.iwstech.com.br/descontae-backend/api"
     }
 },
 {
     "id": "production",
     "config": {
         "keycloakConfigFile": "keycloak.json",
-        "axiosBaseURL": "http://descontae-backend/descontae-backend/api"
+        "axiosBaseURL": "http://descontae-backend.iwstech.com.br/descontae-backend/api"
     }
 }]
