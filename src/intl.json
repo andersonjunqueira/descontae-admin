@@ -34,6 +34,7 @@
         "erro-id-obrigatorio": "O id na URL é obrigatório.",
         "erro-id-desnecessario": "O id não deve ser enviado.",
         "campo-obrigatorio": "Campo Obnrigatório.",
+        "metodo-nao-disponivel": "Método não implementado.",
 
         "== SPECIFIC STRINGS ==": "",
 
