@@ -139,6 +139,7 @@
         "registro-em-uso": "Esse registro é referenciado em outros objetos.",
         "erro-backend-inacessivel": "Backend inacessível.",
         "vigencia-obrigatorias": "A vigëncia dos cartões é obrigatória.",
+        "erro-consulta-responsavel": "Cliente não encontrado.",
 
         "novo-modelo": "Novo Modelo",
         "pesquisa-modelos": "Pesquisa de Modelos",

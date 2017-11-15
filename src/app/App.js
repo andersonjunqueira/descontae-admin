@@ -14,6 +14,7 @@ import Parceiro from '../modules/Parceiro';
 import Oferta from '../modules/Oferta';
 import Cartao from '../modules/Cartao';
 import Pessoa from '../modules/Pessoa';
+import ConsumoCliente from '../modules/Relatorios/ConsumoCliente';
 
 const App = ({store}) => (
     <Provider store={store}>
@@ -31,6 +32,7 @@ const App = ({store}) => (
                 <Route path="/ofertas" name={<Intl str='ofertas'></Intl>} component={Oferta} />
                 <Route path="/cartoes" name={<Intl str='cartoes'></Intl>} component={Cartao} />
                 <Route path="/pessoas" name={<Intl str='pessoas'></Intl>} component={Pessoa} />
+                <Route path="/relatorio-consumo" name={<Intl str='relatorio-consumo'></Intl>} component={ConsumoCliente} />
 
             </Route>
 

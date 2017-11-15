@@ -58,5 +58,19 @@
             }
         ]
 
+    },
+    {
+        "text": "relatorios",
+        "icon": "fa fa-cogs",
+        "roles": ["admin", "cliente"],
+        "submenu": [
+            {
+                "text": "consumo",
+                "icon": "fa fa-tag",
+                "roles": ["admin", "cliente"],
+                "url": "/relatorio-consumo"
+            }
+        ]
+
     }
 ]
