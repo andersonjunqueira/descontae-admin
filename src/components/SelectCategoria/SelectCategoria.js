@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import Select from '../../components/Select';
+import Select from '../Select';
 
-import { loadPlanosForSelect } from './Plano.actions';
+import { loadCategoriasForSelect } from './SelectCategoria.actions';
 
-class SelectPlano extends Component {
+class SelectCategoria extends Component {
 
     componentWillMount() {
         if(!this.props.list) {
-            this.props.loadPlanosForSelect();
+            this.props.loadCategoriasForSelect();
         }
     }
 
@@ -21,8 +21,7 @@ class SelectPlano extends Component {
             help: this.props.help,
             required: this.props.required,
             undefinedOption: this.props.undefinedOption,
-            options: this.props.list,
-            onChange: this.props.onChange
+            options: this.props.list
         };
         return (
             <Select {...attrs}/>
@@ -30,25 +29,24 @@ class SelectPlano extends Component {
     }
 }
 
-SelectPlano.propTypes = {
+SelectCategoria.propTypes = {
     label: PropTypes.node,
     placeholder: PropTypes.node,
     help: PropTypes.string,
     required: PropTypes.bool,
     undefinedOption: PropTypes.bool,
-    options: PropTypes.arrayOf(PropTypes.object),
-    onChange: PropTypes.func
+    options: PropTypes.arrayOf(PropTypes.object)
 }
 
 const mapStateToProps = (state) => {
     return {
-        list: state.planoReducer.selectList
+        list: state.selectCategoriaReducer.selectList
     }
 };
 
-SelectPlano = connect(
+SelectCategoria = connect(
     mapStateToProps, 
-    { loadPlanosForSelect }
-)(SelectPlano);
+    { loadCategoriasForSelect }
+)(SelectCategoria);
 
-export default SelectPlano;
+export default SelectCategoria;

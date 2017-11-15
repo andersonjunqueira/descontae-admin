@@ -14,7 +14,7 @@ import Parceiro from '../modules/Parceiro';
 import Oferta from '../modules/Oferta';
 import Cartao from '../modules/Cartao';
 import Pessoa from '../modules/Pessoa';
-import ConsumoCliente from '../modules/Relatorios/ConsumoCliente';
+import Dashboard from '../modules/Dashboard';
 
 const App = ({store}) => (
     <Provider store={store}>
@@ -22,8 +22,7 @@ const App = ({store}) => (
         <Router history={browserHistory}>
 
             <Route component={Full} path="/" name={<Intl str='inicio'></Intl>}>
-                <IndexRoute component={Inicio} />
-
+                <IndexRoute component={Dashboard}/>
                 <Route path="/categorias" name={<Intl str='categorias'></Intl>} component={Categoria} />
                 <Route path="/marcas" name={<Intl str='marcas'></Intl>} component={Marca} />
                 <Route path="/clientes" name={<Intl str='clientes'></Intl>} component={Cliente} />
@@ -32,8 +31,8 @@ const App = ({store}) => (
                 <Route path="/ofertas" name={<Intl str='ofertas'></Intl>} component={Oferta} />
                 <Route path="/cartoes" name={<Intl str='cartoes'></Intl>} component={Cartao} />
                 <Route path="/pessoas" name={<Intl str='pessoas'></Intl>} component={Pessoa} />
-                <Route path="/relatorio-consumo" name={<Intl str='relatorio-consumo'></Intl>} component={ConsumoCliente} />
 
+                <Route path="/componentes" name={<Intl str='inicio'></Intl>} component={Inicio}/>
             </Route>
 
         </Router>

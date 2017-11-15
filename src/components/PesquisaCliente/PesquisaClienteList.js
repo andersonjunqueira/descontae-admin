@@ -3,10 +3,10 @@ import { reduxForm } from 'redux-form';
 import { Form, Row, Col, Button, Table } from 'reactstrap';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
-import { cnpjFunctions } from '../../components/CNPJ';
-import Text from '../../components/Text';
-import Intl from '../../components/Intl';
-import { translate } from '../../components/Intl/Intl.actions';
+import { cnpjFunctions } from '../CNPJ';
+import Text from '../Text';
+import Intl from '../Intl';
+import { translate } from '../Intl/Intl.actions';
 
 class PesquisaClienteList extends Component {
 

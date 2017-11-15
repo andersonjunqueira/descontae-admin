@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import Select from '../../components/Select';
+import Select from '../Select';
 
-import { loadFranquiasForSelect } from './Marca.actions';
+import { loadPlanosForSelect } from './SelectPlano.actions';
 
-class SelectMarca extends Component {
+class SelectPlano extends Component {
 
     componentWillMount() {
         if(!this.props.list) {
-            this.props.loadFranquiasForSelect();
+            this.props.loadPlanosForSelect();
         }
     }
 
@@ -30,7 +30,7 @@ class SelectMarca extends Component {
     }
 }
 
-SelectMarca.propTypes = {
+SelectPlano.propTypes = {
     label: PropTypes.node,
     placeholder: PropTypes.node,
     help: PropTypes.string,
@@ -42,13 +42,13 @@ SelectMarca.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        list: state.marcaReducer.selectList
+        list: state.selectPlanoReducer.selectList
     }
 };
 
-SelectMarca = connect(
+SelectPlano = connect(
     mapStateToProps, 
-    { loadFranquiasForSelect }
-)(SelectMarca);
+    { loadPlanosForSelect }
+)(SelectPlano);
 
-export default SelectMarca;
+export default SelectPlano;

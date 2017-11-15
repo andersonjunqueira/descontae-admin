@@ -10,9 +10,9 @@ import Number from '../../components/Number';
 import Date from '../../components/Date';
 import Select from '../../components/Select';
 import Intl from '../../components/Intl';
-import SelectPlano from '../Plano/SelectPlano';
-import PesquisaPessoa from '../PesquisaPessoa';
-import PesquisaCliente from '../PesquisaCliente';
+import SelectPlano from '../../components/SelectPlano';
+import PesquisaPessoa from '../../components/PesquisaPessoa';
+import PesquisaCliente from '../../components/PesquisaCliente';
 import { translate } from '../../components/Intl/Intl.actions';
 
 class CartaoForm extends Component {

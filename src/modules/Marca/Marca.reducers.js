@@ -1,4 +1,4 @@
-import { MARCAS_PESQUISA, MARCA_EDICAO, MARCA_SETMODE, MARCA_SELECT } from './Marca.actions';
+import { MARCAS_PESQUISA, MARCA_EDICAO, MARCA_SETMODE } from './Marca.actions';
 
 const marcaReducer = (state = {}, action) => {
 
@@ -12,9 +12,6 @@ const marcaReducer = (state = {}, action) => {
 
         case MARCA_EDICAO:
             return Object.assign({}, state, { obj: action.payload });
-
-        case MARCA_SELECT:
-            return Object.assign({}, state, { selectList: action.payload });
 
         default:
             return state;

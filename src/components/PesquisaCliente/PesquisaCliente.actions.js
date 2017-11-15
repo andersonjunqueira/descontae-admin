@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { toaster } from '../../components/Notification/Notification.actions';
+import { toaster } from '../Notification/Notification.actions';
 
 export const [ PESQUISACLIENTE_PESQUISA ] = [ "PESQUISACLIENTE_PESQUISA" ];
 

@@ -2,6 +2,13 @@ import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 import { reducer as notificationsReducer} from 'reapop';
 
+import selectMarcaReducer from '../components/SelectMarca/SelectMarca.reducers';
+import selectCategoriaReducer from '../components/SelectCategoria/SelectCategoria.reducers';
+import selectPlanoReducer from '../components/SelectPlano/SelectPlano.reducers';
+import selectCidadeReducer from '../components/SelectCidade/SelectCidade.reducers';
+import pesquisaPessoaReducer from '../components/PesquisaPessoa/PesquisaPessoa.reducers';
+import pesquisaClienteReducer from '../components/PesquisaCliente/PesquisaCliente.reducers';
+
 import ufReducer from '../components/UF/UF.reducers';
 import intlReducer from '../components/Intl/Intl.reducers';
 import sidebarReducer from '../components/Sidebar/Sidebar.reducers';
@@ -13,10 +20,8 @@ import planoReducer from '../modules/Plano/Plano.reducers';
 import parceiroReducer from '../modules/Parceiro/Parceiro.reducers';
 import ofertaReducer from '../modules/Oferta/Oferta.reducers';
 import cartaoReducer from '../modules/Cartao/Cartao.reducers';
-import pesquisaPessoaReducer from '../modules/PesquisaPessoa/PesquisaPessoa.reducers';
-import pesquisaClienteReducer from '../modules/PesquisaCliente/PesquisaCliente.reducers';
 import pessoaReducer from '../modules/Pessoa/Pessoa.reducers';
-import consumoClienteReducer from '../modules/Relatorios/ConsumoCliente/ConsumoCliente.reducers';
+import dashboardReducer from '../modules/Dashboard/Dashboard.reducers';
 
 
 import profileReducer from '../modules/Profile/Profile.reducers';
@@ -62,7 +67,11 @@ const reducers = combineReducers({
     pesquisaPessoaReducer,
     pesquisaClienteReducer,
     pessoaReducer,
-    consumoClienteReducer,
+    dashboardReducer,
+    selectMarcaReducer,
+    selectCategoriaReducer,
+    selectPlanoReducer,
+    selectCidadeReducer,
 
     ufReducer,
     intlReducer,

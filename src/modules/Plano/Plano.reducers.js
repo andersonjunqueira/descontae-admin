@@ -1,4 +1,4 @@
-import { PLANOS_PESQUISA, PLANO_EDICAO, PLANO_SETMODE, PLANO_SELECT } from './Plano.actions';
+import { PLANOS_PESQUISA, PLANO_EDICAO, PLANO_SETMODE } from './Plano.actions';
 
 const planoReducer = (state = {}, action) => {
 
@@ -12,9 +12,6 @@ const planoReducer = (state = {}, action) => {
 
         case PLANO_EDICAO:
             return Object.assign({}, state, { obj: action.payload });
-
-        case PLANO_SELECT:
-            return Object.assign({}, state, { selectList: action.payload });
 
         default:
             return state;

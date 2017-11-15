@@ -5,12 +5,12 @@ import { Form, Row, Col, Button } from 'reactstrap';
 import Text from '../../components/Text';
 import CNPJ from '../../components/CNPJ';
 import Email from '../../components/Email';
-import SelectCategoria from '../Categoria/SelectCategoria';
-import SelectMarca from '../Marca/SelectMarca';
+import SelectCategoria from '../../components/SelectCategoria';
+import SelectMarca from '../../components/SelectMarca';
 import Phones from '../Snippets/Phones';
 import Unidades from '../Snippets/Unidades';
 import Intl from '../../components/Intl';
-import { translate } from "../../components/Intl/Intl.actions";
+import { translate } from '../../components/Intl/Intl.actions';
 
 class ParceiroForm extends Component {
 

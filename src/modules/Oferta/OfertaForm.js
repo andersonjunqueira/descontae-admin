@@ -7,7 +7,7 @@ import File from '../../components/File';
 import Intl from '../../components/Intl';
 import TextArea from '../../components/TextArea';
 import Select from '../../components/Select';
-import SelectMarca from '../Marca/SelectMarca';
+import SelectMarca from '../../components/SelectMarca';
 import Card, { CardHeader, CardBody } from '../../components/Card';
 
 import UnidadesOferta from './UnidadesOferta';
