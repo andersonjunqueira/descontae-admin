@@ -171,7 +171,7 @@ class DashboardForm extends Component {
                                 </CardBody>
                             </Card>                        
                             <Card>
-                                <CardHeader>
+                                <CardHeader> 
                                     <Intl str='cartoes-ativos'></Intl> 
                                 </CardHeader>
                                 <CardBody>
@@ -181,7 +181,7 @@ class DashboardForm extends Component {
                             </Card>
                             <Card>
                                 <CardHeader>
-                                    <Intl str='consumos-categoria'></Intl> 
+                                    <Intl str='consumos-cidade'></Intl> 
                                 </CardHeader>
                                 <CardBody>
                                     {this.props.data.totaisByCidade.length > 0 && (<Pie data={this.getConsumosPorCidadeData()} options={this.getChartOptions()}/>)}
@@ -192,7 +192,7 @@ class DashboardForm extends Component {
                         <Col xs={12} md={6}>
                             <Card>
                                 <CardHeader>
-                                    <Intl str='consumos-cidade'></Intl> 
+                                    <Intl str='consumos-categoria'></Intl> 
                                 </CardHeader>
                                 <CardBody>
                                     {this.props.data.totaisByCategoria.length > 0 && (<Pie data={this.getConsumosPorCategoriaData()} options={this.getChartOptions()}/>)}
