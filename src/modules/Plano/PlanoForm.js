@@ -8,6 +8,7 @@ import Text from '../../components/Text';
 import File from '../../components/File';
 import Number from '../../components/Number';
 import Select from '../../components/Select';
+import SimNaoSelect from '../../components/SimNaoSelect';
 
 import { translate } from "../../components/Intl/Intl.actions";
 
@@ -41,6 +42,7 @@ class PlanoForm extends Component {
             {value: "A", text: translate("ativo")},
             {value: "I", text: translate("inativo")}
         ];
+
         const { handleSubmit, doSubmit, pristine, reset, submitting, invalid} = this.props;
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
@@ -60,11 +62,14 @@ class PlanoForm extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={12} md={6}>
+                            <Col xs={12} md={4}>
                                 <Number name="valor" label={<Intl str='valor'></Intl>} required={true} step={0.1} precision={2} min={0}/>
                             </Col>
-                            <Col xs={12} md={6}>
+                            <Col xs={12} md={4}>
                                 <Select name="situacao" options={situacaoTypes} label={<Intl str='situacao'></Intl>}/>
+                            </Col>
+                            <Col xs={12} md={4}>
+                                <SimNaoSelect name="mostraApp" label={<Intl str='mostra-app'></Intl>}/>
                             </Col>
                         </Row>
                     </Col>

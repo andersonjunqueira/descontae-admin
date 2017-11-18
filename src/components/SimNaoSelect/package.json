@@ -1,0 +1,6 @@
+{
+  "name": "SimNaoSelect",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./SimNaoSelect.js"
+}

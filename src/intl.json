@@ -36,6 +36,8 @@
         "erro-id-desnecessario": "O id não deve ser enviado.",
         "campo-obrigatorio": "Campo Obnrigatório.",
         "metodo-nao-disponivel": "Método não implementado.",
+        "versao": "Versão",
+        "desenvolvido-por": "Desenvolvido por",
 
         "== SPECIFIC STRINGS ==": "",
 
@@ -153,6 +155,7 @@
         "inicio-periodo": "Início Período",
         "fim-periodo": "Fim Período",
         "nao-ha-dados": "Dados não encontrados.",
+        "mostra-app": "Mostra no APP",
 
         "novo-modelo": "Novo Modelo",
         "pesquisa-modelos": "Pesquisa de Modelos",

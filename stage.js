@@ -1,14 +1,10 @@
 const fs = require('fs');
 const yargs = require('yargs');
 
-let stageArg = process.argv[2];
-let stages = [];
+const package = require('./package.json');
+const stages = require('./stages.json');
 
-try {
-    const stagesFile = fs.readFileSync('stages.json');
-    stages = JSON.parse(stagesFile);
-} catch(e) {
-}
+let stageArg = process.argv[2];
 
 let stageArray = stages.filter((s) => '--' + s.id === stageArg);
 if(stageArray.length == 0) {
@@ -16,16 +12,16 @@ if(stageArray.length == 0) {
 }
 
 if(stageArray.length == 0) {
-    console.log('O stage informado é inválido')
+    console.log('O stage informado é inválido');
 }
 
 const stage = stageArray[0];
-let app = undefined;
+stage.config.version = package.version;
 
 try {
-
+    
     const appFile = fs.readFileSync('src/app.json');
-    app = JSON.parse(appFile);
+    let app = JSON.parse(appFile);
     app.config = Object.assign(app.config, stage.config);
     fs.writeFileSync('src/app.json', JSON.stringify(app, null, 2));
 

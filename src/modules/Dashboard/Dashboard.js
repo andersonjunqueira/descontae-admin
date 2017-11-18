@@ -14,7 +14,11 @@ class Dashboard extends Component {
     }
 
     componentWillMount() {
-        this.props.actions.getDashboard();
+        if(this.props.data) {
+            if(this.props.roles.isAdmin || this.props.roles.isCliente) {
+                this.props.actions.getDashboard();
+            }
+        }
     }
 
     atualizar(values) {
@@ -25,18 +29,20 @@ class Dashboard extends Component {
 
     render() {
         if(this.props.data) {
-            return (
-                <DashboardForm data={this.props.data} doSubmit={this.atualizar}/>
-            );
-        } else {
-            return (<div></div>);
-        }
+            if(this.props.roles.isAdmin || this.props.roles.isCliente) {
+                return (
+                    <DashboardForm data={this.props.data} doSubmit={this.atualizar}/>
+                );
+            }
+        } 
+        return (<div></div>);
     }
 
 }
 
 const mapStateToProps = (state) => {
     return {
+        roles: state.profileReducer.roles,
         data: state.dashboardReducer.data
     };
 };

@@ -2,8 +2,9 @@
   "title": "Descontaê Admin",
   "subtitle": "Administração",
   "config": {
-    "keycloakConfigFile": "keycloak.json",
-    "axiosBaseURL": "http://localhost:8000/descontae-backend/api"
+    "keycloakConfigFile": "keycloak-beta.json",
+    "axiosBaseURL": "http://localhost:8000/descontae-backend/api",
+    "version": "1.0.0-SNAPSHOT"
   },
   "userMenu": [
     {

@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 
+import appData from '../../app.json';
+import { translate } from '../Intl/Intl.actions';
+
 class Footer extends Component {
   render() {
+    console.log(appData);
     return (
       <footer className="app-footer small">
-        <span className="float-left">Desenvolvido por <a href="http://www.iwstech.com.br/">IWS Tech</a></span>
-        <span className="float-right">Powered by CoreUI</span>
+        <strong>
+          <span className="float-left">{`${translate('desenvolvido-por')}: `} <a href="http://www.iwstech.com.br/" target="_self">IWS TECH</a></span>
+          <span className="float-right">{`${translate('versao')}: ${appData.config.version}`}</span>
+        </strong>
       </footer>
     )
   }

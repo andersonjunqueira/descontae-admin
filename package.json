@@ -1,7 +1,6 @@
 {
   "name": "descontae-admin",
-  "version": "0.0.1-SNAPSHOT",
-  "1homepage": "http://213.136.69.6/descontae-admin",
+  "version": "1.0.0-SNAPSHOT",
   "private": true,
   "devDependencies": {
     "gulp": "^3.9.1",

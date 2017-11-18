@@ -69,26 +69,29 @@ class Sidebar extends Component {
     }
 
     render() {
-        const menuItems = this.filterMenu(this.props.menu, this.props.roles);
-        const activeRoute = this.activeRoute;
-        const handleClick = this.handleClick;
-        return (
-            <div className="sidebar">
-                <nav className="sidebar-nav">
-                    <ul className="nav">
-                        {menuItems.map( (item, index) => {
-                            if(item.heading) {
-                                return <MenuHeading key={index} item={item} />
-                            } else if(item.submenu) {
-                                return <Submenu key={index} item={item} activeRoute={activeRoute} handleClick={handleClick} />
-                            } else {
-                                return <MenuItem key={index} item={item} />
-                            }
-                        })}
-                    </ul>
-                </nav>
-            </div>
-        )
+        if(this.props.menu && this.props.roles) {
+            const menuItems = this.filterMenu(this.props.menu, this.props.roles.plain);
+            const activeRoute = this.activeRoute;
+            const handleClick = this.handleClick;
+            return (
+                <div className="sidebar">
+                    <nav className="sidebar-nav">
+                        <ul className="nav">
+                            {menuItems.map( (item, index) => {
+                                if(item.heading) {
+                                    return <MenuHeading key={index} item={item} />
+                                } else if(item.submenu) {
+                                    return <Submenu key={index} item={item} activeRoute={activeRoute} handleClick={handleClick} />
+                                } else {
+                                    return <MenuItem key={index} item={item} />
+                                }
+                            })}
+                        </ul>
+                    </nav>
+                </div>
+            );
+        }
+        return (<div></div>);
     }
 }
 
