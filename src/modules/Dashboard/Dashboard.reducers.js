@@ -5,7 +5,7 @@ const dashboardReducer = (state = {}, action) => {
     switch (action.type) {
 
         case DASHBOARD_LOADED:
-            return Object.assign({}, state, { data: action.payload });
+            return Object.assign({}, state, action.payload);
 
         default:
             return state; 

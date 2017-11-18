@@ -8,6 +8,7 @@ import { headerMenuLoad, userMenuLoad } from '../components/Header/Header.action
 import { sidebarMenuLoad } from '../components/Sidebar/Sidebar.actions';
 import { DEFAULT_LANGUAGE} from '../components/Intl/Intl.actions';
 import { toaster } from '../components/Notification/Notification.actions';
+import { loadDashboard } from '../modules/Dashboard/Dashboard.actions';
 
 export const [ MODE_INSERT, MODE_UPDATE, MODE_LIST ] = [ "MODE_INSERT", "MODE_UPDATE", "MODE_LIST" ];
 export const [ PAGESIZE_DEFAULT, PAGESIZE_MODAL ] = [ 10, 5 ];
@@ -49,23 +50,29 @@ export const login = (auth) => {
                     };
                 }
 
+                
                 // ENCONTROU, CARREGA E CONTINUA
                 dispatch({type: PROFILE_LOADED, payload: data});
-
+                
                 // ATUALIZA O IDIOMA DE ACORDO COM A PREFERÊNCIA DO USUÁRIO
                 dispatch(changeLanguage(response.data.idioma, true));
-
+                
                 // DISPARA A CARGA DOS MENUS
                 dispatch(headerMenuLoad);
                 dispatch(userMenuLoad);
                 dispatch(sidebarMenuLoad);
-
+                
                 // DISPARA NOTIFICAÇÃO
                 dispatch(toaster(null, "bem-vindo", [name]));
-
+                
                 // ATUALIZAR O STORE COM O OBJETO DO KEYCLOAK
                 dispatch({type: PROCESS_LOGIN, payload: auth});
 
+                // CARREGA A DASHBOARD
+                if(data.roles.isAdmin || data.roles.isCliente) {
+                    dispatch(loadDashboard());
+                }
+                
             }).catch( (error) => {
                 
                 if(error.response) {

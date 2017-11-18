@@ -2,10 +2,20 @@ import axios from "axios";
 
 import { toaster } from '../../components/Notification/Notification.actions';
 import { dateFunctions } from '../../components/Date';
+import { translate } from '../../components/Intl/Intl.actions';
 
 export const [ DASHBOARD_LOADED ] = [ "DASHBOARD_LOADED" ];
 
-export const getDashboard = (idCliente, idCidade, dataInicio, dataFim) => {
+const converter = {
+    toFrontend: (values) => {
+        const data = JSON.parse(JSON.stringify(values));
+        data.dataInicio = dateFunctions.toFrontend(data.dataInicio);
+        data.dataFim = dateFunctions.toFrontend(data.dataFim);
+        return data;
+    }
+}
+
+export const loadDashboard = (idCliente, idCidade, dataInicio, dataFim) => {
     return dispatch => {
 
         let qs = '';
@@ -13,7 +23,7 @@ export const getDashboard = (idCliente, idCidade, dataInicio, dataFim) => {
             qs += `idCliente=${idCliente}`;
         }
 
-        if(idCidade) {
+        if(idCidade && idCidade !== translate('selecione')) {
             qs += `${qs.length > 0 ? '&' : ''}idCidade=${idCidade}`;
         }
 
@@ -25,9 +35,9 @@ export const getDashboard = (idCliente, idCidade, dataInicio, dataFim) => {
             qs += `${qs.length > 0 ? '&' : ''}inicio=${dateFunctions.toBackend(dataFim)}`;
         }
 
-        axios.get(`/consumos/dashboard${qs.length > 0 ? '?' : ''}${qs}`)
+        return axios.get(`/consumos/dashboard${qs.length > 0 ? '?' : ''}${qs}`)
             .then(function(response) {
-                dispatch({type: DASHBOARD_LOADED, payload: response.data});
+                dispatch({type: DASHBOARD_LOADED, payload: converter.toFrontend(response.data)});
 
             }).catch(function(error){
                 console.log(error);

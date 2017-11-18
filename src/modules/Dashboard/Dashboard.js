@@ -12,26 +12,26 @@ class Dashboard extends Component {
         super(props);
         this.atualizar = this.atualizar.bind(this);
     }
-
-    componentWillMount() {
-        if(this.props.data) {
+/*
+    componentWillUpdate() {
+        if(this.props.roles) {
             if(this.props.roles.isAdmin || this.props.roles.isCliente) {
-                this.props.actions.getDashboard();
+                this.props.actions.loadDashboard();
             }
         }
     }
-
+*/
     atualizar(values) {
         let idCliente = values.cliente ? values.cliente.id : undefined;
         let idCidade = values.cidade ? values.cidade.id : undefined;
-        this.props.actions.getDashboard(idCliente, idCidade, values.inicio, values.fim);
+        this.props.actions.loadDashboard(idCliente, idCidade, values.inicio, values.fim);
     }
 
     render() {
-        if(this.props.data) {
+        if(Object.keys(this.props.data).length) {
             if(this.props.roles.isAdmin || this.props.roles.isCliente) {
                 return (
-                    <DashboardForm data={this.props.data} doSubmit={this.atualizar}/>
+                    <DashboardForm data={this.props.data} doSubmit={this.atualizar} showClienteSearch={this.props.roles.isAdmin}/>
                 );
             }
         } 
@@ -43,7 +43,7 @@ class Dashboard extends Component {
 const mapStateToProps = (state) => {
     return {
         roles: state.profileReducer.roles,
-        data: state.dashboardReducer.data
+        data: state.dashboardReducer
     };
 };
 

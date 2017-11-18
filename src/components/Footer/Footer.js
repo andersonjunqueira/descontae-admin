@@ -5,7 +5,6 @@ import { translate } from '../Intl/Intl.actions';
 
 class Footer extends Component {
   render() {
-    console.log(appData);
     return (
       <footer className="app-footer small">
         <strong>
