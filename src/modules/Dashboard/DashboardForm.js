@@ -125,6 +125,10 @@ class DashboardForm extends Component {
                             <Button type="submit" color="primary" disabled={invalid || submitting}>
                                 <Intl str='atualizar'></Intl>
                             </Button>
+
+                            <Button type="button" disabled={pristine || submitting} onClick={() => this.props.dispatch(reset)} className="espacamento">
+                                <Intl str='limpar'></Intl>
+                            </Button>                            
                         </Col>
                     </Row><br/>
 
@@ -182,7 +186,7 @@ class DashboardForm extends Component {
                                 </CardBody>
                             </Card>                        
                         </Col>
-                        <Col xs={12} md={6}>
+                        <Col xs={12} md={12}>
                             <Card>
                                 <CardHeader>
                                     <Intl str='consumos-categoria'></Intl> {`(${this.props.data.cidade.nome}, ${this.props.data.dataInicio} - ${this.props.data.dataFim})`} 
