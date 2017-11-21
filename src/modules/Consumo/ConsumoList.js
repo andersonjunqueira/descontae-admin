@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import { Form, Row, Col, Button, Table, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Form, Row, Col, Button, Table } from 'reactstrap';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
-import { cnpjFunctions } from '../../components/CNPJ';
 import Text from '../../components/Text';
 import Intl from '../../components/Intl';
 
@@ -12,21 +11,6 @@ class ConsumoList extends Component {
     constructor(props) {
         super(props);
         this.limpar = this.limpar.bind(this);
-        this.toggle = this.toggle.bind(this);
-        this.excluir = this.excluir.bind(this);
-
-        this.state = {
-            modal: false,
-            modalParam: ""
-        };
-
-    }
-
-    toggle(value) {
-        this.setState({
-            modal: !this.state.modal,
-            modalParam: value
-        });
     }
 
     limpar() {
@@ -34,15 +18,8 @@ class ConsumoList extends Component {
         this.props.doLimpar();
     }
 
-    excluir(value) {
-        this.props.doExcluir(this.state.modalParam.id);
-        this.toggle({});
-    }
-
     render() {
-        const { handleSubmit, doSubmit, pristine, submitting, invalid, data, doCarregar } = this.props;
-        const toggle = (value) => this.toggle(value);
-
+        const { handleSubmit, doSubmit, invalid, submitting, data } = this.props;
         let content = (<Intl str="nenhum-registro-encontrado"></Intl>);
         if(data && data.totalElements > 0) {
             let paginationLinks = [];
@@ -74,32 +51,31 @@ class ConsumoList extends Component {
             content = (
                 <div>
                     <Table hover size="sm" className="tabela">
-                        <thead>
-                            <tr>
-                                <th className="categ-col-1">#</th>
-                                <th className="categ-col-2"><Intl str="nome"></Intl></th>
-                                <th className="categ-col-3"><Intl str="cnpj"></Intl></th>
-                                <th className="categ-col-3"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Object.keys(data.content).map(function(key) {
-                                return (<tr key={key}>
-                                    <td className="text-center" scope="row">{data.content[key].id}</td>
-                                    <td>{data.content[key].nome}</td>
-                                    <td>{cnpjFunctions.applyMask(data.content[key].cnpj)}</td>
-                                    <td className="text-center">
-                                        <Button type="button" onClick={() => doCarregar(data.content[key].id)} color="secondary" size="sm">
-                                            <i className="fa fa-pencil"></i>
-                                        </Button>
-
-                                        <Button type="button" onClick={() => toggle(data.content[key]) } color="danger" size="sm" className="espacamento">
-                                            <i className="fa fa-trash"></i>
-                                        </Button>
-                                    </td>
-                                </tr>);
-                            })}
-                        </tbody>
+                    <thead>
+                        <tr>
+                            <th className="table-w-5 text-center"><Intl str="cartao"></Intl></th>
+                            <th className="table-w-15"><Intl str="bairro"></Intl></th>
+                            <th className="table-w-15"><Intl str="cidade"></Intl></th>
+                            <th className="table-w-5 text-center"><Intl str="uf"></Intl></th>
+                            <th className="table-w-20"><Intl str="usuario"></Intl></th>
+                            <th className="table-w-10 text-center"><Intl str="marca"></Intl></th>
+                            <th className="table-w-30"><Intl str="oferta"></Intl></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Object.keys(data.content).map(function(key) {
+                            const r = data.content[key];
+                            return (<tr key={r.consumoId}>
+                                <td className="text-center" scope="row">{r.numeroCartao}</td>
+                                <td>{r.bairro}</td>
+                                <td>{r.cidade}</td>
+                                <td className="text-center">{r.uf}</td>
+                                <td>{r.nomeUsuario}</td>
+                                <td className="text-center">{r.marca}</td>
+                                <td>{r.oferta}</td>
+                            </tr>);
+                        })}
+                    </tbody>
                     </Table>
                     {paginationLinks.length > 0 && (
                         <Row>
@@ -135,31 +111,14 @@ class ConsumoList extends Component {
                     <Intl str='pesquisar'></Intl>
                 </Button>
 
-                <Button type="button" disabled={pristine || submitting} onClick={() => this.limpar()} className="espacamento">
+                <Button type="button" onClick={() => this.limpar()} className="espacamento">
                     <Intl str='limpar'></Intl>
-                </Button>
-
-                <Button type="button" onClick={() => this.props.doNovo()} color="secondary">
-                    <i className="fa fa-plus"></i>
-                    <Intl str='novo-consumo'></Intl>
                 </Button>
 
                 <div>
                     <h6><Intl str="resultado-pesquisa"></Intl></h6>
                     {content}
                 </div>
-
-                <Modal isOpen={this.state.modal} toggle={toggle}>
-                    <ModalHeader toggle={toggle}><Intl str="confirmacao-exclusao"></Intl></ModalHeader>
-                    <ModalBody>
-                        <Intl str="consumo-excluir-mensagem" params={[this.state.modalParam.nome]}></Intl>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={() => this.excluir()}><Intl str="excluir"></Intl></Button>
-                        <Button color="secondary" onClick={toggle} className="espacamento"><Intl str="cancelar"></Intl></Button>
-                    </ModalFooter>
-                </Modal>
-
             </Form>
         );
     }

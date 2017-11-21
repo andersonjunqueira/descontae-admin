@@ -24,7 +24,6 @@ import pessoaReducer from '../modules/Pessoa/Pessoa.reducers';
 import dashboardReducer from '../modules/Dashboard/Dashboard.reducers';
 import consumoReducer from '../modules/Consumo/Consumo.reducers';
 
-
 import profileReducer from '../modules/Profile/Profile.reducers';
 
 import AppData from '../app.json';
@@ -57,6 +56,8 @@ const appReducer = (state = initialState, action) => {
 }
 
 const reducers = combineReducers({
+    consumos: consumoReducer,
+    
     profileReducer,
     categoriaReducer,
     marcaReducer,
@@ -73,7 +74,6 @@ const reducers = combineReducers({
     selectCategoriaReducer,
     selectPlanoReducer,
     selectCidadeReducer,
-    consumoReducer,
 
     ufReducer,
     intlReducer,

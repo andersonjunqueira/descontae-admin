@@ -20,12 +20,6 @@ const converter = {
     }
 }
 
-export const setMode = (mode) => {
-    return dispatch => {
-        dispatch({type: CONSUMO_SETMODE, payload: mode});
-    }
-}
-
 export const consultar = (filtro, start, pagesize) => {
     filtro = filtro ? filtro : {};
     filtro.start = start;
