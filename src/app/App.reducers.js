@@ -22,6 +22,7 @@ import ofertaReducer from '../modules/Oferta/Oferta.reducers';
 import cartaoReducer from '../modules/Cartao/Cartao.reducers';
 import pessoaReducer from '../modules/Pessoa/Pessoa.reducers';
 import dashboardReducer from '../modules/Dashboard/Dashboard.reducers';
+import consumoReducer from '../modules/Consumo/Consumo.reducers';
 
 
 import profileReducer from '../modules/Profile/Profile.reducers';
@@ -72,6 +73,7 @@ const reducers = combineReducers({
     selectCategoriaReducer,
     selectPlanoReducer,
     selectCidadeReducer,
+    consumoReducer,
 
     ufReducer,
     intlReducer,

@@ -7,7 +7,7 @@ import { cnpjFunctions } from '../../components/CNPJ';
 import Text from '../../components/Text';
 import Intl from '../../components/Intl';
 
-class ModeloList extends Component {
+class ConsumoList extends Component {
 
     constructor(props) {
         super(props);
@@ -123,7 +123,7 @@ class ModeloList extends Component {
 
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
-                <h4><Intl str='pesquisa-modelos'></Intl></h4>
+                <h4><Intl str='pesquisa-consumos'></Intl></h4>
                 <Row>
                     <Col xs={12} md={12}>
                         <Text name="nome" label={<Intl str='nome'></Intl>} maxLength={100}/>
@@ -141,7 +141,7 @@ class ModeloList extends Component {
 
                 <Button type="button" onClick={() => this.props.doNovo()} color="secondary">
                     <i className="fa fa-plus"></i>
-                    <Intl str='novo-modelo'></Intl>
+                    <Intl str='novo-consumo'></Intl>
                 </Button>
 
                 <div>
@@ -152,7 +152,7 @@ class ModeloList extends Component {
                 <Modal isOpen={this.state.modal} toggle={toggle}>
                     <ModalHeader toggle={toggle}><Intl str="confirmacao-exclusao"></Intl></ModalHeader>
                     <ModalBody>
-                        <Intl str="modelo-excluir-mensagem" params={[this.state.modalParam.nome]}></Intl>
+                        <Intl str="consumo-excluir-mensagem" params={[this.state.modalParam.nome]}></Intl>
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={() => this.excluir()}><Intl str="excluir"></Intl></Button>
@@ -171,9 +171,9 @@ const validate = values => {
     return errors;
 }
 
-ModeloList = reduxForm({ 
-    form: "ModeloList", 
+ConsumoList = reduxForm({ 
+    form: "ConsumoList", 
     validate 
-})(ModeloList);
+})(ConsumoList);
 
-export default ModeloList;
+export default ConsumoList;

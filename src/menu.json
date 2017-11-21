@@ -16,6 +16,12 @@
         "url": "/ofertas"
     },
     {
+        "text": "consumos",
+        "icon": "fa fa-book",
+        "roles": ["admin", "cliente"],
+        "url": "/consumos"
+    },
+    {
         "text": "parceiros",
         "icon": "fa fa-hand-spock-o",
         "roles": ["admin"],
