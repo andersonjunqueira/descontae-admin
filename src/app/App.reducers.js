@@ -9,11 +9,12 @@ import selectCidadeReducer from '../components/SelectCidade/SelectCidade.reducer
 import pesquisaPessoaReducer from '../components/PesquisaPessoa/PesquisaPessoa.reducers';
 import pesquisaClienteReducer from '../components/PesquisaCliente/PesquisaCliente.reducers';
 
+import * as catReducers from '../modules/Categoria/Categoria.reducers';
+
 import ufReducer from '../components/UF/UF.reducers';
 import intlReducer from '../components/Intl/Intl.reducers';
 import sidebarReducer from '../components/Sidebar/Sidebar.reducers';
 import headerReducer from '../components/Header/Header.reducers';
-import categoriaReducer from '../modules/Categoria/Categoria.reducers';
 import marcaReducer from '../modules/Marca/Marca.reducers';
 import clienteReducer from '../modules/Cliente/Cliente.reducers';
 import planoReducer from '../modules/Plano/Plano.reducers';
@@ -56,10 +57,12 @@ const appReducer = (state = initialState, action) => {
 }
 
 const reducers = combineReducers({
+    categorias: catReducers.pesquisaCategoriaReducer,
+    categoria: catReducers.categoriaReducer,
+    
     consumos: consumoReducer,
     
     profileReducer,
-    categoriaReducer,
     marcaReducer,
     clienteReducer,
     planoReducer,

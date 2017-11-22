@@ -3,7 +3,7 @@
   "subtitle": "Administração",
   "config": {
     "keycloakConfigFile": "keycloak-beta.json",
-    "axiosBaseURL": "http://localhost:8000/descontae-backend/api",
+    "axiosBaseURL": "http://descontae-backend-hom.iwstech.com.br/descontae-backend/api",
     "version": "1.0.0-SNAPSHOT"
   },
   "userMenu": [

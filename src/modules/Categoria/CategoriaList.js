@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 
 import { Form, Row, Col, Button, Table, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
@@ -10,9 +10,9 @@ class CategoriaList extends Component {
 
     constructor(props) {
         super(props);
-        this.limpar = this.limpar.bind(this);
-        this.toggle = this.toggle.bind(this);
-        this.excluir = this.excluir.bind(this);
+        // this.limpar = this.limpar.bind(this);
+        // this.toggle = this.toggle.bind(this);
+        // this.excluir = this.excluir.bind(this);
 
         this.state = {
             modal: false,
@@ -21,26 +21,25 @@ class CategoriaList extends Component {
 
     }
 
-    toggle(value) {
-        this.setState({
-            modal: !this.state.modal,
-            modalParam: value
-        });
-    }
+    // toggle(value) {
+    //     this.setState({
+    //         modal: !this.state.modal,
+    //         modalParam: value
+    //     });
+    // }
 
-    limpar() {
-        this.props.dispatch(this.props.reset);
-        this.props.doLimpar();
-    }
+    // limpar() {
+    //     this.props.dispatch(this.props.reset);
+    //     this.props.doLimpar();
+    // }
 
-    excluir(value) {
-        this.props.doExcluir(this.state.modalParam.id);
-        this.toggle({});
-    }
+    // excluir(value) {
+    //     this.props.doExcluir(this.state.modalParam.id);
+    //     this.toggle({});
+    // }
 
     render() {
-        const { handleSubmit, doSubmit, pristine, submitting, invalid, data, doCarregar } = this.props;
-        const toggle = (value) => this.toggle(value);
+        // const toggle = (value) => this.toggle(value);
 
         let content = (<Intl str="nenhum-registro-encontrado"></Intl>);
         if(data && data.totalElements > 0) {
@@ -85,14 +84,14 @@ class CategoriaList extends Component {
                                 return (<tr key={key}>
                                     <td></td>
                                     <td>{data.content[key].nome}</td>
-                                    <td className="text-center">
+                                    <td className="text-center">{/*
                                         <Button type="button" onClick={() => doCarregar(data.content[key].id)} color="secondary" size="sm">
                                             <i className="fa fa-pencil"></i>
                                         </Button>
 
                                         <Button type="button" onClick={() => toggle(data.content[key]) } color="danger" size="sm" className="espacamento">
                                             <i className="fa fa-trash"></i>
-                                        </Button>
+                                        </Button>*/}
                                     </td>
                                 </tr>);
                             })}
@@ -118,9 +117,11 @@ class CategoriaList extends Component {
             );
         }
 
+        const { data, doSubmit, handleSubmit, pristine, submitting, invalid } = this.props;
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
                 <h4><Intl str='pesquisa-categorias'></Intl></h4>
+{/*
                 <Row>
                     <Col xs={12} md={12}>
                         <Text name="nome" label={<Intl str='nome'></Intl>} maxLength={100}/>
@@ -140,12 +141,12 @@ class CategoriaList extends Component {
                     <i className="fa fa-plus"></i>
                     <Intl str='nova-categoria'></Intl>
                 </Button>
-
+*/}
                 <div>
                     <h6><Intl str="resultado-pesquisa"></Intl></h6>
                     {content}
                 </div>
-
+{/*
                 <Modal isOpen={this.state.modal} toggle={toggle}>
                     <ModalHeader toggle={toggle}><Intl str="confirmacao-exclusao"></Intl></ModalHeader>
                     <ModalBody>
@@ -156,7 +157,7 @@ class CategoriaList extends Component {
                         <Button color="secondary" onClick={toggle} className="espacamento"><Intl str="cancelar"></Intl></Button>
                     </ModalFooter>
                 </Modal>
-
+*/}
             </Form>
         );
     }
@@ -167,6 +168,11 @@ const validate = values => {
     const errors = {};
     return errors;
 }
+
+CategoriaList.propTypes = {
+    data: PropTypes.array,
+    doSubmit: PropTypes.func
+};
 
 CategoriaList = reduxForm({ 
     form: "CategoriaList", 

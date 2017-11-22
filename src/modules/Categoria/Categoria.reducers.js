@@ -1,23 +1,18 @@
-import { CATEGORIAS_PESQUISA, CATEGORIA_EDICAO, CATEGORIAS_SETMODE } from './Categoria.actions';
+import { CATEGORIAS_SEARCH, CATEGORIA_LOAD } from './Categoria.actions';
 
-const categoriaReducer = (state = {}, action) => {
-
+export const pesquisaCategoriaReducer = (state = [], action) => {
     switch (action.type) {
-
-        case CATEGORIAS_SETMODE:
-            return Object.assign({}, state, { mode: action.payload });
-
-        case CATEGORIAS_PESQUISA:
-            return Object.assign({}, state, { registros: action.payload, obj: undefined });
-
-        case CATEGORIA_EDICAO:
-            return Object.assign({}, state, { obj: action.payload });
-
-        default:
-            return state;
-
+        case CATEGORIAS_SEARCH:
+            return Object.assign({}, state, action.payload);
     }
-
+    return state;
 }
 
-export default categoriaReducer;
+export const categoriaReducer = (state = null, action) => {
+    switch (action.type) {
+        case CATEGORIA_LOAD:
+            return Object.assign({}, state, action.payload);
+    }
+    return state;
+}
+

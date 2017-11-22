@@ -6,43 +6,30 @@ import CategoriaForm from './CategoriaForm';
 import CategoriaList from './CategoriaList';
 
 import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGESIZE_DEFAULT } from '../../app/App.actions';
-import * as categoriaActions from './Categoria.actions';
+import actions from './Categoria.actions';
 
 class Categoria extends Component {
 
     constructor(props) {
         super(props);
-        this.consultar = this.consultar.bind(this);
-        this.pesquisar = this.pesquisar.bind(this);
-        this.limpar = this.limpar.bind(this);
-        this.novo = this.novo.bind(this);
-        this.carregar = this.carregar.bind(this);
-        this.salvar = this.salvar.bind(this);
-        this.excluir = this.excluir.bind(this);
-        this.setPage = this.setPage.bind(this);
+        this.fetchAll = this.fetchAll.bind(this);
+        // this.consultar = this.consultar.bind(this);
+        // this.limpar = this.limpar.bind(this);
+        // this.novo = this.novo.bind(this);
+        // this.carregar = this.carregar.bind(this);
+        // this.salvar = this.salvar.bind(this);
+        // this.excluir = this.excluir.bind(this);
+        // this.setPage = this.setPage.bind(this);
 
-        this.state = {
-            lastFilter: ""
-        };
+        this.fetchAll();
     }
 
-    componentDidMount() {
-        this.consultar();
+    fetchAll(values, page = 0, pagesize = PAGESIZE_DEFAULT) {
+        this.props.actions.fetchAll(values, page, pagesize);
     }
-
-    pesquisar(values) {
-        this.consultar(values);
-    }
+/*
 
     consultar(values, page = 0, pagesize = PAGESIZE_DEFAULT) {
-        let filter = Object.assign({}, values);
-        filter.sort = "nome,ASC";
-        if(filter && filter.nome) {
-            filter.nome += "*";
-        }
-
-        this.setState(Object.assign({}, this.state, { lastFilter: filter }));
-        this.props.actions.setMode(MODE_LIST);
         this.props.actions.consultar(filter, page, pagesize);
     }
 
@@ -70,44 +57,41 @@ class Categoria extends Component {
     setPage(page) {
         this.consultar(this.state.lastFilter, page);
     }
+*/
 
     render() {
-
-        const { data } = this.props;
-        const obj = {};
-
-        return (
-            <div>
-                {data.mode === MODE_LIST && <CategoriaList data={data.registros} 
-                    doSubmit={this.pesquisar} doLimpar={this.limpar} doNovo={this.novo} doCarregar={this.carregar} 
-                    doExcluir={this.excluir} doSetPage={this.setPage}></CategoriaList>}
-
-                {data.mode === MODE_INSERT && <CategoriaForm 
-                    data={obj} doSubmit={this.salvar} doConsultar={this.consultar}></CategoriaForm>}
-
-                {data.mode === MODE_UPDATE && <CategoriaForm 
-                    data={data.obj} doSubmit={this.salvar} doConsultar={this.consultar}></CategoriaForm>}
-            </div>
-        );
+        const { list, obj } = this.props;
+        if(!obj) {
+            return (
+                <CategoriaList data={list} 
+                    doSubmit={this.fetchAll} 
+                    doLimpar={this.fetchAll} 
+                    doNovo={this.fetchAll} 
+                    doCarregar={this.fetchAll}
+                    doExcluir={this.fetchAll}/>
+            );
+        } else {
+            return (
+                <CategoriaForm data={obj} 
+                    doSubmit={this.salvar} 
+                    doConsultar={this.consultar}/>
+            );
+        };
     }
 
 }
 
 const mapStateToProps = (state) => {
     return {
-        data: state.categoriaReducer
+        list: state.categorias,
+        obj: state.categoria
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(categoriaActions, dispatch)
+        actions: bindActionCreators(actions, dispatch)
     };
 };
 
-Categoria = connect(
-    mapStateToProps, 
-    mapDispatchToProps
-)(Categoria);
-
-export default Categoria;
+export default connect(mapStateToProps, mapDispatchToProps)(Categoria);

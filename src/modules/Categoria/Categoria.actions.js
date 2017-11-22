@@ -1,78 +1,60 @@
 import axios from "axios";
 
-import { toaster } from '../../components/Notification/Notification.actions';
+import * as alerts from '../../components/Notification/Notification.actions';
 
-export const [ CATEGORIAS_PESQUISA, CATEGORIA_EDICAO, CATEGORIAS_SETMODE ] = [ "CATEGORIAS_PESQUISA", "CATEGORIA_EDICAO", "CATEGORIAS_SETMODE" ];
+export const [ CATEGORIAS_SEARCH, CATEGORIA_LOAD ] = [ "CATEGORIAS_SEARCH", "CATEGORIA_LOAD" ];
 
-export const setMode = (mode) => {
-    return dispatch => {
-        dispatch({type: CATEGORIAS_SETMODE, payload: mode});
-    }
-}
-
-export const consultar = (filtro, start, pagesize) => {
-    filtro = filtro ? filtro : {};
-    filtro.start = start;
-    filtro.page = pagesize;
-
-    return dispatch => {
+const actions = {
+    fetchAll: (filtro, start, pagesize) => (dispatch) => {
+        filtro = filtro ? filtro : {};
+        filtro.start = start;
+        filtro.page = pagesize;
 
         axios.get('/categorias', { params: filtro })
             .then(function(response) {
-                dispatch({type: CATEGORIAS_PESQUISA, payload: response.data});
-
+                dispatch({type: CATEGORIAS_SEARCH, payload: response.data});
             }).catch(function(error){
-                console.log(error);
-                dispatch(toaster("erro-consulta-categorias", error.response.data, [], {status: "error"}));
+                alerts.notifyError("erro-consulta-categorias", error.response.data, dispatch);
+            });
+    }, 
+
+    fetchOne: (id) => (dispatch) => {
+        axios.get('/categorias/' + id)
+            .then(function(response) {
+                dispatch({type: CATEGORIA_LOAD, payload: response.data});
+            }).catch(function(error){
+                alerts.notifyError("erro-carga-categoria", error.response.data, dispatch);
             });
 
-    }
-}
+    }, 
 
-export const salvar = (categoria, callback) => {
-    return dispatch => {
+    add: () => (dispatch) => {
+        dispatch({type: CATEGORIA_LOAD, payload: {}});
+    }, 
 
+    save: (categoria, callback) => (dispatch) => {
         axios.put('/categorias', categoria)
             .then(function(response) {
                 callback();
-                dispatch(toaster(null, "categoria-salva", [], {status: "success"}));
-
+                dispatch({type: CATEGORIA_LOAD, payload: null});
+                alerts.notifySuccess("categoria-salva", null, dispatch);
             }).catch(function(error){
-                console.log(error);
-                dispatch(toaster("erro-salvar-categoria", error.response.data, [], {status: "error"}));
+                alerts.notifyError("erro-salvar-categoria", error.response.data, dispatch);
             });
-
-    }
-}
-
-export const excluir = (id, callback) => {
-    return dispatch => {
+    }, 
+    
+    delete: (id, callback) => (dispatch) => {
 
         axios.delete('/categorias/' + id)
             .then(function(response) {
-                callback();
-                dispatch(toaster(null, "categoria-excluida", [], {status: "success"}));
+                dispatch({type: CATEGORIA_LOAD, payload: null});
+                alerts.notifySuccess("categoria-excluida", null, dispatch);
 
             }).catch(function(error){
-                console.log(error);
-                dispatch(toaster("erro-excluir-categoria", error.response.data, [], {status: "error"}));
+                alerts.notifyError("erro-excluir-categoria", error.response.data, dispatch);
             });
 
     }
-}
+};
 
-export const carregar = (id) => {
-    return dispatch => {
-
-        axios.get('/categorias/' + id)
-            .then(function(response) {
-                dispatch({type: CATEGORIA_EDICAO, payload: response.data});
-
-            }).catch(function(error){
-                console.log(error);
-                dispatch(toaster("erro-carga-categoria", error.response.data, [], {status: "error"}));
-            });
-
-    }
-}
-
+export default actions;
