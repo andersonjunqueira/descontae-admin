@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'; 
 
 import * as DASHBOARD_CLIENTE from './Dashboard.actions';
-import { translate } from '../../components/Intl/Intl.actions';
 import DashboardForm from './DashboardForm';
 
 class Dashboard extends Component {
@@ -41,6 +40,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log('DASHBOARD LOADING STATE');
     return {
         roles: state.profileReducer.roles,
         data: state.dashboardReducer

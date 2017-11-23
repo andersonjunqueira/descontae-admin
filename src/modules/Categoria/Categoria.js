@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import CategoriaForm from './CategoriaForm';
 import CategoriaList from './CategoriaList';
 
-import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGESIZE_DEFAULT } from '../../app/App.actions';
+import { PAGESIZE_DEFAULT } from '../../app/App.actions';
 import actions from './Categoria.actions';
 
 class Categoria extends Component {
@@ -13,19 +13,27 @@ class Categoria extends Component {
     constructor(props) {
         super(props);
         this.fetchAll = this.fetchAll.bind(this);
+        this.setPage = this.setPage.bind(this);
+        console.log('CATEGORIA CONSTRUCTOR');
         // this.consultar = this.consultar.bind(this);
         // this.limpar = this.limpar.bind(this);
         // this.novo = this.novo.bind(this);
         // this.carregar = this.carregar.bind(this);
         // this.salvar = this.salvar.bind(this);
         // this.excluir = this.excluir.bind(this);
-        // this.setPage = this.setPage.bind(this);
+    }
 
+    componentWillMount() {
+        console.log('CATEGORIA WILLMOUNT');
         this.fetchAll();
     }
 
     fetchAll(values, page = 0, pagesize = PAGESIZE_DEFAULT) {
         this.props.actions.fetchAll(values, page, pagesize);
+    }
+
+    setPage(page) {
+        this.fetchAll('', page);
     }
 /*
 
@@ -53,22 +61,17 @@ class Categoria extends Component {
     excluir(id) {
         this.props.actions.excluir(id, this.consultar);
     }
-
-    setPage(page) {
-        this.consultar(this.state.lastFilter, page);
-    }
 */
 
     render() {
+        console.log('CATEGORIA RENDER');
         const { list, obj } = this.props;
         if(!obj) {
             return (
-                <CategoriaList data={list} 
-                    doSubmit={this.fetchAll} 
-                    doLimpar={this.fetchAll} 
-                    doNovo={this.fetchAll} 
-                    doCarregar={this.fetchAll}
-                    doExcluir={this.fetchAll}/>
+                <CategoriaList 
+                    data={list} 
+                    doSubmit={this.fetchAll}
+                    doSetPage={this.setPage}/>
             );
         } else {
             return (
@@ -76,12 +79,13 @@ class Categoria extends Component {
                     doSubmit={this.salvar} 
                     doConsultar={this.consultar}/>
             );
-        };
+        }
     }
 
 }
 
 const mapStateToProps = (state) => {
+    console.log('CATEGORIA LOADING STATE');
     return {
         list: state.categorias,
         obj: state.categoria

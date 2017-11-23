@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 
-import { Form, Row, Col, Button, Table, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
-import Text from '../../components/Text';
+import { Form } from 'reactstrap';
+import PaginationBar from '../../components/PaginationBar';
+import Table from '../../components/Table';
 import Intl from '../../components/Intl';
 
 class CategoriaList extends Component {
@@ -40,84 +40,40 @@ class CategoriaList extends Component {
 
     render() {
         // const toggle = (value) => this.toggle(value);
+        const { data, doSetPage, doSubmit, handleSubmit } = this.props;
 
         let content = (<Intl str="nenhum-registro-encontrado"></Intl>);
         if(data && data.totalElements > 0) {
-            let paginationLinks = [];
-            if(data.totalPages > 1) {
-                if(!data.first) {
-                    paginationLinks.push({ icon: "fa fa-step-backward", page: 0});
-                }
 
-                let start = data.number - 4;
-                let last = data.number + 5;
-
-                if(start < 0) {
-                    start = 0;
-                }
-
-                if(last > data.totalPages) {
-                    last = data.totalPages;
-                }
-
-                for (let i=start; i < last; i++) {
-                    paginationLinks.push({ text: i+1, page: i, active: i === data.number});
-                }
-
-                if(!data.last) {
-                    paginationLinks.push({ icon: "fa fa-step-forward", page: data.totalPages-1});
-                }
-            }
+            const headers = [
+                { label: (<Intl str="nome"></Intl>), classNames: 'table-w-75' },
+                { classNames: 'table-w-20 text-center' }
+            ];
 
             content = (
                 <div>
-                    <Table hover size="sm" className="tabela">
-                        <thead>
-                            <tr>
-                                <th className="table-w-5"></th>
-                                <th className="table-w-75"><Intl str="nome"></Intl></th>
-                                <th className="table-w-20 text-center"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Object.keys(data.content).map(function(key) {
-                                return (<tr key={key}>
-                                    <td></td>
-                                    <td>{data.content[key].nome}</td>
-                                    <td className="text-center">{/*
-                                        <Button type="button" onClick={() => doCarregar(data.content[key].id)} color="secondary" size="sm">
-                                            <i className="fa fa-pencil"></i>
-                                        </Button>
+                    <Table headers={headers}>
+                        {Object.keys(data.content).map(function(key) {
+                            return (<tr key={key}>
+                                <td></td>
+                                <td>{data.content[key].nome}</td>
+                                <td className="text-center">{/*
+                                    <Button type="button" onClick={() => doCarregar(data.content[key].id)} color="secondary" size="sm">
+                                        <i className="fa fa-pencil"></i>
+                                    </Button>
 
-                                        <Button type="button" onClick={() => toggle(data.content[key]) } color="danger" size="sm" className="espacamento">
-                                            <i className="fa fa-trash"></i>
-                                        </Button>*/}
-                                    </td>
-                                </tr>);
-                            })}
-                        </tbody>
+                                    <Button type="button" onClick={() => toggle(data.content[key]) } color="danger" size="sm" className="espacamento">
+                                        <i className="fa fa-trash"></i>
+                                    </Button>*/}
+                                </td>
+                            </tr>);
+                        })}
                     </Table>
-                    {paginationLinks.length > 0 && (
-                            <Row>
-                                <Col xs={12} md={12}>
-                                    <Pagination className="pull-right">
-                                        {paginationLinks.map( (item, index) => {
-                                            return (<PaginationItem key={index} active={item.active}>
-                                                <PaginationLink onClick={() => { this.props.doSetPage(item.page); }}>
-                                                    <i className={"fa " + item.icon}></i>
-                                                    {item.text}
-                                                </PaginationLink>
-                                            </PaginationItem>)
-                                        })}
-                                    </Pagination>
-                                </Col>
-                            </Row>
-                        )}
-                    </div>
+                    <PaginationBar data={data} selectPage={doSetPage}/>
+                </div>
             );
         }
 
-        const { data, doSubmit, handleSubmit, pristine, submitting, invalid } = this.props;
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
                 <h4><Intl str='pesquisa-categorias'></Intl></h4>
@@ -170,8 +126,9 @@ const validate = values => {
 }
 
 CategoriaList.propTypes = {
-    data: PropTypes.array,
-    doSubmit: PropTypes.func
+    data: PropTypes.object,
+    doSubmit: PropTypes.func,
+    doSetPage: PropTypes.func
 };
 
 CategoriaList = reduxForm({ 

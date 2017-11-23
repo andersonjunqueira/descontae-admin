@@ -6,7 +6,9 @@ export const [ CATEGORIAS_SEARCH, CATEGORIA_LOAD ] = [ "CATEGORIAS_SEARCH", "CAT
 
 const actions = {
     fetchAll: (filtro, start, pagesize) => (dispatch) => {
+        console.log('CATEGORIA FETCH ALL');
         filtro = filtro ? filtro : {};
+        filtro.sort = "nome,ASC";
         filtro.start = start;
         filtro.page = pagesize;
 
@@ -14,7 +16,7 @@ const actions = {
             .then(function(response) {
                 dispatch({type: CATEGORIAS_SEARCH, payload: response.data});
             }).catch(function(error){
-                alerts.notifyError("erro-consulta-categorias", error.response.data, dispatch);
+                alerts.notifyError("erro-consulta-categorias", null, error, dispatch);
             });
     }, 
 
@@ -23,7 +25,7 @@ const actions = {
             .then(function(response) {
                 dispatch({type: CATEGORIA_LOAD, payload: response.data});
             }).catch(function(error){
-                alerts.notifyError("erro-carga-categoria", error.response.data, dispatch);
+                alerts.notifyError("erro-carga-categoria", null, error, dispatch);
             });
 
     }, 
@@ -39,7 +41,7 @@ const actions = {
                 dispatch({type: CATEGORIA_LOAD, payload: null});
                 alerts.notifySuccess("categoria-salva", null, dispatch);
             }).catch(function(error){
-                alerts.notifyError("erro-salvar-categoria", error.response.data, dispatch);
+                alerts.notifyError("erro-salvar-categoria", null, error, dispatch);
             });
     }, 
     
@@ -51,7 +53,7 @@ const actions = {
                 alerts.notifySuccess("categoria-excluida", null, dispatch);
 
             }).catch(function(error){
-                alerts.notifyError("erro-excluir-categoria", error.response.data, dispatch);
+                alerts.notifyError("erro-excluir-categoria", null, error, dispatch);
             });
 
     }

@@ -2,7 +2,7 @@ import { addNotification } from 'reapop';
 
 import { translate } from "../Intl/Intl.actions";
 
-export const toaster = (title, msg, params = [], configuration) => {
+export const toaster = (title, msg, params = [], configuration, error = undefined) => {
 
     const defaultConfig = {
         message: undefined,
@@ -21,18 +21,21 @@ export const toaster = (title, msg, params = [], configuration) => {
         ...configuration
     });
 
-    // console.log({ status: configuration.status, title, msg });
+    if(error) {
+        console.log(error);
+    }
+
     return addNotification(config);
 }
 
-export const notify = (labelKey, msgKey, status, dispatch) => {
-    dispatch(toaster(labelKey, msgKey, [], {status}));
+export const notify = (labelKey, msgKey, status, dispatch, error) => {
+    dispatch(toaster(labelKey, msgKey, [], {status}, error));
 }
 
 export const notifySuccess = (labelKey, msgKey, dispatch) => {
     notify(null, msgKey, "success", dispatch);
 }
 
-export const notifyError = (labelKey, msgKey, dispatch) => {
-    notify(null, msgKey, "error", dispatch);
+export const notifyError = (labelKey, msgKey, error, dispatch) => {
+    notify(null, msgKey, "error", dispatch, error);
 }
