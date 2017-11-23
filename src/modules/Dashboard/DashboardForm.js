@@ -160,7 +160,7 @@ class DashboardForm extends Component {
                                 </CardHeader>
                                 <CardBody>
                                     {this.props.data.cartoesAtivos.length > 0 && (<Pie data={this.getCartoesAtivosData()} options={this.getPieOptions()}/>)}
-                                    {this.props.data.cartoesAtivos.length == 0 && (<span>{translate('nao-ha-dados')}</span>)}
+                                    {this.props.data.cartoesAtivos.length === 0 && (<span>{translate('nao-ha-dados')}</span>)}
                                 </CardBody>
                             </Card>
                         </Col>
@@ -171,7 +171,7 @@ class DashboardForm extends Component {
                                 </CardHeader>
                                 <CardBody>
                                     {this.props.data.consumosTotaisByCidade.length > 0 && (<Bar data={this.getConsumosPorCidadeData()} options={this.getBarOptions()}/>)}
-                                    {this.props.data.consumosTotaisByCidade.length == 0 && (<span>{translate('nao-ha-dados')}</span>)}
+                                    {this.props.data.consumosTotaisByCidade.length === 0 && (<span>{translate('nao-ha-dados')}</span>)}
                                 </CardBody>
                             </Card>
                         </Col>
@@ -182,7 +182,7 @@ class DashboardForm extends Component {
                                 </CardHeader>
                                 <CardBody>
                                     {this.props.data.consumosTotaisByBairro.length > 0 && (<Bar data={this.getConsumosPorBairroData()} options={this.getBarOptions()}/>)}
-                                    {this.props.data.consumosTotaisByBairro.length == 0 && (<span>{translate('nao-ha-dados')}</span>)}
+                                    {this.props.data.consumosTotaisByBairro.length === 0 && (<span>{translate('nao-ha-dados')}</span>)}
                                 </CardBody>
                             </Card>                        
                         </Col>
@@ -193,7 +193,7 @@ class DashboardForm extends Component {
                                 </CardHeader>
                                 <CardBody>
                                     {this.props.data.consumosTotaisByCategoria.length > 0 && (<Pie data={this.getConsumosPorCategoriaData()} options={this.getPieOptions()}/>)}
-                                    {this.props.data.consumosTotaisByCategoria.length == 0 && (<span>{translate('nao-ha-dados')}</span>)}
+                                    {this.props.data.consumosTotaisByCategoria.length === 0 && (<span>{translate('nao-ha-dados')}</span>)}
                                 </CardBody>
                             </Card>
                         </Col>
