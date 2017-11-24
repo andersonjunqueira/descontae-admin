@@ -2,6 +2,10 @@ import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 import { reducer as notificationsReducer} from 'reapop';
 
+import headerReducer from '../layout/Header/Header.reducers';
+import sidebarReducer from '../layout/Sidebar/Sidebar.reducers';
+import categoriasReducer from '../modules/Categoria/Categoria.reducers';
+
 import selectMarcaReducer from '../components/SelectMarca/SelectMarca.reducers';
 import selectCategoriaReducer from '../components/SelectCategoria/SelectCategoria.reducers';
 import selectPlanoReducer from '../components/SelectPlano/SelectPlano.reducers';
@@ -9,12 +13,8 @@ import selectCidadeReducer from '../components/SelectCidade/SelectCidade.reducer
 import pesquisaPessoaReducer from '../components/PesquisaPessoa/PesquisaPessoa.reducers';
 import pesquisaClienteReducer from '../components/PesquisaCliente/PesquisaCliente.reducers';
 
-import * as catReducers from '../modules/Categoria/Categoria.reducers';
-
-import ufReducer from '../components/UF/UF.reducers';
 import intlReducer from '../components/Intl/Intl.reducers';
-import sidebarReducer from '../components/Sidebar/Sidebar.reducers';
-import headerReducer from '../components/Header/Header.reducers';
+import ufReducer from '../components/UF/UF.reducers';
 import marcaReducer from '../modules/Marca/Marca.reducers';
 import clienteReducer from '../modules/Cliente/Cliente.reducers';
 import planoReducer from '../modules/Plano/Plano.reducers';
@@ -38,12 +38,11 @@ const initialState = {
 }
 
 const appReducer = (state = initialState, action) => {
-    console.log(action.type, action);
+    // console.log(action.type, action);
     switch (action.type) {
         case PROCESS_LOGIN:
-            return  Object.assign({}, state, {
-                auth: action.payload
-            });
+            return  Object.assign({}, state, { auth: action.payload });
+
         case LOADED_INTL:
             return  Object.assign({}, state, {
                 intlStrings: action.payload,
@@ -55,12 +54,15 @@ const appReducer = (state = initialState, action) => {
 }
 
 const reducers = combineReducers({
-    categorias: catReducers.pesquisaCategoriaReducer,
-    categoria: catReducers.categoriaReducer,
+    app: appReducer,
+    intl: intlReducer,
+    header: headerReducer,
+    categorias: categoriasReducer,
+    profile: profileReducer,
+    sidebar: sidebarReducer,
     
     consumos: consumoReducer,
     
-    profileReducer,
     marcaReducer,
     clienteReducer,
     planoReducer,
@@ -77,10 +79,6 @@ const reducers = combineReducers({
     selectCidadeReducer,
 
     ufReducer,
-    intlReducer,
-    sidebarReducer,
-    headerReducer,
-    appReducer,
     notifications: notificationsReducer(),
     form
 })

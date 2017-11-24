@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {withRouter} from 'react-router-dom';
 
 import Submenu from './Submenu';
 import MenuHeading from './MenuHeading';
 import MenuItem from './MenuItem';
 
-import { sidebarMenuLoad } from './Sidebar.actions';
+const Sidebar = withRouter(props => <SideMenu {...props}/>);
 
-class Sidebar extends Component {
+class SideMenu extends Component {
 
     constructor(props) {
         super(props);
         this.activeRoute = this.activeRoute.bind(this);
-        this.activeRoute = this.activeRoute.bind(this);
-    }
-
-    componentWillMount() {
-        this.props.sidebarMenuLoad();
     }
 
     handleClick(e) {
@@ -62,53 +58,41 @@ class Sidebar extends Component {
                     adicionar(item)
                 }
             }
-
         }
-
         return out;
     }
 
     render() {
-        if(this.props.menu && this.props.roles) {
-            const menuItems = this.filterMenu(this.props.menu, this.props.roles.plain);
-            const activeRoute = this.activeRoute;
-            const handleClick = this.handleClick;
-            return (
-                <div className="sidebar">
-                    <nav className="sidebar-nav">
-                        <ul className="nav">
-                            {menuItems.map( (item, index) => {
-                                if(item.heading) {
-                                    return <MenuHeading key={index} item={item} />
-                                } else if(item.submenu) {
-                                    return <Submenu key={index} item={item} activeRoute={activeRoute} handleClick={handleClick} />
-                                } else {
-                                    return <MenuItem key={index} item={item} />
-                                }
-                            })}
-                        </ul>
-                    </nav>
-                </div>
-            );
-        }
-        return (<div></div>);
+        const menuItems = this.filterMenu(this.props.data.menu, this.props.data.roles.plain);
+        return (
+            <div className="sidebar">
+                <nav className="sidebar-nav">
+                    <ul className="nav">
+                        {menuItems.map( (item, index) => {
+                            if(item.heading) {
+                                return <MenuHeading key={index} item={item} />
+                            } else if(item.submenu) {
+                                return <Submenu key={index} item={item} activeRoute={this.activeRoute} handleClick={handleClick} />
+                            } else {
+                                return <MenuItem key={index} item={item} />
+                            }
+                        })}
+                    </ul>
+                </nav>
+            </div>
+        );
     }
 }
 
-Sidebar.defaultProps = {
-    menu: []
-};
-
 const mapStateToProps = (state) => {
-    return {
-        roles: state.profileReducer.roles,
-        menu: state.sidebarReducer.sidebarMenu
-    }
+    const ns = {};
+    ns.roles = state.profile.roles || { plain: [] } ;
+    ns.menu = state.sidebar.sidebarMenu || [];
+    return { data: ns };
 };
 
-Sidebar = connect(
-    mapStateToProps, 
-    { sidebarMenuLoad } 
-)(Sidebar);
+SideMenu = connect(
+    mapStateToProps
+)(SideMenu);
 
 export default Sidebar;

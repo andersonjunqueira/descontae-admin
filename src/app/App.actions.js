@@ -1,26 +1,71 @@
 import axios from "axios";
 
+import * as alerts from '../components/Notification/Notification.actions';
 import { zipcodeFunctions } from '../components/ZipCode';
 import { phoneFunctions } from '../components/Phone';
 import { cpfFunctions } from '../components/CPF';
-import { changeLanguage } from '../components/Intl/Intl.actions';
-import { headerMenuLoad, userMenuLoad } from '../components/Header/Header.actions';
-import { sidebarMenuLoad } from '../components/Sidebar/Sidebar.actions';
-import { DEFAULT_LANGUAGE} from '../components/Intl/Intl.actions';
-import { toaster } from '../components/Notification/Notification.actions';
+
+import { headerMenuLoad, userMenuLoad } from '../layout/Header/Header.actions';
+import { sidebarMenuLoad } from '../layout/Sidebar/Sidebar.actions';
+import { changeLanguage, DEFAULT_LANGUAGE } from '../components/Intl/Intl.actions';
 import { loadDashboard } from '../modules/Dashboard/Dashboard.actions';
+import { initLanguage } from '../components/Intl/Intl.actions';
+
+import intlData from '../intl.json';
+import appData from '../app.json';
+import menuData from '../menu.json';
 
 export const [ MODE_INSERT, MODE_UPDATE, MODE_LIST ] = [ "MODE_INSERT", "MODE_UPDATE", "MODE_LIST" ];
 export const [ PAGESIZE_DEFAULT, PAGESIZE_MODAL ] = [ 10, 5 ];
-export const [ PROCESS_LOGIN, PROFILE_LOADED ] = [ "PROCESS_LOGIN", "PROFILE_LOADED" ];
 export const [ ROLE_ADMIN, ROLE_CLIENTE, ROLE_USUARIO, ROLE_PARCEIRO ] = [ 'admin', 'cliente', 'usuario', 'parceiro' ];
+
+export const [ PROCESS_LOGIN, PROFILE_LOADED ] = [ "PROCESS_LOGIN", "PROFILE_LOADED" ];
 
 export const logout = (auth) => {
     auth.logout();
 }
 
+const createUser = (userData, auth, dispatch) => {
+    axios.post('/pessoas', userData)
+      .then( (response) => {
+          alerts.notifySuccess('novo-usuario', 'novo-usuario-registrado', dispatch);
+      }).catch( (error) => {
+          alerts.notifyError('novo-usuario', 'problema-registro', error, dispatch);  
+          setTimeout(() => logout(auth), 3000);
+      });
+}
+
+const loadUserData = (userData, resource_access, sub) => {
+    const data = Object.assign(userData, {});
+    
+    data.cep = data.cep ? zipcodeFunctions.applyMask(data.cep) : undefined;
+    data.cpf = data.cpf ? cpfFunctions.applyMask(data.cpf) : undefined;
+    if(data.telefones && Object.keys(data.telefones).length > 0) {
+        Object.keys(data.telefones).map((keyName, keyIndex) => {
+            return data.telefones[keyIndex].numero = phoneFunctions.applyMask(data.telefones[keyIndex].numero);
+        });
+    }
+
+    data.keycloakid = sub;
+    if(resource_access) {
+        const roles = resource_access['descontae-admin'].roles;
+        data.roles = {
+            plain: roles,
+            isAdmin: roles.indexOf(ROLE_ADMIN) > -1,
+            isCliente: roles.indexOf(ROLE_CLIENTE) > -1,
+            isParceiro: roles.indexOf(ROLE_PARCEIRO) > -1,
+            isUsuario: roles.indexOf(ROLE_USUARIO) > -1
+        };
+    }
+
+    return data;
+}
+
 export const login = (auth) => {
     return dispatch => {
+
+        // INICIALIZAÇÃO IDIOMA
+        dispatch(initLanguage(intlData));
 
         const { name, email, resource_access, sub } = auth.tokenParsed;
 
@@ -28,94 +73,57 @@ export const login = (auth) => {
         axios.get('/pessoas/login', {params:{"email": email}})
             .then( (response) => {
 
-                const data = Object.assign(response.data, {});
+                const userData = loadUserData(response.data, resource_access, sub);
 
-                data.cep = data.cep ? zipcodeFunctions.applyMask(data.cep) : undefined;
-                data.cpf = data.cpf ? cpfFunctions.applyMask(data.cpf) : undefined;
-                if(data.telefones && Object.keys(data.telefones).length > 0) {
-                    Object.keys(data.telefones).map((keyName, keyIndex) => {
-                        return data.telefones[keyIndex].numero = phoneFunctions.applyMask(data.telefones[keyIndex].numero);
-                    });
-                }
-
-                data.keycloakid = sub;
-                if(resource_access) {
-                    const roles = resource_access['descontae-admin'].roles;
-                    data.roles = {
-                        plain: roles,
-                        isAdmin: roles.indexOf(ROLE_ADMIN) > -1,
-                        isCliente: roles.indexOf(ROLE_CLIENTE) > -1,
-                        isParceiro: roles.indexOf(ROLE_PARCEIRO) > -1,
-                        isUsuario: roles.indexOf(ROLE_USUARIO) > -1
-                    };
-                }
-
-                
                 // ENCONTROU, CARREGA E CONTINUA
-                dispatch({type: PROFILE_LOADED, payload: data});
+                dispatch({type: PROFILE_LOADED, payload: userData});
                 
                 // ATUALIZA O IDIOMA DE ACORDO COM A PREFERÊNCIA DO USUÁRIO
-                dispatch(changeLanguage(response.data.idioma, true));
+                dispatch(changeLanguage(userData.idioma, true));
                 
                 // DISPARA A CARGA DOS MENUS
-                dispatch(headerMenuLoad);
-                dispatch(userMenuLoad);
-                dispatch(sidebarMenuLoad);
-                
-                // DISPARA NOTIFICAÇÃO
-                dispatch(toaster(null, "bem-vindo", [name]));
+                dispatch(headerMenuLoad(appData.headerMenu));
+                dispatch(userMenuLoad(appData.userMenu));
+                dispatch(sidebarMenuLoad(menuData));
                 
                 // ATUALIZAR O STORE COM O OBJETO DO KEYCLOAK
                 dispatch({type: PROCESS_LOGIN, payload: auth});
 
                 // CARREGA A DASHBOARD
-                if(data.roles.isAdmin || data.roles.isCliente) {
+                if(userData.roles.isAdmin || userData.roles.isCliente) {
                     dispatch(loadDashboard());
                 }
+
+                // DISPARA NOTIFICAÇÃO
+                alerts.notifyInfo(null, 'bem-vindo', [name], dispatch);
                 
             }).catch( (error) => {
-                
                 if(error.response) {
 
-                    // 404 É USUÁRIO NÃO ENCONTRADO, REGISTRANDO
                     if(error.response.status === 404) {
-
-                        let pessoa = {
+                        
+                        // 404 É USUÁRIO NÃO ENCONTRADO, REGISTRANDO
+                        createUser({
                             nome: name,
                             email: email,
                             idioma: DEFAULT_LANGUAGE
-                        };
-
-                        // GRAVANDO O PERFIL
-                        axios.post('/pessoas', pessoa)
-                          .then( (response) => {
-
-                              dispatch(toaster("novo-usuario", "novo-usuario-registrado", [], {status: "success"}));
-
-                          }).catch( (error) => {
-
-                              dispatch(toaster("novo-usuario", "problema-registro", [], {status: "error"}));
-                              setTimeout(() => logout(auth), 3000);
-
-                          });
+                        }, auth, dispatch);
 
                     } else {
-
-                        dispatch(toaster("erro-desconhecido", null, [], {status: "error"}));
+                        alerts.notifyError('erro-desconhecido', null, error, dispatch);
                         setTimeout(() => logout(auth), 3000);
-
                     }
 
                 } else {
                     if(error.message === 'Network Error') {
-                        dispatch(toaster("erro-desconhecido", "erro-backend-inacessivel", [], {status: "error"}));    
+                        alerts.notifyError('erro', 'erro-backend-inacessivel', error, dispatch);
                     } else {
-                        dispatch(toaster(null, "erro-desconhecido", [], {status: "error"}));
+                        alerts.notifyError('erro-desconhecido', null, error, dispatch);
                     }
                 }
-
             });
-
     }
 }
+
+
 

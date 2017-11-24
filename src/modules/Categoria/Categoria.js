@@ -21,8 +21,10 @@ class Categoria extends Component {
             pageSize: PAGESIZE_DEFAULT,
             orderBy: 'nome,ASC'
         };
-
         this.fetchAll(this.state.values, this.state.orderBy, this.state.startPage, this.state.pageSize);
+    }
+    
+    componentDidMount() {
     }
 
     fetchAll(values, orderBy, startPage, pageSize) {
@@ -44,35 +46,31 @@ class Categoria extends Component {
     }
 
     render() {
-        const { list, obj } = this.props;
-        if(!obj) {
-            return (
-                <CategoriaList 
-                    data={list} 
-                    doSubmit={(values) => this.fetchAll(values)}
-                    doAdd={this.props.actions.add}
-                    doDelete={this.props.actions.delete}
-                    doFetchOne={this.props.actions.fetchOne}
-                    doSetPage={this.setPage}
-                    setOrderBy={this.setOrderBy}
-                />
-            );
+        if(this.props.data.active) {
+            console.log('render active');
+            return (<CategoriaForm data={this.props.data.active} 
+                doSubmit={this.props.actions.save}
+                doCancel={this.props.actions.cancel}
+            />);
         } else {
-            return (
-                <CategoriaForm data={obj} 
-                    doSubmit={this.props.actions.save}
-                    doCancel={this.props.actions.cancel}
-                />
-            );
+            console.log('render list', this.props.data, this.props.data.list);
+            return (<CategoriaList 
+                data={this.props.data.list} 
+                doSubmit={(values) => this.fetchAll(values)}
+                doAdd={this.props.actions.add}
+                doDelete={this.props.actions.delete}
+                doFetchOne={this.props.actions.fetchOne}
+                doSetPage={this.setPage}
+                setOrderBy={this.setOrderBy}
+            />);
         }
     }
-
 }
 
 const mapStateToProps = (state) => {
+    console.log('mapStateToProps', state.categorias.list);
     return {
-        list: state.categorias,
-        obj: state.categoria
+        data: state.categorias
     };
 };
 

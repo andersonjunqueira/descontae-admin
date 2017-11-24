@@ -1,8 +1,7 @@
-import React, { PropTypes } from 'react';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
-import { Provider } from 'react-redux';
+import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Full from '../containers/Full';
+import Full from '../layout/Full';
 import Intl from '../components/Intl';
 
 import Inicio from '../modules/Inicio';
@@ -18,12 +17,11 @@ import Dashboard from '../modules/Dashboard';
 import Consumo from '../modules/Consumo';
 
 const App = ({store}) => (
-    <Provider store={store}>
+    <BrowserRouter>
+        <Full>
+            <Switch>
+                <Route path="/componentes" name={<Intl str='inicio'></Intl>} component={Inicio}/>
 
-        <Router history={browserHistory}>
-
-            <Route component={Full} path="/" name={<Intl str='inicio'></Intl>}>
-                <IndexRoute component={Dashboard}/>
                 <Route path="/categorias" name={<Intl str='categorias'></Intl>} component={Categoria} />
                 <Route path="/marcas" name={<Intl str='marcas'></Intl>} component={Marca} />
                 <Route path="/clientes" name={<Intl str='clientes'></Intl>} component={Cliente} />
@@ -33,18 +31,10 @@ const App = ({store}) => (
                 <Route path="/cartoes" name={<Intl str='cartoes'></Intl>} component={Cartao} />
                 <Route path="/pessoas" name={<Intl str='pessoas'></Intl>} component={Pessoa} />
                 <Route path="/consumos" name={<Intl str='consumos'></Intl>} component={Consumo} />
-
-                <Route path="/componentes" name={<Intl str='inicio'></Intl>} component={Inicio}/>
-            </Route>
-
-        </Router>
-
-    </Provider>
+                <Route path="/" component={Dashboard} />
+            </Switch>
+        </Full>
+    </BrowserRouter>
 );
-
-
-App.propTypes = {
-    store: PropTypes.object.isRequired,
-};
 
 export default App;

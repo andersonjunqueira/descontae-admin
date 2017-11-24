@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import appData from '../../app.json';
-import { translate } from '../Intl/Intl.actions';
+import { translate } from '../../components/Intl/Intl.actions';
 
 class Footer extends Component {
   render() {

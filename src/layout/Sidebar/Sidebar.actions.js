@@ -1,8 +1,6 @@
 export const [ LOADED_SIDEBAR_MENU ] = [ "LOADED_SIDEBAR_MENU" ];
 
-import menuData from '../../menu.json';
-
-export const sidebarMenuLoad = () => {
+export const sidebarMenuLoad = (menuData) => {
     return dispatch => {
         dispatch({type: LOADED_SIDEBAR_MENU, payload: menuData});
     }

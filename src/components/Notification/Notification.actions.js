@@ -28,14 +28,18 @@ export const toaster = (title, msg, params = [], configuration, error = undefine
     return addNotification(config);
 }
 
-export const notify = (labelKey, msgKey, status, dispatch, error) => {
-    dispatch(toaster(labelKey, msgKey, [], {status}, error));
+export const notify = (labelKey, msgKey, params, status, dispatch, error) => {
+    dispatch(toaster(labelKey, msgKey, params, {status}, error));
 }
 
-export const notifySuccess = (labelKey, msgKey, dispatch) => {
+export const notifySuccess = (labelKey, msgKey, params, dispatch) => {
     notify(labelKey, msgKey, "success", dispatch);
 }
 
-export const notifyError = (labelKey, msgKey, error, dispatch) => {
+export const notifyError = (labelKey, msgKey, params, error, dispatch) => {
     notify(labelKey, msgKey, "error", dispatch, error);
+}
+
+export const notifyInfo = (labelKey, msgKey, params, dispatch) => {
+    notify(labelKey, msgKey, params, "info", dispatch);
 }

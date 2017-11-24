@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Intl from '../Intl';
+import Intl from '../../components/Intl';
 
 class MenuHeading extends Component {
     render() {

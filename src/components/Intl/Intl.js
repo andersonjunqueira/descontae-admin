@@ -23,7 +23,7 @@ Intl.defaultProps = {
 
 const mapStateToProps = (state) => {
     return {
-        language: state.intlReducer.currentLanguage
+        language: state.intl.currentLanguage
     }
 };
 
