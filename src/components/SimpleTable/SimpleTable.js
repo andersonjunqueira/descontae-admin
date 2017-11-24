@@ -10,7 +10,11 @@ class SimpleTable extends Component {
                 <thead>
                     <tr>
                         {headers && headers.map((h, index) => {
-                            return (<th key={index} className={h.classNames || ''}>{h.label || ''}</th>)
+                            let label = h.label || '';
+                            if(h.orderField && this.props.setOrderBy) {
+                                label = (<a href="#" onClick={() => this.props.setOrderBy('nome','DESC')}>{label}</a>);
+                            }
+                            return (<th key={index} className={h.classNames || ''}>{label}</th>);
                         })}
                     </tr>
                 </thead>
@@ -24,7 +28,8 @@ class SimpleTable extends Component {
 
 SimpleTable.propTypes = {
     children: PropTypes.node,
-    headers: PropTypes.arrayOf(PropTypes.object)
+    headers: PropTypes.arrayOf(PropTypes.object),
+    setOrderBy: PropTypes.func
 }
 
 SimpleTable.defaultProps = {

@@ -13,18 +13,34 @@ class Categoria extends Component {
         super(props);
         this.fetchAll = this.fetchAll.bind(this);
         this.setPage = this.setPage.bind(this);
-        this.fetchAll();
+        this.setOrderBy = this.setOrderBy.bind(this);
+
+        this.state = {
+            values: undefined,
+            startPage: 0,
+            pageSize: PAGESIZE_DEFAULT,
+            orderBy: 'nome,ASC'
+        };
+
+        this.fetchAll(this.state.values, this.state.orderBy, this.state.startPage, this.state.pageSize);
     }
 
-    componentWillMount() {
-    }
-
-    fetchAll(values, startPage = 0, pagesize = PAGESIZE_DEFAULT) {
-        this.props.actions.fetchAll(values, startPage, pagesize);
+    fetchAll(values, orderBy, startPage, pageSize) {
+        this.props.actions.fetchAll(
+            values || this.state.values, 
+            orderBy || this.state.orderBy, 
+            startPage || this.state.startPage, 
+            pageSize || this.state.pageSize
+        );
     }
 
     setPage(page) {
-        this.fetchAll('', page);
+        this.fetchAll(undefined, undefined, page);
+    }
+
+    setOrderBy(field, direction) {
+        this.setState(Object.assign({}, this.state, { orderBy: `${field},${direction}` }));
+        this.fetchAll();
     }
 
     render() {
@@ -38,6 +54,7 @@ class Categoria extends Component {
                     doDelete={this.props.actions.delete}
                     doFetchOne={this.props.actions.fetchOne}
                     doSetPage={this.setPage}
+                    setOrderBy={this.setOrderBy}
                 />
             );
         } else {

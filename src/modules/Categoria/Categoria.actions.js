@@ -13,11 +13,13 @@ export const actionTypes = {
 }
 
 const actions = {
-    fetchAll: (filtro, startPage, pagesize) => (dispatch) => {
+    fetchAll: (filtro, orderBy, startPage, pageSize) => (dispatch) => {
+        
         filtro = filtro ? filtro : {};
-        filtro.sort = "nome,ASC";
+        filtro.sort = orderBy;
         filtro.start = startPage;
-        filtro.size = pagesize;
+        filtro.size = pageSize;
+
         axios.get('/categorias', { params: filtro })
             .then(function(response) {
                 dispatch({type: actionTypes.CATEGORIAS_SEARCH, payload: response.data});

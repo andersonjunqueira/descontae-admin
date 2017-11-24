@@ -31,7 +31,7 @@ class CategoriaList extends Component {
         const toggle = (value) => this.showModal(value);
         const { data, doSetPage, doSubmit, doFetchOne, handleSubmit, pristine, submitting, invalid } = this.props;
         const headers = [
-            { label: (<Intl str="nome"></Intl>), classNames: 'table-w-75' },
+            { label: (<Intl str="nome"></Intl>), classNames: 'table-w-75', orderField: 'nome' },
             { classNames: 'table-w-20 text-center' }
         ];
 
@@ -60,7 +60,7 @@ class CategoriaList extends Component {
                     {(!data || data.totalElements === 0) && <Intl str="nenhum-registro-encontrado"></Intl>}
                     {(data && data.totalElements > 0) && (
                         <div>
-                            <SimpleTable headers={headers}>
+                            <SimpleTable headers={headers} setOrderBy={this.props.setOrderBy}>
                                 {Object.keys(data.content).map(function(key) {
                                     const r = data.content[key];
                                     return (<tr key={key}>
@@ -106,7 +106,8 @@ CategoriaList.propTypes = {
     doAdd: PropTypes.func,
     doDelete: PropTypes.func,
     doFetchOne: PropTypes.func,
-    doSetPage: PropTypes.func
+    doSetPage: PropTypes.func,
+    setOrderBy: PropTypes.func
 };
 
 CategoriaList = reduxForm({ 
