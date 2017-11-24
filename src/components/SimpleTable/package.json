@@ -1,0 +1,6 @@
+{
+  "name": "SimpleTable",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./SimpleTable.js"
+}

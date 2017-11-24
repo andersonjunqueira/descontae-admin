@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import { Table } from 'reactstrap';
 
-class Table extends Component {
+class SimpleTable extends Component {
 
     render() {
         const { headers, children } = this.props;
@@ -9,7 +10,7 @@ class Table extends Component {
                 <thead>
                     <tr>
                         {headers && headers.map((h, index) => {
-                            return (<th key={index} className={h.classNames || ''}>{h.label || <span/>}</th>)
+                            return (<th key={index} className={h.classNames || ''}>{h.label || ''}</th>)
                         })}
                     </tr>
                 </thead>
@@ -21,13 +22,13 @@ class Table extends Component {
     }
 }
 
-Table.propTypes = {
+SimpleTable.propTypes = {
     children: PropTypes.node,
     headers: PropTypes.arrayOf(PropTypes.object)
 }
 
-Table.defaultProps = {
+SimpleTable.defaultProps = {
     headers: []
 };
 
-export default Table;
+export default SimpleTable;

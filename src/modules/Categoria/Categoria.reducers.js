@@ -1,10 +1,9 @@
-import { CATEGORIAS_SEARCH, CATEGORIA_LOAD } from './Categoria.actions';
+import { actionTypes } from './Categoria.actions';
 
 export const pesquisaCategoriaReducer = (state = {}, action) => {
-    console.log(action.type)
     switch (action.type) {
-        // case CATEGORIAS_SEARCH:
-        //     return Object.assign({}, state, action.payload);
+        case actionTypes.CATEGORIAS_SEARCH:
+            return action.payload;
         default:
             return state;
     }
@@ -12,8 +11,15 @@ export const pesquisaCategoriaReducer = (state = {}, action) => {
 
 export const categoriaReducer = (state = null, action) => {
     switch (action.type) {
-        case CATEGORIA_LOAD:
-            return Object.assign({}, state, action.payload);
+        case actionTypes.CATEGORIA_LOAD:
+        case actionTypes.CATEGORIA_NEW:
+            return action.payload;
+
+        case actionTypes.CATEGORIA_SAVE:
+        case actionTypes.CATEGORIA_DELETE:
+        case actionTypes.CATEGORIA_CANCEL:
+            return null;
+
         default:
             return state;
     }

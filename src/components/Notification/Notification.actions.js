@@ -33,9 +33,9 @@ export const notify = (labelKey, msgKey, status, dispatch, error) => {
 }
 
 export const notifySuccess = (labelKey, msgKey, dispatch) => {
-    notify(null, msgKey, "success", dispatch);
+    notify(labelKey, msgKey, "success", dispatch);
 }
 
 export const notifyError = (labelKey, msgKey, error, dispatch) => {
-    notify(null, msgKey, "error", dispatch, error);
+    notify(labelKey, msgKey, "error", dispatch, error);
 }

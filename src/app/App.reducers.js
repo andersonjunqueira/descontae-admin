@@ -38,19 +38,17 @@ const initialState = {
 }
 
 const appReducer = (state = initialState, action) => {
+    console.log(action.type, action);
     switch (action.type) {
-
         case PROCESS_LOGIN:
             return  Object.assign({}, state, {
                 auth: action.payload
             });
-
         case LOADED_INTL:
             return  Object.assign({}, state, {
                 intlStrings: action.payload,
                 language: action.language
             });
-
         default:
             return state;
     }
