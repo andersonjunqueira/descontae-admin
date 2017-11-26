@@ -27,7 +27,12 @@ class Consumo extends Component {
     }
 
     consultar(values, page = 0, pagesize = PAGESIZE_DEFAULT) {
-        let filter = Object.assign({}, values);
+        const filter = {};
+        filter.cidade = values.cidade && values.cidade.id ? values.cidade.id : undefined;
+        filter.cliente = values.cliente && values.cliente.id ? values.cliente.id : undefined;
+        filter.dataInicio = values.inicio;
+        filter.dataFim = values.fim;
+
         this.setState(Object.assign({}, this.state, { lastFilter: filter }));
         this.props.actions.consultar(filter, page, pagesize);
     }
@@ -43,7 +48,8 @@ class Consumo extends Component {
     render() {
         const { data } = this.props;
         return (
-            <ConsumoList data={data.registros} doSetPage={this.setPage}  doSubmit={this.pesquisar} doLimpar={this.limpar}/>
+            <ConsumoList data={data.registros} doSetPage={this.setPage}  doSubmit={this.pesquisar} doLimpar={this.limpar} 
+                showClienteSearch={this.props.roles ? this.props.roles.isAdmin : false}/>
         );
     }
 
@@ -51,6 +57,7 @@ class Consumo extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        roles: state.profileReducer.roles,
         data: state.consumos
     };
 };

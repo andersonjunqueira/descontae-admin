@@ -1,16 +1,40 @@
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
-import { Form, Row, Col, Button, Table } from 'reactstrap';
+import { reduxForm, change } from 'redux-form';
+import { Form, Row, Col, Button, Table, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
+import PesquisaCliente from '../../components/PesquisaCliente';
+import SelectCidade from '../../components/SelectCidade';
+import Date from '../../components/Date';
 import Text from '../../components/Text';
 import Intl from '../../components/Intl';
+
+import { translate } from '../../components/Intl/Intl.actions';
 
 class ConsumoList extends Component {
 
     constructor(props) {
         super(props);
         this.limpar = this.limpar.bind(this);
+        this.modalClienteToggle = this.modalClienteToggle.bind(this);
+        this.selecionarCliente = this.selecionarCliente.bind(this);
+
+        this.state = {
+            modalClienteOpen: false
+        };
+    }
+
+    modalClienteToggle() {
+        this.setState({
+            modalClienteOpen: !this.state.modalClienteOpen
+        });
+    }
+
+    selecionarCliente(value) {
+        if(value) {
+            this.props.dispatch(change('ConsumoList', 'cliente', value));
+        }
+        this.modalClienteToggle();
     }
 
     limpar() {
@@ -100,11 +124,28 @@ class ConsumoList extends Component {
         return (
             <Form onSubmit={handleSubmit(doSubmit)}>
                 <h4><Intl str='pesquisa-consumos'></Intl></h4>
+
                 <Row>
-                    <Col xs={12} md={12}>
-                        <Text name="nome" label={<Intl str='nome'></Intl>} maxLength={100}/>
+                    <Col xs={12} md={4}>
+                        <SelectCidade name="cidade.id" label={<Intl str='cidade'></Intl>}/>
+                    </Col>
+                    <Col xs={12} md={4}>
+                        <Date name="inicio" label={<Intl str='inicio-periodo'></Intl>}/>
+                    </Col>
+                    <Col xs={12} md={4}>
+                        <Date name="fim" label={<Intl str='fim-periodo'></Intl>}/>
                     </Col>
                 </Row>
+                
+                {this.props.showClienteSearch && (
+                    <Row>
+                        <Col xs={12} md={6}>
+                            <Text name="cliente.nome" label={<Intl str='cliente'></Intl>} maxLength={50} disabled={true}
+                                actionLabel={translate("pesquisar")}
+                                action={this.modalClienteToggle}/>
+                        </Col>
+                    </Row>
+                )}
 
                 <Button type="submit" color="primary" disabled={invalid || submitting}>
                     <i className="fa fa-search"></i>
@@ -119,6 +160,13 @@ class ConsumoList extends Component {
                     <h6><Intl str="resultado-pesquisa"></Intl></h6>
                     {content}
                 </div>
+
+                <Modal isOpen={this.state.modalClienteOpen} toggle={this.modalClienteToggle} size="lg">
+                    <ModalHeader toggle={this.modalClienteToggle}><Intl str="pesquisa-clientes"></Intl></ModalHeader>
+                    <ModalBody>
+                        <PesquisaCliente doSelecionar={this.selecionarCliente}/>
+                    </ModalBody>
+                </Modal>                  
             </Form>
         );
     }
@@ -129,6 +177,10 @@ const validate = values => {
     const errors = {};
     return errors;
 }
+
+ConsumoList.defaultProps = {
+    showClienteSearch: false
+};
 
 ConsumoList = reduxForm({ 
     form: "ConsumoList", 
