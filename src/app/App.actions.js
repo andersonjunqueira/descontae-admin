@@ -61,11 +61,18 @@ const loadUserData = (userData, resource_access, sub) => {
     return data;
 }
 
+export const init = (dispatch) => {
+    // INICIALIZAÇÃO IDIOMA
+    dispatch(initLanguage(intlData));
+
+    // DISPARA A CARGA DOS MENUS
+    dispatch(headerMenuLoad(appData.headerMenu));
+    dispatch(userMenuLoad(appData.userMenu));
+    dispatch(sidebarMenuLoad(menuData));
+}
+
 export const login = (auth) => {
     return dispatch => {
-
-        // INICIALIZAÇÃO IDIOMA
-        dispatch(initLanguage(intlData));
 
         const { name, email, resource_access, sub } = auth.tokenParsed;
 
@@ -80,11 +87,6 @@ export const login = (auth) => {
                 
                 // ATUALIZA O IDIOMA DE ACORDO COM A PREFERÊNCIA DO USUÁRIO
                 dispatch(changeLanguage(userData.idioma, true));
-                
-                // DISPARA A CARGA DOS MENUS
-                dispatch(headerMenuLoad(appData.headerMenu));
-                dispatch(userMenuLoad(appData.userMenu));
-                dispatch(sidebarMenuLoad(menuData));
                 
                 // ATUALIZAR O STORE COM O OBJETO DO KEYCLOAK
                 dispatch({type: PROCESS_LOGIN, payload: auth});

@@ -15,8 +15,6 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
-        this.logout = this.logout.bind(this);
-
         this.state = {
             dropdownOpen: false
         };
@@ -36,15 +34,6 @@ class Header extends Component {
     mobileSidebarToggle(e) {
         e.preventDefault();
         document.body.classList.toggle('sidebar-mobile-show');
-    }
-
-    asideToggle(e) {
-        e.preventDefault();
-        document.body.classList.toggle('aside-menu-hidden');
-    }
-
-    logout() {
-        this.props.logout(this.props.auth);
     }
 
     render() {
@@ -113,15 +102,12 @@ class Header extends Component {
                                     return ui;
                                 })}
 
-                                <Button type="button" className="dropdown-item" onClick={this.logout}>
+                                <Button type="button" className="dropdown-item" onClick={() => this.props.logout(this.props.data.auth)}>
                                     <i className="fa fa-sign-out"></i> <Intl str="sair"></Intl>
                                 </Button>
 
                             </DropdownMenu>
                         </Dropdown>
-                    </li>
-                    <li className="nav-item hidden-md-down">
-                        <a className="nav-link navbar-toggler aside-menu-toggler" onClick={this.asideToggle} href="#">&#9776;</a>
                     </li>
                 </ul>
             </header>

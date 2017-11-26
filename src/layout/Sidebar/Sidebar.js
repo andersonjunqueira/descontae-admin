@@ -72,7 +72,7 @@ class SideMenu extends Component {
                             if(item.heading) {
                                 return <MenuHeading key={index} item={item} />
                             } else if(item.submenu) {
-                                return <Submenu key={index} item={item} activeRoute={this.activeRoute} handleClick={handleClick} />
+                                return <Submenu key={index} item={item} activeRoute={this.activeRoute} handleClick={this.handleClick} />
                             } else {
                                 return <MenuItem key={index} item={item} />
                             }

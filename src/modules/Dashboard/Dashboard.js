@@ -42,8 +42,8 @@ class Dashboard extends Component {
 const mapStateToProps = (state) => {
     console.log('DASHBOARD LOADING STATE');
     return {
-        roles: state.profileReducer.roles,
-        data: state.dashboardReducer
+        roles: state.profile.roles,
+        data: state.dashboard
     };
 };
 

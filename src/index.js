@@ -8,12 +8,14 @@ import axios from "axios";
 
 import App from './app/App';
 import reducers from './app/App.reducers';
-import { login } from './app/App.actions';
+import { init, login } from './app/App.actions';
 
 import appData from './app.json';
 
 // CRIAÇÃO DA REDUX STORE
 const store = createStore(reducers, applyMiddleware(thunk));
+
+init(store.dispatch);
 
 //KEYCLOAK CONFIG
 let kc = Keycloak(appData.config.keycloakConfigFile);
