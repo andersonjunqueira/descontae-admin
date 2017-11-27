@@ -2,12 +2,15 @@
   "title": "Descontaê Admin",
   "subtitle": "Administração",
   "config": {
-    "keycloakConfigFile": "keycloak-beta.json",
-    "axiosBaseURL": "http://descontae-backend-hom.iwstech.com.br/descontae-backend/api",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "1.0.0-SNAPSHOT",
+    "axiosBaseURL": "http://localhost:8000/descontae-backend/api",
+    "keycloak": {
+      "url": "http://auth-hom.iwstech.com.br/auth",
+      "realm": "descontaeRealm-dev",
+      "clientId": "descontae-admin"
+    }
   },
-  "userMenu": [
-    {
+  "userMenu": [{
       "text": "usuario",
       "heading": true
     },
@@ -17,10 +20,8 @@
       "icon": "fa fa-user"
     }
   ],
-  "headerMenu": [
-    {
-      "text": "inicio",
-      "url": "/"
-    }
-  ]
+  "headerMenu": [{
+    "text": "inicio",
+    "url": "/"
+  }]
 }

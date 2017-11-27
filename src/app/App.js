@@ -4,8 +4,11 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Full from '../layout/Full';
 import Intl from '../components/Intl';
 
+import CategoriaList from '../modules/Categoria/CategoriaList';
+import CategoriaForm from '../modules/Categoria/CategoriaForm';
+
+
 import Inicio from '../modules/Inicio';
-import Categoria from '../modules/Categoria';
 import Marca from '../modules/Marca';
 import Cliente from '../modules/Cliente';
 import Plano from '../modules/Plano';
@@ -20,9 +23,9 @@ const App = ({store}) => (
     <BrowserRouter>
         <Full>
             <Switch>
-                <Route path="/componentes" name={<Intl str='inicio'></Intl>} component={Inicio}/>
+                <Route path="/categorias/novo" component={CategoriaForm} />
+                <Route path="/categorias" component={CategoriaList} />
 
-                <Route path="/categorias" name={<Intl str='categorias'></Intl>} component={Categoria} />
                 <Route path="/marcas" name={<Intl str='marcas'></Intl>} component={Marca} />
                 <Route path="/clientes" name={<Intl str='clientes'></Intl>} component={Cliente} />
                 <Route path="/planos" name={<Intl str='planos'></Intl>} component={Plano} />
@@ -31,6 +34,8 @@ const App = ({store}) => (
                 <Route path="/cartoes" name={<Intl str='cartoes'></Intl>} component={Cartao} />
                 <Route path="/pessoas" name={<Intl str='pessoas'></Intl>} component={Pessoa} />
                 <Route path="/consumos" name={<Intl str='consumos'></Intl>} component={Consumo} />
+
+                <Route path="/componentes" name={<Intl str='inicio'></Intl>} component={Inicio}/>
                 <Route path="/" component={Dashboard} />
             </Switch>
         </Full>

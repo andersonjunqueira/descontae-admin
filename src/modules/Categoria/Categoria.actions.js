@@ -1,37 +1,46 @@
 import axios from "axios";
 
 import * as alerts from '../../components/Notification/Notification.actions';
+import { PAGESIZE_DEFAULT } from '../../app/App.actions';
 
 export const actionTypes = {
-    CATEGORIAS_SET_FILTER: 'CATEGORIAS_SETFILTER',
-    CATEGORIAS_FETCH_ALL: 'CATEGORIAS_FETCHALL',
-    CATEGORIA_FETCH_ONE: 'CATEGORIAS_FETCHONE', 
-    CATEGORIA_ADD: 'CATEGORIAS_ADD', 
-    CATEGORIA_SAVE: 'CATEGORIAS_SAVE', 
-    CATEGORIA_DELETE: 'CATEGORIAS_DELETE',
-    CATEGORIA_CANCEL: 'CATEGORIA_CANCEL'
+    FETCH_CATEGORIAS: 'FETCH_CATEGORIAS',
+    CREATE_CATEGORIA: 'CREATE_CATEGORIA'
+//    CATEGORIA_FETCH_ONE: 'CATEGORIAS_FETCHONE', 
+//    CATEGORIA_SAVE: 'CATEGORIAS_SAVE', 
+//    CATEGORIA_DELETE: 'CATEGORIAS_DELETE',
+//    CATEGORIA_CANCEL: 'CATEGORIA_CANCEL'
 }
 
-const actions = {
+export const fetchAll = (params) => {
+    const filtro = params ? params : {};
+    filtro.start = 0;
+    filtro.size = PAGESIZE_DEFAULT;
 
-    setFilter: (searchArguments, orderByField, orderByDirection, startPage, pageSize) => (dispatch) => {
-        dispatch({type: actionTypes.CATEGORIAS_SET_FILTER, payload: searchArguments});
-    }, 
-
-    fetchAll: (filtro, orderBy, startPage, pageSize) => (dispatch) => {
-        
-        filtro = filtro ? filtro : {};
-        filtro.sort = orderBy;
-        filtro.start = startPage;
-        filtro.size = pageSize;
-        console.log('fetch all');
+    return (dispatch) => {
         axios.get('/categorias', { params: filtro })
             .then(function(response) {
-                dispatch({type: actionTypes.CATEGORIAS_FETCH_ALL, payload: response.data});
+                dispatch({type: actionTypes.FETCH_CATEGORIAS, payload: response.data});
             }).catch(function(error){
                 alerts.notifyError("erro-consulta-categorias", null, error, dispatch);
             });
-    }, 
+    };
+}
+
+export const create = (values) => { 
+    return (dispatch) => {
+        axios.post('/categorias', values)
+            .then(function(response) {
+                dispatch({type: actionTypes.CREATE_CATEGORIA, payload: null});
+                alerts.notifySuccess("categoria-salva", null, dispatch);
+            }).catch(function(error){
+                alerts.notifyError("erro-salvar-categoria", null, error, dispatch);
+            });
+    };
+}
+
+/*
+
 
     fetchOne: (id) => (dispatch) => {
         axios.get('/categorias/' + id)
@@ -70,7 +79,6 @@ const actions = {
 
     cancel: () => (dispatch) => {
         dispatch({type: actionTypes.CATEGORIA_CANCEL});
-    }, 
-};
+    }
+*/
 
-export default actions;
