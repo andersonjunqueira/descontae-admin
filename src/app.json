@@ -2,9 +2,13 @@
   "title": "Descontaê Admin",
   "subtitle": "Administração",
   "config": {
-    "keycloakConfigFile": "keycloak-beta.json",
     "axiosBaseURL": "http://localhost:8000/descontae-backend/api",
-    "version": "1.0.0-SNAPSHOT"
+    "version": "1.0.0-SNAPSHOT",
+    "keycloak": {
+      "url": "http://auth.iwstech.com.br/auth",
+      "realm": "descontaeRealm",
+      "clientId": "descontae-admin"
+    }
   },
   "userMenu": [
     {

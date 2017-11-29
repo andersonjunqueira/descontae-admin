@@ -40,8 +40,8 @@
   },
   "scripts": {
     "set-local": "node stage.js --local",
-    "set-beta": "node stage.js --beta",
-    "set-production": "node stage.js --production",
+    "set-hom": "node stage.js --hom",
+    "set-prod": "node stage.js --prod",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

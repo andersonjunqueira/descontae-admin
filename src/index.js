@@ -24,7 +24,7 @@ const store = createStore(
 store.dispatch(initLanguage(intlData));
 
 //KEYCLOAK CONFIG
-let kc = Keycloak(appData.config.keycloakConfigFile);
+let kc = Keycloak(appData.config.keycloak);
 kc.init({onLoad: 'check-sso'}).success(authenticated => {
     if (authenticated) {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + kc.token;
