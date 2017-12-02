@@ -4,30 +4,30 @@
     "config": {
         "axiosBaseURL": "http://localhost:8000/descontae-backend/api",
         "keycloak": {
-            "url": "http://auth-hom.iwstech.com.br/auth",
-            "realm": "descontaeRealm-dev",
+            "url": "http://auth.iwstech.com.br/auth",
+            "realm": "descontaeRealm",
             "clientId": "descontae-admin"
         }
     }
 },
 {
-    "id": "beta",
+    "id": "hom",
     "config": {
-        "axiosBaseURL": "http://descontae-backend-hom.iwstech.com.br/descontae-backend/api",
-        "keycloak": {
-            "url": "http://auth-hom.iwstech.com.br/auth",
-            "realm": "descontaeRealm-dev",
-            "clientId": "descontae-admin"
-        }
-    }
-},
-{
-    "id": "production",
-    "config": {
-        "axiosBaseURL": "http://descontae-backend.iwstech.com.br/descontae-backend/api",
+        "axiosBaseURL": "http://api.descontae.com.br/api",
         "keycloak": {
             "url": "http://auth.iwstech.com.br/auth",
-            "realm": "descontaeRealm-dev",
+            "realm": "descontaeRealm",
+            "clientId": "descontae-admin"
+        }
+    }
+},
+{
+    "id": "prod",
+    "config": {
+        "axiosBaseURL": "http://api.descontae.com.br/api",
+        "keycloak": {
+            "url": "http://auth.iwstech.com.br/auth",
+            "realm": "descontaeRealm",
             "clientId": "descontae-admin"
         }
     }
