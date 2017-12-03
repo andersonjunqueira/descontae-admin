@@ -13,7 +13,6 @@ const formatQs = (q) => {
     }
     let qs = '';
     Object.keys(q).map( k => {
-
         if( k === 'sort' ) {
             q[k].forEach(item => {
                 qs += `${qs.length > 0 ? '&' : ''}sort=${item}`;
@@ -23,21 +22,23 @@ const formatQs = (q) => {
                 qs += `${qs.length > 0 ? '&' : ''}${q.sort[index]}.dir=${item}`;    
             });
         } else {
-            if(q[k] != undefined) {
+            if(q[k] !== undefined) {
                 qs += `${qs.length > 0 ? '&' : ''}${k}=${q[k]}`;
             }
         }
-
+        return null;
     });
     return `${qs.length > 0 ? '?' : ''}${qs}`;
 }
 
 export const fetchAll = (params) => {
-
     return (dispatch) => {
         axios.get(`/categorias${formatQs(params)}`)
             .then(function(response) {
 
+                if(response.status === 204) {
+                    dispatch(alerts.notifyWarning("nenhum-registro-encontrado", null, null));
+                }
                 dispatch({type: actionTypes.FETCH_CATEGORIAS, payload: response.data});
 
             }).catch(function(error){

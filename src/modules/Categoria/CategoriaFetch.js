@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux';
 
@@ -23,6 +23,15 @@ class CategoriaFetch extends Component {
     }
 
     componentDidMount() {
+        this.props.fetchAll(this.state.filtro);
+    }
+
+    pesquisar(values) {
+        if(values.nome) {
+            this.setState(Object.assign(this.state.filtro, { nome: `${values.nome}*` }));
+        } else {
+            this.setState(Object.assign(this.state.filtro, { nome: undefined }));
+        }
         this.props.fetchAll(this.state.filtro);
     }
 
@@ -56,9 +65,10 @@ class CategoriaFetch extends Component {
         return (
             <CategoriaList 
                 data={this.props.data} 
-                handleDelete={this.remove.bind(this)}
-                handlePage={this.fetchPage.bind(this)}
-                handleOrder={this.setOrderBy.bind(this)}
+                doSubmit={this.pesquisar.bind(this)}
+                doDelete={this.remove.bind(this)}
+                doSetPage={this.fetchPage.bind(this)}
+                doSetOrderBy={this.setOrderBy.bind(this)}
             />
         );
     }

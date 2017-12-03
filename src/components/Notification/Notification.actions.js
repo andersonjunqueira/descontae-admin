@@ -43,3 +43,7 @@ export const notifySuccess = (labelKey, msgKey, params) => {
 export const notifyInfo = (labelKey, msgKey, params) => {
     return notify(labelKey, msgKey, params, "info");
 }
+
+export const notifyWarning = (labelKey, msgKey, params) => {
+    return notify(labelKey, msgKey, params, "warning");
+}
