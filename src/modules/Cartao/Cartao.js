@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import CartaoForm from './CartaoForm';
 import CartaoList from './CartaoList';
 
-import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGESIZE_DEFAULT } from '../../app/App.actions';
+import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGELIMIT_DEFAULT } from '../../app/App.actions';
 import * as cartaoActions from './Cartao.actions';
 
 class Cartao extends Component {
@@ -34,7 +34,7 @@ class Cartao extends Component {
         this.consultar(values);
     }
 
-    consultar(values, page = 0, pagesize = PAGESIZE_DEFAULT) {
+    consultar(values, page = 0, pagesize = PAGELIMIT_DEFAULT) {
         let filter = Object.assign({}, values);
         filter.sort = "1,ASC";
 

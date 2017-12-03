@@ -2,9 +2,10 @@ import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 import { reducer as notificationsReducer} from 'reapop';
 
+import categoriasReducer from '../modules/Categoria/Categoria.reducers';
+
 import headerReducer from '../layout/Header/Header.reducers';
 import sidebarReducer from '../layout/Sidebar/Sidebar.reducers';
-import categoriasReducer from '../modules/Categoria/Categoria.reducers';
 
 import selectMarcaReducer from '../components/SelectMarca/SelectMarca.reducers';
 import selectCategoriaReducer from '../components/SelectCategoria/SelectCategoria.reducers';

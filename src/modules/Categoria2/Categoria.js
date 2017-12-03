@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import CategoriaForm from './CategoriaForm';
 import CategoriaList from './CategoriaList';
 import actions from './Categoria.actions';
-import { PAGESIZE_DEFAULT } from '../../app/App.actions';
+import { PAGELIMIT_DEFAULT } from '../../app/App.actions';
 
 class Categoria extends Component {
 
@@ -18,7 +18,7 @@ class Categoria extends Component {
         this.state = {
             values: undefined,
             startPage: 0,
-            pageSize: PAGESIZE_DEFAULT,
+            pageSize: PAGELIMIT_DEFAULT,
             orderBy: 'nome,ASC'
         };
         this.fetchAll(this.state.values, this.state.orderBy, this.state.startPage, this.state.pageSize);

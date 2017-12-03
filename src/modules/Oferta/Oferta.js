@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import OfertaForm from './OfertaForm';
 import OfertaList from './OfertaList';
 
-import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGESIZE_DEFAULT } from '../../app/App.actions';
+import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGELIMIT_DEFAULT } from '../../app/App.actions';
 import * as ofertaActions from './Oferta.actions';
 import { fileFunctions } from "../../components/File";
 
@@ -36,7 +36,7 @@ class Oferta extends Component {
         this.consultar(values);
     }
 
-    consultar(values, page = 0, pagesize = PAGESIZE_DEFAULT) {
+    consultar(values, page = 0, pagesize = PAGELIMIT_DEFAULT) {
         let filter = Object.assign({}, values);
         filter.sort = "";
         if(filter && filter.nome) {

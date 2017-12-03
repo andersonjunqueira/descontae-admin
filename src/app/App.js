@@ -4,8 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Full from '../layout/Full';
 import Intl from '../components/Intl';
 
-import CategoriaList from '../modules/Categoria/CategoriaList';
-import CategoriaForm from '../modules/Categoria/CategoriaForm';
+import CategoriaFetch from '../modules/Categoria/CategoriaFetch';
 
 
 import Inicio from '../modules/Inicio';
@@ -23,8 +22,9 @@ const App = ({store}) => (
     <BrowserRouter>
         <Full>
             <Switch>
+                <Route path="/categorias" component={CategoriaFetch} />
+{/*
                 <Route path="/categorias/novo" component={CategoriaForm} />
-                <Route path="/categorias" component={CategoriaList} />
 
                 <Route path="/marcas" name={<Intl str='marcas'></Intl>} component={Marca} />
                 <Route path="/clientes" name={<Intl str='clientes'></Intl>} component={Cliente} />
@@ -36,6 +36,7 @@ const App = ({store}) => (
                 <Route path="/consumos" name={<Intl str='consumos'></Intl>} component={Consumo} />
 
                 <Route path="/componentes" name={<Intl str='inicio'></Intl>} component={Inicio}/>
+*/}
                 <Route path="/" component={Dashboard} />
             </Switch>
         </Full>

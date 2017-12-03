@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'; 
 
-import { PAGESIZE_DEFAULT } from '../../app/App.actions';
+import { PAGELIMIT_DEFAULT } from '../../app/App.actions';
 import ConsumoList from './ConsumoList';
 import * as consumoActions from './Consumo.actions';
 
@@ -19,14 +19,14 @@ class Consumo extends Component {
             lastFilter: ""
         };
 
-        this.props.actions.consultar({}, 0, PAGESIZE_DEFAULT);
+        this.props.actions.consultar({}, 0, PAGELIMIT_DEFAULT);
     }
 
     pesquisar(values) {
         this.consultar(values);
     }
 
-    consultar(values, page = 0, pagesize = PAGESIZE_DEFAULT) {
+    consultar(values, page = 0, pagesize = PAGELIMIT_DEFAULT) {
         const filter = {};
         filter.cidade = values.cidade && values.cidade.id ? values.cidade.id : undefined;
         filter.cliente = values.cliente && values.cliente.id ? values.cliente.id : undefined;

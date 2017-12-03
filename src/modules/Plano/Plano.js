@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PlanoForm from './PlanoForm';
 import PlanoList from './PlanoList';
 
-import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGESIZE_DEFAULT } from '../../app/App.actions';
+import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGELIMIT_DEFAULT } from '../../app/App.actions';
 import * as planoActions from './Plano.actions';
 import { fileFunctions } from "../../components/File";
 
@@ -35,7 +35,7 @@ class Plano extends Component {
         this.consultar(values);
     }
 
-    consultar(values, page = 0, pagesize = PAGESIZE_DEFAULT) {
+    consultar(values, page = 0, pagesize = PAGELIMIT_DEFAULT) {
         let filter = Object.assign({}, values);
         filter.sort = "titulo,ASC";
         if(filter && filter.nome) {

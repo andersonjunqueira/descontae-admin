@@ -56,8 +56,7 @@ const validate = (values) => {
 }
 
 const mapDispatch = (dispatch) => {
-    return { create };
-    //return bindActionCreators({ create }, dispatch);
+    return bindActionCreators({ create }, dispatch);
 };
 
 CategoriaForm = connect(null, mapDispatch)(

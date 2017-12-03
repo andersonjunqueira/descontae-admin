@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PessoaForm from './PessoaForm';
 import PessoaList from './PessoaList';
 
-import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGESIZE_DEFAULT } from '../../app/App.actions';
+import { MODE_INSERT, MODE_UPDATE, MODE_LIST, PAGELIMIT_DEFAULT } from '../../app/App.actions';
 import * as pessoaActions from './Pessoa.actions';
 
 class PESSOA extends Component {
@@ -34,7 +34,7 @@ class PESSOA extends Component {
         this.consultar(values);
     }
 
-    consultar(values, page = 0, pagesize = PAGESIZE_DEFAULT) {
+    consultar(values, page = 0, pagesize = PAGELIMIT_DEFAULT) {
         let filter = Object.assign({}, values);
         filter.sort = "nome,ASC";
         if(filter && filter.nome) {
