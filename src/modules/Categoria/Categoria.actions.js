@@ -4,7 +4,7 @@ import * as alerts from '../../components/Notification/Notification.actions';
 
 export const actionTypes = {
     FETCH_CATEGORIAS: 'FETCH_CATEGORIAS',
-    DELETE_CATEGORIAS: 'DELETE_CATEGORIAS'
+    SAVE_CATEGORIA: 'SAVE_CATEGORIA'
 };
 
 const formatQs = (q) => {
@@ -52,12 +52,29 @@ export const remove = (id, callback) => {
         axios.delete('/categorias/' + id)
             .then(function(response) {
 
-                dispatch({type: actionTypes.DELETE_CATEGORIAS});
-                callback();
-
                 dispatch(alerts.notifySuccess("categoria-excluida", null, null));
+                if(callback) {
+                    callback(); 
+                }
+
             }).catch(function(error){
                 dispatch(alerts.notifyError("erro-excluir-categoria", null, error));
+            });
+    };
+};
+
+export const save = (categoria, callback) => { 
+    return (dispatch) => {
+        axios.put('/categorias', categoria)
+            .then(function(response) {
+
+                alerts.notifySuccess("categoria-salva", null, dispatch);
+                if(callback) {
+                    callback(); 
+                }
+
+            }).catch(function(error){
+                alerts.notifyError("erro-salvar-categoria", null, error, dispatch);
             });
     };
 };

@@ -5,6 +5,7 @@ import Full from '../layout/Full';
 import Intl from '../components/Intl';
 
 import CategoriaFetch from '../modules/Categoria/CategoriaFetch';
+import CategoriaNew from '../modules/Categoria/CategoriaNew';
 
 
 import Inicio from '../modules/Inicio';
@@ -22,9 +23,9 @@ const App = ({store}) => (
     <BrowserRouter>
         <Full>
             <Switch>
+                <Route path="/categorias/novo" component={CategoriaNew} />
                 <Route path="/categorias" component={CategoriaFetch} />
 {/*
-                <Route path="/categorias/novo" component={CategoriaForm} />
 
                 <Route path="/marcas" name={<Intl str='marcas'></Intl>} component={Marca} />
                 <Route path="/clientes" name={<Intl str='clientes'></Intl>} component={Cliente} />
