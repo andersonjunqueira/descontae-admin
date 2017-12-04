@@ -106,6 +106,26 @@ li.page-item {
     line-height: 1.0;
 }
 
+p.form-control-plaintext {
+    margin-bottom: 0;
+    padding-top: 7px;
+}
+
+.react-numeric-input {
+    width: 100%;
+}
+
+.react-numeric-input .form-control {
+    width: 100%;
+    direction: rtl;
+}
+
+.sidebar .nav .nav-item .nav-link.nav-dropdown-toggle::before, 
+.sidebar .nav .nav-item .navbar .nav-dropdown-toggle.dropdown-toggle::before, 
+.navbar .sidebar .nav .nav-item .nav-dropdown-toggle.dropdown-toggle::before {
+    top: 0.66875rem;
+}
+
 /* ESPAÇAMENTO TABELA */
 /* Extra small viewport or screen */
 @media only screen and (max-width : 480px) {
@@ -185,6 +205,7 @@ li.page-item {
 /* Medium viewport or screen */
 @media only screen and (min-width : 992px) {
     button.espacamento { margin-left: 0.5em; }
+    .app-header .navbar-nav { right: 0; }
     .table-md-5 { width: 5%; }
     .table-md-10 { width: 10%; }
     .table-md-15 { width: 15%; }
