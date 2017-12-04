@@ -1,77 +1,101 @@
 import axios from "axios";
 
-import { toaster } from '../../components/Notification/Notification.actions';
+import * as alerts from '../../components/Notification/Notification.actions';
 
-export const [ MARCAS_PESQUISA, MARCA_EDICAO, MARCA_SETMODE ] = [ "MARCAS_PESQUISA", "MARCA_EDICAO", "MARCA_SETMODE" ];
+export const actionTypes = {
+    FETCH_ALL: 'FETCH_MARCAS',
+    FETCH_ONE: 'FETCH_MARCA'
+};
 
-export const setMode = (mode) => {
-    return dispatch => {
-        dispatch({type: MARCA_SETMODE, payload: mode});
+const BASE_URL = "/franquias";
+const MODULE_CONSTANT = "marca";
+
+const formatQs = (q) => {
+    if(!q) {
+        return '';
     }
+    let qs = '';
+    Object.keys(q).map( k => {
+        if( k === 'sort' ) {
+            q[k].forEach(item => {
+                qs += `${qs.length > 0 ? '&' : ''}sort=${item}`;
+            });
+        } else if( k === 'dir' ) {
+            q[k].forEach( (item, index) => {
+                qs += `${qs.length > 0 ? '&' : ''}${q.sort[index]}.dir=${item}`;    
+            });
+        } else {
+            if(q[k] !== undefined) {
+                qs += `${qs.length > 0 ? '&' : ''}${k}=${q[k]}`;
+            }
+        }
+        return null;
+    });
+    return `${qs.length > 0 ? '?' : ''}${qs}`;
 }
 
-export const consultar = (filtro, start, pagesize) => {
-    filtro = filtro ? filtro : {};
-    filtro.start = start;
-    filtro.page = pagesize;
-
-    return dispatch => {
-
-        axios.get('/franquias', { params: filtro })
+export const fetchAll = (params) => {
+    return (dispatch) => {
+        axios.get(`${BASE_URL}${formatQs(params)}`)
             .then(function(response) {
-                dispatch({type: MARCAS_PESQUISA, payload: response.data});
+
+                if(response.status === 204) {
+                    dispatch(alerts.notifyWarning("nenhum-registro-encontrado"));
+                }
+                dispatch({type: actionTypes.FETCH_ALL, payload: response.data});
 
             }).catch(function(error){
-                console.log(error);
-                dispatch(toaster("erro-consulta-marcas", error.response.data, [], {status: "error"}));
+                dispatch(alerts.notifyError(`erro-consulta-${MODULE_CONSTANT}s`, null, error));
             });
+    };
+};
 
-    }
-}
-
-export const salvar = (marca, callback) => {
-    return dispatch => {
-
-        axios.put('/franquias', marca)
+export const remove = (id, callback) => {
+    return (dispatch) => {
+        axios.delete(`${BASE_URL}/${id}`)
             .then(function(response) {
-                callback();
-                dispatch(toaster(null, "marca-salva", [], {status: "success"}));
+
+                dispatch(alerts.notifySuccess(`${MODULE_CONSTANT}-excluido`));
+                if(callback) {
+                    callback(); 
+                }
 
             }).catch(function(error){
-                console.log(error);
-                dispatch(toaster("erro-salvar-marca", error.response.data, [], {status: "error"}));
+                dispatch(alerts.notifyError(`erro-excluir-${MODULE_CONSTANT}`, null, error));
             });
+    };
+};
 
-    }
-}
-
-export const excluir = (id, callback) => {
-    return dispatch => {
-
-        axios.delete('/franquias/' + id)
+export const save = (categoria, callback) => { 
+    return (dispatch) => {
+        axios.put(`${BASE_URL}`, categoria)
             .then(function(response) {
-                callback();
-                dispatch(toaster(null, "marca-excluida", [], {status: "success"}));
+
+                dispatch(alerts.notifySuccess(`${MODULE_CONSTANT}-salvo`));
+                if(callback) {
+                    callback(); 
+                }
 
             }).catch(function(error){
-                console.log(error);
-                dispatch(toaster("erro-excluir-marca", error.response.data, [], {status: "error"}));
+                dispatch(alerts.notifyError(`erro-salvar-${MODULE_CONSTANT}`, null, error));
             });
+    };
+};
 
-    }
-}
-
-export const carregar = (id) => {
-    return dispatch => {
-
-        axios.get('/franquias/' + id)
+export const fetchOne = (id, notfoundCallback) =>  {
+    return (dispatch) => {
+        axios.get(`${BASE_URL}/${id}`)
             .then(function(response) {
-                dispatch({type: MARCA_EDICAO, payload: response.data});
+
+                dispatch({type: actionTypes.FETCH_ONE, payload: response.data});
 
             }).catch(function(error){
-                console.log(error);
-                dispatch(toaster("erro-carga-marca", error.response.data, [], {status: "error"}));
+                if(error.response.status = 404) {
+                    dispatch(alerts.notifyWarning("registro-nao-encontrado"));
+                    notfoundCallback();
+                } else {
+                    dispatch(alerts.notifyError(`erro-carga-${MODULE_CONSTANT}`, null, error));
+                }
             });
-
-    }
-}
+    };
+};

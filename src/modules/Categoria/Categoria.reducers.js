@@ -1,18 +1,16 @@
 import { actionTypes } from './Categoria.actions';
 
-const categoriasReducer = (state = {}, action) => {
+export const reducer = (state = {}, action) => {
 
     switch (action.type) {
 
-        case actionTypes.FETCH_CATEGORIAS:
+        case actionTypes.FETCH_ALL:
             return { list: action.payload };
 
-        case actionTypes.FETCH_CATEGORIA:
+        case actionTypes.FETCH_ONE:
             return { list: state.list, active: action.payload };
 
         default:
             return state;
     }
 }
-
-export default categoriasReducer;

@@ -2,10 +2,12 @@ import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 import { reducer as notificationsReducer} from 'reapop';
 
-import categoriasReducer from '../modules/Categoria/Categoria.reducers';
-
+import intlReducer from '../components/Intl/Intl.reducers';
 import headerReducer from '../layout/Header/Header.reducers';
+import profileReducer from '../modules/Profile/Profile.reducers';
 import sidebarReducer from '../layout/Sidebar/Sidebar.reducers';
+import { reducer as categoriasReducer } from '../modules/Categoria/Categoria.reducers';
+import { reducer as marcasReducer } from '../modules/Marca/Marca.reducers';
 
 import selectMarcaReducer from '../components/SelectMarca/SelectMarca.reducers';
 import selectCategoriaReducer from '../components/SelectCategoria/SelectCategoria.reducers';
@@ -13,10 +15,7 @@ import selectPlanoReducer from '../components/SelectPlano/SelectPlano.reducers';
 import selectCidadeReducer from '../components/SelectCidade/SelectCidade.reducers';
 import pesquisaPessoaReducer from '../components/PesquisaPessoa/PesquisaPessoa.reducers';
 import pesquisaClienteReducer from '../components/PesquisaCliente/PesquisaCliente.reducers';
-
-import intlReducer from '../components/Intl/Intl.reducers';
 import ufReducer from '../components/UF/UF.reducers';
-import marcaReducer from '../modules/Marca/Marca.reducers';
 import clienteReducer from '../modules/Cliente/Cliente.reducers';
 import planoReducer from '../modules/Plano/Plano.reducers';
 import parceiroReducer from '../modules/Parceiro/Parceiro.reducers';
@@ -26,10 +25,7 @@ import pessoaReducer from '../modules/Pessoa/Pessoa.reducers';
 import dashboardReducer from '../modules/Dashboard/Dashboard.reducers';
 import consumoReducer from '../modules/Consumo/Consumo.reducers';
 
-import profileReducer from '../modules/Profile/Profile.reducers';
-
 import AppData from '../app.json';
-
 import { PROCESS_LOGIN, LOADED_INTL } from './App.actions';
 
 const initialState = {
@@ -58,14 +54,14 @@ const reducers = combineReducers({
     app: appReducer,
     intl: intlReducer,
     notifications: notificationsReducer(),
-    categorias: categoriasReducer,
-    
     header: headerReducer,
     profile: profileReducer,
     sidebar: sidebarReducer,
+    categorias: categoriasReducer,
+    marcas: marcasReducer,
+    
     dashboard: dashboardReducer,
     consumos: consumoReducer,
-    marcaReducer,
     clienteReducer,
     planoReducer,
     parceiroReducer,

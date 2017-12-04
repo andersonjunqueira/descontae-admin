@@ -7,10 +7,10 @@ import Intl from '../components/Intl';
 import CategoriaFetch from '../modules/Categoria/CategoriaFetch';
 import CategoriaNew from '../modules/Categoria/CategoriaNew';
 import CategoriaEdit from '../modules/Categoria/CategoriaEdit';
+import MarcaFetch from '../modules/Marca/MarcaFetch';
 
 
 import Inicio from '../modules/Inicio';
-import Marca from '../modules/Marca';
 import Cliente from '../modules/Cliente';
 import Plano from '../modules/Plano';
 import Parceiro from '../modules/Parceiro';
@@ -27,9 +27,10 @@ const App = ({store}) => (
                 <Route path="/categorias/novo" component={CategoriaNew} />
                 <Route path="/categorias/:id" component={CategoriaEdit} />
                 <Route path="/categorias" component={CategoriaFetch} />
+
+                <Route path="/marcas" component={MarcaFetch} />
 {/*
 
-                <Route path="/marcas" name={<Intl str='marcas'></Intl>} component={Marca} />
                 <Route path="/clientes" name={<Intl str='clientes'></Intl>} component={Cliente} />
                 <Route path="/planos" name={<Intl str='planos'></Intl>} component={Plano} />
                 <Route path="/parceiros" name={<Intl str='parceiros'></Intl>} component={Parceiro} />

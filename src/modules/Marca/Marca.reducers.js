@@ -1,23 +1,16 @@
-import { MARCAS_PESQUISA, MARCA_EDICAO, MARCA_SETMODE } from './Marca.actions';
+import { actionTypes } from './Marca.actions';
 
-const marcaReducer = (state = {}, action) => {
+export const reducer = (state = {}, action) => {
 
     switch (action.type) {
 
-        case MARCA_SETMODE:
-            return Object.assign({}, state, { mode: action.payload });
+        case actionTypes.FETCH_ALL:
+            return { list: action.payload };
 
-        case MARCAS_PESQUISA:
-            return Object.assign({}, state, { registros: action.payload, obj: undefined });
-
-        case MARCA_EDICAO:
-            return Object.assign({}, state, { obj: action.payload });
+        case actionTypes.FETCH_ONE:
+            return { list: state.list, active: action.payload };
 
         default:
             return state;
-
     }
-
 }
-
-export default marcaReducer;
