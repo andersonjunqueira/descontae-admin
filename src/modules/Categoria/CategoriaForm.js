@@ -8,6 +8,12 @@ import Intl from '../../components/Intl';
 
 class CategoriaForm extends Component {
 
+    componentDidUpdate() {
+        if(this.props.data) {
+            this.props.dispatch(this.props.initialize(this.props.data));
+        }
+    }
+
     render() {
         const { handleSubmit, pristine, reset, submitting, invalid } = this.props;
         return (

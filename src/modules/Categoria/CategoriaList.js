@@ -72,11 +72,9 @@ class CategoriaList extends Component {
                             return (<tr key={key}>
                                 <td>{r.nome}</td>
                                 <td className="text-center">
-{/*
-    <Button onClick={() => doFetchOne(r.id)} color="secondary" size="sm">
-    <i className="fa fa-pencil"></i>
-    </Button>
-*/}
+                                    <Link className="btn btn-secondary btn-sm" to={`/categorias/${r.id}`}>
+                                        <i className="fa fa-pencil"></i>
+                                    </Link>
                                     <Button onClick={() => toggle(r)} color="danger" size="sm" className="espacamento">
                                         <i className="fa fa-trash"></i>
                                     </Button>

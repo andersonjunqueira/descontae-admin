@@ -4,7 +4,8 @@ import * as alerts from '../../components/Notification/Notification.actions';
 
 export const actionTypes = {
     FETCH_CATEGORIAS: 'FETCH_CATEGORIAS',
-    SAVE_CATEGORIA: 'SAVE_CATEGORIA'
+    SAVE_CATEGORIA: 'SAVE_CATEGORIA',
+    FETCH_CATEGORIA: 'FETCH_CATEGORIA'
 };
 
 const formatQs = (q) => {
@@ -37,7 +38,7 @@ export const fetchAll = (params) => {
             .then(function(response) {
 
                 if(response.status === 204) {
-                    dispatch(alerts.notifyWarning("nenhum-registro-encontrado", null, null));
+                    dispatch(alerts.notifyWarning("nenhum-registro-encontrado"));
                 }
                 dispatch({type: actionTypes.FETCH_CATEGORIAS, payload: response.data});
 
@@ -52,7 +53,7 @@ export const remove = (id, callback) => {
         axios.delete('/categorias/' + id)
             .then(function(response) {
 
-                dispatch(alerts.notifySuccess("categoria-excluida", null, null));
+                dispatch(alerts.notifySuccess("categoria-excluida"));
                 if(callback) {
                     callback(); 
                 }
@@ -68,13 +69,31 @@ export const save = (categoria, callback) => {
         axios.put('/categorias', categoria)
             .then(function(response) {
 
-                alerts.notifySuccess("categoria-salva", null, dispatch);
+                dispatch(alerts.notifySuccess("categoria-salva"));
                 if(callback) {
                     callback(); 
                 }
 
             }).catch(function(error){
-                alerts.notifyError("erro-salvar-categoria", null, error, dispatch);
+                dispatch(alerts.notifyError("erro-salvar-categoria", null, error));
+            });
+    };
+};
+
+export const fetchOne = (id, notfoundCallback) =>  {
+    return (dispatch) => {
+        axios.get('/categorias/' + id)
+            .then(function(response) {
+
+                dispatch({type: actionTypes.FETCH_CATEGORIA, payload: response.data});
+
+            }).catch(function(error){
+                if(error.response.status = 404) {
+                    dispatch(alerts.notifyWarning("registro-nao-encontrado"));
+                    notfoundCallback();
+                } else {
+                    dispatch(alerts.notifyError("erro-carga-categoria", null, error));
+                }
             });
     };
 };

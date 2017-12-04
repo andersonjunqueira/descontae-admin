@@ -6,6 +6,9 @@ const categoriasReducer = (state = {}, action) => {
         case actionTypes.FETCH_CATEGORIAS:
             return { list: action.payload };
 
+        case actionTypes.FETCH_CATEGORIA:
+            return { list: state.list, active: action.payload };
+
         default:
             return state;
     }

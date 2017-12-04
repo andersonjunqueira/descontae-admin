@@ -6,6 +6,7 @@ import Intl from '../components/Intl';
 
 import CategoriaFetch from '../modules/Categoria/CategoriaFetch';
 import CategoriaNew from '../modules/Categoria/CategoriaNew';
+import CategoriaEdit from '../modules/Categoria/CategoriaEdit';
 
 
 import Inicio from '../modules/Inicio';
@@ -24,6 +25,7 @@ const App = ({store}) => (
         <Full>
             <Switch>
                 <Route path="/categorias/novo" component={CategoriaNew} />
+                <Route path="/categorias/:id" component={CategoriaEdit} />
                 <Route path="/categorias" component={CategoriaFetch} />
 {/*
 
