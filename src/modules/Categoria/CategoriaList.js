@@ -37,8 +37,8 @@ class CategoriaList extends Component {
         const toggle = (value) => this.showModal(value);
         const { data, doSubmit, doDelete, doSetPage, doSetOrderBy, handleSubmit, pristine, submitting, invalid } = this.props;
         const headers = [
-            { label: (<Intl str="nome"></Intl>), classNames: 'table-w-45', orderField: 'nome' },
-            { classNames: 'table-w-10 text-center' }
+            { classNames: 'table-xs-75 table-sm-85 table-md-85 table-lg-90', label: (<Intl str="nome"></Intl>), orderField: 'nome' },
+            { classNames: 'table-xs-25 table-sm-15 table-md-15 table-lg-10 text-center' }
         ];
 
         return (
@@ -51,14 +51,13 @@ class CategoriaList extends Component {
                     </Col>
                 </Row>
                 <Button type="submit" color="primary" disabled={invalid || submitting}>
-                    <i className="fa fa-search"></i>
-                    <Intl str='pesquisar'></Intl>
+                    <i className="fa fa-search"></i> <Intl str='pesquisar' className="hidden-xs-down"></Intl>
                 </Button>
                 <Button type="button" disabled={pristine || submitting} onClick={this.reset.bind(this)} className="espacamento">
-                    <Intl str='limpar'></Intl>
+                    <i className="fa fa-eraser"></i> <Intl str='limpar' className="hidden-xs-down"></Intl>
                 </Button>
                 <Link className="btn btn-secondary" to="/categorias/novo">
-                    <i className="fa fa-plus"></i> <Intl str='nova-categoria'></Intl>
+                    <i className="fa fa-plus"></i> <Intl str='nova-categoria' className="hidden-xs-down"></Intl>
                 </Link>
 
                 <hr />
@@ -71,7 +70,7 @@ class CategoriaList extends Component {
                             const r = data.content[key];
                             return (<tr key={key}>
                                 <td>{r.nome}</td>
-                                <td className="text-center">
+                                <td className="text-right">
                                     <Link className="btn btn-secondary btn-sm" to={`/categorias/${r.id}`}>
                                         <i className="fa fa-pencil"></i>
                                     </Link>

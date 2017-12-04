@@ -8,7 +8,7 @@ export const DEFAULT_LANGUAGE = "br";
 class Intl extends Component {
     render() {
       const t = translate;
-      return (<span>{t(this.props.str, this.props.params)}</span>);
+      return (<span className={this.props.className}>{t(this.props.str, this.props.params)}</span>);
     }
 }
 

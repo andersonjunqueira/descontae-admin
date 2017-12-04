@@ -26,13 +26,13 @@ class CategoriaForm extends Component {
                 </Row>
 
                 <Button type="submit" color="primary" disabled={invalid || submitting}>
-                    <Intl str='salvar'></Intl>
+                    <i className="fa fa-floppy-o"></i> <Intl str='salvar' className="hidden-xs-down"></Intl>
                 </Button>
                 <Button type="button" disabled={pristine || submitting} onClick={() => this.props.dispatch(reset)} className="espacamento">
-                    <Intl str='limpar'></Intl>
+                    <i className="fa fa-eraser"></i> <Intl str='limpar' className="hidden-xs-down"></Intl>
                 </Button>
                 <Link className="btn btn-secondary" to="/categorias">
-                    <Intl str='cancelar'></Intl>
+                    <i className="fa fa-ban"></i> <Intl str='cancelar' className="hidden-xs-down"></Intl>
                 </Link> 
 
             </Form>

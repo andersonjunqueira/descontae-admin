@@ -4,7 +4,6 @@ import * as alerts from '../../components/Notification/Notification.actions';
 
 export const actionTypes = {
     FETCH_CATEGORIAS: 'FETCH_CATEGORIAS',
-    SAVE_CATEGORIA: 'SAVE_CATEGORIA',
     FETCH_CATEGORIA: 'FETCH_CATEGORIA'
 };
 
