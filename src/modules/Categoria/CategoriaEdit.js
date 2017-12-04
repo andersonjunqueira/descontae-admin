@@ -22,12 +22,16 @@ class CategoriaEdit extends Component {
     }
 
     render() {
-        return (
-            <CategoriaForm 
-                data={this.props.data}    
-                doSubmit={this.salvar.bind(this)}
-            />
-        );
+        if(this.props.data) {
+            return (
+                <CategoriaForm 
+                    data={this.props.data}    
+                    doSubmit={this.salvar.bind(this)}
+                />
+            );
+        } else {
+            return <span></span>;
+        }
     }
     
 }

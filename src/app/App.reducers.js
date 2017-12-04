@@ -55,18 +55,16 @@ const appReducer = (state = initialState, action) => {
 }
 
 const reducers = combineReducers({
-    form,
-    notifications: notificationsReducer(),
     app: appReducer,
     intl: intlReducer,
-    header: headerReducer,
+    notifications: notificationsReducer(),
     categorias: categoriasReducer,
+    
+    header: headerReducer,
     profile: profileReducer,
     sidebar: sidebarReducer,
     dashboard: dashboardReducer,
-    
     consumos: consumoReducer,
-    
     marcaReducer,
     clienteReducer,
     planoReducer,
@@ -80,7 +78,9 @@ const reducers = combineReducers({
     selectCategoriaReducer,
     selectPlanoReducer,
     selectCidadeReducer,
-    ufReducer
+    ufReducer,
+
+    form
 })
 
 export default reducers;

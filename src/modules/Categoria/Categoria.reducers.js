@@ -1,6 +1,7 @@
 import { actionTypes } from './Categoria.actions';
 
 const categoriasReducer = (state = {}, action) => {
+    console.log(action);
     switch (action.type) {
 
         case actionTypes.FETCH_CATEGORIAS:
