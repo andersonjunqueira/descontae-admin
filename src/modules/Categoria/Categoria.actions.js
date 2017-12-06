@@ -66,9 +66,9 @@ export const remove = (id, callback) => {
     };
 };
 
-export const save = (categoria, callback) => { 
+export const save = (obj, callback) => { 
     return (dispatch) => {
-        axios.put(`${BASE_URL}`, categoria)
+        axios.put(`${BASE_URL}`, obj)
             .then(function(response) {
 
                 dispatch(alerts.notifySuccess(`${MODULE_CONSTANT}-salvo`));

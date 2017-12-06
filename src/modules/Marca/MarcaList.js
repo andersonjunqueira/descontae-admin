@@ -56,7 +56,7 @@ class MarcaList extends Component {
                 <Button type="button" disabled={pristine || submitting} onClick={this.reset.bind(this)} className="espacamento">
                     <i className="fa fa-eraser"></i> <Intl str='limpar' className="hidden-xs-down"></Intl>
                 </Button>
-                <Link className="btn btn-secondary" to="/categorias/novo">
+                <Link className="btn btn-secondary" to="/marcas/novo">
                     <i className="fa fa-plus"></i> <Intl str='nova-marca' className="hidden-xs-down"></Intl>
                 </Link>
 

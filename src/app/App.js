@@ -8,6 +8,8 @@ import CategoriaFetch from '../modules/Categoria/CategoriaFetch';
 import CategoriaNew from '../modules/Categoria/CategoriaNew';
 import CategoriaEdit from '../modules/Categoria/CategoriaEdit';
 import MarcaFetch from '../modules/Marca/MarcaFetch';
+import MarcaNew from '../modules/Marca/MarcaNew';
+import MarcaEdit from '../modules/Marca/MarcaEdit';
 
 
 import Inicio from '../modules/Inicio';
@@ -28,6 +30,8 @@ const App = ({store}) => (
                 <Route path="/categorias/:id" component={CategoriaEdit} />
                 <Route path="/categorias" component={CategoriaFetch} />
 
+                <Route path="/marcas/novo" component={MarcaNew} />
+                <Route path="/marcas/:id" component={MarcaEdit} />
                 <Route path="/marcas" component={MarcaFetch} />
 {/*
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import * as alerts from '../../components/Notification/Notification.actions';
+import { fileFunctions } from "../../components/File";
 
 export const actionTypes = {
     FETCH_ALL: 'FETCH_MARCAS',
@@ -66,9 +67,9 @@ export const remove = (id, callback) => {
     };
 };
 
-export const save = (categoria, callback) => { 
+export const save = (obj, callback) => { 
     return (dispatch) => {
-        axios.put(`${BASE_URL}`, categoria)
+        axios.put(`${BASE_URL}`, obj)
             .then(function(response) {
 
                 dispatch(alerts.notifySuccess(`${MODULE_CONSTANT}-salvo`));
@@ -99,3 +100,33 @@ export const fetchOne = (id, notfoundCallback) =>  {
             });
     };
 };
+
+export const processImages = (obj, callback) => {
+    return (dispatch) => {
+        const data = Object.assign({}, obj, {});
+        
+        let plogo = fileFunctions.getPromise(data.logomarca).then(response => {
+            if(response) {
+                data.logomarca = response;
+            }
+        });
+
+        let pthumb = fileFunctions.getPromise(data.imagemThumbnail).then(response => {
+            if(response) {
+                data.imagemThumbnail = response;
+            }
+        });
+
+        let pfundo = fileFunctions.getPromise(data.imagemFundoApp).then(response => {
+            if(response) {
+                data.imagemFundoApp = response;
+            }
+        });
+
+        Promise.all([plogo, pthumb, pfundo]).then(values => { 
+            callback();
+        }, reason => {
+            dispatch(alerts.notifyError(`erro-salvar-${MODULE_CONSTANT}`, null, reason));
+        });
+    };
+}; 
