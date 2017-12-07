@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import MarcaForm from './MarcaForm';
-import { save, fetchOne } from './Marca.actions';
+import { save, fetchOne, processImages } from './Marca.actions';
 
 class MarcaEdit extends Component {
 
@@ -15,9 +15,10 @@ class MarcaEdit extends Component {
     }
 
     salvar(values) {
-        console.log(values);
-        this.props.save(values, () => {
-            this.props.history.push('/marcas');
+        this.props.processImages(values, (data) => {
+            this.props.save(data, () => {
+                this.props.history.push('/marcas');
+            });
         });
     }
 
@@ -43,7 +44,7 @@ const mapState = (state) => {
 };
 
 const mapDispatch = (dispatch) => {
-    return bindActionCreators({ save, fetchOne }, dispatch);
+    return bindActionCreators({ save, fetchOne, processImages }, dispatch);
 };
 
 export default connect(mapState, mapDispatch)(MarcaEdit);

@@ -71,7 +71,7 @@ class MarcaList extends Component {
                             return (<tr key={key}>
                                 <td>{r.nome}</td>
                                 <td className="text-right">
-                                    <Link className="btn btn-secondary btn-sm" to={`/categorias/${r.id}`}>
+                                    <Link className="btn btn-secondary btn-sm" to={`/marcas/${r.id}`}>
                                         <i className="fa fa-pencil"></i>
                                     </Link>
                                     <Button onClick={() => toggle(r)} color="danger" size="sm" className="espacamento">

@@ -8,8 +8,8 @@ import { save, processImages } from './Marca.actions';
 class MarcaNew extends Component {
 
     salvar(values) {
-        this.props.processImages(values, () => {
-            this.props.save(values, () => {
+        this.props.processImages(values, (data) => {
+            this.props.save(data, () => {
                 this.props.history.push('/marcas');
             });
         });
