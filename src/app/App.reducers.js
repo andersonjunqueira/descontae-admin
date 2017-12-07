@@ -8,6 +8,7 @@ import profileReducer from '../modules/Profile/Profile.reducers';
 import sidebarReducer from '../layout/Sidebar/Sidebar.reducers';
 import { reducer as categoriasReducer } from '../modules/Categoria/Categoria.reducers';
 import { reducer as marcasReducer } from '../modules/Marca/Marca.reducers';
+import { reducer as planosReducer } from '../modules/Plano/Plano.reducers';
 
 import selectMarcaReducer from '../components/SelectMarca/SelectMarca.reducers';
 import selectCategoriaReducer from '../components/SelectCategoria/SelectCategoria.reducers';
@@ -17,7 +18,6 @@ import pesquisaPessoaReducer from '../components/PesquisaPessoa/PesquisaPessoa.r
 import pesquisaClienteReducer from '../components/PesquisaCliente/PesquisaCliente.reducers';
 import ufReducer from '../components/UF/UF.reducers';
 import clienteReducer from '../modules/Cliente/Cliente.reducers';
-import planoReducer from '../modules/Plano/Plano.reducers';
 import parceiroReducer from '../modules/Parceiro/Parceiro.reducers';
 import ofertaReducer from '../modules/Oferta/Oferta.reducers';
 import cartaoReducer from '../modules/Cartao/Cartao.reducers';
@@ -59,11 +59,11 @@ const reducers = combineReducers({
     sidebar: sidebarReducer,
     categorias: categoriasReducer,
     marcas: marcasReducer,
+    planos: planosReducer,
     
     dashboard: dashboardReducer,
     consumos: consumoReducer,
     clienteReducer,
-    planoReducer,
     parceiroReducer,
     ofertaReducer,
     cartaoReducer,

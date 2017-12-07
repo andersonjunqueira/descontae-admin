@@ -10,11 +10,13 @@ import CategoriaEdit from '../modules/Categoria/CategoriaEdit';
 import MarcaFetch from '../modules/Marca/MarcaFetch';
 import MarcaNew from '../modules/Marca/MarcaNew';
 import MarcaEdit from '../modules/Marca/MarcaEdit';
+import PlanoFetch from '../modules/Plano/PlanoFetch';
+import PlanoNew from '../modules/Plano/PlanoNew';
+import PlanoEdit from '../modules/Plano/PlanoEdit';
 
 
 import Inicio from '../modules/Inicio';
 import Cliente from '../modules/Cliente';
-import Plano from '../modules/Plano';
 import Parceiro from '../modules/Parceiro';
 import Oferta from '../modules/Oferta';
 import Cartao from '../modules/Cartao';
@@ -29,14 +31,15 @@ const App = ({store}) => (
                 <Route path="/categorias/novo" component={CategoriaNew} />
                 <Route path="/categorias/:id" component={CategoriaEdit} />
                 <Route path="/categorias" component={CategoriaFetch} />
-
                 <Route path="/marcas/novo" component={MarcaNew} />
                 <Route path="/marcas/:id" component={MarcaEdit} />
                 <Route path="/marcas" component={MarcaFetch} />
+                <Route path="/planos/novo" component={PlanoNew} />
+                <Route path="/planos/:id" component={PlanoEdit} />
+                <Route path="/planos" component={PlanoFetch} />
 {/*
 
                 <Route path="/clientes" name={<Intl str='clientes'></Intl>} component={Cliente} />
-                <Route path="/planos" name={<Intl str='planos'></Intl>} component={Plano} />
                 <Route path="/parceiros" name={<Intl str='parceiros'></Intl>} component={Parceiro} />
                 <Route path="/ofertas" name={<Intl str='ofertas'></Intl>} component={Oferta} />
                 <Route path="/cartoes" name={<Intl str='cartoes'></Intl>} component={Cartao} />

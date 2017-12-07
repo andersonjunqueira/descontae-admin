@@ -68,7 +68,7 @@ class MarcaForm extends Component {
                 <Button type="button" disabled={pristine || submitting} onClick={() => this.props.dispatch(reset)} className="espacamento">
                     <i className="fa fa-eraser"></i> <Intl str='limpar' className="hidden-xs-down"></Intl>
                 </Button>
-                <Link className="btn btn-secondary" to="/categorias">
+                <Link className="btn btn-secondary" to="/marcas">
                     <i className="fa fa-ban"></i> <Intl str='cancelar' className="hidden-xs-down"></Intl>
                 </Link> 
 

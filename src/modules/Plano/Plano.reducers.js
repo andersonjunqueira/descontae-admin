@@ -1,23 +1,16 @@
-import { PLANOS_PESQUISA, PLANO_EDICAO, PLANO_SETMODE } from './Plano.actions';
+import { actionTypes } from './Plano.actions';
 
-const planoReducer = (state = {}, action) => {
+export const reducer = (state = {}, action) => {
 
     switch (action.type) {
 
-        case PLANO_SETMODE:
-            return Object.assign({}, state, { mode: action.payload });
+        case actionTypes.FETCH_ALL:
+            return { list: action.payload };
 
-        case PLANOS_PESQUISA:
-            return Object.assign({}, state, { registros: action.payload, obj: undefined });
-
-        case PLANO_EDICAO:
-            return Object.assign({}, state, { obj: action.payload });
+        case actionTypes.FETCH_ONE:
+            return { list: state.list, active: action.payload };
 
         default:
             return state;
-
     }
-
 }
-
-export default planoReducer;

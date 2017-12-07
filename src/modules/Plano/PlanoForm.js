@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
 import { Form, Row, Col, Button } from 'reactstrap';
 
 import Intl from '../../components/Intl';
@@ -14,27 +15,10 @@ import { translate } from "../../components/Intl/Intl.actions";
 
 class PlanoForm extends Component {
 
-    constructor(props) {
-        super(props);
-        this.cancelar = this.cancelar.bind(this);
-
-        this.state = {
-            id: undefined
-        }
-    }
-
-    componentDidUpdate() {
+    componentDidMount() {
         if(this.props.data) {
-            if(this.state.id !== this.props.data.id) {
-                this.props.dispatch(this.props.initialize(this.props.data));
-                this.setState(Object.assign(this.state, { id: this.props.data.id }));
-            }
+            this.props.dispatch(this.props.initialize(this.props.data));
         }
-    }
-
-    cancelar() {
-        this.props.doConsultar();
-        this.setState(Object.assign(this.state, { id: undefined }));
     }
 
     render() {
@@ -43,12 +27,11 @@ class PlanoForm extends Component {
             {value: "I", text: translate("inativo")}
         ];
 
-        const { handleSubmit, doSubmit, pristine, reset, submitting, invalid} = this.props;
+        const { handleSubmit, pristine, reset, submitting, invalid } = this.props;
         return (
-            <Form onSubmit={handleSubmit(doSubmit)}>
-
+            <Form onSubmit={handleSubmit(this.props.doSubmit)}>
                 <h4><Intl str='plano'></Intl></h4>
-
+                
                 <Row>
                     <Col xs={12} md={8}>
                         <Row>
@@ -87,21 +70,19 @@ class PlanoForm extends Component {
                 </Row>
 
                 <Button type="submit" color="primary" disabled={invalid || submitting}>
-                    <Intl str='salvar'></Intl>
+                    <i className="fa fa-floppy-o"></i> <Intl str='salvar' className="hidden-xs-down"></Intl>
                 </Button>
-
                 <Button type="button" disabled={pristine || submitting} onClick={() => this.props.dispatch(reset)} className="espacamento">
-                    <Intl str='limpar'></Intl>
+                    <i className="fa fa-eraser"></i> <Intl str='limpar' className="hidden-xs-down"></Intl>
                 </Button>
-
-                <Button type="button" onClick={() => this.cancelar()} className="btn btn-secondary">
-                    <Intl str='cancelar'></Intl>
-                </Button>
+                <Link className="btn btn-secondary" to="/planos">
+                    <i className="fa fa-ban"></i> <Intl str='cancelar' className="hidden-xs-down"></Intl>
+                </Link> 
 
             </Form>
         );
-    }
 
+    }
 }
 
 const validate = values => {
@@ -113,5 +94,5 @@ PlanoForm = reduxForm({
     form: "PlanoForm", 
     validate 
 })(PlanoForm);
-
+    
 export default PlanoForm;

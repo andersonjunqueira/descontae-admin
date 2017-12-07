@@ -1,89 +1,121 @@
 import axios from "axios";
 
-import { toaster } from '../../components/Notification/Notification.actions';
+import * as alerts from '../../components/Notification/Notification.actions';
+import { fileFunctions } from "../../components/File";
 
-export const [ PLANOS_PESQUISA, PLANO_EDICAO, PLANO_SETMODE ] = [ "PLANOS_PESQUISA", "PLANO_EDICAO", "PLANO_SETMODE" ];
+export const actionTypes = {
+    FETCH_ALL: 'FETCH_PLANOS',
+    FETCH_ONE: 'FETCH_PLANO'
+};
 
-const converter = {
-    toFrontend: (values) => {
-        const data = values;
-        return data;
-    },
+const BASE_URL = "/planos";
+const MODULE_CONSTANT = "plano";
 
-    toBackend: (values) => {
-        const data = values;
-        return data;
+const formatQs = (q) => {
+    if(!q) {
+        return '';
     }
+    let qs = '';
+    Object.keys(q).map( k => {
+        if( k === 'sort' ) {
+            q[k].forEach(item => {
+                qs += `${qs.length > 0 ? '&' : ''}sort=${item}`;
+            });
+        } else if( k === 'dir' ) {
+            q[k].forEach( (item, index) => {
+                qs += `${qs.length > 0 ? '&' : ''}${q.sort[index]}.dir=${item}`;    
+            });
+        } else {
+            if(q[k] !== undefined) {
+                qs += `${qs.length > 0 ? '&' : ''}${k}=${q[k]}`;
+            }
+        }
+        return null;
+    });
+    return `${qs.length > 0 ? '?' : ''}${qs}`;
 }
 
-export const setMode = (mode) => {
-    return dispatch => {
-        dispatch({type: PLANO_SETMODE, payload: mode});
-    }
-}
-
-export const consultar = (filtro, start, pagesize) => {
-    filtro = filtro ? filtro : {};
-    filtro.start = start;
-    filtro.page = pagesize;
-
-    return dispatch => {
-
-        axios.get('/planos', { params: filtro })
+export const fetchAll = (params) => {
+    return (dispatch) => {
+        axios.get(`${BASE_URL}${formatQs(params)}`)
             .then(function(response) {
-                dispatch({type: PLANOS_PESQUISA, payload: response.data});
+
+                if(response.status === 204) {
+                    dispatch(alerts.notifyWarning("nenhum-registro-encontrado"));
+                }
+                dispatch({type: actionTypes.FETCH_ALL, payload: response.data});
 
             }).catch(function(error){
-                console.log(error);
-                dispatch(toaster("erro-consulta-planos", error.response.data, [], {status: "error"}));
+                dispatch(alerts.notifyError(`erro-consulta-${MODULE_CONSTANT}s`, null, error));
             });
+    };
+};
 
-    }
-}
-
-export const salvar = (values, callback) => {
-    return dispatch => {
-
-        axios.put('/planos', converter.toBackend(values) )
+export const remove = (id, callback) => {
+    return (dispatch) => {
+        axios.delete(`${BASE_URL}/${id}`)
             .then(function(response) {
-                callback();
-                dispatch(toaster(null, "plano-salvo", [], {status: "success"}));
+
+                dispatch(alerts.notifySuccess(`${MODULE_CONSTANT}-excluido`));
+                if(callback) {
+                    callback(); 
+                }
 
             }).catch(function(error){
-                console.log(error);
-                dispatch(toaster("erro-salvar-plano", error.response.data, [], {status: "error"}));
+                dispatch(alerts.notifyError(`erro-excluir-${MODULE_CONSTANT}`, null, error));
             });
+    };
+};
 
-    }
-}
-
-export const excluir = (id, callback) => {
-    return dispatch => {
-
-        axios.delete('/planos/' + id)
+export const save = (obj, callback) => { 
+    return (dispatch) => {
+        axios.put(`${BASE_URL}`, obj)
             .then(function(response) {
-                callback();
-                dispatch(toaster(null, "plano-excluido", [], {status: "success"}));
+
+                dispatch(alerts.notifySuccess(`${MODULE_CONSTANT}-salvo`));
+                if(callback) {
+                    callback(); 
+                }
 
             }).catch(function(error){
-                console.log(error);
-                dispatch(toaster("erro-excluir-plano", error.response.data, [], {status: "error"}));
+                dispatch(alerts.notifyError(`erro-salvar-${MODULE_CONSTANT}`, null, error));
             });
+    };
+};
 
-    }
-}
-
-export const carregar = (id) => {
-    return dispatch => {
-
-        axios.get('/planos/' + id)
+export const fetchOne = (id, notfoundCallback) =>  {
+    return (dispatch) => {
+        axios.get(`${BASE_URL}/${id}`)
             .then(function(response) {
-                dispatch({type: PLANO_EDICAO, payload: converter.toFrontend(response.data)});
+
+                dispatch({type: actionTypes.FETCH_ONE, payload: response.data});
 
             }).catch(function(error){
-                console.log(error);
-                dispatch(toaster("erro-carga-plano", error.response.data, [], {status: "error"}));
+                if(error.response.status = 404) {
+                    dispatch(alerts.notifyWarning("registro-nao-encontrado"));
+                    notfoundCallback();
+                } else {
+                    dispatch(alerts.notifyError(`erro-carga-${MODULE_CONSTANT}`, null, error));
+                }
             });
+    };
+};
 
-    }
-}
+export const processImages = (obj, callback) => {
+    return (dispatch) => {
+
+        const data = Object.assign({}, obj); 
+        
+        let pimagem = fileFunctions.getPromise(obj.imagem).then(response => {
+            if(response) {
+                data.imagem = response;
+            }
+        });
+
+        Promise.all([pimagem]).then(values => { 
+            callback(data);
+        }, reason => {
+            dispatch(alerts.notifyError(`erro-salvar-${MODULE_CONSTANT}`, null, reason));
+        });
+    };
+}; 
