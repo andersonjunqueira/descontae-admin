@@ -67,7 +67,7 @@ export const fetchOne = (id, notfoundCallback) =>  {
                 dispatch({type: actionTypes.FETCH_ONE, payload: response.data});
 
             }).catch(function(error){
-                if(error.response.status = 404) {
+                if(error.response.status === 404) {
                     dispatch(alerts.notifyWarning("registro-nao-encontrado"));
                     notfoundCallback();
                 } else {
