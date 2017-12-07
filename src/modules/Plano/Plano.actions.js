@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import * as alerts from '../../components/Notification/Notification.actions';
+import { formatQs } from '../../app/App.utils';
 import { fileFunctions } from "../../components/File";
 
 export const actionTypes = {
@@ -10,30 +11,6 @@ export const actionTypes = {
 
 const BASE_URL = "/planos";
 const MODULE_CONSTANT = "plano";
-
-const formatQs = (q) => {
-    if(!q) {
-        return '';
-    }
-    let qs = '';
-    Object.keys(q).map( k => {
-        if( k === 'sort' ) {
-            q[k].forEach(item => {
-                qs += `${qs.length > 0 ? '&' : ''}sort=${item}`;
-            });
-        } else if( k === 'dir' ) {
-            q[k].forEach( (item, index) => {
-                qs += `${qs.length > 0 ? '&' : ''}${q.sort[index]}.dir=${item}`;    
-            });
-        } else {
-            if(q[k] !== undefined) {
-                qs += `${qs.length > 0 ? '&' : ''}${k}=${q[k]}`;
-            }
-        }
-        return null;
-    });
-    return `${qs.length > 0 ? '?' : ''}${qs}`;
-}
 
 export const fetchAll = (params) => {
     return (dispatch) => {
