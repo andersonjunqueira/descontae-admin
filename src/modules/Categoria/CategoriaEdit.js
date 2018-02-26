@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux';
 
-import CategoriaForm from './CategoriaForm';
-import { save, fetchOne } from './Categoria.actions';
+import ProfileForm from './ProfileForm';
+import { save, fetchOne } from './Profile.actions';
 
-class CategoriaEdit extends Component {
+class ProfileEdit extends Component {
 
     componentDidMount() {
         const {id} = this.props.match.params;
@@ -24,7 +24,7 @@ class CategoriaEdit extends Component {
     render() {
         if(this.props.data) {
             return (
-                <CategoriaForm 
+                <ProfileForm 
                     data={this.props.data}    
                     doSubmit={this.salvar.bind(this)}
                 />
@@ -46,4 +46,4 @@ const mapDispatch = (dispatch) => {
     return bindActionCreators({ save, fetchOne }, dispatch);
 };
 
-export default connect(mapState, mapDispatch)(CategoriaEdit);
+export default connect(mapState, mapDispatch)(ProfileEdit);

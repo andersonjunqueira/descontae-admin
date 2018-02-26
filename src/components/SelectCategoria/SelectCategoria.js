@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 
 import Select from '../Select';
 
-import { loadCategoriasForSelect } from './SelectCategoria.actions';
+import { loadProfilesForSelect } from './SelectProfile.actions';
 
-class SelectCategoria extends Component {
+class SelectProfile extends Component {
 
     componentWillMount() {
         if(!this.props.list) {
-            this.props.loadCategoriasForSelect();
+            this.props.loadProfilesForSelect();
         }
     }
 
@@ -29,7 +29,7 @@ class SelectCategoria extends Component {
     }
 }
 
-SelectCategoria.propTypes = {
+SelectProfile.propTypes = {
     label: PropTypes.node,
     placeholder: PropTypes.node,
     help: PropTypes.string,
@@ -40,13 +40,13 @@ SelectCategoria.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        list: state.selectCategoriaReducer.selectList
+        list: state.selectProfileReducer.selectList
     }
 };
 
-SelectCategoria = connect(
+SelectProfile = connect(
     mapStateToProps, 
-    { loadCategoriasForSelect }
-)(SelectCategoria);
+    { loadProfilesForSelect }
+)(SelectProfile);
 
-export default SelectCategoria;
+export default SelectProfile;

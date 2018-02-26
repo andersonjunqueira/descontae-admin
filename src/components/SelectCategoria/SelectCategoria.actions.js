@@ -4,7 +4,7 @@ import { toaster } from '../Notification/Notification.actions';
 
 export const [ CATEGORIAS_SELECT ] = [ "CATEGORIAS_SELECT" ];
 
-export const loadCategoriasForSelect = () => {
+export const loadProfilesForSelect = () => {
     return dispatch => {
         axios({ url: '/categorias?sort=nome,ASC&size=1000', method: 'get', responseType: 'json' })
         .then(function(response) {

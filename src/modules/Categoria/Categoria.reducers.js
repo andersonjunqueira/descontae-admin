@@ -1,4 +1,4 @@
-import { actionTypes } from './Categoria.actions';
+import { actionTypes } from './Profile.actions';
 
 export const reducer = (state = {}, action) => {
 

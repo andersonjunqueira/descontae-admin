@@ -1,4 +1,4 @@
-import { CATEGORIAS_SELECT } from './SelectCategoria.actions';
+import { CATEGORIAS_SELECT } from './SelectProfile.actions';
 
 const categoriaReducer = (state = {}, action) => {
 

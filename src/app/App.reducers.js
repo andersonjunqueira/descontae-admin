@@ -6,12 +6,12 @@ import intlReducer from '../components/Intl/Intl.reducers';
 import headerReducer from '../layout/Header/Header.reducers';
 import profileReducer from '../modules/Profile/Profile.reducers';
 import sidebarReducer from '../layout/Sidebar/Sidebar.reducers';
-import { reducer as categoriasReducer } from '../modules/Categoria/Categoria.reducers';
+import { reducer as categoriasReducer } from '../modules/Profile/Profile.reducers';
 import { reducer as marcasReducer } from '../modules/Marca/Marca.reducers';
 import { reducer as planosReducer } from '../modules/Plano/Plano.reducers';
 
 import selectMarcaReducer from '../components/SelectMarca/SelectMarca.reducers';
-import selectCategoriaReducer from '../components/SelectCategoria/SelectCategoria.reducers';
+import selectProfileReducer from '../components/SelectProfile/SelectProfile.reducers';
 import selectPlanoReducer from '../components/SelectPlano/SelectPlano.reducers';
 import selectCidadeReducer from '../components/SelectCidade/SelectCidade.reducers';
 import pesquisaPessoaReducer from '../components/PesquisaPessoa/PesquisaPessoa.reducers';
@@ -71,7 +71,7 @@ const reducers = combineReducers({
     pesquisaClienteReducer,
     pessoaReducer,
     selectMarcaReducer,
-    selectCategoriaReducer,
+    selectProfileReducer,
     selectPlanoReducer,
     selectCidadeReducer,
     ufReducer,

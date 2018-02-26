@@ -10,7 +10,7 @@ import Email from '../../components/Email';
 import Phone from '../../components/Phone';
 import TextArea from '../../components/TextArea';
 import Endereco from '../../components/Endereco';
-import SelectCategoria from '../Categoria/SelectCategoria';
+import SelectProfile from '../Profile/SelectProfile';
 import SelectMarca from '../Marca/SelectMarca';
 import Intl from '../../components/Intl';
 import Phones from '../../components/Phones';
@@ -177,7 +177,7 @@ class ParceiroForm extends Component {
                 </Row>
                 <Row>
                     <Col xs={12} md={6}>
-                        <SelectCategoria name="categoria" label={<Intl str='categoria'></Intl>} required={true}/>
+                        <SelectProfile name="categoria" label={<Intl str='categoria'></Intl>} required={true}/>
                     </Col>
                     <Col xs={12} md={6}>
                         <SelectMarca name="marca" label={<Intl str='marca'></Intl>} required={true}/>

@@ -6,7 +6,7 @@ import { Form, Row, Col, Button } from 'reactstrap';
 import Text from '../../components/Text';
 import Intl from '../../components/Intl';
 
-class CategoriaForm extends Component {
+class ProfileForm extends Component {
 
     componentDidMount() {
         if(this.props.data) {
@@ -46,9 +46,9 @@ const validate = values => {
     return errors;
 }
 
-CategoriaForm = reduxForm({ 
-    form: "CategoriaForm", 
+ProfileForm = reduxForm({ 
+    form: "ProfileForm", 
     validate 
-})(CategoriaForm);
+})(ProfileForm);
     
-export default CategoriaForm;
+export default ProfileForm;

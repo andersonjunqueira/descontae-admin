@@ -5,7 +5,7 @@ import { Form, Row, Col, Button } from 'reactstrap';
 import Text from '../../components/Text';
 import CNPJ from '../../components/CNPJ';
 import Email from '../../components/Email';
-import SelectCategoria from '../../components/SelectCategoria';
+import SelectProfile from '../../components/SelectProfile';
 import SelectMarca from '../../components/SelectMarca';
 import Phones from '../Snippets/Phones';
 import Unidades from '../Snippets/Unidades';
@@ -62,7 +62,7 @@ class ParceiroForm extends Component {
                 </Row>
                 <Row>
                     <Col xs={12} md={6}>
-                        <SelectCategoria name="categoria.id" label={<Intl str='categoria'></Intl>} required={true}/>
+                        <SelectProfile name="categoria.id" label={<Intl str='categoria'></Intl>} required={true}/>
                     </Col>
                     <Col xs={12} md={6}>
                         <SelectMarca name="marca.id" label={<Intl str='marca'></Intl>} required={true}/>

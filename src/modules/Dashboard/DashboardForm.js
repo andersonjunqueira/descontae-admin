@@ -17,7 +17,7 @@ class DashboardForm extends Component {
     constructor(props) {
         super(props);
         this.getCartoesAtivosData = this.getCartoesAtivosData.bind(this);
-        this.getConsumosPorCategoriaData = this.getConsumosPorCategoriaData.bind(this);
+        this.getConsumosPorProfileData = this.getConsumosPorProfileData.bind(this);
         this.getConsumosPorCidadeData = this.getConsumosPorCidadeData.bind(this);
         this.getConsumosPorBairroData = this.getConsumosPorBairroData.bind(this);
         this.modalClienteToggle = this.modalClienteToggle.bind(this);
@@ -58,11 +58,11 @@ class DashboardForm extends Component {
         };
     }
 
-    getConsumosPorCategoriaData() {
+    getConsumosPorProfileData() {
         return {
-            labels: this.props.data.consumosTotaisByCategoria.map((item) => `${item.nome} - ${item.percentual}`),
+            labels: this.props.data.consumosTotaisByProfile.map((item) => `${item.nome} - ${item.percentual}`),
             datasets: [{
-                data: this.props.data.consumosTotaisByCategoria.map((item) => item.total),
+                data: this.props.data.consumosTotaisByProfile.map((item) => item.total),
                 backgroundColor: this.getColors(),
                 hoverBackgroundColor: this.getColors()
             }]
@@ -192,8 +192,8 @@ class DashboardForm extends Component {
                                     <Intl str='consumos-categoria'></Intl> {`(${this.props.data.cidade.nome}, ${this.props.data.dataInicio} - ${this.props.data.dataFim})`} 
                                 </CardHeader>
                                 <CardBody>
-                                    {this.props.data.consumosTotaisByCategoria.length > 0 && (<Pie data={this.getConsumosPorCategoriaData()} options={this.getPieOptions()}/>)}
-                                    {this.props.data.consumosTotaisByCategoria.length === 0 && (<span>{translate('nao-ha-dados')}</span>)}
+                                    {this.props.data.consumosTotaisByProfile.length > 0 && (<Pie data={this.getConsumosPorProfileData()} options={this.getPieOptions()}/>)}
+                                    {this.props.data.consumosTotaisByProfile.length === 0 && (<span>{translate('nao-ha-dados')}</span>)}
                                 </CardBody>
                             </Card>
                         </Col>

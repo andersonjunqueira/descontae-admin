@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux';
 
-import CategoriaForm from './CategoriaForm';
-import { save } from './Categoria.actions';
+import ProfileForm from './ProfileForm';
+import { save } from './Profile.actions';
 
-class CategoriaNew extends Component {
+class ProfileNew extends Component {
 
     salvar(values) {
         this.props.save(values, () => {
@@ -15,7 +15,7 @@ class CategoriaNew extends Component {
 
     render() {
         return (
-            <CategoriaForm 
+            <ProfileForm 
                 doSubmit={this.salvar.bind(this)}
             />
         );
@@ -27,4 +27,4 @@ const mapDispatch = (dispatch) => {
     return bindActionCreators({ save }, dispatch);
 };
 
-export default connect(null, mapDispatch)(CategoriaNew);
+export default connect(null, mapDispatch)(ProfileNew);

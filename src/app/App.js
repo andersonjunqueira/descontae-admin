@@ -4,9 +4,9 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Full from '../layout/Full';
 import Intl from '../components/Intl';
 
-import CategoriaFetch from '../modules/Categoria/CategoriaFetch';
-import CategoriaNew from '../modules/Categoria/CategoriaNew';
-import CategoriaEdit from '../modules/Categoria/CategoriaEdit';
+import ProfileFetch from '../modules/Profile/ProfileFetch';
+import ProfileNew from '../modules/Profile/ProfileNew';
+import ProfileEdit from '../modules/Profile/ProfileEdit';
 import MarcaFetch from '../modules/Marca/MarcaFetch';
 import MarcaNew from '../modules/Marca/MarcaNew';
 import MarcaEdit from '../modules/Marca/MarcaEdit';
@@ -28,9 +28,9 @@ const App = ({store}) => (
     <BrowserRouter>
         <Full>
             <Switch>
-                <Route path="/categorias/novo" component={CategoriaNew} />
-                <Route path="/categorias/:id" component={CategoriaEdit} />
-                <Route path="/categorias" component={CategoriaFetch} />
+                <Route path="/categorias/novo" component={ProfileNew} />
+                <Route path="/categorias/:id" component={ProfileEdit} />
+                <Route path="/categorias" component={ProfileFetch} />
                 <Route path="/marcas/novo" component={MarcaNew} />
                 <Route path="/marcas/:id" component={MarcaEdit} />
                 <Route path="/marcas" component={MarcaFetch} />

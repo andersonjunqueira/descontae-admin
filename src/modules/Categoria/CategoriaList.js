@@ -8,7 +8,7 @@ import SimpleTable from '../../components/SimpleTable';
 import Text from '../../components/Text';
 import Intl from '../../components/Intl';
 
-class CategoriaList extends Component {
+class ProfileList extends Component {
 
     constructor(props) {
         super(props);
@@ -106,9 +106,9 @@ const validate = values => {
     return errors;
 }
 
-CategoriaList = reduxForm({ 
-    form: "CategoriaList", 
+ProfileList = reduxForm({ 
+    form: "ProfileList", 
     validate 
-})(CategoriaList);
+})(ProfileList);
 
-export default CategoriaList;
+export default ProfileList;

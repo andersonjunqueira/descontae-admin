@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux';
 
-import CategoriaList from './CategoriaList';
-import { fetchAll, remove } from './Categoria.actions';
+import ProfileList from './ProfileList';
+import { fetchAll, remove } from './Profile.actions';
 import { PAGELIMIT_DEFAULT } from '../../app/App.actions';
 
-class CategoriaFetch extends Component {
+class ProfileFetch extends Component {
 
     constructor(props) {
         super(props);
@@ -63,7 +63,7 @@ class CategoriaFetch extends Component {
 
     render() {
         return (
-            <CategoriaList 
+            <ProfileList 
                 data={this.props.data} 
                 doSubmit={this.pesquisar.bind(this)}
                 doDelete={this.remove.bind(this)}
@@ -85,4 +85,4 @@ const mapDispatch = (dispatch) => {
     return bindActionCreators({ fetchAll, remove }, dispatch);
 };
 
-export default connect(mapState, mapDispatch)(CategoriaFetch);
+export default connect(mapState, mapDispatch)(ProfileFetch);
